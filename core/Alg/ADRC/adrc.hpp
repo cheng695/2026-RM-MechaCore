@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-namespace Alg::LADRC
+namespace ALG::LADRC
 {
 class TDquadratic
 {
@@ -14,7 +14,7 @@ class TDquadratic
      * @param max_x2  跟踪器的最大输出
      * @param h       采样周期，单位s
      */
-    TDquadratic(float r = 300.0f, float h = 0.001f) : r(r), h(h)
+    TDquadratic(float r = 1.0f, float h = 0.001f) : r(r), h(h)
     {
     }
 
@@ -45,6 +45,16 @@ class TDquadratic
      * @return float 跟踪器输出
      */
     float Calc(float u);
+
+    /**
+     * @brief 设置跟踪器参数
+     *
+     * @param r 跟踪器参数
+     */
+    void setR(float r)
+    {
+        r = r;
+    }
 
   private:
     float u_;
@@ -170,4 +180,4 @@ class Adrc
     TDquadratic td_;
 };
 
-} // namespace Alg::LADRC
+} // namespace ALG::LADRC

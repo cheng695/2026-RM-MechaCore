@@ -1,6 +1,6 @@
 #include "core/Alg/ADRC/adrc.hpp"
 
-namespace Alg::LADRC
+namespace ALG::LADRC
 {
 
 float TDquadratic::Calc(float u)

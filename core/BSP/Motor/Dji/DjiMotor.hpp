@@ -104,7 +104,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      * @param data  数据发送的数据
      * @param id    CAN id
      */
-    void setCAN(int16_t data, int id)
+    void sendCAN(HAL::CAN::ICanDevice *can, int16_t data, int id)
     {
         tx_frame.id = send_idxs_;
         tx_frame.dlc = 8;
@@ -114,15 +114,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
 
         tx_frame.data[(id - 1) * 2] = data >> 8;
         tx_frame.data[(id - 1) * 2 + 1] = data << 8 >> 8;
-    }
 
-    /**
-     * @brief               发送Can数据
-     *
-     * @param pTxMailbox    邮箱
-     */
-    void sendCAN(HAL::CAN::ICanDevice *can)
-    {
         can->send(tx_frame); // 发送数据
     }
 

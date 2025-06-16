@@ -10,8 +10,15 @@ PID::PID(float kp, float ki, float kd, float max) : max_(max), min_(-max)
     k_[0] = kp;
     k_[1] = ki;
     k_[2] = kd;
+    integral_separation_threshold_ = 16384.0f;
 }
 
+/**
+ * @brief 计算PID输出
+ *
+ * @param feedback 反馈值
+ * @return float
+ */
 float PID::Calc(float feedback)
 {
     feedback_ = feedback;
@@ -33,10 +40,12 @@ float PID::Calc(float feedback)
         }
     }
 
+    // 积分项
     k_out_[1] = k_[1] * integral_;
 
     // 微分项
-    k_out_[2] = k_[2] * (error_ - previous_error_);
+    derivative_ = error_ - previous_error_;
+    k_out_[2] = k_[2] * derivative_;
 
     // 计算输出
     output_ = k_out_[0] + k_out_[1] + k_out_[2];
@@ -60,4 +69,123 @@ float PID::Calc(float feedback)
 
     return output_;
 }
+
+/**
+ * @brief 计算PID输出
+ *
+ * @param feedback 反馈值
+ * @param derivative_feedback 微分反馈值
+ * @return float
+ */
+float PID::Calc(float feedback, float derivative_feedback)
+{
+    feedback_ = feedback;
+    error_ = target_ - feedback_;
+
+    // 比例项
+    k_out_[0] = k_[0] * error_;
+
+    // 积分项处理
+    // 积分隔离：只有当误差小于阈值时才进行积分累积
+    if (std::abs(error_) < integral_separation_threshold_)
+    {
+        integral_ += error_;
+
+        // 积分限幅：限制积分累积值的范围
+        if (integral_limit_ > 0.0f)
+        {
+            integral_ = std::clamp(integral_, -integral_limit_, integral_limit_);
+        }
+    }
+
+    // 积分项
+    k_out_[1] = k_[1] * integral_;
+
+    // 微分项
+    derivative_ = derivative_feedback;
+    k_out_[2] = k_[2] * derivative_;
+
+    // 计算输出
+    output_ = k_out_[0] + k_out_[1] + k_out_[2];
+
+    // 输出限幅
+    output_ = std::clamp(output_, min_, max_);
+
+    // 积分抗饱和：如果输出饱和，则回退积分累积
+    if ((output_ >= max_ && error_ > 0) || (output_ <= min_ && error_ < 0))
+    {
+        integral_ -= error_;
+        // 确保积分不超出限制
+        if (integral_limit_ > 0.0f)
+        {
+            integral_ = std::clamp(integral_, -integral_limit_, integral_limit_);
+        }
+    }
+
+    // 更新历史误差
+    previous_error_ = error_;
+
+    return output_;
+}
+
+/**
+ * @brief 计算PID输出
+ *
+ * @param feedback 反馈值
+ * @param td 微分跟踪器
+ * @return float
+ */
+float PID::Calc(float feedback, ALG::LADRC::TDquadratic &td)
+{
+    feedback_ = feedback;
+    error_ = target_ - feedback_;
+
+    td.Calc(feedback_);
+
+    // 比例项
+    k_out_[0] = k_[0] * error_;
+
+    // 积分项处理
+    // 积分隔离：只有当误差小于阈值时才进行积分累积
+    if (std::abs(error_) < integral_separation_threshold_)
+    {
+        integral_ += error_;
+
+        // 积分限幅：限制积分累积值的范围
+        if (integral_limit_ > 0.0f)
+        {
+            integral_ = std::clamp(integral_, -integral_limit_, integral_limit_);
+        }
+    }
+
+    // 积分项
+    k_out_[1] = k_[1] * integral_;
+
+    // 微分项
+    derivative_ = td.getX2();
+    k_out_[2] = k_[2] * derivative_;
+
+    // 计算输出
+    output_ = k_out_[0] + k_out_[1] + k_out_[2];
+
+    // 输出限幅
+    output_ = std::clamp(output_, min_, max_);
+
+    // 积分抗饱和：如果输出饱和，则回退积分累积
+    if ((output_ >= max_ && error_ > 0) || (output_ <= min_ && error_ < 0))
+    {
+        integral_ -= error_;
+        // 确保积分不超出限制
+        if (integral_limit_ > 0.0f)
+        {
+            integral_ = std::clamp(integral_, -integral_limit_, integral_limit_);
+        }
+    }
+
+    // 更新历史误差
+    previous_error_ = error_;
+
+    return output_;
+}
+
 } // namespace ALG::PID

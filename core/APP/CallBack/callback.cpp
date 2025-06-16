@@ -1,3 +1,5 @@
+#include "core/Alg/ADRC/adrc.hpp"
+#include "core/Alg/PID/pid.hpp"
 #include "core/BSP/Common/StateWatch/state_watch.hpp"
 #include "core/BSP/Motor/Dji/DjiMotor.hpp"
 #include "core/HAL/CAN/can_hal.hpp"
@@ -5,9 +7,12 @@
 #include "core/HAL/UART/uart_hal.hpp"
 
 #include <cstring>
+
 uint8_t buffer[3] = {0};
 auto uatr_rx_frame = HAL::UART::Data{buffer, 3};
-uint16_t speed = 0;
+uint16_t tar_Pos = 0;
+ALG::PID::PID pid(0, 0, 0, 16384);
+ALG::LADRC::TDquadratic td(200, 0.001);
 
 extern "C"
 {
@@ -26,11 +31,13 @@ extern "C"
         auto &can1 = HAL::CAN::get_can_bus_instance().get_device(HAL::CAN::CanDeviceId::HAL_Can1);
 
         uint16_t pos = static_cast<uint32_t>(BSP::Motor::Dji::Motor6020.getAngleDeg(1));
+        // float vel = BSP::Motor::Dji::Motor6020.getVelocityRpm(1);
+        log.trace("Pos:%d", pos);
 
-        log.trace("Pos:%d\n", pos);
+        // pid.setTarget(tar_Pos);
+        pid.Calc(pos, td);
 
-        BSP::Motor::Dji::Motor6020.setCAN(speed, 2);
-        BSP::Motor::Dji::Motor6020.sendCAN(&can1);
+        BSP::Motor::Dji::Motor6020.sendCAN(&can1, pid.getOutput(), 2);
 
         HAL_Delay(5);
     }
@@ -49,10 +56,6 @@ void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
     if (hcan == can1.get_handle())
     {
         BSP::Motor::Dji::Motor6020.Parse(rx_frame);
-
-        // auto &log = HAL::LOGGER::Logger::getInstance();
-        pos = static_cast<uint32_t>(BSP::Motor::Dji::Motor6020.getAngleDeg(1));
-        // log.trace("Pos:%d\n", pos);
     }
 }
 

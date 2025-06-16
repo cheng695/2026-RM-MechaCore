@@ -1,24 +1,31 @@
+#include "core/Alg/ADRC/adrc.hpp"
+
 namespace ALG::PID
 {
 class PID
 {
   private:
-    float k_[3];
-    float k_out_[3];
-    float integral_;
-    float previous_error_;
-    float output_;
-    float max_;
-    float min_;
-    float target_;
-    float feedback_;
-    float error_;
+    float k_[3];       // 比例、积分、微分增益
+    float k_out_[3];   // 比例、积分、微分输出
+    float integral_;   // 积分项
+    float derivative_; // 微分项
+    float target_;     // 目标值
+    float feedback_;   // 反馈值
+    float max_;        // 输出限幅
+    float min_;        // 输出限幅
+
+    float error_;          // 误差
+    float output_;         // 输出
+    float previous_error_; // 上一次误差
+
     float integral_limit_;                // 积分限幅值
     float integral_separation_threshold_; // 积分隔离阈值
 
   public:
     PID(float kp, float ki, float kd, float max);
     float Calc(float feedback);
+    float Calc(float feedback, float derivative_feedback);
+    float Calc(float feedback, ALG::LADRC::TDquadratic &td);
     void reset();
     void setTarget(float target);
     void setFeedback(float feedback);
