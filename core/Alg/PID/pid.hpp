@@ -35,6 +35,8 @@ class PID
     void setIntegralSeparation(float threshold);
     float getOutput();
     float getError();
+    float getTarget();
+    float getFeedback();
 };
 
 /**
@@ -132,6 +134,16 @@ inline float PID::getOutput()
 inline float PID::getError()
 {
     return error_;
+}
+
+inline float PID::getTarget()
+{
+    return target_;
+}
+
+inline float PID::getFeedback()
+{
+    return feedback_;
 }
 
 } // namespace ALG::PID
