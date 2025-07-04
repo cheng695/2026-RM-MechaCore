@@ -1,0 +1,7 @@
+MDK-ARM/FreeRTOS_Infantry_A_Board_CPP/
+MDK-ARM/*.uvoptx
+MDK-ARM/*.uvguix.*
+.vs/
+.vscode/
+CppProperties.json
+*.code-workspace

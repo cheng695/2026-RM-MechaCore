@@ -1,0 +1,99 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.32.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 h'j, 1, LIC=MGXG8-3C467-PHN89-4NFAY-Y9SMH-BKG83
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.32.0.0
+Toolchain Path:  F:\keil\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.14.1
+Assembler:       Armasm.exe V6.14.1
+Linker/Locator:  ArmLink.exe V6.14.1
+Library Manager: ArmAr.exe V6.14.1
+Hex Converter:   FromElf.exe V6.14.1
+CPU DLL:         SARMCM3.DLL V5.32.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      UL2CM3.DLL V1.163.9.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+C:\Users\h'j\Desktop\Mai\RCIA_FreeRTOS_Infantry_A_Board_CPP-main\MDK-ARM\booster.uvprojx
+Project File Date:  05/22/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.14.1', folder: 'F:\keil\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+Note: source file '..\User\call_back.hpp' - object file renamed from '.\Objects\call_back.o' to '.\Objects\call_back_1.o'.
+Note: source file '..\User\can.hpp' - object file renamed from '.\Objects\can.o' to '.\Objects\can_1.o'.
+Note: source file '..\Core\Src\can.c' - object file renamed from '.\Objects\can.o' to '.\Objects\can_2.o'.
+../Core/Src/dma.c(22): error: 'dma.h' file not found
+#include "dma.h"
+         ^~~~~~~
+1 error generated.
+compiling dma.c...
+../User/call_back.hpp(1): warning: #pragma once in main file [-Wpragma-once-outside-header]
+#pragma once
+        ^
+../User/call_back.hpp(2): warning: In file included from...
+../User/can.hpp(2): error: 'can.h' file not found
+#include "can.h"
+         ^~~~~~~
+1 warning and 1 error generated.
+compiling call_back.hpp...
+../Core/Src/can.c(21): error: 'can.h' file not found
+#include "can.h"
+         ^~~~~~~
+1 error generated.
+compiling can.c...
+../User/can.cpp(1): warning: In file included from...
+../User/can.hpp(2): error: 'can.h' file not found
+#include "can.h"
+         ^~~~~~~
+1 error generated.
+compiling can.cpp...
+../User/can.hpp(1): warning: #pragma once in main file [-Wpragma-once-outside-header]
+#pragma once
+        ^
+../User/can.hpp(2): error: 'can.h' file not found
+#include "can.h"
+         ^~~~~~~
+1 warning and 1 error generated.
+compiling can.hpp...
+../Core/Src/usart.c(21): error: 'usart.h' file not found
+#include "usart.h"
+         ^~~~~~~~~
+1 error generated.
+compiling usart.c...
+../Core/Src/main.c(20): error: 'main.h' file not found
+#include "main.h"
+         ^~~~~~~~
+1 error generated.
+compiling main.c...
+../User/call_back.cpp(1): warning: In file included from...
+../User/call_back.hpp(2): warning: In file included from...
+../User/can.hpp(2): error: 'can.h' file not found
+#include "can.h"
+         ^~~~~~~
+1 error generated.
+compiling call_back.cpp...
+".\Objects\booster.axf" - 8 Error(s), 2 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.3.0.0.pack
+                Keil.STM32F4xx_DFP.3.0.0
+                STMicroelectronics STM32F4 Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
