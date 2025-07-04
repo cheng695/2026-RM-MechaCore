@@ -1,1 +1,16 @@
 common/build/
+MDK-ARM/FreeRTOS_Infantry_C_Board_Chassis_CPP/
+MDK-ARM/*.uvoptx
+MDK-ARM/*.uvguix.*
+.vs/
+.vscode/
+CppProperties.json
+*.code-workspace
+
+MDK-ARM/FreeRTOS_Infantry_A_Board_CPP/
+MDK-ARM/*.uvoptx
+MDK-ARM/*.uvguix.*
+.vs/
+.vscode/
+CppProperties.json
+*.code-workspace
