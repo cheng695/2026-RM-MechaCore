@@ -1,0 +1,549 @@
+{
+  "name": "FreeRTOS_Infantry_C_Board_Chassis_CPP",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Application",
+        "files": [],
+        "folders": [
+          {
+            "name": "MDK-ARM",
+            "files": [
+              {
+                "path": "../MDK-ARM/startup_stm32f407xx.s"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "User",
+            "files": [],
+            "folders": [
+              {
+                "name": "Core",
+                "files": [
+                  {
+                    "path": "../Core/Src/main.c"
+                  },
+                  {
+                    "path": "../Core/Src/gpio.c"
+                  },
+                  {
+                    "path": "../Core/Src/freertos.c"
+                  },
+                  {
+                    "path": "../Core/Src/can.c"
+                  },
+                  {
+                    "path": "../Core/Src/dma.c"
+                  },
+                  {
+                    "path": "../Core/Src/tim.c"
+                  },
+                  {
+                    "path": "../Core/Src/usart.c"
+                  },
+                  {
+                    "path": "../Core/Src/stm32f4xx_it.c"
+                  },
+                  {
+                    "path": "../Core/Src/stm32f4xx_hal_msp.c"
+                  },
+                  {
+                    "path": "../Core/Src/stm32f4xx_hal_timebase_tim.c"
+                  }
+                ],
+                "folders": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Drivers",
+        "files": [],
+        "folders": [
+          {
+            "name": "STM32F4xx_HAL_Driver",
+            "files": [
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c"
+              },
+              {
+                "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "CMSIS",
+            "files": [
+              {
+                "path": "../Core/Src/system_stm32f4xx.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Middlewares",
+        "files": [],
+        "folders": [
+          {
+            "name": "FreeRTOS",
+            "files": [
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/croutine.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/list.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/queue.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/tasks.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/timers.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Library",
+            "files": [],
+            "folders": [
+              {
+                "name": "DSP Library",
+                "files": [],
+                "folders": [
+                  {
+                    "name": "DSP Library",
+                    "files": [
+                      {
+                        "path": "../Middlewares/ST/ARM/DSP/Lib/arm_cortexM4lf_math.lib"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "User",
+        "files": [
+          {
+            "path": "../User/call_back.cpp"
+          },
+          {
+            "path": "../User/can.cpp"
+          },
+          {
+            "path": "../User/capacity.cpp"
+          },
+          {
+            "path": "../User/clamp.cpp"
+          },
+          {
+            "path": "../User/communication.cpp"
+          },
+          {
+            "path": "../User/dji_motor.cpp"
+          },
+          {
+            "path": "../User/dr16.cpp"
+          },
+          {
+            "path": "../User/Task/capacity_task.cpp"
+          },
+          {
+            "path": "../User/error_handle.cpp"
+          },
+          {
+            "path": "../User/init.cpp"
+          },
+          {
+            "path": "../User/pid.cpp"
+          },
+          {
+            "path": "../User/simple_math.cpp"
+          },
+          {
+            "path": "../User/state_machine.cpp"
+          },
+          {
+            "path": "../User/tracking_differentiator.cpp"
+          },
+          {
+            "path": "../User/uart.cpp"
+          },
+          {
+            "path": "../User/variables.cpp"
+          },
+          {
+            "path": "../User/referee.cpp"
+          },
+          {
+            "path": "../User/crc.cpp"
+          },
+          {
+            "path": "../User/ui.cpp"
+          },
+          {
+            "path": "../User/power_limit.cpp"
+          }
+        ],
+        "folders": [
+          {
+            "name": "UI",
+            "files": [],
+            "folders": [
+              {
+                "name": "Static",
+                "files": [
+                  {
+                    "path": "../MDK-ARM/UI/darw_static.cpp"
+                  },
+                  {
+                    "path": "../MDK-ARM/UI/darw_static.hpp"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "Dynamic",
+                "files": [
+                  {
+                    "path": "../MDK-ARM/UI/darw_dynamic.cpp"
+                  },
+                  {
+                    "path": "../MDK-ARM/UI/darw_dynamic.hpp"
+                  }
+                ],
+                "folders": []
+              }
+            ]
+          },
+          {
+            "name": "Task",
+            "files": [
+              {
+                "path": "../User/Task/chassis.cpp"
+              },
+              {
+                "path": "../User/Task/referee_detect_task.cpp"
+              },
+              {
+                "path": "../User/Task/communication_task.cpp"
+              },
+              {
+                "path": "../User/Task/error_handle_task.cpp"
+              },
+              {
+                "path": "../MDK-ARM/UI/Key.hpp"
+              },
+              {
+                "path": "../MDK-ARM/UI/RM_RefereeSystem.cpp"
+              },
+              {
+                "path": "../MDK-ARM/UI/RM_RefereeSystem.h"
+              },
+              {
+                "path": "../MDK-ARM/UI/RM_RefereeSystemCRC.cpp"
+              },
+              {
+                "path": "../MDK-ARM/UI/RM_RefereeSystemCRC.h"
+              },
+              {
+                "path": "../MDK-ARM/UI/StaticTime.hpp"
+              },
+              {
+                "path": "../MDK-ARM/UI/UI_Queue.cpp"
+              },
+              {
+                "path": "../MDK-ARM/UI/UI_Queue.hpp"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "::CMSIS",
+        "files": [],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": "STM32F407IGHx",
+  "packDir": ".pack/Keil/STM32F4xx_DFP.2.14.0",
+  "miscInfo": {
+    "uid": "ed8f42682238fd8516ebd05afc9915fc"
+  },
+  "targets": {
+    "FreeRTOS_Infantry_C_Board_Chassis_CPP": {
+      "excludeList": [],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x1c000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x2001c000",
+                "size": "0x4000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x100000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "stm32f4x",
+        "interface": "cmsis-dap-v1",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "ST",
+            "cpuName": "STM32F407IG"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "../Core/Inc",
+          "../Drivers/STM32F4xx_HAL_Driver/Inc",
+          "../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+          "../Middlewares/Third_Party/FreeRTOS/Source/include",
+          "../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+          "../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F",
+          "../Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+          "../Drivers/CMSIS/Include",
+          "../User",
+          "../../../../AppData/Local/Keil_v5/ARM/ARMCLANG/include",
+          "../../../../AppData/Local/Arm/Packs/ARM/CMSIS-DSP/1.15.0/Include",
+          "../User/UI/Static",
+          "../User/UI/Dynamic",
+          "../User/Task",
+          "../Utils",
+          "../MDK-ARM/UI",
+          "../APP",
+          "../Middlewares/ST/ARM/DSP/Inc",
+          ".cmsis/include",
+          "../MDK-ARM/RTE/_FreeRTOS_Infantry_C_Board_Chassis_CPP"
+        ],
+        "libList": [],
+        "defineList": [
+          "USE_HAL_DRIVER",
+          "STM32F407xx"
+        ]
+      },
+      "builderOptions": {
+        "AC6": {
+          "version": 3,
+          "beforeBuildTasks": [],
+          "afterBuildTasks": [],
+          "global": {
+            "output-debug-info": "enable"
+          },
+          "c/cpp-compiler": {
+            "optimization": "level-0",
+            "language-c": "c99",
+            "language-cpp": "c++17",
+            "one-elf-section-per-function": true,
+            "short-enums#wchar": true,
+            "warnings": "no-warnings"
+          },
+          "asm-compiler": {
+            "$use": "asm-auto"
+          },
+          "linker": {
+            "output-format": "elf",
+            "misc-controls": "--diag_suppress=L6329"
+          }
+        }
+      }
+    }
+  },
+  "version": "3.5"
+}
