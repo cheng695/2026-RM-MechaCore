@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "cwd": "c:/Users/Creeper/Desktop/Dart/MDK-ARM",
+      "type": "cortex-debug",
+      "request": "launch",
+      "name": "C/C++ Runner: Debug Session",
+      "servertype": "openocd",
+      "executable": ".\\build\\Dart\\Dart.axf",
+      "device": "STM32F427IIH6",
+      "configFiles": [
+        "interface/cmsis-dap.cfg",
+        "target/stm32f4x.cfg"
+      ],
+      "liveWatch": {
+        "enabled": true,
+        "samplesPerSecond": 4
+      },
+      "rtos": "auto"
+    }
+  ] 
+}
