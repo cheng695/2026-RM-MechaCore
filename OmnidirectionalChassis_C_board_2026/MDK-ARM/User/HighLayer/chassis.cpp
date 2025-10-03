@@ -1,5 +1,9 @@
 #include "chassis.hpp"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
 void Chassis_Monitor(void const * argument)
 {
     while(1)
@@ -8,3 +12,33 @@ void Chassis_Monitor(void const * argument)
         osDelay(10);
     }
 }
+
+void Chassis_Ctrl(void const * argument)
+{
+    extern Buzzer::C_buzzer c_buzzer;
+    while(1)
+    {
+        osDelay(50);
+    }
+}
+
+void Capacitor(void const * argument)
+{
+    while(1)
+    {
+        osDelay(1);
+    }
+}
+
+
+void Chassis_Comm(void const * argument)
+{
+    while(1)
+    {
+        osDelay(1);
+    }
+}
+
+#ifdef __cplusplus
+}
+#endif

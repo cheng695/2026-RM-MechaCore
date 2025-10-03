@@ -59,10 +59,10 @@ osThreadId chassis_commHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
-void Chassis_Ctrl(void const * argument);
-void Chassis_Monitor(void const * argument);
-void Capacitor(void const * argument);
-void Chassis_Comm(void const * argument);
+extern void Chassis_Ctrl(void const * argument);
+extern void Chassis_Monitor(void const * argument);
+extern void Capacitor(void const * argument);
+extern void Chassis_Comm(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -151,78 +151,6 @@ void StartDefaultTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartDefaultTask */
-}
-
-/* USER CODE BEGIN Header_Chassis_Ctrl */
-/**
-* @brief Function implementing the chassis_ctrl thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Chassis_Ctrl */
-void Chassis_Ctrl(void const * argument)
-{
-  /* USER CODE BEGIN Chassis_Ctrl */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Chassis_Ctrl */
-}
-
-/* USER CODE BEGIN Header_Chassis_Monitor */
-/**
-* @brief Function implementing the chassis_monitor thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Chassis_Monitor */
-void Chassis_Monitor(void const * argument)
-{
-  /* USER CODE BEGIN Chassis_Monitor */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Chassis_Monitor */
-}
-
-/* USER CODE BEGIN Header_Capacitor */
-/**
-* @brief Function implementing the capacitor thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Capacitor */
-void Capacitor(void const * argument)
-{
-  /* USER CODE BEGIN Capacitor */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Capacitor */
-}
-
-/* USER CODE BEGIN Header_Chassis_Comm */
-/**
-* @brief Function implementing the chassis_comm thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Chassis_Comm */
-void Chassis_Comm(void const * argument)
-{
-  /* USER CODE BEGIN Chassis_Comm */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Chassis_Comm */
 }
 
 /* Private application code --------------------------------------------------*/
