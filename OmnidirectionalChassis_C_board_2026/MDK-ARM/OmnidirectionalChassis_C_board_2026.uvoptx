@@ -195,6 +195,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>rx_buffer,0x10</ItemText>
         </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Motor3508,0x0A</ItemText>
+        </Ww>
       </WatchWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>
@@ -758,7 +763,7 @@
 
   <Group>
     <GroupName>User\HighLayer</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1518,7 +1523,7 @@
 
   <Group>
     <GroupName>User\LowLayer\HAL_\pwm</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1575,6 +1580,38 @@
       <bDave2>0</bDave2>
       <PathWithFileName>.\User\LowLayer\HAL_\uart\uart_driver.hpp</PathWithFileName>
       <FilenameWithoutPath>uart_driver.hpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>User\LowLayer\Equipment\buzzer</GroupName>
+    <tvExp>1</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>25</GroupNumber>
+      <FileNumber>96</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\User\LowLayer\Equipment\buzzer\Buzzer.cpp</PathWithFileName>
+      <FilenameWithoutPath>Buzzer.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>25</GroupNumber>
+      <FileNumber>97</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\User\LowLayer\Equipment\buzzer\Buzzer.hpp</PathWithFileName>
+      <FilenameWithoutPath>Buzzer.hpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

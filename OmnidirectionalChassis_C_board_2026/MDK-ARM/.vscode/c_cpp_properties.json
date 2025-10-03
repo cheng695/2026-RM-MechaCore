@@ -38,7 +38,8 @@
                 "f:\\RCIA\\2026-RM-MechaCore\\OmnidirectionalChassis_C_board_2026\\MDK-ARM\\User\\LowLayer\\HAL_\\can",
                 "f:\\RCIA\\2026-RM-MechaCore\\OmnidirectionalChassis_C_board_2026\\MDK-ARM\\User\\LowLayer\\HAL_\\gpio",
                 "f:\\RCIA\\2026-RM-MechaCore\\OmnidirectionalChassis_C_board_2026\\MDK-ARM\\User\\LowLayer\\HAL_\\pwm",
-                "f:\\RCIA\\2026-RM-MechaCore\\OmnidirectionalChassis_C_board_2026\\MDK-ARM\\User\\LowLayer\\HAL_\\uart"
+                "f:\\RCIA\\2026-RM-MechaCore\\OmnidirectionalChassis_C_board_2026\\MDK-ARM\\User\\LowLayer\\HAL_\\uart",
+                "f:\\RCIA\\2026-RM-MechaCore\\OmnidirectionalChassis_C_board_2026\\MDK-ARM\\User\\LowLayer\\Equipment\\buzzer"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

@@ -94,6 +94,8 @@
 "omnidirectionalchassis_c_board_2026\pwm_driver_1.o"
 "omnidirectionalchassis_c_board_2026\uart_driver.o"
 "omnidirectionalchassis_c_board_2026\uart_driver_1.o"
+"omnidirectionalchassis_c_board_2026\buzzer.o"
+"omnidirectionalchassis_c_board_2026\buzzer_1.o"
 --strict --scatter "OmnidirectionalChassis_C_board_2026\OmnidirectionalChassis_C_board_2026.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

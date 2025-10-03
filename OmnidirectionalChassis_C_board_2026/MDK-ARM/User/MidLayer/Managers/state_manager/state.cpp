@@ -2,6 +2,8 @@
 #include "../User/LowLayer/Equipment/motor/djimotor.hpp"
 #include "../User/LowLayer/Equipment/remote/dr16.hpp"
 
+extern Buzzer::C_buzzer c_buzzer;
+
 void State::model::updateState() 
 {
     // 这里可以安全地使用 dr16，因为在.cpp文件中包含了完整定义
@@ -44,7 +46,7 @@ void MotorState()
     {
         if(!Motor3508.IsMotorOnline(i))  // 使用公共方法检查在线状态
         {
-            // 处理第i个电机离线的情况
+            c_buzzer.Sound(i);// 处理第i个电机离线的情况
         }
     }
 }

@@ -2,6 +2,7 @@
 #define _STATE_BASE_HPP_
 
 #include "main.h"
+#include "../User/LowLayer/Equipment/buzzer/Buzzer.hpp"
 
 namespace State
 {
