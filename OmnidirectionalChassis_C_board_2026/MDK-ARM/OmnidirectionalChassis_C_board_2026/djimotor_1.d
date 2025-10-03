@@ -1,5 +1,6 @@
 omnidirectionalchassis_c_board_2026/djimotor_1.o: \
   User\LowLayer\Equipment\motor\djimotor.hpp \
+  User\..\User\LowLayer\Equipment\motor\motor_base.hpp \
   User\..\User\LowLayer\HAL_\can\can_driver.hpp ..\Core\Inc\can.h \
   ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
@@ -26,4 +27,5 @@ omnidirectionalchassis_c_board_2026/djimotor_1.o: \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  User\..\User\MidLayer\Managers\state_manager\state_base.hpp
+  User\..\User\MidLayer\Managers\state_manager\state_base.hpp \
+  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp

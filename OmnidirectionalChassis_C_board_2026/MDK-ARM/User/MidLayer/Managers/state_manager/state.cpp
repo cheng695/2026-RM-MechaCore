@@ -34,32 +34,18 @@ void State::model::updateState()
 
 void MotorState()
 {
-    M3508_201.getlastTime();
-    M3508_201.checkTime(200);
-    if(!M3508_201.isOnline)
-    {
+    extern motor::GM3508<4> Motor3508;
 
-    }
-
-    M3508_202.getlastTime();
-    M3508_202.checkTime(200);
-    if(!M3508_202.isOnline)
+    // 调用对象的检查方法更新所有电机状态
+    Motor3508.checkMotorsState();
+    
+    // 然后检查每个电机的在线状态
+    for(int i = 0; i < Motor3508.GetMotorCount(); i++)
     {
-        
-    }
-
-    M3508_203.getlastTime();
-    M3508_203.checkTime(200);
-    if(!M3508_203.isOnline)
-    {
-        
-    }
-
-    M3508_204.getlastTime();
-    M3508_204.checkTime(200);
-    if(!M3508_204.isOnline)
-    {
-        
+        if(!Motor3508.IsMotorOnline(i))  // 使用公共方法检查在线状态
+        {
+            // 处理第i个电机离线的情况
+        }
     }
 }
 

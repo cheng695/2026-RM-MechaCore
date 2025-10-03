@@ -1,6 +1,7 @@
 omnidirectionalchassis_c_board_2026/state_1.o: \
-  User\MidLayer\Managers\state_manager\state.hpp ..\Core\Inc\main.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+  User\MidLayer\Managers\state_manager\state.hpp \
+  User\..\User\MidLayer\Managers\state_manager\state_base.hpp \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \

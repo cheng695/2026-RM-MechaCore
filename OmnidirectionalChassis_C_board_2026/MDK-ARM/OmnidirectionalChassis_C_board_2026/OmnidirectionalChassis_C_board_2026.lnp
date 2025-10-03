@@ -81,6 +81,7 @@
 "omnidirectionalchassis_c_board_2026\hi12_1.o"
 "omnidirectionalchassis_c_board_2026\djimotor.o"
 "omnidirectionalchassis_c_board_2026\djimotor_1.o"
+"omnidirectionalchassis_c_board_2026\motor_base.o"
 "omnidirectionalchassis_c_board_2026\dr16.o"
 "omnidirectionalchassis_c_board_2026\dr16_1.o"
 "omnidirectionalchassis_c_board_2026\newremote.o"

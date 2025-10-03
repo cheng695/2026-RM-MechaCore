@@ -1,8 +1,8 @@
 #include "can_driver.hpp"
 
 // 全局实例指针（工厂函数中设置）实例化
-static CanDriver::CanHal* can1Hal = nullptr;
-static CanDriver::CanHal* can2Hal = nullptr;
+static std::unique_ptr<CanDriver::STM32CANHal> can1HAL;
+static std::unique_ptr<CanDriver::STM32CANHal> can2HAL;
 
 // 工厂函数
  std::unique_ptr<CanDriver::CanHal> CanDriver::CreateCANHal(uint32_t index)
@@ -10,25 +10,21 @@ static CanDriver::CanHal* can2Hal = nullptr;
      switch (index) 
      {
          case 1:
-             if (!can1Hal) 
+             if (!can1HAL) 
              {
-                std::unique_ptr<CanDriver::CanHal> hal(new CanDriver::STM32CANHal);
-                can1Hal = hal.get();
-                hal->hcan_ = hcan1;               
-                hal->ConfigureFilter();
-                return hal;
+                can1HAL = std::unique_ptr<STM32CANHal>(new STM32CANHal());
+                can1HAL->hcan_ = hcan1;               
+                can1HAL->ConfigureFilter();
              }
-             break;
+             return std::unique_ptr<CanHal>(can1HAL.get());
          case 2:
-             if (!can2Hal) 
+             if (!can2HAL) 
              {
-                std::unique_ptr<CanDriver::CanHal> hal(new CanDriver::STM32CANHal);
-                can2Hal = hal.get();
-                hal->hcan_ = hcan2;
-                hal->ConfigureFilter();
-                return hal;
-             }
-             break;
+                can2HAL = std::unique_ptr<STM32CANHal>(new STM32CANHal());
+                can2HAL->hcan_ = hcan2;
+                can2HAL->ConfigureFilter();
+            }
+            return std::unique_ptr<CanHal>(can2HAL.get());
      }
      return nullptr;
  }
@@ -89,17 +85,17 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) //中断回调函数
 // C→C++桥接函数
 void CAN1_RxFifo0Callback(void) //用户中断函数
 { 
-    if (can1Hal) //实例化的can
+    if (can1HAL) //实例化的can
     {
-        can1Hal->IrqRxFifo0(); 
+        can1HAL->IrqRxFifo0(); 
     }
 }
 
 void CAN2_RxFifo0Callback(void) //用户中断函数
 { 
-    if (can2Hal) //实例化的can
+    if (can2HAL) //实例化的can
     {
-        can2Hal->IrqRxFifo0(); 
+        can2HAL->IrqRxFifo0(); 
     } 
 }
 

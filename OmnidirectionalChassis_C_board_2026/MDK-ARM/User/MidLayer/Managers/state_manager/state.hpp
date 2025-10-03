@@ -1,22 +1,14 @@
 #ifndef _STATE_HPP_
 #define _STATE_HPP_
 
-#include "main.h"
+#include "../User/MidLayer/Managers/state_manager/state_base.hpp"
 
 // 前向声明
-namespace motor {
-    class DJImotor;
-}
-
 namespace Clicker {
     class DR16;
 }
 
 // 外部变量声明
-extern motor::DJImotor M3508_201;
-extern motor::DJImotor M3508_202;
-extern motor::DJImotor M3508_203;
-extern motor::DJImotor M3508_204;
 
 extern Clicker::DR16 dr16;
 
