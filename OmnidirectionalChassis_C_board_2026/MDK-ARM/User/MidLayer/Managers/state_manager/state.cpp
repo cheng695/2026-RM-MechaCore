@@ -4,6 +4,8 @@
 
 extern Buzzer::C_buzzer c_buzzer;
 
+State::model chass_model;
+
 void State::model::updateState() 
 {
     // 这里可以安全地使用 dr16，因为在.cpp文件中包含了完整定义
@@ -31,6 +33,10 @@ void State::model::updateState()
     {
         current_state = KEYBOARD;
     }
+    else 
+    {
+        current_state = STOP;
+    }
 }
 
 
@@ -53,10 +59,12 @@ void MotorState()
 
 void RemoteState()
 {
-    dr16.getlastTime();
-    dr16.checkTime(200);
-    if(!dr16.isOnline)
-    {
+    extern Clicker::DR16 dr16;
 
+    dr16.checkRemotecontrolState();
+
+    if(!dr16.IsRemotecontrolOnline())
+    {
+        c_buzzer.remote();
     }
 }

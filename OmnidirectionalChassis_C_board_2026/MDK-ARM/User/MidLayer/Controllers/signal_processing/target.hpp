@@ -32,7 +32,6 @@ namespace Target
             float q;
             float e;
 
-
     };
 }
 

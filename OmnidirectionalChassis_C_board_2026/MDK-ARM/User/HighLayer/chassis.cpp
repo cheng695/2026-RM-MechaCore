@@ -9,13 +9,13 @@ void Chassis_Monitor(void const * argument)
     while(1)
     {
         MOTOR_MONITOR.MotorMonitor();
+        REMOTE_MONITOR.RemotecontrolMonitor();
         osDelay(10);
     }
 }
 
 void Chassis_Ctrl(void const * argument)
 {
-    extern Buzzer::C_buzzer c_buzzer;
     while(1)
     {
         osDelay(50);

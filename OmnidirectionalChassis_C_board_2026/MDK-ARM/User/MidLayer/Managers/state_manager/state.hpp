@@ -17,16 +17,17 @@ namespace State
 {
     class model
     {
-        enum model_state
-        {
-            STOP,      //2,2
-            FOLLOW,    //2,3
-            NOTFOLLOW, //3,2
-            SHOT,      //2,1
-            VISION,    //1,2
-            KEYBOARD,  //1,1
-        };
         public:
+            enum model_state
+            {
+                STOP,      //2,2
+                FOLLOW,    //2,3
+                NOTFOLLOW, //3,2
+                SHOT,      //2,1
+                VISION,    //1,2
+                KEYBOARD,  //1,1
+            };
+
 			void updateState();  // 声明，实现在.cpp文件中
 			model_state getCurrentState() 
 			{

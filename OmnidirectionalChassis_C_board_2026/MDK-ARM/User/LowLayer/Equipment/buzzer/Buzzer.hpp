@@ -18,6 +18,7 @@ namespace Buzzer
             void m4(); //B_4
             void to_bord(); //__B_B_B__
             void imu(); //_B_B__
+            void remote(); //_B_B__B_B__
 
             typedef void(C_buzzer::*BuzzerSound)();
 

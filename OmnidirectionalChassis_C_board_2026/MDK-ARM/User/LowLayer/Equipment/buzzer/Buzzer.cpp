@@ -87,7 +87,24 @@ void Buzzer::C_buzzer::to_bord()
     osDelay(50);
 
     myPwmDriver.setPwm(0, 2, 168);
-    osDelay(850);
+    osDelay(380);
     myPwmDriver.setPwm(0, 2, 0);
+    osDelay(200);
+}
+
+void Buzzer::C_buzzer::remote()
+{
+    for(int i = 0; i < 2; i++)
+    {
+        myPwmDriver.setPwm(0, 2, 168);
+        osDelay(100);
+        myPwmDriver.setPwm(0, 2, 0);
+        osDelay(50);
+
+        myPwmDriver.setPwm(0, 2, 168);
+        osDelay(380);
+        myPwmDriver.setPwm(0, 2, 0);
+        osDelay(50);
+    }
     osDelay(200);
 }

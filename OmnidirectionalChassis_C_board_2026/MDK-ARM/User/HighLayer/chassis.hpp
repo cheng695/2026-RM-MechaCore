@@ -6,5 +6,6 @@
 #include "../User/HighLayer/Monitor.hpp"
 
 extern Monitor::motor_monitor MOTOR_MONITOR;
+extern Monitor::remote_monitor REMOTE_MONITOR;
 
 #endif
