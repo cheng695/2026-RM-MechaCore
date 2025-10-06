@@ -75,6 +75,11 @@ namespace motor
                 return N;
             }
 
+            void SetTarget(uint8_t id, float target)
+            {
+                encoderdata[id-1].target = target;
+            }
+
             float GetSpeedRef(uint8_t id)
             {
                 return encoderdata[id-1].ref_speed;

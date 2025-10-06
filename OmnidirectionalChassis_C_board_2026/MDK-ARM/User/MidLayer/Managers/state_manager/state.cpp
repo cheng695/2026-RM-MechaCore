@@ -3,41 +3,54 @@
 #include "../User/LowLayer/Equipment/remote/dr16.hpp"
 
 extern Buzzer::C_buzzer c_buzzer;
+extern motor::GM3508<4> Motor3508;
+
+State::model chass_model;
 
 void State::model::updateState() 
 {
-    // 这里可以安全地使用 dr16，因为在.cpp文件中包含了完整定义
-    if (dr16.rc.s1 == 2 && dr16.rc.s2 == 2) 
+    static const model_state state_choose[4][4] = {
+        {STOP, STOP          , STOP       , STOP},
+        {STOP, KEYBOARD      , SHOT_FOLLOW, SHOT_Rotate},
+        {STOP, VISION_NOTSHOT, STOP       , NOTFOLLOW},
+        {STOP, VISION_SHOT   , FOLLOW     , STOP}
+    };
+
+    if(dr16.rc.s1 >= 1 && dr16.rc.s1 <= 3 && dr16.rc.s2 >= 1 && dr16.rc.s2 <= 3)
+    {
+        current_state = state_choose[dr16.rc.s1][dr16.rc.s2];
+    }
+    else
     {
         current_state = STOP;
     }
-    else if (dr16.rc.s1 == 2 && dr16.rc.s2 == 3) 
+
+    if(!dr16.IsRemotecontrolOnline())
     {
-        current_state = FOLLOW;
+        current_state = STOP;
     }
-    else if (dr16.rc.s1 == 3 && dr16.rc.s2 == 2) 
+
+    for(int i = 0; i < Motor3508.GetMotorCount(); i++)
     {
-        current_state = NOTFOLLOW;
+        if(!Motor3508.IsMotorOnline(i))  // 使用公共方法检查在线状态
+        {
+            current_state = STOP;
+        }
     }
-    else if(dr16.rc.s1 == 2 && dr16.rc.s2 == 1)
+
+    if(current_state != last_state)
     {
-        current_state = SHOT;
+        is_statechanged = true;
+        last_state = current_state;
     }
-    else if(dr16.rc.s1 == 1 && dr16.rc.s2 == 2)
+    else
     {
-        current_state = VISION;
-    }
-    else if(dr16.rc.s1 == 1 && dr16.rc.s2 == 1)
-    {
-        current_state = KEYBOARD;
+        is_statechanged = false;
     }
 }
 
-
 void MotorState()
 {
-    extern motor::GM3508<4> Motor3508;
-
     // 调用对象的检查方法更新所有电机状态
     Motor3508.checkMotorsState();
     
@@ -46,17 +59,19 @@ void MotorState()
     {
         if(!Motor3508.IsMotorOnline(i))  // 使用公共方法检查在线状态
         {
-            c_buzzer.Sound(i);// 处理第i个电机离线的情况
+            //c_buzzer.Sound(i);// 处理第i个电机离线的情况
         }
     }
 }
 
 void RemoteState()
 {
-    dr16.getlastTime();
-    dr16.checkTime(200);
-    if(!dr16.isOnline)
-    {
+    extern Clicker::DR16 dr16;
 
+    dr16.checkRemotecontrolState();
+
+    if(!dr16.IsRemotecontrolOnline())
+    {
+        c_buzzer.remote();
     }
 }

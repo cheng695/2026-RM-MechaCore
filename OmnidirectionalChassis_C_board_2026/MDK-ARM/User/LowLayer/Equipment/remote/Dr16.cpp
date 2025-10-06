@@ -1,7 +1,7 @@
 #include "Dr16.hpp"
 
 Clicker::DR16 dr16;
-uint8_t pData[18];
+
 void Clicker::DR16::DR16DataUpdata(const uint8_t *pData)
 {
     if(pData == NULL)
@@ -30,12 +30,7 @@ void Clicker::DR16::DR16DataUpdata(const uint8_t *pData)
     key.e = (pData[14] & 0x80) >> 7;
         
     reserved_.reserved = ((int16_t)pData[16]) | ((int16_t)pData[17] << 8);
+
+    this->lasttime = this->getlastTime();
 }
 
-void RemoteRxData(const uint8_t* rx_buffer, uint16_t size)
-{
-    if(size == 18)
-    {
-        dr16.DR16DataUpdata(rx_buffer);
-    }
-}

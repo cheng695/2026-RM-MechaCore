@@ -17,6 +17,31 @@ namespace Target
             bool dead_zone_flag4;
             
             void TargetDataUpdate();
+
+            float Getvx_left()
+            {
+                return vx_left;
+            }
+
+            float Getvy_left()
+            {
+                return vy_left;
+            }
+
+            float Getvx_right()
+            {
+                return vx_right;
+            }
+
+            float Getvy_right()
+            {
+                return vy_right;
+            }
+
+            float GetRoller()
+            {
+                return Roller;
+            }
             
         private:
             float vx_left;
@@ -32,8 +57,9 @@ namespace Target
             float q;
             float e;
 
-
     };
 }
+
+void Dead_zone(); 
 
 #endif
