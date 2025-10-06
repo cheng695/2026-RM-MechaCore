@@ -60,6 +60,7 @@
 "omnidirectionalchassis_c_board_2026\odometry_1.o"
 "omnidirectionalchassis_c_board_2026\chassis_control.o"
 "omnidirectionalchassis_c_board_2026\chassis_control_1.o"
+"omnidirectionalchassis_c_board_2026\pidtarget.o"
 "omnidirectionalchassis_c_board_2026\target.o"
 "omnidirectionalchassis_c_board_2026\target_1.o"
 "omnidirectionalchassis_c_board_2026\callback.o"

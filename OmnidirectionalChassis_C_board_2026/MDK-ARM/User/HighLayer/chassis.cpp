@@ -18,7 +18,9 @@ void Chassis_Ctrl(void const * argument)
 {
     while(1)
     {
-        osDelay(50);
+        wheel_control.wheelControl();
+        remote_control.remoteControl();
+        osDelay(1);
     }
 }
 

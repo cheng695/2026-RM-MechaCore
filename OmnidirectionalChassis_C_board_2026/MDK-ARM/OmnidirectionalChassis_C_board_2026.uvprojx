@@ -739,6 +739,11 @@
               <FileType>8</FileType>
               <FilePath>.\User\MidLayer\Controllers\chassis_control\chassis_control.hpp</FilePath>
             </File>
+            <File>
+              <FileName>PidTarget.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\MidLayer\Controllers\chassis_control\PidTarget.hpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
