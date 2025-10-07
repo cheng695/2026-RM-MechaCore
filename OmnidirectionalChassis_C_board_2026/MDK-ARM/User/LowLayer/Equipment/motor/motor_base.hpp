@@ -1,10 +1,10 @@
 #ifndef _MOTOR_BASE_HPP_
 #define _MOTOR_BASE_HPP_ 
 
-#include "can_driver.hpp"
 #include <array>
 #include <memory>
 #include <unordered_map>
+#include "../User/LowLayer/HAL_/can/can_driver.hpp"
 #include "../User/MidLayer/Managers/state_manager/state_base.hpp"
 #include "../User/MidLayer/Algorithms/odometry/odometry.hpp"
 
@@ -30,25 +30,62 @@ namespace motor
 
                 float add_angle;
 
-                bool is_Online;
+                odometry::angle_odometry angle_odometry_8191{8191.0f, 8191.0f};
+                odometry::angle_odometry angle_odometry_360{360.0f, 8191.0f};
+                // odometry::angle_odometry angle_odometry_...{..., ...};
+
+                bool isOnline;
                 float target;
+                uint32_t time;
 
                 // 构造函数初始化所有成员
                 EncoderData() : 
                     ref_angle(0), ref_speed(0), ref_torqueCurrent(0), ref_torque(0), ref_temperate(0),
                     angle_deg(0.0f), angle_rad(0.0f), speed_rpm(0.0f), speed_rad_s(0.0f),
-                    torquecurrent(0.0f), torque(0.0f), add_angle(0.0f), is_Online(false), target(0.0f) {}
+                    torquecurrent(0.0f), torque(0.0f), add_angle(0.0f), 
+                    angle_odometry_8191(8191.0f, 8191.0f),
+                    angle_odometry_360(360.0f, 8191.9f),
+                    isOnline(false), target(0.0f) {}
             };
 
-            std::array<EncoderData, N> encoderdata;
+            EncoderData encoderdata[N];
         
         public:
+
+            // 添加公共访问方法
+            const EncoderData& GetEncoderData(uint8_t index) const 
+            {
+                if (index < N) {
+                    return encoderdata[index];
+                }
+                // 返回第一个元素作为错误处理（或者可以抛出异常）
+                return encoderdata[0];
+            }
+            
+            bool IsMotorOnline(uint8_t index) const
+            {
+                if (index < N) {
+                    return encoderdata[index].isOnline;
+                }
+                return false;
+            }
+
+            uint8_t GetMotorCount() const
+            {
+                return N;
+            }
+
+            void SetTarget(uint8_t id, float target)
+            {
+                encoderdata[id-1].target = target;
+            }
+
             float GetSpeedRef(uint8_t id)
             {
                 return encoderdata[id-1].ref_speed;
             }
 
-            flloat GetAngleRef(uint8_t id)
+            float GetAngleRef(uint8_t id)
             {
                 return encoderdata[id-1].ref_angle;
             }

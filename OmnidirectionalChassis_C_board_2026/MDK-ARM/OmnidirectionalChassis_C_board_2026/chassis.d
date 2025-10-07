@@ -16,6 +16,7 @@ omnidirectionalchassis_c_board_2026/chassis.o: User\HighLayer\chassis.cpp \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h \
   User\..\User\HighLayer\Monitor.hpp \
   User\..\User\MidLayer\Managers\state_manager\state.hpp \
+  User\..\User\MidLayer\Managers\state_manager\state_base.hpp \
   ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
@@ -40,4 +41,18 @@ omnidirectionalchassis_c_board_2026/chassis.o: User\HighLayer\chassis.cpp \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  User\..\User\LowLayer\Equipment\buzzer\Buzzer.hpp \
+  User\..\User\LowLayer\HAL_\pwm\pwm_driver.hpp ..\Core\Inc\tim.h \
+  User\..\User\HighLayer\Control.hpp \
+  User\..\User\MidLayer\Controllers\chassis_control\chassis_control.hpp \
+  User\..\User\MidLayer\Algorithms\algorithm\pid.hpp \
+  User\..\User\MidLayer\Controllers\chassis_control\PidTarget.hpp \
+  User\..\User\MidLayer\Algorithms\kinematics\chassis_kinematics.hpp \
+  User\..\User\LowLayer\Equipment\motor\djimotor.hpp \
+  User\..\User\LowLayer\Equipment\motor\motor_base.hpp \
+  User\..\User\LowLayer\HAL_\can\can_driver.hpp ..\Core\Inc\can.h \
+  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp \
+  User\..\User\MidLayer\Controllers\signal_processing\target.hpp \
+  User\..\User\LowLayer\Equipment\remote\Dr16.hpp ..\Core\Inc\usart.h \
+  ..\Core\Inc\dma.h User\..\User\LowLayer\HAL_\uart\uart_driver.hpp

@@ -51,6 +51,11 @@ namespace odometry
                 return accumulatedAngle;
             }
 
+            float getAccumulatedAngle()
+            {
+                return accumulatedAngle;
+            }
+
         private:
             float maxAngle;           // 最大角度值
             float Resolution;         // 编码器分辨率

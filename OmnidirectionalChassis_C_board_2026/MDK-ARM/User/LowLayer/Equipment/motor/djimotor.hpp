@@ -1,145 +1,11 @@
 #ifndef _DJIMOTOR_HPP_
 #define _DJIMOTOR_HPP_
 
-#include "../User/LowLayer/HAL_/can/can_driver.hpp"
+#include "../User/LowLayer/Equipment/motor/motor_base.hpp"
 
-
-
-// namespace motor
-// {
-//     struct AngleCalculator 
-//     {
-//         float maxAngle;           // 最大角度值
-//         float accumulatedAngle;   // 累计角度
-//         float lastAngleRaw;       // 上一次原始角度值
-//         bool initialized;         // 初始化标志
-        
-//         AngleCalculator(float maxAngleValue) : 
-//             maxAngle(maxAngleValue), 
-//             accumulatedAngle(0.0f), 
-//             lastAngleRaw(0.0f), 
-//             initialized(false) {}
-        
-//         // 更新累计角度
-//         float update(float currentRawAngle) 
-//         {
-//             if (!initialized) 
-//             {
-//                 lastAngleRaw = currentRawAngle;
-//                 accumulatedAngle = currentRawAngle;
-//                 initialized = true;
-//                 return accumulatedAngle;
-//             }
-            
-//             // 处理角度翻转情况
-//             float delta = currentRawAngle - lastAngleRaw;
-//             const float halfMax = maxAngle / 2.0f;
-            
-//             if (delta > halfMax) 
-//             {
-//                 // 向下翻转
-//                 accumulatedAngle += (-maxAngle + delta);
-//             } 
-//             else if (delta < -halfMax) 
-//             {
-//                 // 向上翻转
-//                 accumulatedAngle += (maxAngle + delta);
-//             }
-//             else 
-//             {
-//                 // 正常变化
-//                 accumulatedAngle += delta;
-//             }
-            
-//             lastAngleRaw = currentRawAngle;
-//             return accumulatedAngle;
-//         }
-//     };
-
-//     class DJImotor : public State::monitoring
-//     {   
-//         public:
-//             DJImotor(uint32_t recv_id) { recv_id_ = recv_id; };
-//             void DataUpdate(const uint8_t *data, float Maximum_angle);
-
-//             float getAccumulatedAngle(float maxAngleValue) 
-//             {
-//                 // 查找是否存在对应的角度计算器
-//                 for (auto& calc : angleCalculators) 
-//                 {
-//                     if (calc.maxAngle == maxAngleValue) 
-//                     {
-//                         return calc.update((float)angle);
-//                     }
-//                 }
-                
-//                 // 如果不存在，则创建新的角度计算器
-//                 angleCalculators.emplace_back(maxAngleValue);
-//                 return angleCalculators.back().update((float)angle);
-//             }
-
-//             float totalAngle;               //累计角度
-//             float MotorSet;                 //电机设置值
-        
-//         private:
-//             uint32_t recv_id_;              //接收id
-//             int16_t ref_angle;              //转子机械角度  0-8191
-//             int16_t ref_speed;              //转子速度      rpm
-//             int16_t ref_torqueCurrent;      //实际扭矩电流
-//             uint8_t ref_temperate;          //电机温度      摄氏度
-
-//             float angle;                    //转子机械角度,float              
-//             float speed;                    //转子速度,float        
-//             float torquecurrent;            //实际扭矩电流,float
-//             float torque;                   //电机扭矩
-
-//             float angle_8191;               //转子机械角度  0-8191
-//             float angle_360;                //转子机械角度  0-360
-//             float speed_rad;                //转子速度      rad/s
-
-//             //提供两个接口，这个是最大角度的值，前面的是结构体，里面有一些关于累加角度的变量和函数
-//             AngleCalculator angle8191Calc{8191.0f};
-//             AngleCalculator angle360Calc {360.0f };
-//             std::vector<AngleCalculator> angleCalculators;
-//     };
-
-//     class DJIMotorController 
-//     { 
-//     public:
-//         explicit DJIMotorController(CanDriver::CanHal& can) : can_(can) {}
-    
-//         // 更清晰的API命名
-//         bool Send0x200(int16_t m1, int16_t m2, int16_t m3, int16_t m4) //值都放入这条函数
-//         {
-//             return SendMotorData(0x200, m1, m2, m3, m4);
-//         }
-        
-//         bool Send0x1FF(int16_t m1, int16_t m2, int16_t m3, int16_t m4) //值都放入这条函数
-//         {
-//             return SendMotorData(0x1FF, m1, m2, m3, m4);
-//         }
-
-//         bool Send0x1FE(int16_t m1, int16_t m2, int16_t m3, int16_t m4) //值都放入这条函数
-//         {
-//             return SendMotorData(0x1FE, m1, m2, m3, m4);
-//         }
-
-//     private:
-//         bool SendMotorData(uint16_t cmdId, int16_t m1, int16_t m2, int16_t m3, int16_t m4); //发送帧处理函数
-//         CanDriver::CanHal& can_;
-        
-//         static void PackInt16(uint8_t* dst, int16_t val) //数据处理函数
-//         {
-//             dst[0] = static_cast<uint8_t>(val >> 8);
-//             dst[1] = static_cast<uint8_t>(val & 0xFF);
-//         };
-//     };
-// }
-
-// void RmMotorRxData(const CanDriver::CanFrame& frame);
 namespace motor
 {
-    struct Coefficient
+    struct Coefficient 
     {
         double reduction_ratio;      // 减速比
         double torque_constant;      // 力矩常数 (Nm/A)
@@ -174,21 +40,76 @@ namespace motor
         }
     };
 
-    template<uint8_t N> class DJImotorBase : public motor_base<N>
+    template<uint8_t N> class DJImotorBase : public MotorBase<N>
     {
-        public:
-            DJImotorBase(uint16_t init_id_, const uint8_t(*rxid_)[N], uint32_t txid_, Coefficient* data)
+            public:
+            
+            struct Coefficient* CoefficientData; 
+            
+            DJImotorBase(uint16_t init_id_,  uint8_t(*rxid_)[N], uint32_t txid_, Coefficient* data)
             {
                 for(uint8_t i = 0; i < N; ++i)
                 {
-                    rxid[i] = rxid_[i];
+                    rxid[i] = (*rxid_)[i];
                 }
                 txid = txid_;
                 init_id = init_id_;
                 CoefficientData = data;
+                can_ = nullptr; // 保存CAN实例引用
             }
 
-            Coefficient CoefficientData;
+            bool Send0x200(int16_t m1, int16_t m2, int16_t m3, int16_t m4) //值都放入这条函数
+            {
+                return SendMotorData(0x200, m1, m2, m3, m4);
+            }
+            
+            bool Send0x1FF(int16_t m1, int16_t m2, int16_t m3, int16_t m4) //值都放入这条函数
+            {
+                return SendMotorData(0x1FF, m1, m2, m3, m4);
+            }
+
+            bool Send0x1FE(int16_t m1, int16_t m2, int16_t m3, int16_t m4) //值都放入这条函数
+            {
+                return SendMotorData(0x1FE, m1, m2, m3, m4);
+            }
+
+            void PackInt16(uint8_t* dest, int16_t value)
+            {
+                dest[0] = (value >> 8) & 0xFF;
+                dest[1] = value & 0xFF;
+            }
+
+            bool SendMotorData(uint16_t cmdId, int16_t m1, int16_t m2, int16_t m3, int16_t m4)
+            {
+                CanDriver::CanFrame frame;
+                frame.id = cmdId;
+                frame.dlc = 8;
+                frame.isExtended = false;
+                frame.isRemote = false;
+                
+                // 打包4个电机的16位数据（每个电机占2个字节）
+                PackInt16(&frame.data[0], m1);
+                PackInt16(&frame.data[2], m2);
+                PackInt16(&frame.data[4], m3);
+                PackInt16(&frame.data[6], m4);
+                
+                // 通过CAN发送
+                if(can_) return can_->Send(frame);
+                return false;
+            }
+
+            void checkMotorsState()
+            {
+                for(uint8_t i = 0; i < N; i++)
+                {
+                    this->getTime();
+                    this->checkTime(200);
+                    this->encoderdata[i].isOnline = this->isOnline;
+                    // 注意：这里我们不直接处理离线情况，而是在MotorState函数中检查isOnline标志
+                }
+            }
+
+            void SetCan(CanDriver::CanHal* can){can_ = can;}
 
             void DataUpdate(const uint8_t *data, uint8_t index)
             {
@@ -208,31 +129,79 @@ namespace motor
                     {
                         // 获取电机数据
                         DataUpdate(frame.data, i);
-
+                        
+                        Configure(i);
                     }
                 }
             }
 
             void Configure(size_t i)
             {
-                this->encoderdata[i].angle_deg = this->encoderdata[i].ref_angle * CoefficientData->encoder_to_deg;
-                this->encoderdata[i].angle_rad = this->encoderdata[i].angle_deg * CoefficientData->deg_to_rad;
-                this->encoderdata[i].speed_rpm = this->encoderdata[i].ref_speed * CoefficientData->encoder_to_rpm;
-                this->encoderdata[i].speed_rad = this->encoderdata[i].speed_rpm * CoefficientData->rpm_to_radps;
-                this->encoderdata[i].torque_Nm = this->encoderdata[i].ref_torqueCurrent * CoefficientData->current_to_torque_coefficient;
-                this->encoderdata[i].current_A = this->encoderdata[i].ref_torqueCurrent * CoefficientData->feedback_to_current_coefficient;
-                this->encoderdata[i].temperate_C = this->encoderdata[i].ref_temperate;
+                this->encoderdata[i].angle_deg       = this->encoderdata[i].ref_angle * CoefficientData->encoder_to_deg;
+                this->encoderdata[i].angle_rad       = this->encoderdata[i].angle_deg * CoefficientData->deg_to_rad;
+                this->encoderdata[i].speed_rpm       = this->encoderdata[i].ref_speed * CoefficientData->encoder_to_rpm;
+                this->encoderdata[i].speed_rad_s     = this->encoderdata[i].speed_rpm * CoefficientData->rpm_to_radps;
+                this->encoderdata[i].torque          = this->encoderdata[i].ref_torqueCurrent * CoefficientData->current_to_torque_coefficient;
+                this->encoderdata[i].torquecurrent   = this->encoderdata[i].ref_torqueCurrent * CoefficientData->feedback_to_current_coefficient;
 
-                this->encoderdata[i].add_angle = 
-                
+                this->encoderdata[i].angle_odometry_8191.update(static_cast<float>(this->encoderdata[i].ref_angle));
+                this->encoderdata[i].angle_odometry_360.update(static_cast<float>(this->encoderdata[i].ref_angle));
+                //this->encoderdata[i].angle_odometry_....update(static_cast<float>(this->encoderdata[i].ref_angle));
+
+                this->encoderdata[i].add_angle = this->encoderdata[i].angle_odometry_8191.getAccumulatedAngle();
+
+                this->encoderdata[i].time = DJImotorBase<N>::getlastTime();
             }
 
 
         private:
             uint8_t rxid[N];
             uint32_t txid;
-            uint16_t init_id
+            uint16_t init_id;
+            CanDriver::CanHal* can_; // 添加CAN驱动实例指针
+    };
 
+
+    template <uint8_t N> class GM2006 : public DJImotorBase<N>
+    {
+    public:
+        GM2006(uint16_t init_id_, uint8_t (*rxid_)[N], uint32_t txid_)
+            : DJImotorBase<N>(init_id_, rxid_, txid_,
+                            // 直接构造参数对象
+                        new Coefficient(36.0, 0.18 / 36.0, 16384, 10, 8192, 360))
+        {
+        }
+        ~GM2006() {
+            delete this->CoefficientData;  // 释放内存
+        }
+    };
+
+    template <uint8_t N> class GM3508 : public DJImotorBase<N>
+    {
+    public:
+        GM3508(uint16_t init_id_, uint8_t (*rxid_)[N], uint32_t txid_)
+            : DJImotorBase<N>(init_id_, rxid_, txid_,
+                            // 直接构造参数对象
+                        new Coefficient(1.0, 0.3 / 1.0, 16384, 20, 8192, 360))
+        {
+        }
+        ~GM3508() {
+            delete this->CoefficientData;  // 释放内存
+        }
+    };
+
+    template <uint8_t N> class GM6020 : public DJImotorBase<N>
+    {
+    public:
+        GM6020(uint16_t init_id_, uint8_t (*rxid_)[N], uint32_t txid_)
+            : DJImotorBase<N>(init_id_, rxid_, txid_,
+                            // 直接构造参数对象
+                        new Coefficient(1.0, 0.7 * 1.0, 16384, 3, 8192, 360))
+        {
+        }
+        ~GM6020() {
+            delete this->CoefficientData;  // 释放内存
+        }
 
     };
 

@@ -1,0 +1,3 @@
+omnidirectionalgimbal_a_board_2026/odometry.o: \
+  User\MidLayer\Algorithms\odometry\odometry.cpp \
+  User\MidLayer\Algorithms\odometry\odometry.hpp

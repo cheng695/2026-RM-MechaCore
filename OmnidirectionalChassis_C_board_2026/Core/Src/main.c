@@ -62,6 +62,7 @@ void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN 0 */
 extern void CanInit();
 extern void RxEventCallback();
+extern void pwminit();
 /* USER CODE END 0 */
 
 /**
@@ -103,6 +104,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   CanInit();
   RxEventCallback();
+  pwminit();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in cmsis_os2.c) */

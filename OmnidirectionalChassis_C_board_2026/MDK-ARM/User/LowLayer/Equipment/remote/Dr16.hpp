@@ -9,7 +9,6 @@
 
 namespace Clicker
 {
-
     class DR16 : public State::monitoring
     {
         public:
@@ -48,6 +47,23 @@ namespace Clicker
             }reserved_;
 
         void DR16DataUpdata(const uint8_t *pData);
+
+        void checkRemotecontrolState()
+        {
+            this->time = this->getTime();
+            this->isOnline = this->checkTime(200);
+        }
+
+        bool IsRemotecontrolOnline() const
+        {
+            return this->isOnline;
+        }
+
+        private:
+            uint8_t pData[18];
+            float time;
+            float lasttime;
+            bool isOnline;
     };
 }
 

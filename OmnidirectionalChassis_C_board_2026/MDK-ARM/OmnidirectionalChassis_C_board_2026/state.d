@@ -1,7 +1,8 @@
 omnidirectionalchassis_c_board_2026/state.o: \
   User\MidLayer\Managers\state_manager\state.cpp \
-  User\MidLayer\Managers\state_manager\state.hpp ..\Core\Inc\main.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+  User\MidLayer\Managers\state_manager\state.hpp \
+  User\..\User\MidLayer\Managers\state_manager\state_base.hpp \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
@@ -26,8 +27,25 @@ omnidirectionalchassis_c_board_2026/state.o: \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  User\..\User\LowLayer\Equipment\buzzer\Buzzer.hpp \
+  User\..\User\LowLayer\HAL_\pwm\pwm_driver.hpp ..\Core\Inc\tim.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
+  ..\Core\Inc\FreeRTOSConfig.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h \
   User\..\User\LowLayer\Equipment\motor\djimotor.hpp \
+  User\..\User\LowLayer\Equipment\motor\motor_base.hpp \
   User\..\User\LowLayer\HAL_\can\can_driver.hpp ..\Core\Inc\can.h \
-  User\..\User\MidLayer\Managers\state_manager\state_base.hpp \
+  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp \
   User\..\User\LowLayer\Equipment\remote\dr16.hpp ..\Core\Inc\usart.h \
   ..\Core\Inc\dma.h User\..\User\LowLayer\HAL_\uart\uart_driver.hpp

@@ -60,6 +60,7 @@
 "omnidirectionalchassis_c_board_2026\odometry_1.o"
 "omnidirectionalchassis_c_board_2026\chassis_control.o"
 "omnidirectionalchassis_c_board_2026\chassis_control_1.o"
+"omnidirectionalchassis_c_board_2026\pidtarget.o"
 "omnidirectionalchassis_c_board_2026\target.o"
 "omnidirectionalchassis_c_board_2026\target_1.o"
 "omnidirectionalchassis_c_board_2026\callback.o"
@@ -81,6 +82,7 @@
 "omnidirectionalchassis_c_board_2026\hi12_1.o"
 "omnidirectionalchassis_c_board_2026\djimotor.o"
 "omnidirectionalchassis_c_board_2026\djimotor_1.o"
+"omnidirectionalchassis_c_board_2026\motor_base.o"
 "omnidirectionalchassis_c_board_2026\dr16.o"
 "omnidirectionalchassis_c_board_2026\dr16_1.o"
 "omnidirectionalchassis_c_board_2026\newremote.o"
@@ -93,6 +95,8 @@
 "omnidirectionalchassis_c_board_2026\pwm_driver_1.o"
 "omnidirectionalchassis_c_board_2026\uart_driver.o"
 "omnidirectionalchassis_c_board_2026\uart_driver_1.o"
+"omnidirectionalchassis_c_board_2026\buzzer.o"
+"omnidirectionalchassis_c_board_2026\buzzer_1.o"
 --strict --scatter "OmnidirectionalChassis_C_board_2026\OmnidirectionalChassis_C_board_2026.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

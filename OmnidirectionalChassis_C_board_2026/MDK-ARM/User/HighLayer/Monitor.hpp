@@ -10,6 +10,12 @@ namespace Monitor
         public:
             void MotorMonitor();
     };
+
+    class remote_monitor
+    {
+        public:
+            void RemotecontrolMonitor();
+    };
 }
 
 #endif

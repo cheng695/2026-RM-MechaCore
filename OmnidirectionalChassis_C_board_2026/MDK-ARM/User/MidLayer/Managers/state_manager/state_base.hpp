@@ -2,6 +2,7 @@
 #define _STATE_BASE_HPP_
 
 #include "main.h"
+#include "../User/LowLayer/Equipment/buzzer/Buzzer.hpp"
 
 namespace State
 {
@@ -12,14 +13,16 @@ namespace State
             int currentTime;
             bool isOnline;
             
-            void getlastTime()
+            float getTime()
             {
                 currentTime = HAL_GetTick();
+                return currentTime;
             }
 
-            void getTime()
+            float getlastTime()
             {
                 lastUpdateTime = HAL_GetTick();
+                return lastUpdateTime;
             }
             
             bool checkTime(int time)
@@ -27,6 +30,10 @@ namespace State
                 if (currentTime - lastUpdateTime > time)
                 {
                     isOnline = false;
+                }
+                else 
+                {
+                    isOnline = true;  // 在时间范围内，设置为在线
                 }
                 return isOnline;
             }

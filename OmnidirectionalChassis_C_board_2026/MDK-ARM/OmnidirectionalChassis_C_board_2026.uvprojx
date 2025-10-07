@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;.\User</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;./User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -739,6 +739,11 @@
               <FileType>8</FileType>
               <FilePath>.\User\MidLayer\Controllers\chassis_control\chassis_control.hpp</FilePath>
             </File>
+            <File>
+              <FileName>PidTarget.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\MidLayer\Controllers\chassis_control\PidTarget.hpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -971,6 +976,21 @@
               <FileName>uart_driver.hpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\User\LowLayer\HAL_\uart\uart_driver.hpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>User\LowLayer\Equipment\buzzer</GroupName>
+          <Files>
+            <File>
+              <FileName>Buzzer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\LowLayer\Equipment\buzzer\Buzzer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buzzer.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\LowLayer\Equipment\buzzer\Buzzer.hpp</FilePath>
             </File>
           </Files>
         </Group>
