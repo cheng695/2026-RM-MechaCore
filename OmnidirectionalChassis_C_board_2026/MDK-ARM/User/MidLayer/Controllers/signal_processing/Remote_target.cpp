@@ -1,8 +1,8 @@
-#include "target.hpp"
+#include "Remote_target.hpp"
 
-Target::target dr16_tar;
+RemoteTarget::remotetarget dr16_tar;
 
-void Target::target::TargetDataUpdate()
+void RemoteTarget::remotetarget::TargetDataUpdate()
 {
     Dead_zone(); 
     dr16_tar.vx_left   = dead_zone_flag3 ? 0.0f : (dr16.rc.ch3 - 1024.0f)/660.0f;

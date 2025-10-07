@@ -750,14 +750,19 @@
           <GroupName>User\MidLayer\Controllers\signal_processing</GroupName>
           <Files>
             <File>
-              <FileName>target.cpp</FileName>
+              <FileName>Kinematic_target.hpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\User\MidLayer\Controllers\signal_processing\target.cpp</FilePath>
+              <FilePath>.\User\MidLayer\Controllers\signal_processing\Kinematic_target.hpp</FilePath>
             </File>
             <File>
-              <FileName>target.hpp</FileName>
+              <FileName>Remote_target.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\User\MidLayer\Controllers\signal_processing\target.hpp</FilePath>
+              <FilePath>.\User\MidLayer\Controllers\signal_processing\Remote_target.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Remote_target.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\MidLayer\Controllers\signal_processing\Remote_target.hpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -920,6 +925,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>User\LowLayer\Equipment\buzzer</GroupName>
+          <Files>
+            <File>
+              <FileName>Buzzer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\LowLayer\Equipment\buzzer\Buzzer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buzzer.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\LowLayer\Equipment\buzzer\Buzzer.hpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>User\LowLayer\HAL_\can</GroupName>
           <Files>
             <File>
@@ -976,21 +996,6 @@
               <FileName>uart_driver.hpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\User\LowLayer\HAL_\uart\uart_driver.hpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>User\LowLayer\Equipment\buzzer</GroupName>
-          <Files>
-            <File>
-              <FileName>Buzzer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\User\LowLayer\Equipment\buzzer\Buzzer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Buzzer.hpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\User\LowLayer\Equipment\buzzer\Buzzer.hpp</FilePath>
             </File>
           </Files>
         </Group>

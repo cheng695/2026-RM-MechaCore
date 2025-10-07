@@ -51,6 +51,6 @@ omnidirectionalchassis_c_board_2026/chassis_control.o: \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h \
   User\..\User\MidLayer\Algorithms\odometry\odometry.hpp \
   User\..\User\MidLayer\Managers\state_manager\state.hpp \
-  User\..\User\MidLayer\Controllers\signal_processing\target.hpp \
+  User\..\User\MidLayer\Controllers\signal_processing\Remote_target.hpp \
   User\..\User\LowLayer\Equipment\remote\Dr16.hpp ..\Core\Inc\usart.h \
   ..\Core\Inc\dma.h User\..\User\LowLayer\HAL_\uart\uart_driver.hpp

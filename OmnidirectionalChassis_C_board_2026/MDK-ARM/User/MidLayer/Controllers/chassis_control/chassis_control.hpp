@@ -4,7 +4,7 @@
 #include <math.h>
 #include "../User/MidLayer/Algorithms/algorithm/pid.hpp"
 #include "../User/MidLayer/Managers/state_manager/state.hpp"
-#include "../User/MidLayer/Controllers/signal_processing/target.hpp"
+#include "../User/MidLayer/Controllers/signal_processing/Remote_target.hpp"
 
 extern State::model chass_model;
 extern Target::target dr16_tar;
@@ -26,51 +26,51 @@ namespace ChassisControl
         private:
     };
 
-    class kinematics_target : public Kinematics::Wheelset<4>
-    {
-        public:
-            void nofollow(float phi)//0.005512f
-            {
-                float w, vx, vy;
-                w = 8911.0f*dr16_tar.GetRoller();
-                vx = 8911.0f*(dr16_tar.Getvx_left() *  cosf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w) + dr16_tar.Getvy_left() * sinf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w)); 
-                vy = 8911.0f*(dr16_tar.Getvx_left() * -sinf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w) + dr16_tar.Getvy_left() * cosf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w)); 
+    // class kinematics_target : public Kinematics::Wheelset<4>
+    // {
+    //     public:
+    //         void nofollow(float phi)//0.005512f
+    //         {
+    //             float w, vx, vy;
+    //             w = 8911.0f*dr16_tar.GetRoller();
+    //             vx = 8911.0f*(dr16_tar.Getvx_left() *  cosf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w) + dr16_tar.Getvy_left() * sinf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w)); 
+    //             vy = 8911.0f*(dr16_tar.Getvx_left() * -sinf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w) + dr16_tar.Getvy_left() * cosf(/*M6020_206.theta_planning*/ + 0.02f*phi*VehicleDirection_w)); 
                 
-                Omini.setVehicleDirection_w(w);
-                Omini.setVehicleDirection_vx(vx);
-                Omini.setVehicleDirection_vy(vy);
-            }
+    //             Omini.setVehicleDirection_w(w);
+    //             Omini.setVehicleDirection_vx(vx);
+    //             Omini.setVehicleDirection_vy(vy);
+    //         }
 
-            void follow(float phi)//13.78f
-            {
-                float w, vx, vy;
-                w  = 8911.0f*dr16_tar.GetRoller() /*+ Revolve_PidInstance.NormalPID(M6020_206.theta_planning, 0.0f)*/; 
-                vx = 8911.0f*(dr16_tar.Getvx_left() *  cosf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * sinf(/*M6020_206.theta_planning*/ + 0.02f*phi));
-                vy = 8911.0f*(dr16_tar.Getvx_left() * -sinf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * cosf(/*M6020_206.theta_planning*/ + 0.02f*phi));
+    //         void follow(float phi)//13.78f
+    //         {
+    //             float w, vx, vy;
+    //             w  = 8911.0f*dr16_tar.GetRoller() /*+ Revolve_PidInstance.NormalPID(M6020_206.theta_planning, 0.0f)*/; 
+    //             vx = 8911.0f*(dr16_tar.Getvx_left() *  cosf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * sinf(/*M6020_206.theta_planning*/ + 0.02f*phi));
+    //             vy = 8911.0f*(dr16_tar.Getvx_left() * -sinf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * cosf(/*M6020_206.theta_planning*/ + 0.02f*phi));
             
-                Omini.setVehicleDirection_w(w);
-                Omini.setVehicleDirection_vx(vx);
-                Omini.setVehicleDirection_vy(vy);
-            }
+    //             Omini.setVehicleDirection_w(w);
+    //             Omini.setVehicleDirection_vx(vx);
+    //             Omini.setVehicleDirection_vy(vy);
+    //         }
 
-            void follow_rotate(float phi)//13.78f
-            {
-                float w, vx, vy;
-                w  = 8911.0f*dr16_tar.GetRoller() /*+ Revolve_PidInstance.NormalPID(M6020_206.theta_planning, 0.0f)*/; 
-                vx = 8911.0f*(dr16_tar.Getvx_left() *  cosf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * sinf(/*M6020_206.theta_planning*/ + 0.02f*phi));
-                vy = 8911.0f*(dr16_tar.Getvx_left() * -sinf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * cosf(/*M6020_206.theta_planning*/ + 0.02f*phi));
+    //         void follow_rotate(float phi)//13.78f
+    //         {
+    //             float w, vx, vy;
+    //             w  = 8911.0f*dr16_tar.GetRoller() /*+ Revolve_PidInstance.NormalPID(M6020_206.theta_planning, 0.0f)*/; 
+    //             vx = 8911.0f*(dr16_tar.Getvx_left() *  cosf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * sinf(/*M6020_206.theta_planning*/ + 0.02f*phi));
+    //             vy = 8911.0f*(dr16_tar.Getvx_left() * -sinf(/*M6020_206.theta_planning*/ + 0.02f*phi) + dr16_tar.Getvy_left() * cosf(/*M6020_206.theta_planning*/ + 0.02f*phi));
             
-                Omini.setVehicleDirection_w(w);
-                Omini.setVehicleDirection_vx(vx);
-                Omini.setVehicleDirection_vy(vy);            
-            }
+    //             Omini.setVehicleDirection_w(w);
+    //             Omini.setVehicleDirection_vx(vx);
+    //             Omini.setVehicleDirection_vy(vy);            
+    //         }
 
-            void keyboard()
-            {
+    //         void keyboard()
+    //         {
                 
-            }
+    //         }
 
-    };
+    // };
 
     template<uint8_t N> class motortarget 
     {

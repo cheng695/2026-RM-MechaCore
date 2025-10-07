@@ -1,13 +1,13 @@
-#ifndef _TARGET_HPP_
-#define _TARGET_HPP_
+#ifndef _REMOTE_TARGET_HPP_
+#define _REMOTE_TARGET_HPP_
 
 #include "../User/LowLayer/Equipment/remote/Dr16.hpp"
 
 extern Clicker::DR16 dr16;
 
-namespace Target
+namespace RemoteTarget
 {
-    class target
+    class remotetarget
     {
         public:
             bool dead_zone_flag0;

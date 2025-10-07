@@ -1,20 +1,20 @@
 #include "djimotor.hpp"
 
-// 全局CAN实例
-CanDriver::CanHal* can1 = nullptr;
-CanDriver::CanHal* can2 = nullptr;
-
+// 实例化电机
 static uint8_t motor_rx_ids[4] = {1, 2, 3, 4};
-
-// 全局电机对象
 motor::GM3508<4> Motor3508(0x200, &motor_rx_ids, 0x200);
 
+//can接收回调函数
 void GlobalRmMotorRxData(const CanDriver::CanFrame& frame)
 {
     Motor3508.RmMotorRxData(frame);
 }
 
-// 初始化函数
+// 全局CAN实例
+CanDriver::CanHal* can1 = nullptr;
+CanDriver::CanHal* can2 = nullptr;
+
+// 初始化can函数
 extern "C" void CanInit()
 {
     // 1. 创建CAN实例

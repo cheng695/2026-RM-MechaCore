@@ -53,6 +53,6 @@ omnidirectionalchassis_c_board_2026/chassis_1.o: \
   User\..\User\LowLayer\Equipment\motor\motor_base.hpp \
   User\..\User\LowLayer\HAL_\can\can_driver.hpp ..\Core\Inc\can.h \
   User\..\User\MidLayer\Algorithms\odometry\odometry.hpp \
-  User\..\User\MidLayer\Controllers\signal_processing\target.hpp \
+  User\..\User\MidLayer\Controllers\signal_processing\Remote_target.hpp \
   User\..\User\LowLayer\Equipment\remote\Dr16.hpp ..\Core\Inc\usart.h \
   ..\Core\Inc\dma.h User\..\User\LowLayer\HAL_\uart\uart_driver.hpp

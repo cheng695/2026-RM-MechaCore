@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 F:\RCIA\2026-RM-MechaCore\OmnidirectionalChassis_C_board_2026\MDK-ARM\OmnidirectionalChassis_C_board_2026.uvprojx
-Project File Date:  10/06/2025
+Project File Date:  10/08/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'F:\keil5\ARM\ARMCLANG\Bin'
@@ -38,7 +38,7 @@ Note: source file '.\User\MidLayer\Algorithms\filter\Low-pass filter.hpp' - obje
 Note: source file '.\User\MidLayer\Algorithms\kinematics\chassis_kinematics.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\chassis_kinematics.o' to 'OmnidirectionalChassis_C_board_2026\chassis_kinematics_1.o'.
 Note: source file '.\User\MidLayer\Algorithms\odometry\odometry.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\odometry.o' to 'OmnidirectionalChassis_C_board_2026\odometry_1.o'.
 Note: source file '.\User\MidLayer\Controllers\chassis_control\chassis_control.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\chassis_control.o' to 'OmnidirectionalChassis_C_board_2026\chassis_control_1.o'.
-Note: source file '.\User\MidLayer\Controllers\signal_processing\target.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\target.o' to 'OmnidirectionalChassis_C_board_2026\target_1.o'.
+Note: source file '.\User\MidLayer\Controllers\signal_processing\Remote_target.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\Remote_target.o' to 'OmnidirectionalChassis_C_board_2026\remote_target_1.o'.
 Note: source file '.\User\MidLayer\Managers\comm_manager\Callback.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\Callback.o' to 'OmnidirectionalChassis_C_board_2026\callback_1.o'.
 Note: source file '.\User\MidLayer\Managers\comm_manager\CtoA.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\CtoA.o' to 'OmnidirectionalChassis_C_board_2026\ctoa_1.o'.
 Note: source file '.\User\MidLayer\Managers\power_manager\power.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\power.o' to 'OmnidirectionalChassis_C_board_2026\power_1.o'.
@@ -49,15 +49,19 @@ Note: source file '.\User\LowLayer\Equipment\imu\CH104.hpp' - object file rename
 Note: source file '.\User\LowLayer\Equipment\imu\HI12.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\HI12.o' to 'OmnidirectionalChassis_C_board_2026\hi12_1.o'.
 Note: source file '.\User\LowLayer\Equipment\motor\djimotor.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\djimotor.o' to 'OmnidirectionalChassis_C_board_2026\djimotor_1.o'.
 Note: source file '.\User\LowLayer\Equipment\remote\Dr16.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\Dr16.o' to 'OmnidirectionalChassis_C_board_2026\dr16_1.o'.
+Note: source file '.\User\LowLayer\Equipment\buzzer\Buzzer.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\Buzzer.o' to 'OmnidirectionalChassis_C_board_2026\buzzer_1.o'.
 Note: source file '.\User\LowLayer\HAL_\can\can_driver.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\can_driver.o' to 'OmnidirectionalChassis_C_board_2026\can_driver_1.o'.
-Note: source file '.\User\LowLayer\HAL_\gpio\gpio_driver.cpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\gpio_driver.o' to 'OmnidirectionalChassis_C_board_2026\gpio_driver_2.o'.
 Note: source file '.\User\LowLayer\HAL_\gpio\gpio_driver.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\gpio_driver.o' to 'OmnidirectionalChassis_C_board_2026\gpio_driver_1.o'.
 Note: source file '.\User\LowLayer\HAL_\pwm\pwm_driver.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\pwm_driver.o' to 'OmnidirectionalChassis_C_board_2026\pwm_driver_1.o'.
 Note: source file '.\User\LowLayer\HAL_\uart\uart_driver.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\uart_driver.o' to 'OmnidirectionalChassis_C_board_2026\uart_driver_1.o'.
-Note: source file '.\User\LowLayer\Equipment\buzzer\Buzzer.hpp' - object file renamed from 'OmnidirectionalChassis_C_board_2026\Buzzer.o' to 'OmnidirectionalChassis_C_board_2026\buzzer_1.o'.
+compiling chassis.hpp...
 compiling chassis_control.cpp...
+compiling chassis_control.hpp...
+compiling Control.hpp...
+compiling chassis.cpp...
+compiling Control.cpp...
 linking...
-Program Size: Code=53628 RO-data=1592 RW-data=72 ZI-data=21232  
+Program Size: Code=54152 RO-data=1628 RW-data=76 ZI-data=21108  
 FromELF: creating hex file...
 "OmnidirectionalChassis_C_board_2026\OmnidirectionalChassis_C_board_2026.axf" - 0 Error(s), 0 Warning(s).
 
@@ -82,7 +86,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

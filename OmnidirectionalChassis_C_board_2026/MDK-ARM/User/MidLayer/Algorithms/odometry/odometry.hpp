@@ -6,7 +6,7 @@ namespace odometry
 {
     class angle_odometry
     {
-        public:
+        public:    
             angle_odometry(float MaxAngle, float Resolution) : maxAngle(MaxAngle), Resolution(Resolution)
             {
                 accumulatedAngle = 0.0f;
