@@ -1,9 +1,14 @@
 #include "chassis_control.hpp"
+#include "../User/MidLayer/Managers/state_manager/state.hpp"
+#include "../User/MidLayer/Controllers/chassis_control/PidTarget.hpp"
 
-PidTarget::pid_target<PIDQuantity> ChassisPidTarget;
-ChassisControl::kinematics_target KinematicsTarget;
-ChassisControl::motortarget<PIDQuantity> MotorTarget;
+extern State::model chass_model;
+
+PidTarget::pidtarget chassis_pidtarget;
 ChassisControl::modelchoose model_choose;
+ChassisControl::Send motor_send;
+ChassisControl::PIDCalculate pid_calculate;
+
 void ChassisControl::modelchoose::ModeSelection()
 {
     chass_model.updateState();
@@ -42,28 +47,28 @@ void ChassisControl::modelchoose::ModeSelection()
         switch(chass_model.getCurrentState())
         {
             case State::model::STOP:
-                ChassisPidTarget.stop(PIDQuantity);
+                model_choose.stop();
                 break;
             case State::model::FOLLOW:
-                KinematicsTarget.follow(13.78f);
+                model_choose.follow(13.78f);
                 break;
             case State::model::NOTFOLLOW:
-                KinematicsTarget.nofollow(0.005512f);
+                model_choose.nofollow(0.005512f);
                 break;
             case State::model::SHOT_FOLLOW:
-                KinematicsTarget.follow(13.78f);
+                model_choose.follow(13.78f);
                 break;
             case State::model::SHOT_Rotate:
-                KinematicsTarget.follow_rotate(13.78f);
+                model_choose.rotate_follow(13.78f);
                 break;
             case State::model::VISION_NOTSHOT:
-                KinematicsTarget.nofollow(0.005512f);
+                model_choose.nofollow(0.005512f);
                 break;
             case State::model::VISION_SHOT:
-                KinematicsTarget.nofollow(0.005512f);
+                model_choose.nofollow(0.005512f);
                 break;
             case State::model::KEYBOARD:
-                KinematicsTarget.keyboard();
+                model_choose.keyboard();
                 break;
         }
     }

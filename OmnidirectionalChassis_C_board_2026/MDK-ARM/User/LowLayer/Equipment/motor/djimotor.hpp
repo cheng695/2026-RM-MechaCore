@@ -1,6 +1,7 @@
 #ifndef _DJIMOTOR_HPP_
 #define _DJIMOTOR_HPP_
 
+#include <vector>
 #include "../User/LowLayer/Equipment/motor/motor_base.hpp"
 
 namespace motor
@@ -25,7 +26,7 @@ namespace motor
         static constexpr double deg_to_rad = 0.017453292519611;
         static constexpr double rad_to_deg = 1 / 0.017453292519611;
             
-        // 构造函数带参数计算 rr减速比，tc扭矩常数，fmc反馈最大电流，mc最大电流，er编码器分辨率 ma最大角度（一圈，叠加角用）
+        // 结构体构造函数带参数计算 rr减速比，tc扭矩常数，fmc反馈最大电流，mc最大电流，er编码器分辨率 ma最大角度（一圈，叠加角用）
         Coefficient (double rr, double tc, double fmc, double mc, double er, double ma)
             : reduction_ratio(rr), torque_constant(tc), feedback_current_max(fmc), current_max(mc), 
             encoder_resolution(er), max_angle(ma)
@@ -46,6 +47,7 @@ namespace motor
             
             struct Coefficient* CoefficientData; 
             
+            //DJImotorBase类构造函数
             DJImotorBase(uint16_t init_id_,  uint8_t(*rxid_)[N], uint32_t txid_, Coefficient* data)
             {
                 for(uint8_t i = 0; i < N; ++i)
@@ -103,7 +105,7 @@ namespace motor
                 for(uint8_t i = 0; i < N; i++)
                 {
                     this->getTime();
-                    this->checkTime(200);
+                    this->isOnline = this->checkTime(200);
                     this->encoderdata[i].isOnline = this->isOnline;
                     // 注意：这里我们不直接处理离线情况，而是在MotorState函数中检查isOnline标志
                 }
@@ -144,16 +146,12 @@ namespace motor
                 this->encoderdata[i].torque          = this->encoderdata[i].ref_torqueCurrent * CoefficientData->current_to_torque_coefficient;
                 this->encoderdata[i].torquecurrent   = this->encoderdata[i].ref_torqueCurrent * CoefficientData->feedback_to_current_coefficient;
 
-                this->encoderdata[i].angle_odometry_8191.update(static_cast<float>(this->encoderdata[i].ref_angle));
-                this->encoderdata[i].angle_odometry_360.update(static_cast<float>(this->encoderdata[i].ref_angle));
-                //this->encoderdata[i].angle_odometry_....update(static_cast<float>(this->encoderdata[i].ref_angle));
+                this->encoderdata[i].Accumulate_angle_->update(static_cast<float>(this->encoderdata[i].ref_angle));
+                this->encoderdata[i].add_angle = this->encoderdata[i].Accumulate_angle_->getAccumulatedAngle();
 
-                this->encoderdata[i].add_angle = this->encoderdata[i].angle_odometry_8191.getAccumulatedAngle();
-
-                this->encoderdata[i].time = DJImotorBase<N>::getlastTime();
+                this->encoderdata[i].lasttime = this->getlastTime();
             }
-
-
+ 
         private:
             uint8_t rxid[N];
             uint32_t txid;
@@ -161,14 +159,12 @@ namespace motor
             CanDriver::CanHal* can_; // 添加CAN驱动实例指针
     };
 
-
     template <uint8_t N> class GM2006 : public DJImotorBase<N>
     {
     public:
         GM2006(uint16_t init_id_, uint8_t (*rxid_)[N], uint32_t txid_)
             : DJImotorBase<N>(init_id_, rxid_, txid_,
-                            // 直接构造参数对象
-                        new Coefficient(36.0, 0.18 / 36.0, 16384, 10, 8192, 360))
+            new Coefficient(36.0, 0.18 / 36.0, 16384, 10, 8192, 360))
         {
         }
         ~GM2006() {
@@ -181,8 +177,7 @@ namespace motor
     public:
         GM3508(uint16_t init_id_, uint8_t (*rxid_)[N], uint32_t txid_)
             : DJImotorBase<N>(init_id_, rxid_, txid_,
-                            // 直接构造参数对象
-                        new Coefficient(1.0, 0.3 / 1.0, 16384, 20, 8192, 360))
+            new Coefficient(1.0, 0.3 / 1.0, 16384, 20, 8192, 360))
         {
         }
         ~GM3508() {
@@ -195,8 +190,7 @@ namespace motor
     public:
         GM6020(uint16_t init_id_, uint8_t (*rxid_)[N], uint32_t txid_)
             : DJImotorBase<N>(init_id_, rxid_, txid_,
-                            // 直接构造参数对象
-                        new Coefficient(1.0, 0.7 * 1.0, 16384, 3, 8192, 360))
+            new Coefficient(1.0, 0.7 * 1.0, 16384, 3, 8192, 360))
         {
         }
         ~GM6020() {

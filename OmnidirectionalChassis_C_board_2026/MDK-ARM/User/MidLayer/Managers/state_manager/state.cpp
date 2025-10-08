@@ -4,6 +4,7 @@
 
 extern Buzzer::C_buzzer c_buzzer;
 extern motor::GM3508<4> Motor3508;
+extern Clicker::DR16 dr16;
 
 State::model chass_model;
 
@@ -25,14 +26,14 @@ void State::model::updateState()
         current_state = STOP;
     }
 
-    if(!dr16.IsRemotecontrolOnline())
+    if(!dr16.GetIsRemotecontrolOnline())
     {
         current_state = STOP;
     }
 
     for(int i = 0; i < Motor3508.GetMotorCount(); i++)
     {
-        if(!Motor3508.IsMotorOnline(i))  // 使用公共方法检查在线状态
+        if(!Motor3508.GetIsMotorOnline(i))  // 使用公共方法检查在线状态
         {
             current_state = STOP;
         }
@@ -57,20 +58,18 @@ void MotorState()
     // 然后检查每个电机的在线状态
     for(int i = 0; i < Motor3508.GetMotorCount(); i++)
     {
-        if(!Motor3508.IsMotorOnline(i))  // 使用公共方法检查在线状态
+        if(!Motor3508.GetIsMotorOnline(i))  // 使用公共方法检查在线状态
         {
-            //c_buzzer.Sound(i);// 处理第i个电机离线的情况
+            c_buzzer.Sound(i);// 处理第i个电机离线的情况
         }
     }
 }
 
 void RemoteState()
 {
-    extern Clicker::DR16 dr16;
-
     dr16.checkRemotecontrolState();
 
-    if(!dr16.IsRemotecontrolOnline())
+    if(!dr16.GetIsRemotecontrolOnline())
     {
         c_buzzer.remote();
     }

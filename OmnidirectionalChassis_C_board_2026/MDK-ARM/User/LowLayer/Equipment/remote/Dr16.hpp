@@ -54,7 +54,7 @@ namespace Clicker
             this->isOnline = this->checkTime(200);
         }
 
-        bool IsRemotecontrolOnline() const
+        bool GetIsRemotecontrolOnline() const
         {
             return this->isOnline;
         }
