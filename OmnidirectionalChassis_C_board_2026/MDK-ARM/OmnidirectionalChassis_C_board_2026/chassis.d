@@ -46,13 +46,13 @@ omnidirectionalchassis_c_board_2026/chassis.o: User\HighLayer\chassis.cpp \
   User\..\User\LowLayer\HAL_\pwm\pwm_driver.hpp ..\Core\Inc\tim.h \
   User\..\User\HighLayer\Control.hpp \
   User\..\User\MidLayer\Controllers\chassis_control\chassis_control.hpp \
-  User\..\User\MidLayer\Algorithms\algorithm\pid.hpp \
-  User\..\User\MidLayer\Controllers\chassis_control\PidTarget.hpp \
+  User\..\User\MidLayer\Controllers\signal_processing\Remote_target.hpp \
+  User\..\User\LowLayer\Equipment\remote\Dr16.hpp ..\Core\Inc\usart.h \
+  ..\Core\Inc\dma.h User\..\User\LowLayer\HAL_\uart\uart_driver.hpp \
   User\..\User\MidLayer\Algorithms\kinematics\chassis_kinematics.hpp \
+  User\..\User\MidLayer\Controllers\chassis_control\PidTarget.hpp \
+  User\..\User\MidLayer\Algorithms\algorithm\pid.hpp \
   User\..\User\LowLayer\Equipment\motor\djimotor.hpp \
   User\..\User\LowLayer\Equipment\motor\motor_base.hpp \
   User\..\User\LowLayer\HAL_\can\can_driver.hpp ..\Core\Inc\can.h \
-  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp \
-  User\..\User\MidLayer\Controllers\signal_processing\Remote_target.hpp \
-  User\..\User\LowLayer\Equipment\remote\Dr16.hpp ..\Core\Inc\usart.h \
-  ..\Core\Inc\dma.h User\..\User\LowLayer\HAL_\uart\uart_driver.hpp
+  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp

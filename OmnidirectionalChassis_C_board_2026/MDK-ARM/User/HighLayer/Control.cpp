@@ -6,7 +6,8 @@ Control::remote_control remote_control;
 void Control::motor_control::wheelControl()
 {
     model_choose.ModeSelection();
-    MotorTarget.Omnidirectional();
+    chassis_pidtarget.Setpidtarget();
+    motor_send.SendToMotor();
 }
 
 void Control::remote_control::remoteControl()

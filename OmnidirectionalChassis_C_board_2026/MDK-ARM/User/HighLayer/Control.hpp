@@ -4,8 +4,9 @@
 #include "../User/MidLayer/Controllers/chassis_control/chassis_control.hpp"
 
 extern ChassisControl::modelchoose model_choose;
-extern Target::target dr16_tar;
-extern ChassisControl::motortarget<PIDQuantity> MotorTarget;
+extern ChassisControl::Send motor_send;
+extern ChassisControl::PIDCalculate pid_calculate;
+extern PidTarget::pidtarget chassis_pidtarget;
 
 namespace Control
 {

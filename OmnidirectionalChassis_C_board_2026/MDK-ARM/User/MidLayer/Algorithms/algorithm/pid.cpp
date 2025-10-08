@@ -1,10 +1,11 @@
 #include "pid.hpp"
 
-PID::PID_ M3508(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f);
-PID::PID_ M3508_1(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f);
-PID::PID_ M3508_2(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f);
-PID::PID_ M3508_3(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f);
-PID::PID_ M3508_4(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f);
+PID::PID_ M3508[4] = {
+    PID::PID_(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f),
+    PID::PID_(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f),
+    PID::PID_(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f),
+    PID::PID_(PID::PID_::PID_MODE::PID_SPEED, 5.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 200.0f)
+};
 PID::PID_ Revolve_PidInstance(PID::PID_::PID_MODE::PID_POSITION, 2000.0f, 0.0f, 0.0f, 16384.0f, 0.0f, 0.0f);
 
 float PID::PID_::NormalPID(float ref, float set)

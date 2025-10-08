@@ -3,34 +3,23 @@
 
 #include "../User/MidLayer/Algorithms/kinematics/chassis_kinematics.hpp"
 
-#define PIDQuantity 4
+#define PIDtargetNum 5
 
-extern Kinematics::Wheelset<4> Omini;
+extern Kinematic::wheelkinematic ChassisKinematic;
 
 namespace PidTarget
 {
-    template<uint8_t N> class pid_target 
+    class pidtarget
     {
         public:
-            void stop(uint8_t count)
+            void Setpidtarget()
             {
-                for(uint8_t i = 0; i < N; i++)
+                ChassisKinematic.KinematicTarget();
+                for(uint8_t i = 0; i < 4; i++) //四个轮子逆解算
                 {
-                    Omini.setVehicleDirection_w(0.0f);
-                    Omini.setVehicleDirection_vy(0.0f);
-                    Omini.setVehicleDirection_vx(0.0f);
+                    PidTarget[i] = ChassisKinematic.GetKinematicsTarget(i);
                 }
-            }
-
-            void pidset(uint8_t idenx)
-            {
-                Omini.Target();
-                PidTarget[idenx] = Omini.GetTarget(idenx);
-            }
-
-            uint8_t GetCount()
-            {
-                return N;
+                //PidTarget[4] = ; //底盘跟随用
             }
 
             float GetPidTarget(uint8_t idenx)
@@ -39,8 +28,7 @@ namespace PidTarget
             }
 
         private:
-            float PidTarget[N];
-
+            float PidTarget[PIDtargetNum];        
     };
 }
 
