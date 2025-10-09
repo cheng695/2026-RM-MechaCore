@@ -60,7 +60,6 @@ namespace Clicker
         }
 
         private:
-            uint8_t pData[18];
             float time;
             float lasttime;
             bool isOnline;

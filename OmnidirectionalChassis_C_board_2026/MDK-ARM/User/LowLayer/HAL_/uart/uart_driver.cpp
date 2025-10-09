@@ -1,10 +1,13 @@
 #include "uart_driver.hpp"
 #include "../User/LowLayer/Equipment/remote/Dr16.hpp"
+#include "../User/MidLayer/Managers/comm_manager/CtoA.hpp"
 
 extern Clicker::DR16 dr16;
+extern BoardComm::CtoA Cboard;
 
 UartDriver::uartDriver uart3_driver(&huart3, 0, 18, UartDriver::uartDriver::RX_ONLY);
 UartDriver::uartDriver uart6_driver(&huart6, 32, 0, UartDriver::uartDriver::TX_ONLY);
+UartDriver::uartDriver uart1_driver(&huart1, 10, 5, UartDriver::uartDriver::TX_RX);
 
 static UartDriver::uartDriver* uart_drivers[6] = {nullptr};
 
@@ -61,9 +64,19 @@ void DR16_RxCallback(const uint8_t* data, uint16_t size)
     }
 }
 
+void CBoard_RxCallback(const uint8_t* data, uint16_t size)
+{
+    if(size == 5)
+    {
+        Cboard.ReceiveDataUpdata(data);
+    }
+}
+
 extern "C" void RxEventCallback()
 {
     uart3_driver.setRxCallback(DR16_RxCallback);
+    uart1_driver.setRxCallback(CBoard_RxCallback);
     uart3_driver.UartInit();
     uart6_driver.UartInit();
+    uart1_driver.UartInit();
 }

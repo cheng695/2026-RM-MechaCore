@@ -10,6 +10,7 @@ void Chassis_Monitor(void const * argument)
     {
         MOTOR_MONITOR.MotorMonitor();
         REMOTE_MONITOR.RemotecontrolMonitor();
+        BOARD_MONITOR.BoardMonitor();
         osDelay(10);
     }
 }
@@ -37,6 +38,8 @@ void Chassis_Comm(void const * argument)
 {
     while(1)
     {
+        Comm.sendBoard();
+        Comm.sendTools();
         osDelay(1);
     }
 }

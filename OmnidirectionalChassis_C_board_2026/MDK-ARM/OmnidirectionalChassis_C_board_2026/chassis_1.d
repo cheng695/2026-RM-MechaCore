@@ -55,4 +55,7 @@ omnidirectionalchassis_c_board_2026/chassis_1.o: \
   User\..\User\LowLayer\Equipment\motor\djimotor.hpp \
   User\..\User\LowLayer\Equipment\motor\motor_base.hpp \
   User\..\User\LowLayer\HAL_\can\can_driver.hpp ..\Core\Inc\can.h \
-  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp
+  User\..\User\MidLayer\Algorithms\odometry\odometry.hpp \
+  User\..\User\HighLayer\Communication.hpp \
+  User\..\User\MidLayer\Managers\comm_manager\Callback.hpp \
+  User\..\User\MidLayer\Managers\comm_manager\CtoA.hpp

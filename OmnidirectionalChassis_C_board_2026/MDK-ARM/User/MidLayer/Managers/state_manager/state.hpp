@@ -70,5 +70,6 @@ namespace State
 
 void MotorState();
 void RemoteState();
+void CreceiveState();
 
 #endif

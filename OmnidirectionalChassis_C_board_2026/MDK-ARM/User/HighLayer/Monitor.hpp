@@ -16,6 +16,12 @@ namespace Monitor
         public:
             void RemotecontrolMonitor();
     };
+
+    class board_monitor
+    {
+        public:
+            void BoardMonitor();
+    };
 }
 
 #endif

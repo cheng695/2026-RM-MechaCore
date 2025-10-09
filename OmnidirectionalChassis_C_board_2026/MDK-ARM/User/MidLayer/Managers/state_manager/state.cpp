@@ -1,10 +1,12 @@
 #include "state.hpp"
 #include "../User/LowLayer/Equipment/motor/djimotor.hpp"
 #include "../User/LowLayer/Equipment/remote/dr16.hpp"
+#include "../User/MidLayer/Managers/comm_manager/CtoA.hpp"
 
 extern Buzzer::C_buzzer c_buzzer;
 extern motor::GM3508<4> Motor3508;
 extern Clicker::DR16 dr16;
+extern BoardComm::CtoA Cboard;
 
 State::model chass_model;
 
@@ -72,5 +74,15 @@ void RemoteState()
     if(!dr16.GetIsRemotecontrolOnline())
     {
         c_buzzer.remote();
+    }
+}
+
+void CreceiveState()
+{
+    Cboard.checkBoardCommState();
+
+    if(!Cboard.GetIsBoardCommOnline())
+    {
+        c_buzzer.board();
     }
 }
