@@ -70,6 +70,19 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
     }
 
   public:
+    /**
+     * @brief 注册CAN接收回调函数到CAN设备
+     *
+     * @param can_device CAN设备指针
+     */
+    void registerCallback(HAL::CAN::ICanDevice *can_device)
+    {
+        if (can_device)
+        {
+            // 使用lambda包装Parse函数并注册到CAN设备
+            can_device->register_rx_callback([this](const HAL::CAN::Frame &frame) { this->Parse(frame); });
+        }
+    }
     // 解析函数
     /**
      * @brief 解析CAN数据

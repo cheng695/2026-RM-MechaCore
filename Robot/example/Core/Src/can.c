@@ -32,10 +32,7 @@ void MX_CAN1_Init(void)
 {
 
     /* USER CODE BEGIN CAN1_Init 0 */
-    // 强制复位CAN1外设（解决JLink烧录后CAN不工作的问题）
-    __HAL_RCC_CAN1_FORCE_RESET();
-    HAL_Delay(1);
-    __HAL_RCC_CAN1_RELEASE_RESET();
+
     /* USER CODE END CAN1_Init 0 */
 
     /* USER CODE BEGIN CAN1_Init 1 */
@@ -66,10 +63,7 @@ void MX_CAN2_Init(void)
 {
 
     /* USER CODE BEGIN CAN2_Init 0 */
-    // 强制复位CAN2外设（解决JLink烧录后CAN不工作的问题）
-    __HAL_RCC_CAN2_FORCE_RESET();
-    HAL_Delay(1);
-    __HAL_RCC_CAN2_RELEASE_RESET();
+
     /* USER CODE END CAN2_Init 0 */
 
     /* USER CODE BEGIN CAN2_Init 1 */
