@@ -16,8 +16,19 @@ mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
 
 # 运行 Cmake 配置和编译项目
-cmake ..
-make -j 16
+echo "正在运行CMake配置..."
+if ! cmake ..; then
+    echo "错误：CMake配置失败，取消烧录操作"
+    exit 1
+fi
+
+echo "正在编译项目..."
+if ! make -j 16; then
+    echo "错误：编译失败，取消烧录操作"
+    exit 1
+fi
+
+echo "编译成功完成"
 
 # 查找ELF文件，找不到则尝试使用项目名，最后尝试查找任意.elf文件
 if [ -f "$BUILD_DIR/${TARGET_NAME}.elf" ]; then
@@ -55,6 +66,60 @@ fi
 # 执行 OpenOCD 进行烧录
 cd "$PROJECT_DIR"
 
-# 方法1：直接在命令行中使用变量
+# daplink
 openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "gdb_port 3334" -c "program build/${TARGET_NAME}.elf verify reset exit"
 
+
+# # stlink
+# echo "使用stlink烧录"
+# openocd -f interface/stlink.cfg -c "transport select swd" -f target/stm32f1x.cfg -c "gdb_port 3334" -c "program build/${TARGET_NAME}.elf verify reset exit"
+
+# # jlink
+# # 添加JLink到PATH环境变量（Bash语法）
+# export PATH="$PATH:/d/SEGGER/JLink_V722b"
+# echo start...
+
+# # 创建日志目录
+# LOG_DIR="$BUILD_DIR/log"
+# mkdir -p "$LOG_DIR"
+
+# # 生成带时间戳的日志文件名
+# TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+# LOG_FILE="$LOG_DIR/jlink_flash_${TIMESTAMP}.log"
+
+# # 创建临时 JLink 命令文件并进行烧录
+# cd "$BUILD_DIR"
+
+# # 方案1：标准复位流程（推荐先尝试）
+# cat > download.jlink << EOF
+# log log/jlink_flash_${TIMESTAMP}.log
+# h
+# loadfile ${TARGET_NAME}.hex
+# r
+# g
+# qc
+# EOF
+
+# 方案2：如果方案1不行，取消注释下面的代码，注释掉方案1
+# cat > download.jlink << EOF
+# log log/jlink_flash_${TIMESTAMP}.log
+# h
+# erase
+# loadfile ${TARGET_NAME}.hex
+# r
+# g
+# qc
+# EOF
+
+# 方案3：使用BIN文件（如果HEX有问题）
+# cat > download.jlink << EOF
+# log log/jlink_flash_${TIMESTAMP}.log
+# h
+# loadbin ${TARGET_NAME}.HEX 0x08000000
+# r
+# g
+# qc
+# EOF
+
+# # 使用临时文件进行烧录
+# JLink.exe -autoconnect 1 -device STM32F407IG -if swd -speed 5000 -CommanderScript download.jlink

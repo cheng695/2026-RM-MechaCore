@@ -1,4 +1,5 @@
 #include "BSP/Motor/Dji/DjiMotor.hpp"
+#include "HAL/LOGGER/logger.hpp"
 
 /**
  * @brief 电机实例
@@ -8,6 +9,7 @@
  */
 inline BSP::Motor::Dji::GM2006<1> Motor2006(0x200, {1}, 0x200);
 inline BSP::Motor::Dji::GM3508<2> Motor3508(0x200, {2, 3}, 0x200);
-inline BSP::Motor::Dji::GM6020<1> Motor6020(0x204, {2}, 0x1FE);
+inline BSP::Motor::Dji::GM6020<4> Motor6020(0x204, {1, 2, 3, 4}, 0x1FF);
 
-#define CAN_MOTOR HAL::CAN::get_can_bus_instance().get_device(HAL::CAN::CanDeviceId::HAL_Can1)
+#define CAN_MOTOR HAL::CAN::get_can_bus_instance()
+#define LOG HAL::LOGGER::Logger::getInstance()

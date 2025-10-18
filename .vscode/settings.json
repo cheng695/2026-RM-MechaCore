@@ -1,6 +1,9 @@
 {
     "files.associations": {
+        "*.json": "cpp",
+        "*.cpp": "cpp",
         "limits": "cpp",
-        "callback.hpp": "c"
+        "callback.hpp": "c",
+        "motortask.hpp": "c"
     }
 }
