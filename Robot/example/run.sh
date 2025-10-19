@@ -56,7 +56,10 @@ echo "ELF file: ${ELF_FILE}"
 if [ -f "$ELF_FILE" ]; then
 # 将 ELF 文件转换为 BIN 文件和 HEX 文件
 arm-none-eabi-objcopy -O binary "$ELF_FILE" "$BIN_FILE"
-arm-none-eabi-objcopy -O ihex "$ELF_FILE" "$HEX_FILE"
+# arm-none-eabi-objcopy -O ihex "$ELF_FILE" "$HEX_FILE"
+
+objcopy -Oihex "$ELF_FILE" "$HEX_FILE"
+
 echo "Conversion to BIN and HEX completed"
 else
 echo "Error: ELF file not found. Compilation might have failed."
@@ -66,60 +69,32 @@ fi
 # 执行 OpenOCD 进行烧录
 cd "$PROJECT_DIR"
 
-# daplink
-openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "gdb_port 3334" -c "program build/${TARGET_NAME}.elf verify reset exit"
+# # daplink
+# openocd -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "gdb_port 3334" -c "program build/${TARGET_NAME}.elf verify reset exit"
 
+# jlink
+# 添加JLink到PATH环境变量（Bash语法）
+export PATH="$PATH:/d/SEGGER/JLink_V878"
+echo start...
 
-# # stlink
-# echo "使用stlink烧录"
-# openocd -f interface/stlink.cfg -c "transport select swd" -f target/stm32f1x.cfg -c "gdb_port 3334" -c "program build/${TARGET_NAME}.elf verify reset exit"
+# 创建日志目录
+LOG_DIR="$BUILD_DIR/log"
+mkdir -p "$LOG_DIR"
 
-# # jlink
-# # 添加JLink到PATH环境变量（Bash语法）
-# export PATH="$PATH:/d/SEGGER/JLink_V722b"
-# echo start...
+# 生成带时间戳的日志文件名
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+LOG_FILE="$LOG_DIR/jlink_flash_${TIMESTAMP}.log"
 
-# # 创建日志目录
-# LOG_DIR="$BUILD_DIR/log"
-# mkdir -p "$LOG_DIR"
+# 创建临时 JLink 命令文件并进行烧录
+cd "$BUILD_DIR"
 
-# # 生成带时间戳的日志文件名
-# TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-# LOG_FILE="$LOG_DIR/jlink_flash_${TIMESTAMP}.log"
+cat > download.jlink << EOF
+log log/jlink_flash_${TIMESTAMP}.log
+loadfile ${TARGET_NAME}.elf
+r
+g
+qc
+EOF
 
-# # 创建临时 JLink 命令文件并进行烧录
-# cd "$BUILD_DIR"
-
-# # 方案1：标准复位流程（推荐先尝试）
-# cat > download.jlink << EOF
-# log log/jlink_flash_${TIMESTAMP}.log
-# h
-# loadfile ${TARGET_NAME}.hex
-# r
-# g
-# qc
-# EOF
-
-# 方案2：如果方案1不行，取消注释下面的代码，注释掉方案1
-# cat > download.jlink << EOF
-# log log/jlink_flash_${TIMESTAMP}.log
-# h
-# erase
-# loadfile ${TARGET_NAME}.hex
-# r
-# g
-# qc
-# EOF
-
-# 方案3：使用BIN文件（如果HEX有问题）
-# cat > download.jlink << EOF
-# log log/jlink_flash_${TIMESTAMP}.log
-# h
-# loadbin ${TARGET_NAME}.HEX 0x08000000
-# r
-# g
-# qc
-# EOF
-
-# # 使用临时文件进行烧录
-# JLink.exe -autoconnect 1 -device STM32F407IG -if swd -speed 5000 -CommanderScript download.jlink
+# 使用临时文件进行烧录
+JLink.exe -autoconnect 1 -device STM32F407IG -if swd -speed 5000 -CommanderScript download.jlink

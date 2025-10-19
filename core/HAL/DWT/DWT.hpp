@@ -15,14 +15,14 @@
 #include <chrono>
 #include <cstdint>
 
-namespace BSP
+namespace HAL
 {
 
 class DWTimer
 {
   public:
     // 单例模式获取实例
-    static DWTimer &GetInstance(uint32_t CPU_mHz = 168)
+    static DWTimer &getInstance(uint32_t CPU_mHz = 168)
     {
         static DWTimer instance(CPU_mHz);
         return instance;
@@ -120,4 +120,4 @@ class DWTimer
     DWT_Time SysTime;  // 系统时间
 };
 
-} // namespace BSP
+} // namespace HAL::DWTimer
