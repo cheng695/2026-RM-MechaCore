@@ -47,10 +47,10 @@ add_executable(${CMAKE_PROJECT_NAME})
 add_subdirectory(cmake/stm32cubemx)
 
 # 设置core目录路径和项目根目录
-set(CORE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../core")
+set(CORE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../core")
 set(USER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/User")
 
-set(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
+set(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../..")
 
 # 递归查找core目录下的所有源文件
 file(GLOB_RECURSE CORE_SOURCES 

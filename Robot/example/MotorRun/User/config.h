@@ -13,6 +13,6 @@ inline BSP::Motor::Dji::GM6020<4> Motor6020(0x204, {1, 2, 3, 4}, 0x1FF);
 
 #define CAN_INSTANCE HAL::CAN::get_can_bus_instance()
 #define LOG HAL::LOGGER::Logger::getInstance()
-#define DWT HAL::DWTimer::getInstance(168)
+#define DWTimer HAL::DWTimer::getInstance(168)
 
 #define CHASSIS_CAN HAL::CAN::CanDeviceId::HAL_Can1
