@@ -4,6 +4,7 @@
         "*.cpp": "cpp",
         "limits": "cpp",
         "callback.hpp": "c",
-        "motortask.hpp": "c"
+        "motortask.hpp": "c",
+        "algorithm": "cpp"
     }
 }
