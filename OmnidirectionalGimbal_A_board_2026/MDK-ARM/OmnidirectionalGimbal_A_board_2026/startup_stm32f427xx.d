@@ -1,1 +1,0 @@
-omnidirectionalgimbal_a_board_2026\startup_stm32f427xx.o: startup_stm32f427xx.s
