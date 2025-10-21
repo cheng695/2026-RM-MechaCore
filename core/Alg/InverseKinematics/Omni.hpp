@@ -1,8 +1,8 @@
-#ifndef OMNI_HPP
-#define OMNI_HPP
+#ifndef INVERSE_KINEMATICS_OMNI_HPP
+#define INVERSE_KINEMATICS_OMNI_HPP
 
 #include "Alg/InverseKinematics/InverseKinematics_Base.hpp"
-#include <cmath>
+#include <math.h>
 
 namespace Alg::InverseKinematics 
 {
@@ -12,6 +12,7 @@ namespace Alg::InverseKinematics
             Omni(float r = 1.0f, float s = 1.0f) 
                 : R(r), S(s) 
             {
+                sqrt2_2 = 1.414f / 2.0f;
                 for(int i = 0; i < 4; i++)
                 {
                     Motor[i] = 0.0f;
@@ -27,13 +28,18 @@ namespace Alg::InverseKinematics
 
 
             void InvKinematics()
-            {
-                CalculateVelocities();  
-                
+            {   
                 Motor[0] = (-sqrt2_2 * Vx + sqrt2_2 * Vy + Vw*R)/S;
                 Motor[1] = (-sqrt2_2 * Vx - sqrt2_2 * Vy + Vw*R)/S;
                 Motor[2] = ( sqrt2_2 * Vx - sqrt2_2 * Vy + Vw*R)/S;
                 Motor[3] = ( sqrt2_2 * Vx + sqrt2_2 * Vy + Vw*R)/S;
+            }
+
+            void OmniInvKinematics(float vx, float vy, float vw)
+            {
+                SetSignal_xyw(vx, vy, vw);
+                CalculateVelocities(); 
+                InvKinematics();
             }
 
             float GetMotor0() const { return Motor[0]; }
@@ -53,7 +59,7 @@ namespace Alg::InverseKinematics
             float R;
             float S;
             float Motor[4];
-            const float sqrt2_2 = 1.414f / 2.0f;
+            float sqrt2_2;
     };
 }
 

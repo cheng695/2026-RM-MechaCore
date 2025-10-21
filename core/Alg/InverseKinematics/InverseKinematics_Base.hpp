@@ -13,9 +13,9 @@ namespace Alg::InverseKinematics
 
         virtual void SetSignal_xyw(float x, float y, float w)
         { 
-            Signal_x = x; 
-            Signal_y = y;
-            Signal_w = w;
+            this->Signal_x = x; 
+            this->Signal_y = y;
+            this->Signal_w = w;
         }
         
 
