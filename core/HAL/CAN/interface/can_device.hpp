@@ -1,5 +1,6 @@
 #pragma once
 #include "can.h"
+#include <functional>
 
 namespace HAL::CAN
 {
@@ -19,6 +20,9 @@ struct Frame
     // 是否是远程帧
     bool is_remote_frame;
 };
+
+// CAN接收回调函数类型
+using RxCallback = std::function<void(const Frame &)>;
 
 // CAN设备抽象接口
 class ICanDevice
@@ -40,6 +44,12 @@ class ICanDevice
 
     // 获取CAN句柄
     virtual CAN_HandleTypeDef *get_handle() const = 0;
+
+    // 注册接收回调函数
+    virtual void register_rx_callback(RxCallback callback) = 0;
+
+    // 触发所有注册的回调函数
+    virtual void trigger_rx_callbacks(const Frame &frame) = 0;
 
     // 从RX头提取CAN ID
     static ID_t extract_id(const CAN_RxHeaderTypeDef &rx_header);

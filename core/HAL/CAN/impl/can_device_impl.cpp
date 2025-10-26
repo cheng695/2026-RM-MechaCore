@@ -83,6 +83,9 @@ bool CanDevice::receive(Frame &frame)
     frame.is_extended_id = (rx_header.IDE == CAN_ID_EXT);
     frame.is_remote_frame = (rx_header.RTR == CAN_RTR_REMOTE);
 
+    // 自动触发所有注册的回调函数
+    trigger_rx_callbacks(frame);
+
     return true;
 }
 
@@ -106,6 +109,25 @@ void CanDevice::configure_filter()
     filter.SlaveStartFilterBank = 14;
 
     HAL_CAN_ConfigFilter(handle_, &filter);
+}
+
+void CanDevice::register_rx_callback(RxCallback callback)
+{
+    if (callback)
+    {
+        rx_callbacks_.push_back(callback);
+    }
+}
+
+void CanDevice::trigger_rx_callbacks(const Frame &frame)
+{
+    for (auto &callback : rx_callbacks_)
+    {
+        if (callback)
+        {
+            callback(frame);
+        }
+    }
 }
 
 } // namespace HAL::CAN

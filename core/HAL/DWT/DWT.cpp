@@ -1,7 +1,7 @@
 #include "DWT.hpp"
 #include "main.h"
 
-namespace BSP
+namespace HAL
 {
 // 构造函数
 
@@ -102,4 +102,4 @@ void DWTimer::Delay(float seconds)
     {
     }
 }
-} // namespace BSP
+} // namespace HAL

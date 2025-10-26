@@ -81,37 +81,64 @@ if (can_bus.has_device(HAL::CAN::CanDeviceId::HAL_Can3)) {
 
 ### 接收CAN帧
 
-在中断回调函数中接收数据：
+#### 方式一：使用回调机制（推荐）
+
+使用回调机制可以实现更优雅的代码组织，将数据解析逻辑与中断处理分离：
+
+```cpp
+// 初始化时注册回调
+void Init(void)
+{
+    auto &can1 = HAL::CAN::get_can_bus_instance().get_device(HAL::CAN::CanDeviceId::HAL_Can1);
+    
+    // 方式1: 注册电机的Parse函数作为回调
+    Motor6020.registerCallback(&can1);
+    
+    // 方式2: 注册自定义lambda回调
+    can1.register_rx_callback([](const HAL::CAN::Frame &frame) {
+        // 处理CAN数据
+        if (frame.id == 0x201) {
+            // 处理ID为0x201的数据
+        }
+    });
+    
+    // 可以注册多个回调，它们会按注册顺序依次执行
+    can1.register_rx_callback([](const HAL::CAN::Frame &frame) {
+        // 另一个回调处理逻辑
+    });
+}
+
+// CAN接收中断 - 非常简洁的实现
+extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+    HAL::CAN::Frame rx_frame;
+    auto &can1 = HAL::CAN::get_can_bus_instance().get_device(HAL::CAN::CanDeviceId::HAL_Can1);
+
+    if (hcan == can1.get_handle())
+    {
+        can1.receive(rx_frame);  // receive()内部会自动触发所有注册的回调
+    }
+}
+```
+
+#### 方式二：传统方式（不推荐）
+
+在中断回调函数中直接处理数据：
 
 ```cpp
 // CAN1 接收中断回调
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-    // 获取单例
     auto &can_bus = HAL::CAN::get_can_bus_instance();
-    // 获取CAN1的句柄
     HAL::CAN::Frame rx_frame;
 
-    // 接收CAN1的消息
     if (hcan == can_bus.get_can1().get_handle())
     {
-        can_bus.get_can1().receive(rx_frame);
-    }
-}
-
-
-// 使用设备ID方式
-void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{
-    // 获取单例
-    auto &can_bus = HAL::CAN::get_can_bus_instance();
-    // 获取CAN1的句柄
-    HAL::CAN::Frame rx_frame;
-
-    // 接收CAN1的消息
-    if (hcan == can_bus.get_can1().get_handle())
-    {
-        can_bus.get_can2().receive(rx_frame);
+        if (can_bus.get_can1().receive(rx_frame))
+        {
+            // 直接在中断中处理数据
+            Motor6020.Parse(rx_frame);
+        }
     }
 }
 ```
@@ -194,6 +221,8 @@ if (can_bus.has_device(HAL::CAN::CanDeviceId::HAL_Can3)) {
 - `send()`: 发送CAN帧
 - `receive()`: 接收CAN帧
 - `get_handle()`: 获取HAL CAN句柄
+- `register_rx_callback()`: 注册CAN接收回调函数
+- `trigger_rx_callbacks()`: 触发所有已注册的回调函数
 - `extract_id()`: 从接收头中提取CAN ID (静态方法)
 
 ### ICanBus接口
@@ -204,11 +233,76 @@ if (can_bus.has_device(HAL::CAN::CanDeviceId::HAL_Can3)) {
 - `has_device(id)`: 检查指定ID的设备是否存在
 - `get_can1()`, `get_can2()`: 兼容旧API的便捷方法
 
+## 回调机制详解
+
+### 回调机制的优势
+
+回调机制提供了以下优势：
+
+1. **代码解耦**：将数据解析逻辑与中断处理分离，提高代码可维护性
+2. **灵活性**：可以为同一个CAN设备注册多个回调，支持不同的数据处理逻辑
+3. **可扩展性**：添加新的数据处理逻辑无需修改中断回调函数
+4. **可测试性**：回调函数可以独立测试，不依赖于中断环境
+
+### 回调函数类型
+
+回调函数类型定义为：
+```cpp
+using RxCallback = std::function<void(const Frame &)>;
+```
+
+可以使用以下几种方式注册回调：
+
+1. **Lambda表达式**（推荐）：
+```cpp
+can1.register_rx_callback([](const HAL::CAN::Frame &frame) {
+    // 处理数据
+});
+```
+
+2. **成员函数**：
+```cpp
+// 在类中使用lambda捕获this指针
+Motor6020.registerCallback(&can1);
+// 内部实现：
+// can_device->register_rx_callback([this](const HAL::CAN::Frame &frame) {
+//     this->Parse(frame);
+// });
+```
+
+3. **普通函数**：
+```cpp
+void my_can_handler(const HAL::CAN::Frame &frame) {
+    // 处理数据
+}
+can1.register_rx_callback(my_can_handler);
+```
+
+### DjiMotor回调注册
+
+DjiMotor类提供了`registerCallback()`方法，可以自动将其`Parse()`函数注册为CAN接收回调：
+
+```cpp
+// 在初始化代码中
+auto &can1 = HAL::CAN::get_can_bus_instance().get_device(HAL::CAN::CanDeviceId::HAL_Can1);
+Motor6020.registerCallback(&can1);  // 注册后，每次CAN接收都会自动调用Parse()
+```
+
+### 回调执行顺序
+
+- 回调函数按照注册顺序依次执行
+- 所有回调在中断上下文中执行，应保持回调函数简短高效
+- `receive()` 函数会在成功接收数据后自动触发所有注册的回调
+- 如果某个回调抛出异常或执行失败，不会影响后续回调的执行
+
 ## 注意事项
 
 1. 初始化顺序：首次调用`get_can_bus_instance()`时会自动初始化CAN总线
-2. 中断处理：确保在中断处理函数中调用`receive()`接收数据
-3. 错误处理：`send()`和`receive()`方法返回布尔值表示操作是否成功
-4. 过滤器配置：当前过滤器配置为接收所有帧，可以根据需要修改实现类的`configure_filter()`方法
-5. 抽象接口：代码应当依赖于抽象接口（`ICanDevice`和`ICanBus`），而不是具体实现类
-6. 扩展设备：添加新设备时，只需在实现类中添加和注册，无需修改接口
+2. 回调注册：建议在系统初始化时（如`Init()`函数中）注册所有回调函数
+3. 中断处理：只需调用`receive()`接收数据，它会自动触发所有注册的回调
+4. 错误处理：`send()`和`receive()`方法返回布尔值表示操作是否成功
+5. 过滤器配置：当前过滤器配置为接收所有帧，可以根据需要修改实现类的`configure_filter()`方法
+6. 抽象接口：代码应当依赖于抽象接口（`ICanDevice`和`ICanBus`），而不是具体实现类
+7. 扩展设备：添加新设备时，只需在实现类中添加和注册，无需修改接口
+8. 回调性能：回调在中断上下文中执行，应避免耗时操作，必要时可以使用信号量或队列将数据传递到任务中处理
+9. 自动触发：`receive()`成功接收数据后会自动触发回调，无需手动调用`trigger_rx_callbacks()`
