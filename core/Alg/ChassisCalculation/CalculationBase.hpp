@@ -25,7 +25,13 @@ namespace Alg::CalculationBase
             /**
              * @brief 构造函数，初始化四个轮子的角速度为0
              */
-            ForwardKinematicsBase() : w0(0.0f), w1(0.0f), w2(0.0f), w3(0.0f){}
+            ForwardKinematicsBase()
+            {
+                for(int i = 0; i < 4; i++)
+                {
+                    this->w[i] = 0.0f;
+                }
+            }
             
             /**
              * @brief 设置四个轮子的角速度
@@ -36,26 +42,28 @@ namespace Alg::CalculationBase
              */
             void Set_w0w1w2w3(float w0, float w1, float w2, float w3)
             {
-                this->w0 = w0;
-                this->w1 = w1;
-                this->w2 = w2;
-                this->w3 = w3;
+                this->w[0] = w0;
+                this->w[1] = w1;
+                this->w[2] = w2;
+                this->w[3] = w3;
             }
 
-            /**
-             * @brief 获取轮子的角速度
-             * @return 轮子的角速度
+            /*
+             * @brief 获取指定索引的轮子的角速度
+             * @param index 轮子索引(0-3)
+             * @return 对应轮子的角速度
              */
-            float Get_w0() const { return w0; }
-            float Get_w1() const { return w1; }
-            float Get_w2() const { return w2; }
-            float Get_w3() const { return w3; }
+            float Get_w(int index) const
+            {
+                if(index >= 0 && index < 4) 
+                {
+                    return w[index];
+                }
+                return 0.0f; // 错误情况返回0
+            }
 
         protected:
-            float w0;  // 轮子0的角速度
-            float w1;  // 轮子1的角速度
-            float w2;  // 轮子2的角速度
-            float w3;  // 轮子3的角速度
+            float w[4];  //轮子0,1,2,3的角速度
     };
 
     

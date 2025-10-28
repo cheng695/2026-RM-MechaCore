@@ -29,16 +29,16 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 执行正向运动学计算
+             * @brief 执行正向运动学计算(小心符号问题)
              * 
              * 根据已设置的四个轮子转速，计算底盘在三个自由度上的运动状态
              * 使用全向轮正向运动学公式
              */
             void ForKinematics()
             {
-                ChassisVx = (-Get_w0() - Get_w1() + Get_w2() + Get_w3()) * sqrt2_S_over_4;
-                ChassisVy = ( Get_w0() - Get_w1() - Get_w2() + Get_w3()) * sqrt2_S_over_4;
-                ChassisVw = ( Get_w0() + Get_w1() + Get_w2() + Get_w3()) * S_over_4R ;
+                ChassisVx = (-Get_w(0) - Get_w(1) + Get_w(2) + Get_w(3)) * sqrt2_S_over_4;
+                ChassisVy = ( Get_w(0) - Get_w(1) - Get_w(2) + Get_w(3)) * sqrt2_S_over_4;
+                ChassisVw = ( Get_w(0) + Get_w(1) + Get_w(2) + Get_w(3)) * S_over_4R ;
             }
 
             /**
@@ -57,8 +57,8 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 获取轮子半径， 
-             * @return 轮子半径R
+             * @brief 获取中心投影点到轮子投影点的距离，轮子半径 
+             * @return 中心投影点到轮子投影点的距离R， 轮子半径S
              */
             float GetRadius() const { return R; }
             float GetScaling() const { return S; }
@@ -72,8 +72,8 @@ namespace Alg::CalculationBase
             float GetChassisVw() const { return ChassisVw; }
 
         private:
-            float R;                 // 轮子半径
-            float S;                 // 
+            float R;                 // 中心投影点到轮子投影点的距离
+            float S;                 // 轮子半径
             float ChassisVx;         // 底盘X方向速度
             float ChassisVy;         // 底盘Y方向速度
             float ChassisVw;         // 底盘绕Z轴角速度
@@ -96,16 +96,14 @@ namespace Alg::CalculationBase
         public:
             /**
              * @brief 构造函数
-             * @param w 底盘宽度的一半（质心到左右轮的距离）
-             * @param l 底盘长度的一半（质心到前后轮的距离）
-             * @param r 轮子半径
+             * @param r 中心投影点到轮子投影点距离
+             * @param s 轮子半径
              */
-            Omni_ID(float w = 1.0f, float l = 1.0f, float r = 1.0f) 
-                : W(w), L(l), R(r)
+            Omni_ID(float r = 1.0f, float s = 1.0f) 
+                : R(r), S(s)
             {
                 sqrt2_4 = sqrtf(2.0f) / 4.0f;
-                _2sqrt2 = 2.0f * sqrt(2.0f);
-                k_inv  = 1.0f / (_2sqrt2 * (L + W)); 
+                k_inv  = 1.0f / (4.0f * R); 
 
                 for(int i = 0; i < 4; i++)
                 {
@@ -114,17 +112,17 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 执行逆向动力学计算
+             * @brief 执行逆向动力学计算(小心符号问题)
              * 
              * 根据已设置的底盘受力情况，计算每个轮子需要产生的扭矩
              * 使用全向轮逆向动力学公式
              */
             void InverseDynamics()
             {
-                MotorTorque[0] = (-sqrt2_4 * GetFx() + sqrt2_4 * GetFy() + k_inv * GetTorque()) * R;
-                MotorTorque[1] = ( sqrt2_4 * GetFx() + sqrt2_4 * GetFy() - k_inv * GetTorque()) * R;
-                MotorTorque[2] = ( sqrt2_4 * GetFx() - sqrt2_4 * GetFy() + k_inv * GetTorque()) * R;
-                MotorTorque[3] = (-sqrt2_4 * GetFx() - sqrt2_4 * GetFy() - k_inv * GetTorque()) * R;
+                MotorTorque[0] = (-sqrt2_4 * GetFx() + sqrt2_4 * GetFy() + k_inv * GetTorque()) * S;
+                MotorTorque[1] = ( sqrt2_4 * GetFx() + sqrt2_4 * GetFy() - k_inv * GetTorque()) * S;
+                MotorTorque[2] = ( sqrt2_4 * GetFx() - sqrt2_4 * GetFy() + k_inv * GetTorque()) * S;
+                MotorTorque[3] = (-sqrt2_4 * GetFx() - sqrt2_4 * GetFy() - k_inv * GetTorque()) * S;
             }
 
             /**
@@ -142,22 +140,25 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 获取轮子0,1,2,3所需扭矩
-             * @return 轮子0,1,2,3扭矩
+             * @brief 获取指定索引的电机所需扭矩
+             * @param index 电机索引(0-3)
+             * @return 对应电机的扭矩
              */
-            float GetF0() const { return MotorTorque[0]; }
-            float GetF1() const { return MotorTorque[1]; }
-            float GetF2() const { return MotorTorque[2]; }
-            float GetF3() const { return MotorTorque[3]; }
+            float GetMotorTorque(int index) const 
+            { 
+                if(index >= 0 && index < 4) 
+                {
+                    return MotorTorque[index];
+                }
+                return 0.0f; // 错误情况返回0
+            }
         
         private:
-            float W;              // 质心到左右轮的距离
-            float L;              // 质心到前后轮的距离
-            float R;              // 轮子半径
+            float R;              // 轮子投影点到中心距离
+            float S;              // 轮子半径
             float MotorTorque[4]; // 四个电机的扭矩
             float sqrt2_4;        // 预计算值: sqrt(2)/4
-            float _2sqrt2;        // 预计算值: 2*sqrt(2)
-            float k_inv;          // 预计算值: 力矩转换系数
+            float k_inv;          // 预计算值: 转矩转换系数
     };
 
 
@@ -175,8 +176,8 @@ namespace Alg::CalculationBase
         public:
             /**
              * @brief 构造函数
-             * @param r 轮子半径
-             * @param s 与轮子布局相关的缩放参数
+             * @param r 轮子投影点到中心距离
+             * @param s 轮子半径
              */
             Omni_IK(float r = 1.0f, float s = 1.0f) 
                 : R(r), S(s) 
@@ -201,7 +202,7 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 执行逆向运动学计算
+             * @brief 执行逆向运动学计算(小心符号问题)
              * 
              * 根据已计算的速度分量，计算四个轮子的目标转速
              * 使用麦克纳姆轮逆向运动学公式
@@ -230,13 +231,19 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 获取轮子0,1,2,3目标速度
-             * @return 轮子0,1,2,3速度
+             * @brief 获取指定索引的电机目标速度
+             * @param index 电机索引(0-3)
+             * @return 对应电机的目标速度
              */
-            float GetMotor0() const { return Motor[0]; }
-            float GetMotor1() const { return Motor[1]; }
-            float GetMotor2() const { return Motor[2]; }
-            float GetMotor3() const { return Motor[3]; }
+            float GetMotor(int index) const 
+            { 
+                if(index >= 0 && index < 4) 
+                {
+                    return Motor[index];
+                }
+                return 0.0f; // 错误情况返回0
+            }
+            
             
             /**
              * @brief 获取X,Y方向速度分量, 获取角速度分量
@@ -250,8 +257,8 @@ namespace Alg::CalculationBase
             float Vx{0.0f};       // X方向速度分量
             float Vy{0.0f};       // Y方向速度分量
             float Vw{0.0f};       // 角速度分量
-            float R;              // 轮子半径
-            float S;              // 与轮子布局相关的缩放参数
+            float R;              // 轮子投影点到中心距离
+            float S;              // 轮子半径
             float Motor[4];       // 四个电机的目标速度
             float sqrt2_2;        // 预计算值: sqrt(2)/2
     };
