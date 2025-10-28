@@ -1,7 +1,7 @@
 /**
- * @file logger.hpp
+ * @file can_device_impl.hpp
  * @author 竹节虫 (k.yixiang@qq.com)
- * @brief 日志打印
+ * @brief CAN设备实现
  * @version 0.0.1
  * @date 2025-06-03
  *
@@ -11,6 +11,7 @@
 
 #pragma once
 #include "../interface/can_device.hpp"
+#include <vector>
 
 namespace HAL::CAN
 {
@@ -36,11 +37,18 @@ class CanDevice : public ICanDevice
     bool receive(Frame &frame) override;
     CAN_HandleTypeDef *get_handle() const override;
 
+    // 实现回调机制
+    void register_rx_callback(RxCallback callback) override;
+    void trigger_rx_callbacks(const Frame &frame) override;
+
   private:
     CAN_HandleTypeDef *handle_;
     uint32_t filter_bank_;
     uint32_t fifo_;
     uint32_t mailbox_;
+
+    // 存储注册的回调函数
+    std::vector<RxCallback> rx_callbacks_;
 
     // 配置过滤器
     void configure_filter();
