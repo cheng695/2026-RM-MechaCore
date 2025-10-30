@@ -57,18 +57,33 @@ namespace Alg::CalculationBase
             }
 
             /**
-             * @brief 获取中心投影点到轮子投影点的距离，轮子半径 
-             * @return 中心投影点到轮子投影点的距离R， 轮子半径S
+             * @brief 获取中心投影点到轮子投影点的距离
+             * @return 中心投影点到轮子投影点的距离R
              */
             float GetRadius() const { return R; }
+
+            /**
+             * @brief 获取轮子半径 
+             * @return 轮子半径S
+             */
             float GetScaling() const { return S; }
 
             /**
-             * @brief 获取底盘X方向速度， 获取底盘Y方向速度， 获取底盘角速度
-             * @return X方向速度， Y方向速度， 绕Z轴角速度
-             */           
+             * @brief 获取底盘X方向速度
+             * @return X方向速度(前进/后退方向)
+             */                  
             float GetChassisVx() const { return ChassisVx; }
+            
+            /**
+             * @brief 获取底盘Y方向速度
+             * @return Y方向速度(左移/右移方向)
+             */   
             float GetChassisVy() const { return ChassisVy; }
+
+            /**
+             * @brief 获取底盘角速度
+             * @return 绕Z轴角速度(旋转速度)
+             */     
             float GetChassisVw() const { return ChassisVw; }
 
         private:
@@ -246,11 +261,21 @@ namespace Alg::CalculationBase
             
             
             /**
-             * @brief 获取X,Y方向速度分量, 获取角速度分量
-             * @return X,Y方向速度, 角速度
+             * @brief 获取X方向速度分量
+             * @return X方向速度分量
              */
             float GetVx() const { return Vx; }
+
+            /**
+             * @brief 获取Y方向速度分量
+             * @return Y方向速度分量
+             */
             float GetVy() const { return Vy; }
+            
+            /**
+             * @brief 获取角速度分量
+             * @return 角速度分量
+             */
             float GetVw() const { return Vw; }
 
         private:
