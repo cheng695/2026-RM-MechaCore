@@ -1,3 +1,6 @@
+#ifndef LK_MOTOR_HPP
+#define LK_MOTOR_HPP
+
 #pragma once
 #include <cstring>
 
@@ -346,3 +349,5 @@ namespace BSP::Motor::LK
      */
     inline LK4005<1> Motor4005(0x0140, {1}, 0x141);
 } // namespace BSP::Motor::LK
+
+#endif
