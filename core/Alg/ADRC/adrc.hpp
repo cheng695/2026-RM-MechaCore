@@ -2,7 +2,7 @@
 #define ADRC_HPP
 
 #include "Alg/ADRC/AdrcBase.hpp"
- 
+
 namespace Alg::ADRC
 {
     class FirstLADRC : public AdrcBase
@@ -207,4 +207,3 @@ namespace Alg::ADRC
     };
 }
 #endif
-
