@@ -68,3 +68,4 @@ void Alg::ADRC::SecondLADRC::TD_2(float input)
     V1 += V2 * GetH();
     V2 += fh * GetH();
 }
+
