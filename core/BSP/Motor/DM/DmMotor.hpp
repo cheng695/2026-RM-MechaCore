@@ -1,6 +1,8 @@
+#ifndef Dm_Motor_hpp
+#define Dm_Motor_hpp
+
 #pragma once
 #include "../MotorBase.hpp"
-#include "core/BSP/Common/StateWatch/state_watch.hpp"
 namespace BSP::Motor::DM
 {
     // 参数结构体定义
@@ -359,3 +361,5 @@ namespace BSP::Motor::DM
     inline J4310<1> Motor4310(0x00, {2}, {1});
 
 } // namespace BSP::Motor::DM
+
+#endif

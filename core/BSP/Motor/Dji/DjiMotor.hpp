@@ -1,3 +1,6 @@
+#ifndef DJI_MOTOR_HPP
+#define DJI_MOTOR_HPP
+
 #pragma once
 // 基础DJI电机实现
 #include "../MotorBase.hpp"
@@ -278,3 +281,5 @@ template <uint8_t N> class GM6020 : public DjiMotorBase<N>
 };
 
 } // namespace BSP::Motor::Dji
+
+#endif
