@@ -1,7 +1,9 @@
 #pragma once
-#include <cstring>
 
-#include "../BSP/MotorBase.hpp"
+#include "../BSP/BSP_Motor.hpp"
+#include "../HAL/My_HAL.hpp"
+#include "../MotorBase.hpp"
+#include "../BSP/state_watch.hpp"
 #define PI 3.14159265358979323846
 namespace BSP::Motor::LK
 {
@@ -62,6 +64,8 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
         for (uint8_t i = 0; i < N; ++i)
         {
             recv_idxs_[i] = recv_idxs[i];
+            motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
+            
         }
         send_idxs_ = send_idxs;
         // 初始化电机数据
@@ -81,25 +85,31 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param RxHeader 接收数据的句柄
      * @param pData 接收数据的缓冲区
      */
-		void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
-		{
-				const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
+    void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
+    {
+        const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
 
-				for (uint8_t i = 0; i < N; ++i)
-				{
-						if (received_id == init_address + recv_idxs_[i])
-						{
-								// 直接解析到成员变量 feedback_[i]
-								feedback_[i].cmd = pData[0];
-								feedback_[i].temperature = pData[1];
-								feedback_[i].current = (int16_t)((pData[3] << 8) | pData[2]);
-								feedback_[i].velocity = (int16_t)((pData[5] << 8) | pData[4]);
-								feedback_[i].angle = (uint16_t)((pData[7] << 8) | pData[6]);
+        for (uint8_t i = 0; i < N; ++i)
+        {
+            if (received_id == init_address + recv_idxs_[i])
+            {
+                LkMotorFeedback feedback;
+                memcpy(&feedback, pData, sizeof(LkMotorFeedback));
 
-								Configure(i, feedback_[i]);  // 传递成员变量
-						}
-				}
-		}
+                // 转换字节序（如果需要）
+                feedback.temperature = pData[1];               
+                feedback.current = (float)(int16_t)((pData[3] << 8) | pData[2]);
+                feedback.velocity = (float)(int16_t)((pData[5] << 8) | pData[4]);
+                feedback.angle = (float)(uint16_t)((pData[7] << 8) | pData[6]);
+
+                Configure(i, feedback);
+
+                motor_state_[i].updateTimestamp();
+                motor_state_[i].check();
+                this->runTime_[i].Dir_Flag = (motor_state_[i].getStatus() == BSP::WATCH_STATE::Status::ONLINE);
+            }
+        }
+    }
 
         /**
      * @brief 设置发送数据
@@ -130,7 +140,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void ON(CAN_HandleTypeDef *hcan)
+    void ON(const CAN_HandleTypeDef *hcan)
     {
         uint8_t data[8] = {0x88};
         CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
@@ -141,7 +151,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void OFF(CAN_HandleTypeDef *hcan)
+    void OFF(const CAN_HandleTypeDef *hcan)
     {
         uint8_t data[8] = {0x81};
         CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
@@ -152,7 +162,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void clear_err(CAN_HandleTypeDef *hcan)
+    void clear_err(const CAN_HandleTypeDef *hcan)
     {
         uint8_t data[8] = {0x9B};
         CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
@@ -246,16 +256,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @return uint8_t 在线状态
      */
-    uint8_t ISDir()
-    {
-        bool is_dir = false;
-        for (uint8_t i = 0; i < N; i++)
-        {
-            is_dir |= this->runTime_[i].Dir_Flag = this->runTime_[i].dirTime.ISDir(1000);
-            this->runTime_[i].Dir_Flag = is_dir;
-        }
-        return is_dir;
-    }
+
 
   protected:
     struct MultiAngleData
@@ -281,43 +282,50 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param feedback 反馈数据
      */
     void Configure(size_t i, const LkMotorFeedback& feedback)
-{
-    const auto &params = params_;
-
-    // 修复：使用传入的参数feedback，而不是feedback_[i]
-    this->unit_data_[i].angle_Deg = feedback.angle * params.encoder_to_deg;
-    this->unit_data_[i].angle_Rad = this->unit_data_[i].angle_Deg * params.deg_to_rad;
-    this->unit_data_[i].velocity_Rad = feedback.velocity * params.rpm_to_radps;
-    this->unit_data_[i].velocity_Rpm = feedback.velocity * params.encoder_to_rpm;
-    this->unit_data_[i].current_A = feedback.current * params.feedback_to_current_coefficient;
-    this->unit_data_[i].torque_Nm = feedback.current * params.current_to_torque_coefficient;
-    this->unit_data_[i].temperature_C = feedback.temperature;
-
-    // 多圈角度计算
-    if (multi_angle_data_[i].allow_accumulate) 
     {
-        if (!multi_angle_data_[i].is_initialized)
+        const auto &params = params_;
+
+        this->unit_data_[i].angle_Deg = feedback_[i].angle * params.encoder_to_deg;
+
+        this->unit_data_[i].angle_Rad = this->unit_data_[i].angle_Deg * params.deg_to_rad;
+
+        this->unit_data_[i].velocity_Rad = feedback_[i].velocity * params.rpm_to_radps;
+
+        this->unit_data_[i].velocity_Rpm = feedback_[i].velocity * params.encoder_to_rpm;
+
+        this->unit_data_[i].current_A = feedback_[i].current * params.feedback_to_current_coefficient;
+
+        this->unit_data_[i].torque_Nm = feedback_[i].current * params.current_to_torque_coefficient;
+
+        this->unit_data_[i].temperature_C = feedback_[i].temperature;
+
+        double lastData = this->unit_data_[i].last_angle;
+        double Data = this->unit_data_[i].angle_Deg;
+        // 多圈角度计算
+        if (multi_angle_data_[i].allow_accumulate) 
         {
-            multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
-            multi_angle_data_[i].is_initialized = true;
+            if (!multi_angle_data_[i].is_initialized)
+            {
+                multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
+                multi_angle_data_[i].is_initialized = true;
+            }
+            else
+            {
+                double last_angle = multi_angle_data_[i].last_angle;
+                double delta = this->unit_data_[i].angle_Deg - last_angle;               
+                // 处理360°跳变
+                if (delta > 180.0) 
+                    delta -= 360.0;
+                else if (delta < -180.0) 
+                    delta += 360.0;
+                
+                multi_angle_data_[i].total_angle += delta;
+                this->unit_data_[i].add_angle = delta;
+            }
         }
-        else
-        {
-            double last_angle = multi_angle_data_[i].last_angle;
-            double delta = this->unit_data_[i].angle_Deg - last_angle;               
-            // 处理360°跳变
-            if (delta > 180.0) 
-                delta -= 360.0;
-            else if (delta < -180.0) 
-                delta += 360.0;
-            
-            multi_angle_data_[i].total_angle += delta;
-            this->unit_data_[i].add_angle = delta;
-        }
+        multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
+        this->unit_data_[i].last_angle = this->unit_data_[i].angle_Deg;
     }
-    multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
-    this->unit_data_[i].last_angle = this->unit_data_[i].angle_Deg;
-}
 
   private:
     const uint16_t init_address;    // 初始地址
@@ -327,6 +335,8 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
     CAN::BSP::send_data msd;        // 发送数据
     Parameters params_;
     MultiAngleData multi_angle_data_[N];
+
+    BSP::WATCH_STATE::StateWatch motor_state_[N]; //断联检测
 };
 
 /**
@@ -359,5 +369,5 @@ template <uint8_t N> class LK4005 : public LkMotorBase<N>
  * 构造函数的第一个参数为初始ID，第二个参数为电机ID列表,第三个参数是发送的ID
  *
  */
-inline LK4005<1> Motor4005(0x0140, {1}, 0x141);
+inline LK4005<4> Motor4005(0x140, {1, 2, 3, 4}, 0x140);
 } // namespace BSP::Motor::LK

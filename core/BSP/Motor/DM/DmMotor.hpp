@@ -1,6 +1,6 @@
 #pragma once
 #include "../MotorBase.hpp"
-#include "core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../BSP/state_watch.hpp"
 namespace BSP::Motor::DM
 {
 // 参数结构体定义
@@ -70,6 +70,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         {
             recv_idxs_[i] = recv_ids[i]; // 接收ID索引
             send_idxs_[i] = send_ids[i]; // 发送ID存储
+            motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
         }
     }
 
@@ -142,17 +143,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
 
         this->unit_data_[i].last_angle = Data;
 
-        this->state_watch_[i].updateTimestamp();
-    }
 
-    void SendCAN()
-    {
-        // 设置CAN帧通用配置
-        tx_frame.dlc = 8;
-        tx_frame.ide = 1;
-        tx_frame.is_extended_id = false;
-        tx_frame.is_remote_frame = false;
-        tx_frame.mailbox = 1;
     }
 
   public:
@@ -163,24 +154,28 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param RxHeader  接收数据的句柄
      * @param pData     接收数据的缓冲区
      */
-    void Parse(const HAL::CAN::Frame &frame)
+    void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
     {
-        const uint16_t received_id = frame.id;
+        const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
 
         for (uint8_t i = 0; i < N; ++i)
         {
             if (received_id == init_address + recv_idxs_[i])
             {
-                feedback_->id = frame.data[0] & 0xF0;
-                feedback_->err = frame.data[0] & 0xF;
-                feedback_->angle = (frame.data[1] << 8) | frame.data[2];
-                feedback_->velocity = (frame.data[3] << 4) | (frame.data[4] >> 4);
-                feedback_->torque = ((frame.data[4] & 0xF) << 8) | frame.data[5];
-                feedback_->T_Mos = frame.data[6];
-                feedback_->T_Rotor = frame.data[7];
+                memcpy(&feedback_[i], pData, sizeof(DMMotorfeedback));
+
+                feedback_->id = pData[0] & 0xF0;
+                feedback_->err = pData[0] & 0xF;
+                feedback_->angle = (pData[1] << 8) | pData[2];
+                feedback_->velocity = (pData[3] << 4) | (pData[4] >> 4);
+                feedback_->torque = ((pData[4] & 0xF) << 8) | pData[5];
+                feedback_->T_Mos = pData[6];
+                feedback_->T_Rotor = pData[7];
 
                 Configure(i);
-
+                motor_state_[i].updateTimestamp();
+                motor_state_[i].check();
+                this->runTime_[i].Dir_Flag = (motor_state_[i].getStatus() == ONLINE);
                 break;
             }
         }
@@ -198,12 +193,12 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param _KD 设定Kd
      * @param _torq 设定力矩
      */
-    void ctrl_Motor(HAL::CAN::ICanDevice *can, uint8_t motor_index, float _pos, float _vel, float _KP, float _KD,
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _pos, float _vel, float _KP, float _KD,
                     float _torq)
     {
         if (ISDir())
         {
-            On(can, motor_index);
+            On(hcan, motor_index);
             return;
         }
 
@@ -214,18 +209,16 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         kd_tmp = float_to_uint(_KD, params_.KD_MIN, params_.KD_MAX, 12);
         tor_tmp = float_to_uint(_torq, params_.T_MIN, params_.T_MAX, 12);
 
-        tx_frame.data[0] = (pos_tmp >> 8);
-        tx_frame.data[1] = (pos_tmp);
-        tx_frame.data[2] = (vel_tmp >> 4);
-        tx_frame.data[3] = ((vel_tmp & 0xF) << 4) | (kp_tmp >> 8);
-        tx_frame.data[4] = kp_tmp;
-        tx_frame.data[5] = (kd_tmp >> 4);
-        tx_frame.data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
-        tx_frame.data[7] = tor_tmp;
+        this->send_data[0] = (pos_tmp >> 8);
+        this->send_data[1] = (pos_tmp);
+        this->send_data[2] = (vel_tmp >> 4);
+        this->send_data[3] = ((vel_tmp & 0xF) << 4) | (kp_tmp >> 8);
+        this->send_data[4] = kp_tmp;
+        this->send_data[5] = (kd_tmp >> 4);
+        this->send_data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
+        this->send_data[7] = tor_tmp;
 
-        tx_frame.id = init_address + send_idxs_[motor_index - 1];
-        tx_frame.mailbox = 1;
-        can->send(tx_frame);
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -236,11 +229,11 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param _vel 给定速度
      * @param _pos 给定位置
      */
-    void ctrl_Motor(HAL::CAN::ICanDevice *can, uint8_t motor_index, float _vel, float _pos)
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _vel, float _pos)
     {
-        if (this->state_watch_[motor_index - 1].getState())
+        if (ISDir())
         {
-            On(can, motor_index);
+            On(hcan, motor_index);
             return;
         }
 
@@ -248,8 +241,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         posvel.vel_tmp = _vel;
         posvel.pos_tmp = _pos;
 
-        tx_frame.id = init_address + send_idxs_[motor_index - 1];
-        can->send(tx_frame);
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&posvel, CAN_TX_MAILBOX2);
     }
 
     /**
@@ -259,19 +251,18 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param motor_index 电机序号从1开始
      * @param _vel 给定速度
      */
-    void ctrl_Motor(HAL::CAN::ICanDevice *can, uint8_t motor_index, float _vel)
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _vel)
     {
         if (ISDir())
         {
-            On(can, motor_index);
+            On(hcan, motor_index);
             return;
         }
 
         DM_Vel vel;
         vel.vel_tmp = _vel;
 
-        tx_frame.id = init_address + send_idxs_[motor_index - 1];
-        can->send(tx_frame);
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&vel, CAN_TX_MAILBOX2);
     }
 
     /**
@@ -280,13 +271,11 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param hcan 电机的can句柄
      * @param motor_index 电机序号从1开始
      */
-    void On(HAL::CAN::ICanDevice *can, uint8_t motor_index)
+    void On(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
-        *(uint64_t *)(&tx_frame.data[0]) = 0xFCFFFFFFFFFFFFFF;
+        *(uint64_t *)(&send_data[0]) = 0xFCFFFFFFFFFFFFFF;
 
-        tx_frame.id = init_address + send_idxs_[motor_index - 1];
-
-        can->send(tx_frame);
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
     }
 
     /**
@@ -295,12 +284,10 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param hcan 电机的can句柄
      * @param motor_index 电机序号从1开始
      */
-    void Off(HAL::CAN::ICanDevice *can, uint8_t motor_index)
+    void Off(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
-        *(uint64_t *)(&tx_frame.data[0]) = 0xFDFFFFFFFFFFFFFF;
-        tx_frame.id = init_address + send_idxs_[motor_index - 1];
-        tx_frame.mailbox = 1;
-        can->send(tx_frame);
+        *(uint64_t *)(&send_data[0]) = 0xFDFFFFFFFFFFFFFF;
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
     }
 
     /**
@@ -309,13 +296,13 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param hcan 电机的can句柄
      * @param motor_index 电机序号从1开始
      */
-    void ClearErr(HAL::CAN::ICanDevice *can, uint8_t motor_index)
+    void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
-        *(uint64_t *)(&tx_frame.data[0]) = 0xFBFFFFFFFFFFFFFF;
-
-        tx_frame.id = init_address + send_idxs_[motor_index - 1];
-        can->send(tx_frame);
+        *(uint64_t *)(&send_data[0]) = 0xFBFFFFFFFFFFFFFF;
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
     }
+
+
 
   protected:
     struct alignas(uint64_t) DMMotorfeedback
@@ -349,11 +336,19 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
     DMMotorfeedback feedback_[N]; // 国际单位数据
     Parameters params_;           // 转国际单位参数列表
     uint8_t send_data[8];
-    HAL::CAN::Frame tx_frame;
+
+    BSP::WATCH_STATE::StateWatch motor_state_[N];   //断联检测
 };
 
 template <uint8_t N> class J4310 : public DMMotorBase<N>
 {
+  private:
+    // // 定义参数生成方法
+    // Parameters GetParameters() override
+    // {
+    //     return DMMotorBase<N>::CreateParams(-12.56, 12.56, -30, 30, -10, 10, 0.0, 500, 0.0, 5.0);
+    // }
+
   public:
     // 子类构造时传递参数
     /**
@@ -364,6 +359,28 @@ template <uint8_t N> class J4310 : public DMMotorBase<N>
      */
     J4310(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs_)[N])
         : DMMotorBase<N>(Init_id, ids, send_idxs_, Parameters(-12.56, 12.56, -30, 30, -3, 3, 0.0, 500, 0.0, 5.0))
+    {
+    }
+};
+template <uint8_t N> class S2325 : public DMMotorBase<N>
+{
+  private:
+    // // 定义参数生成方法
+    // Parameters GetParameters() override
+    // {
+    //     return DMMotorBase<N>::CreateParams(-12.56, 12.56, -30, 30, -10, 10, 0.0, 500, 0.0, 5.0);
+    // }
+
+  public:
+    // 子类构造时传递参数
+    /**
+     * @brief dji电机构造函数
+     *
+     * @param Init_id 初始ID
+     * @param ids 电机ID列表
+     */
+    S2325(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs_)[N])
+        : DMMotorBase<N>(Init_id, ids, send_idxs_, Parameters(-12.5, 12.5, -50, 50, -10, 10, 0.0, 500, 0.0, 5.0))
     {
     }
 };
