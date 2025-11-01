@@ -2,8 +2,9 @@
 
 namespace BSP::IMU
 {
-void HI12::Init()
+void HI12::Init(UART_HandleTypeDef *huart)
 {
+    IMUHuart = huart;
     HAL_UARTEx_ReceiveToIdle_DMA(IMUHuart, buffer, sizeof(buffer));
 }//放到main函数里初始化
 
@@ -59,10 +60,10 @@ void HI12::Parse(UART_HandleTypeDef *huart, int Size)
         UpLastTime();
     }
 }//放到串口接收回调里调用
-void HI12::set(UART_HandleTypeDef *huart)
-{
-    IMUHuart = huart;
-}//设置串口放到main
+// void HI12::set(UART_HandleTypeDef *huart)
+// {
+//     IMUHuart = huart;
+// }//设置串口放到main
 void HI12::ClearORE(UART_HandleTypeDef *huart, uint8_t *pData, int Size)
 {
     if (__HAL_UART_GET_FLAG(huart, UART_FLAG_ORE) != RESET)

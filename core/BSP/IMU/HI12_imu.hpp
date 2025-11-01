@@ -28,7 +28,7 @@ class HI12
      * @brief IMU初始化函数
      *
      */
-    void Init();
+    void Init(UART_HandleTypeDef *huart);
 
     /**
      * @brief
