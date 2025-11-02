@@ -92,10 +92,9 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
                 feedback_[i].current = __builtin_bswap16(feedback_[i].current);
 
                 Configure(i);
+                this->state_watch_[i].updateTimestamp();
+                this->state_watch_[i].check();
 
-                motor_state_[i].updateTimestamp();
-                motor_state_[i].check();
-                this->runTime_[i].Dir_Flag = (motor_state_[i].getStatus() == BSP::WATCH_STATE::Status::ONLINE);
             }
         }
     }
@@ -195,7 +194,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
     uint32_t send_idxs_;
     CAN::BSP::send_data msd;
 
-    BSP::WATCH_STATE::StateWatch motor_state_[N];   //断联检测
+
 
   public:
     Parameters params_; // 转国际单位参数列表

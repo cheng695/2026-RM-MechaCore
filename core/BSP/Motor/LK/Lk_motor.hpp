@@ -103,10 +103,9 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
                 feedback.angle = (float)(uint16_t)((pData[7] << 8) | pData[6]);
 
                 Configure(i, feedback);
+                this->state_watch_[i].updateTimestamp();
+                this->state_watch_[i].check();
 
-                motor_state_[i].updateTimestamp();
-                motor_state_[i].check();
-                this->runTime_[i].Dir_Flag = (motor_state_[i].getStatus() == BSP::WATCH_STATE::Status::ONLINE);
             }
         }
     }
@@ -336,7 +335,6 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
     Parameters params_;
     MultiAngleData multi_angle_data_[N];
 
-    BSP::WATCH_STATE::StateWatch motor_state_[N]; //断联检测
 };
 
 /**

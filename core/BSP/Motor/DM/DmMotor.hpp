@@ -173,9 +173,8 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
                 feedback_->T_Rotor = pData[7];
 
                 Configure(i);
-                motor_state_[i].updateTimestamp();
-                motor_state_[i].check();
-                this->runTime_[i].Dir_Flag = (motor_state_[i].getStatus() == ONLINE);
+                this->state_watch_[i].updateTimestamp();
+                this->state_watch_[i].check();
                 break;
             }
         }
@@ -337,7 +336,6 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
     Parameters params_;           // 转国际单位参数列表
     uint8_t send_data[8];
 
-    BSP::WATCH_STATE::StateWatch motor_state_[N];   //断联检测
 };
 
 template <uint8_t N> class J4310 : public DMMotorBase<N>
