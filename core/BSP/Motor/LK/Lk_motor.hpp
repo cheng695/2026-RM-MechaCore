@@ -2,9 +2,11 @@
 #define LK_MOTOR_HPP
 
 #pragma once
-#include <cstring>
 
-#include "../BSP/MotorBase.hpp"
+#include "../BSP/BSP_Motor.hpp"
+#include "../HAL/My_HAL.hpp"
+#include "../MotorBase.hpp"
+#include "../BSP/state_watch.hpp"
 #define PI 3.14159265358979323846
 namespace BSP::Motor::LK
 {
@@ -75,6 +77,9 @@ namespace BSP::Motor::LK
                 multi_angle_data_[i].allow_accumulate = false;
                 multi_angle_data_[i].is_initialized = false;
             }
+            recv_idxs_[i] = recv_idxs[i];
+            motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
+            
         }
 
     public:
@@ -160,6 +165,37 @@ namespace BSP::Motor::LK
             uint8_t data[8] = {0x9B};
             CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
         }
+  public:
+    /**
+     * @brief 解析CAN数据
+     * 
+     * @param RxHeader 接收数据的句柄
+     * @param pData 接收数据的缓冲区
+     */
+    void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
+    {
+        const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
+
+        for (uint8_t i = 0; i < N; ++i)
+        {
+            if (received_id == init_address + recv_idxs_[i])
+            {
+                LkMotorFeedback feedback;
+                memcpy(&feedback, pData, sizeof(LkMotorFeedback));
+
+                // 转换字节序（如果需要）
+                feedback.temperature = pData[1];               
+                feedback.current = (float)(int16_t)((pData[3] << 8) | pData[2]);
+                feedback.velocity = (float)(int16_t)((pData[5] << 8) | pData[4]);
+                feedback.angle = (float)(uint16_t)((pData[7] << 8) | pData[6]);
+
+                Configure(i, feedback);
+                this->state_watch_[i].updateTimestamp();
+                this->state_watch_[i].check();
+
+            }
+        }
+    }
 
         /**
          * @brief 位置控制
@@ -210,6 +246,48 @@ namespace BSP::Motor::LK
 
             CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[id - 1], data, CAN_TX_MAILBOX1);
         }
+    /**
+     * @brief 发送Can数据
+     * 
+     * @param han Can句柄
+     * @param pTxMailbox 邮箱
+     */
+    void sendCAN(CAN_HandleTypeDef *han, uint32_t pTxMailbox)
+    {
+        CAN::BSP::Can_Send(han, send_idxs_, msd.Data, pTxMailbox);
+    }
+    /**
+     * @brief 使能电机
+     * 
+     * @param hcan CAN句柄
+     */
+    void ON(const CAN_HandleTypeDef *hcan)
+    {
+        uint8_t data[8] = {0x88};
+        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
+    }
+
+    /**
+     * @brief 失能电机
+     * 
+     * @param hcan CAN句柄
+     */
+    void OFF(const CAN_HandleTypeDef *hcan)
+    {
+        uint8_t data[8] = {0x81};
+        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
+    }
+
+    /**
+     * @brief 清除错误
+     * 
+     * @param hcan CAN句柄
+     */
+    void clear_err(const CAN_HandleTypeDef *hcan)
+    {
+        uint8_t data[8] = {0x9B};
+        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
+    }
 
         /**
          * @brief 获取多圈角度
@@ -306,6 +384,12 @@ namespace BSP::Motor::LK
         multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
         this->unit_data_[i].last_angle = this->unit_data_[i].angle_Deg;
     }
+    /**
+     * @brief 检查所有电机在线状态
+     * 
+     * @return uint8_t 在线状态
+     */
+
 
     private:
         const uint16_t init_address;    // 初始地址
@@ -341,6 +425,71 @@ namespace BSP::Motor::LK
         {
         }
     };
+    void Configure(size_t i, const LkMotorFeedback& feedback)
+    {
+        const auto &params = params_;
+
+        this->unit_data_[i].angle_Deg = feedback_[i].angle * params.encoder_to_deg;
+
+        this->unit_data_[i].angle_Rad = this->unit_data_[i].angle_Deg * params.deg_to_rad;
+
+        this->unit_data_[i].velocity_Rad = feedback_[i].velocity * params.rpm_to_radps;
+
+        this->unit_data_[i].velocity_Rpm = feedback_[i].velocity * params.encoder_to_rpm;
+
+        this->unit_data_[i].current_A = feedback_[i].current * params.feedback_to_current_coefficient;
+
+        this->unit_data_[i].torque_Nm = feedback_[i].current * params.current_to_torque_coefficient;
+
+        this->unit_data_[i].temperature_C = feedback_[i].temperature;
+
+        double lastData = this->unit_data_[i].last_angle;
+        double Data = this->unit_data_[i].angle_Deg;
+        // 多圈角度计算
+        if (multi_angle_data_[i].allow_accumulate) 
+        {
+            if (!multi_angle_data_[i].is_initialized)
+            {
+                multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
+                multi_angle_data_[i].is_initialized = true;
+            }
+            else
+            {
+                double last_angle = multi_angle_data_[i].last_angle;
+                double delta = this->unit_data_[i].angle_Deg - last_angle;               
+                // 处理360°跳变
+                if (delta > 180.0) 
+                    delta -= 360.0;
+                else if (delta < -180.0) 
+                    delta += 360.0;
+                
+                multi_angle_data_[i].total_angle += delta;
+                this->unit_data_[i].add_angle = delta;
+            }
+        }
+        multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
+        this->unit_data_[i].last_angle = this->unit_data_[i].angle_Deg;
+    }
+
+  private:
+    const uint16_t init_address;    // 初始地址
+    LkMotorFeedback feedback_[N]; // 反馈数据
+    uint8_t recv_idxs_[N];          //接收id
+    uint32_t send_idxs_;            // 发送id
+    CAN::BSP::send_data msd;        // 发送数据
+    Parameters params_;
+    MultiAngleData multi_angle_data_[N];
+
+};
+
+/**
+ * @brief LK电机具体型号配置
+ * 
+ * @tparam N 电机数量
+ */
+template <uint8_t N> class LK4005 : public LkMotorBase<N>
+{
+  public:
     /**
      * @brief 电机实例
      * 模板内的参数为电机的总数量，这里为假设有两个电机
@@ -351,3 +500,21 @@ namespace BSP::Motor::LK
 } // namespace BSP::Motor::LK
 
 #endif
+    LK4005(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs)
+        : LkMotorBase<N>(Init_id, recv_idxs, send_idxs,
+                         Parameters(10.0,  // 减速比
+                                   0.06,   // 扭矩常数 (根据实际电机调整)
+                                   4096,  // 最大反馈电流
+                                   2.7,   // 最大电流 
+                                   65536.0)) // 编码器分辨率
+    {
+    }
+};
+/**
+ * @brief 电机实例
+ * 模板内的参数为电机的总数量，这里为假设有两个电机
+ * 构造函数的第一个参数为初始ID，第二个参数为电机ID列表,第三个参数是发送的ID
+ *
+ */
+inline LK4005<4> Motor4005(0x140, {1, 2, 3, 4}, 0x140);
+} // namespace BSP::Motor::LK

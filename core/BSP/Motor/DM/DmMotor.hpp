@@ -3,6 +3,7 @@
 
 #pragma once
 #include "../MotorBase.hpp"
+#include "../BSP/state_watch.hpp"
 namespace BSP::Motor::DM
 {
     // 参数结构体定义
@@ -48,6 +49,9 @@ namespace BSP::Motor::DM
             : P_MIN(pmin), P_MAX(pmax), V_MIN(vmin), V_MAX(vmax), T_MIN(tmin), T_MAX(tmax), KP_MIN(kpmin), KP_MAX(kpmax),
             KD_MIN(kdmin), KD_MAX(kdmax)
         {
+            recv_idxs_[i] = recv_ids[i]; // 接收ID索引
+            send_idxs_[i] = send_ids[i]; // 发送ID存储
+            motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
         }
     };
 
@@ -142,104 +146,96 @@ namespace BSP::Motor::DM
             else
                 this->unit_data_[i].add_angle += (Data - lastData);
 
-            this->unit_data_[i].last_angle = Data;
 
-            this->state_watch_[i].updateTimestamp();
-        }
+    }
+
+  public:
+    // 解析函数
+    /**
+     * @brief 解析CAN数据
+     * 因为大小端转换不方便的问题，不直接使用memcpy
+     * @param RxHeader  接收数据的句柄
+     * @param pData     接收数据的缓冲区
+     */
+    void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
+    {
+        const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
 
         void SendCAN()
         {
-            // 设置CAN帧通用配置
-            tx_frame.dlc = 8;
-            tx_frame.ide = 1;
-            tx_frame.is_extended_id = false;
-            tx_frame.is_remote_frame = false;
-            tx_frame.mailbox = 1;
-        }
-
-    public:
-        // 解析函数
-        /**
-         * @brief 解析CAN数据
-         * 因为大小端转换不方便的问题，不直接使用memcpy
-         * @param RxHeader  接收数据的句柄
-         * @param pData     接收数据的缓冲区
-         */
-        void Parse(const HAL::CAN::Frame &frame)
-        {
-            const uint16_t received_id = frame.id;
-
-            for (uint8_t i = 0; i < N; ++i)
+            if (received_id == init_address + recv_idxs_[i])
             {
-                if (received_id == init_address + recv_idxs_[i])
-                {
-                    feedback_->id = frame.data[0] & 0xF0;
-                    feedback_->err = frame.data[0] & 0xF;
-                    feedback_->angle = (frame.data[1] << 8) | frame.data[2];
-                    feedback_->velocity = (frame.data[3] << 4) | (frame.data[4] >> 4);
-                    feedback_->torque = ((frame.data[4] & 0xF) << 8) | frame.data[5];
-                    feedback_->T_Mos = frame.data[6];
-                    feedback_->T_Rotor = frame.data[7];
+                memcpy(&feedback_[i], pData, sizeof(DMMotorfeedback));
 
-                    Configure(i);
+                feedback_->id = pData[0] & 0xF0;
+                feedback_->err = pData[0] & 0xF;
+                feedback_->angle = (pData[1] << 8) | pData[2];
+                feedback_->velocity = (pData[3] << 4) | (pData[4] >> 4);
+                feedback_->torque = ((pData[4] & 0xF) << 8) | pData[5];
+                feedback_->T_Mos = pData[6];
+                feedback_->T_Rotor = pData[7];
 
-                    break;
-                }
+                Configure(i);
+                this->state_watch_[i].updateTimestamp();
+                this->state_watch_[i].check();
+                break;
             }
         }
 
-        /**
-         * @brief DM电机的MIT控制方法，利用C++特性实现一个方法三种模式
-         * 由于DM电机普通模式发送数据帧较大，所以设定完发送数据后就直接发送
-         *
-         * @param hcan 电机的can句柄
-         * @param motor_index 电机序号从1开始
-         * @param _pos 设定位置
-         * @param _vel 设定速递
-         * @param _KP 设定Kp
-         * @param _KD 设定Kd
-         * @param _torq 设定力矩
-         */
-        void ctrl_Motor(HAL::CAN::ICanDevice *can, uint8_t motor_index, float _pos, float _vel, float _KP, float _KD,
-                        float _torq)
+    /**
+     * @brief DM电机的MIT控制方法，利用C++特性实现一个方法三种模式
+     * 由于DM电机普通模式发送数据帧较大，所以设定完发送数据后就直接发送
+     *
+     * @param hcan 电机的can句柄
+     * @param motor_index 电机序号从1开始
+     * @param _pos 设定位置
+     * @param _vel 设定速递
+     * @param _KP 设定Kp
+     * @param _KD 设定Kd
+     * @param _torq 设定力矩
+     */
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _pos, float _vel, float _KP, float _KD,
+                    float _torq)
+    {
+        if (ISDir())
         {
-            uint16_t pos_tmp, vel_tmp, kp_tmp, kd_tmp, tor_tmp;
-            pos_tmp = float_to_uint(_pos, params_.P_MIN, params_.P_MAX, 16);
-            vel_tmp = float_to_uint(_vel, params_.V_MIN, params_.V_MAX, 12);
-            kp_tmp = float_to_uint(_KP, params_.KP_MIN, params_.KP_MAX, 12);
-            kd_tmp = float_to_uint(_KD, params_.KD_MIN, params_.KD_MAX, 12);
-            tor_tmp = float_to_uint(_torq, params_.T_MIN, params_.T_MAX, 12);
-
-            tx_frame.data[0] = (pos_tmp >> 8);
-            tx_frame.data[1] = (pos_tmp);
-            tx_frame.data[2] = (vel_tmp >> 4);
-            tx_frame.data[3] = ((vel_tmp & 0xF) << 4) | (kp_tmp >> 8);
-            tx_frame.data[4] = kp_tmp;
-            tx_frame.data[5] = (kd_tmp >> 4);
-            tx_frame.data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
-            tx_frame.data[7] = tor_tmp;
-
-            tx_frame.id = init_address + send_idxs_[motor_index - 1];
-            tx_frame.mailbox = 1;
-            can->send(tx_frame);
+            On(hcan, motor_index);
+            return;
         }
 
-        /**
-         * @brief DM电机的速度和位置控制方法
-         *
-         * @param hcan 电机的can句柄
-         * @param motor_index 电机序号从1开始
-         * @param _vel 给定速度
-         * @param _pos 给定位置
-         */
-        void ctrl_Motor(HAL::CAN::ICanDevice *can, uint8_t motor_index, float _vel, float _pos)
-        {
-            DM_VelPos posvel;
-            posvel.vel_tmp = _vel;
-            posvel.pos_tmp = _pos;
+        uint16_t pos_tmp, vel_tmp, kp_tmp, kd_tmp, tor_tmp;
+        pos_tmp = float_to_uint(_pos, params_.P_MIN, params_.P_MAX, 16);
+        vel_tmp = float_to_uint(_vel, params_.V_MIN, params_.V_MAX, 12);
+        kp_tmp = float_to_uint(_KP, params_.KP_MIN, params_.KP_MAX, 12);
+        kd_tmp = float_to_uint(_KD, params_.KD_MIN, params_.KD_MAX, 12);
+        tor_tmp = float_to_uint(_torq, params_.T_MIN, params_.T_MAX, 12);
 
-            tx_frame.id = init_address + send_idxs_[motor_index - 1];
-            can->send(tx_frame);
+        this->send_data[0] = (pos_tmp >> 8);
+        this->send_data[1] = (pos_tmp);
+        this->send_data[2] = (vel_tmp >> 4);
+        this->send_data[3] = ((vel_tmp & 0xF) << 4) | (kp_tmp >> 8);
+        this->send_data[4] = kp_tmp;
+        this->send_data[5] = (kd_tmp >> 4);
+        this->send_data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
+        this->send_data[7] = tor_tmp;
+
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX1);
+    }
+
+    /**
+     * @brief DM电机的速度和位置控制方法
+     *
+     * @param hcan 电机的can句柄
+     * @param motor_index 电机序号从1开始
+     * @param _vel 给定速度
+     * @param _pos 给定位置
+     */
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _vel, float _pos)
+    {
+        if (ISDir())
+        {
+            On(hcan, motor_index);
+            return;
         }
 
         /**
@@ -267,6 +263,23 @@ namespace BSP::Motor::DM
         void On(HAL::CAN::ICanDevice *can, uint8_t motor_index)
         {
             *(uint64_t *)(&tx_frame.data[0]) = 0xFCFFFFFFFFFFFFFF;
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&posvel, CAN_TX_MAILBOX2);
+    }
+
+    /**
+     * @brief DM电机的速度控制方法
+     *
+     * @param hcan 电机的can句柄
+     * @param motor_index 电机序号从1开始
+     * @param _vel 给定速度
+     */
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _vel)
+    {
+        if (ISDir())
+        {
+            On(hcan, motor_index);
+            return;
+        }
 
             tx_frame.id = init_address + send_idxs_[motor_index - 1];
 
@@ -329,6 +342,59 @@ namespace BSP::Motor::DM
 
         uint8_t recv_idxs_[N];  // ID索引
         uint32_t send_idxs_[N]; // 每个电机的发送ID
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&vel, CAN_TX_MAILBOX2);
+    }
+
+    /**
+     * @brief 使能DM电机
+     *
+     * @param hcan 电机的can句柄
+     * @param motor_index 电机序号从1开始
+     */
+    void On(CAN_HandleTypeDef *hcan, uint8_t motor_index)
+    {
+        *(uint64_t *)(&send_data[0]) = 0xFCFFFFFFFFFFFFFF;
+
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+    }
+
+    /**
+     * @brief 失能DM电机
+     *
+     * @param hcan 电机的can句柄
+     * @param motor_index 电机序号从1开始
+     */
+    void Off(CAN_HandleTypeDef *hcan, uint8_t motor_index)
+    {
+        *(uint64_t *)(&send_data[0]) = 0xFDFFFFFFFFFFFFFF;
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+    }
+
+    /**
+     * @brief 清除DM电机错误
+     *
+     * @param hcan 电机的can句柄
+     * @param motor_index 电机序号从1开始
+     */
+    void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
+    {
+        *(uint64_t *)(&send_data[0]) = 0xFBFFFFFFFFFFFFFF;
+        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+    }
+
+
+
+  protected:
+    struct alignas(uint64_t) DMMotorfeedback
+    {
+        uint8_t id : 4;
+        uint8_t err : 4;
+        uint16_t angle;
+        uint16_t velocity : 12;
+        uint16_t torque : 12;
+        uint8_t T_Mos;
+        uint8_t T_Rotor;
+    };
 
         DMMotorfeedback feedback_[N]; // 国际单位数据
         Parameters params_;           // 转国际单位参数列表
@@ -352,6 +418,29 @@ namespace BSP::Motor::DM
         }
     };
 
+  private:
+    const int16_t init_address; // 初始地址
+
+    uint8_t recv_idxs_[N];  // ID索引
+    uint32_t send_idxs_[N]; // 每个电机的发送ID
+
+    DMMotorfeedback feedback_[N]; // 国际单位数据
+    Parameters params_;           // 转国际单位参数列表
+    uint8_t send_data[8];
+
+};
+
+template <uint8_t N> class J4310 : public DMMotorBase<N>
+{
+  private:
+    // // 定义参数生成方法
+    // Parameters GetParameters() override
+    // {
+    //     return DMMotorBase<N>::CreateParams(-12.56, 12.56, -30, 30, -10, 10, 0.0, 500, 0.0, 5.0);
+    // }
+
+  public:
+    // 子类构造时传递参数
     /**
      * @brief 创建实例时，模板填电机个数，构造函数共三个参数
      * 第一个是初始ID，
@@ -359,6 +448,41 @@ namespace BSP::Motor::DM
      * 第三个是电机发送ID列表
      */
     inline J4310<1> Motor4310(0x00, {2}, {1});
+    J4310(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs_)[N])
+        : DMMotorBase<N>(Init_id, ids, send_idxs_, Parameters(-12.56, 12.56, -30, 30, -3, 3, 0.0, 500, 0.0, 5.0))
+    {
+    }
+};
+template <uint8_t N> class S2325 : public DMMotorBase<N>
+{
+  private:
+    // // 定义参数生成方法
+    // Parameters GetParameters() override
+    // {
+    //     return DMMotorBase<N>::CreateParams(-12.56, 12.56, -30, 30, -10, 10, 0.0, 500, 0.0, 5.0);
+    // }
+
+  public:
+    // 子类构造时传递参数
+    /**
+     * @brief dji电机构造函数
+     *
+     * @param Init_id 初始ID
+     * @param ids 电机ID列表
+     */
+    S2325(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs_)[N])
+        : DMMotorBase<N>(Init_id, ids, send_idxs_, Parameters(-12.5, 12.5, -50, 50, -10, 10, 0.0, 500, 0.0, 5.0))
+    {
+    }
+};
+
+/**
+ * @brief 创建实例时，模板填电机个数，构造函数共三个参数
+ * 第一个是初始ID，
+ * 第二个是电机接收ID列表
+ * 第三个是电机发送ID列表
+ */
+inline J4310<1> Motor4310(0x00, {2}, {1});
 
 } // namespace BSP::Motor::DM
 
