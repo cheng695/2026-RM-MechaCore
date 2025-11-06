@@ -1,3 +1,5 @@
+#ifndef DJI_MOTOR_HPP
+#define DJI_MOTOR_HPP
 
 #pragma once
 // 基础DJI电机实现
@@ -288,3 +290,5 @@ inline GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
 
 
 } // namespace BSP::Motor::Dji
+
+#endif

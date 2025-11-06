@@ -85,11 +85,21 @@ namespace Alg::CalculationBase
             InverseDynamicsBase() : Fx(0.0f), Fy(0.0f), Torque(0.0f){}
 
             /**
-             * @brief 获取X，Y方向的力，扭矩
-             * @return X，Y方向的力，绕Z轴的扭矩
+             * @brief 获取X方向的力
+             * @return X方向的力
              */
             virtual float GetFx() const { return Fx; }
+
+            /**
+             * @brief 获取Y方向的力
+             * @return Y方向的力
+             */
             virtual float GetFy() const { return Fy; }
+            
+            /**
+             * @brief 获取绕Z轴的扭矩
+             * @return 绕Z轴的扭矩
+             */
             virtual float GetTorque() const { return Torque; }
 
             /**
@@ -146,29 +156,59 @@ namespace Alg::CalculationBase
             }
             
             /**
-             * @brief 设置相位参数, 设置速度增益, 设置旋转增益
-             * @param phase 相位值, @param gain 速度增益系数, @param gain 旋转增益系数
+             * @brief 设置相位参数
+             * @param phase 相位值(弧度)
              */
             virtual void SetPhase(float phase) { Phase = phase; }
+
+            /**
+             * @brief 设置速度增益
+             * @param gain 速度增益系数
+             */
             virtual void SetSpeedGain(float gain) { SpeedGain = gain; }
+
+            /**
+             * @brief 设置旋转增益
+             * @param gain 旋转增益系数
+             */
             virtual void SetRotationalGain(float gain) { RotationalGain = gain; }
 
 
             /**
-             * @brief 获取X方向的目标速度, 获取Y方向的目标速度, 获取绕Z轴的目标角速度
-             * @return X方向的目标速度, Y方向的目标速度, 绕Z轴的目标角速度
+             * @brief 获取X方向的目标速度
+             * @return X方向的目标速度
              */
             virtual float GetSignal_x() const { return Signal_x; }
+
+            /**
+             * @brief 获取Y方向的目标速度
+             * @return Y方向的目标速度
+             */
             virtual float GetSignal_y() const { return Signal_y; }
+
+            /**
+             * @brief 获取绕Z轴的目标角速度
+             * @return 绕Z轴的目标角速度
+             */
             virtual float GetSignal_w() const { return Signal_w; }
             
 
             /**
-             * @brief 获取相位参数, 获取速度增益, 获取旋转增益
-             * @return 相位值, 速度增益系数, 旋转增益系数
+             * @brief 获取相位参数
+             * @return 相位值(弧度)
              */
             virtual float GetPhase() const { return Phase; }
+
+            /**
+             * @brief 获取速度增益
+             * @return 速度增益系数
+             */
             virtual float GetSpeedGain() const { return SpeedGain; }
+
+            /**
+             * @brief 获取旋转增益
+             * @return 旋转增益系数
+             */
             virtual float GetRotationalGain() const { return RotationalGain; }
 
 
