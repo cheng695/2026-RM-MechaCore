@@ -1,67 +1,71 @@
 #include "adrc.hpp"
 
-namespace ALG::LADRC
+float Alg::ADRC::FirstLADRC::LADRC_1(float input, float feedback)
 {
-
-float TDquadratic::Calc(float u)
-{
-    // 计算公式
-    u_ = u;
-    x1 += x2 * h;
-    x2 += (-2.0f * r * x2 - r * r * (x1 - u_)) * h;
-    return x1;
+    LESO_1(feedback);
+    LSEF_1(input);
+    std::clamp(U, GetMin(), GetMax());
+    return U;
 }
 
-void Adrc::ESOCalc(float target, float feedback)
+void Alg::ADRC::FirstLADRC::LSEF_1(float target)
 {
-    feedback_ = feedback;
-    target_ = target;
+    KP = GetWc();
 
-    // 计算ESO增益系数
-    beta1 = 2.0f * wc_;
-    beta2 = wc_ * wc_;
-
-    // 更新ESO状态
-    z1 += h_ * (z2 + beta1 * e + b0_ * u);
-    z2 += h_ * (beta2 * e);
-
-    // 目标与观测误差
-    e = feedback_ - this->z1;
-    z1 += (z2 + beta1 * e + b0_ * this->u) * this->h_;
-    z2 += beta2 * e * h_;
+    U0 = KP * (target - Z1);
+    U = (U0 - Z2) / GetB0();
 }
 
-void Adrc::SefCalc()
+void Alg::ADRC::FirstLADRC::LESO_1(float feedback)
 {
-    // 计算跟踪误差
-    float u0 = 0;
-    float e1 = td_.getX1() - z1;
+    Beta1 = 2.0f * GetW0();
+    Beta2 = GetW0() * GetW0();
 
-    // 计算控制律
-    u0 = Kp_ * e1;
-
-    // 计算最终控制量（补偿扰动）
-    u = (u0 - z2) / b0_;
-
-    // 限幅
-    if (u > max_)
-        u = max_;
-    if (u < -max_)
-        u = -max_;
+    E = feedback - Z1;
+    
+    Z1 += GetH() * (Beta1 * E + Z2 + GetB0() * U);
+    Z2 += GetH() * (Beta2 * E);
 }
 
-float Adrc::UpData(float feedback)
+
+
+
+
+float Alg::ADRC::SecondLADRC::LADRC_2(float input, float feedback)
 {
-    // 跟踪微分器处理目标值
-    td_.Calc(target_);
-
-    // ESO估计系统状态和扰动
-    ESOCalc(target_, feedback);
-
-    // 计算控制律
-    SefCalc();
-
-    return u;
+    TD_2(input);
+    LESO_2(feedback);
+    LSEF_2();
+    std::clamp(U, GetMin(), GetMax());
+    return U;
 }
 
-} // namespace ALG::LADRC
+void Alg::ADRC::SecondLADRC::LSEF_2()
+{
+    KP = GetWc() * GetWc();
+    KD = 2.0f * GetWc();
+
+    U0 = KP * (V1 - Z1) + KD * (V2 - Z2);
+    U = (U0 - Z3) / GetB0();
+}
+
+void Alg::ADRC::SecondLADRC::LESO_2(float feedback)
+{
+    Beta1 = 3.0f * GetW0();
+    Beta2 = 3.0f * GetW0() * GetW0();
+    Beta3 = GetW0() * GetW0() * GetW0();
+
+    E = feedback - Z1;
+
+    Z1 += GetH() * (Z2 + Beta1 * E);
+    Z2 += GetH() * (Z3 + GetB0() * U + Beta2 * E);
+    Z3 += GetH() * (Beta3 * E);
+}
+
+void Alg::ADRC::SecondLADRC::TD_2(float input)
+{ 
+    float fh= -R * R * (V1 - input) - 2 * R * V2;
+    V1 += V2 * GetH();
+    V2 += fh * GetH();
+}
+
