@@ -35,6 +35,32 @@ namespace BSP::Motor
         virtual void Parse(const HAL::CAN::Frame &frame) = 0;
 
     public:
+        MotorBase(uint32_t timeThreshold = 100) : state_watch_()
+        {
+            for (int i = 0; i < N; i++) 
+            {
+                new (&state_watch_[i]) BSP::WATCH_STATE::StateWatch(timeThreshold);
+            }
+        }
+
+        void updateTimestamp(uint8_t id)
+        {
+            if (id > 0 && id <= N)
+            {
+                state_watch_[id - 1].UpdateLastTime();
+            }
+        }
+
+        bool isConnected(uint8_t id)
+        {
+            if (id > 0 && id <= N)
+            {
+                state_watch_[id - 1].UpdateTime();
+                state_watch_[id - 1].CheckStatus();
+                return state_watch_[id - 1].GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
+            }
+            return false;
+        }
         /**
          * @brief 获取角度
          *

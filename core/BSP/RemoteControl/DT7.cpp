@@ -9,8 +9,8 @@ namespace BSP::REMOTE_CONTROL
 // ============================================================================================================
 
 // 构造函数：初始化基类与成员
-RemoteController::RemoteController(uint32_t timeout_ms)
-    : BSP::WATCH_STATE::StateWatch(timeout_ms), channels_({0}), mouse_({0}), keyboard_(0)
+RemoteController::RemoteController(int timeThreshold  = 100)
+    : state_watch_(timeThreshold), channels_({0}), mouse_({0}), keyboard_(0)
 {
 }
 

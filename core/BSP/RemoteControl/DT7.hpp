@@ -95,8 +95,6 @@ public:
 	// ======================================================
 	// 构造 / 析构
 	// ======================================================
-
-	RemoteController(uint32_t timeout_ms = 100);
 	~RemoteController() = default;
 
 	// ======================================================
@@ -139,8 +137,20 @@ public:
 	// 设备连接状态查询（保留）
 	// ======================================================
 
-	bool isConnected() const { return getStatus() == BSP::WATCH_STATE::Status::ONLINE; }
-	uint32_t getDisconnectedTime() const { return getOfflineTime(); }
+    void updateTimestamp()
+    {
+        state_watch_.UpdateLastTime();
+    }
+
+    /**
+     * @brief 检查指定电机的连接状态
+     */
+    bool isConnected()
+    {
+        state_watch_.UpdateTime();
+        state_watch_.CheckStatus();
+        return state_watch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
+    }
 
 private:
 	// ======================================================
@@ -193,6 +203,7 @@ private:
 	Mouse mouse_;				   // 鼠标数据
 	uint16_t keyboard_;			   // 键盘数据
 	StickPosition stick_position_; // 摇杆位置（-1.0~1.0）
+    BSP::WATCH_STATE::StateWatch state_watch_;   // 设备在线检测
 };
 
 } // namespace BSP::REMOTE_CONTROL

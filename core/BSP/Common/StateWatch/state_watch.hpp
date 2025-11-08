@@ -69,7 +69,7 @@ namespace BSP::WATCH_STATE
             uint32_t timeout_ms_;             // 超时时间(毫秒)
             uint32_t update_time_;            // 当前数据更新时间
             uint32_t last_update_time_;       // 上次数据更新时间
-            Status status_;              // 当前设备状态
+            Status status_;                   // 当前设备状态
     };
 }
 
