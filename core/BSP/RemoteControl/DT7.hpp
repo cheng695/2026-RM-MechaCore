@@ -16,7 +16,7 @@ namespace BSP::REMOTE_CONTROL
 {
 
 // 遥控器控制器，解析 DT7 数据并提供访问接口
-class RemoteController : public BSP::WATCH_STATE::StateWatch
+class DT7 : public BSP::WATCH_STATE::StateWatch
 {
 public:
 	// ======================================================
@@ -96,8 +96,8 @@ public:
 	// 构造 / 析构
 	// ======================================================
 
-	RemoteController(uint32_t timeout_ms = 100);
-	~RemoteController() = default;
+    DT7(uint32_t timeout_ms = 100);
+    ~DT7() = default;
 
 	// ======================================================
 	// 核心函数：数据解析入口
@@ -161,7 +161,7 @@ private:
 	 * @param length 要提取的位数（最多16位）
 	 * @return 提取的位数据（uint16_t 类型）
 	 */
-	uint16_t extractBits(const uint8_t *data, uint32_t startBit, uint8_t length) const;
+    uint16_t extractBits(const uint8_t *data, uint32_t startBit, uint8_t length) const;
 
 	/**
 	 * @brief 合并两个字节为 int16 值
@@ -169,21 +169,21 @@ private:
 	 * @param high_byte 高字节（高8位）
 	 * @return 合并后的 int16_t 值（小端序）
 	 */
-	int16_t extract16Bits(const uint8_t low_byte, const uint8_t high_byte) const;
+    int16_t extract16Bits(const uint8_t low_byte, const uint8_t high_byte) const;
 
 	/**
 	 * @brief 提取字节作为布尔值
 	 * @param byte 要提取的字节
 	 * @return 布尔值（非零返回 true，零返回 false）
 	 */
-	bool extractBool(const uint8_t byte) const;
+    bool extractBool(const uint8_t byte) const;
 
 	/**
 	 * @brief 限制通道值在有效范围内
 	 * @param value 原始通道值
 	 * @return 限制后的通道值（范围：CHANNEL_VALUE_MIN ~ CHANNEL_VALUE_MAX）
 	 */
-	int16_t mapChannelValue(uint16_t value) const;
+    int16_t mapChannelValue(uint16_t value) const;
 
 	// ======================================================
 	// 成员变量（私有）
