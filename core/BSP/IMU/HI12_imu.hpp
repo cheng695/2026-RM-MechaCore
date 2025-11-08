@@ -1,298 +1,133 @@
-#pragma once
+#ifndef HI12_IMU_HPP
+#define HI12_IMU_HPP
 
-#include <stdint.h>
-#include <math.h>
-#include <stdlib.h>
-#include <cstring>
-#include "usart.h"
-#include "main.h"
-// #include "usart.h"
+#include "HI12Base.hpp"
 
-
-#define HI12MAXLEN 82 // 最大数组长度
-
-namespace BSP
+namespace BSP::IMU
 {
+    class HI12_float : public HI12Base
+    { 
+        public: 
+            HI12_float(UART_HandleTypeDef *huart) 
+                : offset(6), acc{0}, gyro{0}, angle{0}, quaternion{0}
+            {
+                SetUart(huart);
+            }
 
-namespace IMU
-{
-class HI12
-{
-  public:
-  uint32_t lastTime;
+            void DataUpdate(uint8_t *pData)
+            {
+                this->updateTimestamp();
+                Verify(pData);
+                if(GetVerify())
+                {
+                    acc[0] = this->R4(pData+offset+12);
+                    acc[1] = this->R4(pData+offset+16);
+                    acc[2] = this->R4(pData+offset+20);
+                    
+                    gyro[0] = this->R4(pData+offset+24);
+                    gyro[1] = this->R4(pData+offset+28);
+                    gyro[2] = this->R4(pData+offset+32);
+                    
+                    angle[0] = this->R4(pData+offset+48);
+                    angle[1] = this->R4(pData+offset+52);
+                    angle[2] = this->R4(pData+offset+56);
+                    
+                    quaternion[0] = this->R4(pData+offset+60);
+                    quaternion[1] = this->R4(pData+offset+64);
+                    quaternion[2] = this->R4(pData+offset+68);
+                    quaternion[3] = this->R4(pData+offset+72);
+                }
+            }
 
-  void UpLastTime();
+            float GetAcc(int index)
+            {
+                return acc[index];
+            }
 
-  bool ISDir(uint32_t dirTime);
-    /**
-     * @brief IMU初始化函数
-     *
-     */
-    void Init(UART_HandleTypeDef *huart);
+            float GetGyro(int index)
+            {
+                return gyro[index];
+            }
 
-    /**
-     * @brief
-     * IMU的数据解析，利用memcpy直接进行复制拷贝，因为发送的格式都是固定的，内存连续的，所以可以利用memcpy进行快速拷贝
-     *
-     * @return true     解析成功
-     * @return false    解析失败
-     */
-    bool ParseData();
+            float GetAngle(int index)
+            {
+                return angle[index];
+            }
 
-    /**
-     * @brief 被外部调用的解析函数
-     *
-     * @param huart 串口号
-     * @param Size  串口接收到的数据大小
-     */
-    void Parse(UART_HandleTypeDef *huart, int Size);
+            float GetQuaternion(int index)
+            {
+                return quaternion[index];
+            }
 
-    /**
-     * @brief 断联检测
-     *
-     * @return true 断联
-     * @return false 在线
-     */
-    bool ISDir();
-    /**
-     * @brief 改变IMU使用的串口
-     *
-     * @return 
-     */
-
-    void set(UART_HandleTypeDef *huart);
-  private:
-    uint8_t buffer[HI12MAXLEN] = {0}; // 初始化
-    // RM_StaticTime dirTime;            // 运行时间
-
-    /**
-     * @brief 清除ORE标志位，并重新启动DMA接收
-     *
-     * @param huart 串口号
-     * @param pData 接收的数据
-     * @param Size  数据大小
-     */
-    void ClearORE(UART_HandleTypeDef *huart, uint8_t *pData, int Size);
-
-    /**
-     * @brief 如果帧头不在帧头，则通过滑动窗口进行恢复
-     *
-     */
-    void SlidingWindowRecovery();
-
-    /**
-     * @brief CRC16校验
-     *
-     */
-     void HI12::crc16_update(uint16_t *currectCrc, const uint8_t *src, uint32_t lengthInBytes);
-
-    // 帧格式
-    struct __attribute__((packed)) Frame_format
-    {
-        uint8_t header_1; // 帧头
-        uint8_t header_2; // 双帧头
-
-        uint16_t data_len; // 数据域长度
-        uint16_t crc;      // CRC校验
+        private:
+            int offset;
+            float acc[3];
+            float gyro[3];
+            float angle[3];
+            float quaternion[4];
     };
 
-    // 数据域
-    struct __attribute__((packed)) System_telemetry // 系统遥测
-    {
-        uint8_t tag;
-        uint16_t pps_sync_stamp;
-        int8_t temperature;
-        float air_pressure;
-        uint32_t system_time;
+    class HI12_int : public HI12Base
+    { 
+        public: 
+            HI12_int(UART_HandleTypeDef *huart) 
+                : offset(6), acc{0}, gyro{0}, angle{0}, quaternion{0}
+            {
+                SetUart(huart);
+            }
+     
+            void DataUpdate(uint8_t *pData)
+            {
+                this->updateTimestamp();
+                Verify(pData);
+                if(GetVerify())
+                {
+                    acc[0] = this->Init16(pData+offset+0) * 0.00048828f;
+                    acc[1] = this->Init16(pData+offset+2) * 0.00048828f;
+                    acc[2] = this->Init16(pData+offset+4) * 0.00048828f;
+                    
+                    gyro[0] = this->Init16(pData+offset+6)  * 0.061035f;  
+                    gyro[1] = this->Init16(pData+offset+8)  * 0.061035f;  
+                    gyro[2] = this->Init16(pData+offset+10) * 0.061035f;  
+                    
+                    angle[0] = this->Init32(pData+offset+18) * 0.001f;  // 使用Init32直接解析32位数据
+                    angle[1] = this->Init32(pData+offset+22) * 0.001f;
+                    angle[2] = this->Init32(pData+offset+26) * 0.001f;
+                    
+                    quaternion[0] = this->Uint16(pData+offset+32) * 0.0001f;
+                    quaternion[1] = this->Uint16(pData+offset+34) * 0.0001f;
+                    quaternion[2] = this->Uint16(pData+offset+36) * 0.0001f;
+                    quaternion[3] = this->Uint16(pData+offset+38) * 0.0001f;
+                }
+            }
+
+            float GetAcc(int index)
+            {
+                return acc[index];
+            }
+
+            float GetGyro(int index)
+            {
+                return gyro[index];
+            }
+
+            float GetAngle(int index)
+            {
+                return angle[index];
+            }
+
+            float GetQuaternion(int index)
+            {
+                return quaternion[index];
+            }
+
+        private:
+            int offset;
+            float acc[3];
+            float gyro[3];
+            float angle[3];
+            float quaternion[4];
     };
-
-    // 加速度数据
-    struct __attribute__((packed)) Acc // 加速度
-    {
-        float Acc_x;
-        float Acc_y;
-        float Acc_z;
-    };
-
-    // 角速度数据
-    struct __attribute__((packed)) Gyr // 角速度
-    {
-        float Gyr_x;
-        float Gyr_y;
-        float Gyr_z;
-    };
-
-    // 磁强度数据
-    struct __attribute__((packed)) Mag // 磁强度
-    {
-        float Mag_x;
-        float Mag_y;
-        float Mag_z;
-    };
-
-    // 欧拉角数据
-    struct __attribute__((packed)) Euler
-    {
-        float Euler_roll;
-        float Euler_pitch;
-        float Euler_yaw;
-    };
-
-    // 四元数数据
-    struct __attribute__((packed)) Quat
-    {
-        float Quat_x;
-        float Quat_y;
-        float Quat_z;
-        float Quat_w;
-    };
-
-    struct AddData
-    {
-        float last_angle;
-        float add_angle;
-    };
-
-     UART_HandleTypeDef* IMUHuart; 
-    bool is_dir;
-    Frame_format frame;
-    System_telemetry system_telemetry;
-    Acc acc;
-    Gyr gyr;
-    Mag mag;
-    Euler euler;
-    Quat quat;
-    AddData addYaw;
-
-  private:
-    void AddCaclu(AddData &addData, float angle);
-
-  public:
-    /**
-     * @brief 获取Yaw轴角度 单位：角度制
-     *
-     * @return float
-     */
-    float getYaw();
-
-    /**
-     * @brief 获取Pitch轴角度 单位：角度制
-     *
-     * @return float
-     */
-    float getPitch();
-
-    /**
-     * @brief 获取Roll轴角度 单位：角度制
-     *
-     * @return float
-     */
-    float getRoll();
-
-    /**
-     * @brief 获取X轴角速度 单位：度/秒
-     *
-     * @return float
-     */
-    float getGyroX();
-
-    /**
-     * @brief 获取Y轴角速度 单位：度/秒
-     *
-     * @return float
-     */
-    float getGyroY();
-
-    /**
-     * @brief 获取Z轴角速度 单位：度/秒
-     *
-     * @return float
-     */
-    float getGyroZ();
-
-    /**
-     * @brief 获取X轴加速度 单位：g
-     *
-     * @return float
-     */
-    float getAccX();
-
-    /**
-     * @brief 获取Y轴加速度 单位：g
-     *
-     * @return float
-     */
-    float getAccY();
-
-    /**
-     * @brief 获取Z轴加速度 单位：g
-     *
-     * @return float
-     */
-    float getAccZ();
-
-    /**
-     * @brief 获取增量角度
-     * 
-     * @return float 
-     */
-    float getAddYaw();
-};
-
-
-
-inline float HI12::getYaw()
-{
-    return euler.Euler_yaw;
 }
 
-inline float HI12::getPitch()
-{
-    return euler.Euler_pitch;
-}
-
-inline float HI12::getRoll()
-{
-    return euler.Euler_roll;
-}
-
-inline float HI12::getGyroX()
-{
-    return gyr.Gyr_x;
-}
-
-inline float HI12::getGyroY()
-{
-    return gyr.Gyr_y;
-}
-
-inline float HI12::getGyroZ()
-{
-    return gyr.Gyr_z;
-}
-
-inline float HI12::getAccX()
-{
-    return acc.Acc_x;
-}
-
-inline float HI12::getAccY()
-{
-    return acc.Acc_y;
-}
-
-inline float HI12::getAccZ()
-{
-    return acc.Acc_z;
-}
-inline float HI12::getAddYaw()
-{
-    return addYaw.add_angle;
-}
-
-// 全局实例
-inline HI12 imu;
-
-} // namespace IMU
-} // namespace BSP
-
+#endif
