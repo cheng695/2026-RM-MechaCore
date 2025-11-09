@@ -1,9 +1,7 @@
 #pragma once
 
-#include "../BSP/BSP_Motor.hpp"
-#include "../HAL/My_HAL.hpp"
 #include "../MotorBase.hpp"
-#include "../BSP/state_watch.hpp"
+#include "../HAL/CAN/can_hal.hpp"
 #define PI 3.14159265358979323846
 namespace BSP::Motor::LK
 {
@@ -58,16 +56,17 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param send_idxs 发送ID
      * @param params 电机参数
      */
-    LkMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs, Parameters params)
+    LkMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], const uint32_t (&send_idxs)[N], Parameters params)
         : init_address(Init_id),  params_(params)
     {
         for (uint8_t i = 0; i < N; ++i)
         {
             recv_idxs_[i] = recv_idxs[i];
+            send_idxs_[i] = send_idxs[i];
             motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
             
         }
-        send_idxs_ = send_idxs;
+        
         // 初始化电机数据
         for (uint8_t i = 0; i < N; ++i)
         {
@@ -109,8 +108,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
             }
         }
     }
-
-        /**
+    /**
      * @brief 设置发送数据
      * 
      * @param data 数据发送的数据
@@ -120,8 +118,8 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
     {
         // LK电机发送格式与DJI不同，需要根据具体命令调整
         // 这里先使用类似DJI的格式
-        msd.Data[(id - 1) * 2] = data >> 8;
-        msd.Data[(id - 1) * 2 + 1] = data << 8 >> 8;
+        msd[(id - 1) * 2] = data >> 8;
+        msd[(id - 1) * 2 + 1] = data << 8 >> 8;
     }
 
     /**
@@ -132,17 +130,17 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      */
     void sendCAN(CAN_HandleTypeDef *han, uint32_t pTxMailbox)
     {
-        CAN::BSP::Can_Send(han, send_idxs_, msd.Data, pTxMailbox);
+        this->send_can_frame(send_idxs_, msd, 8, pTxMailbox);
     }
     /**
      * @brief 使能电机
      * 
      * @param hcan CAN句柄
      */
-    void ON(const CAN_HandleTypeDef *hcan)
+    void ON(const CAN_HandleTypeDef *hcan, uint32_t id)
     {
         uint8_t data[8] = {0x88};
-        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
     }
 
     /**
@@ -150,10 +148,10 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void OFF(const CAN_HandleTypeDef *hcan)
+    void OFF(const CAN_HandleTypeDef *hcan, uint32_t id)
     {
         uint8_t data[8] = {0x81};
-        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
     }
 
     /**
@@ -161,10 +159,10 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void clear_err(const CAN_HandleTypeDef *hcan)
+    void clear_err(const CAN_HandleTypeDef *hcan, uint32_t id)
     {
         uint8_t data[8] = {0x9B};
-        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[0], data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
     }
 
     /**
@@ -175,7 +173,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param speed 速度限制（RPM）
      * @param id 电机ID
      */
-    void SetPositionCtrl(CAN_HandleTypeDef *hcan, int32_t angle, uint16_t speed, uint8_t id = 1)
+    void SetPositionCtrl(CAN_HandleTypeDef *hcan,  uint8_t id, int32_t angle, uint16_t speed)
     {
         uint8_t data[8];
         uint32_t encoder_value = angle * 100; // 根据实际转换关系调整
@@ -189,7 +187,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
         data[6] = (encoder_value >> 16) & 0xFF;
         data[7] = (encoder_value >> 24) & 0xFF;
 
-        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[id - 1], data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
     }
 
     /**
@@ -199,7 +197,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param torque 目标扭矩
      * @param id 电机ID
      */
-    void SetTorqueCtrl(CAN_HandleTypeDef *hcan, int16_t torque, uint8_t id = 1)
+    void SetTorqueCtrl(CAN_HandleTypeDef *hcan, uint8_t id, int16_t torque)
     {
         if (torque > 2048) torque = 2048;
         if (torque < -2048) torque = -2048;
@@ -214,7 +212,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
         data[6] = 0x00;
         data[7] = 0x00;
 
-        CAN::BSP::Can_Send(hcan, init_address + recv_idxs_[id - 1], data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
     }
 
     /**
@@ -330,8 +328,8 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
     const uint16_t init_address;    // 初始地址
     LkMotorFeedback feedback_[N]; // 反馈数据
     uint8_t recv_idxs_[N];          //接收id
-    uint32_t send_idxs_;            // 发送id
-    CAN::BSP::send_data msd;        // 发送数据
+    uint32_t send_idxs_[N];            // 发送id
+    uint8_t msd;
     Parameters params_;
     MultiAngleData multi_angle_data_[N];
 

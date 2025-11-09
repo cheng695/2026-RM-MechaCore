@@ -1,6 +1,5 @@
 #pragma once
 #include "../MotorBase.hpp"
-#include "../BSP/state_watch.hpp"
 namespace BSP::Motor::DM
 {
 // 参数结构体定义
@@ -217,7 +216,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         this->send_data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
         this->send_data[7] = tor_tmp;
 
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -240,7 +239,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         posvel.vel_tmp = _vel;
         posvel.pos_tmp = _pos;
 
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&posvel, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], &posvel, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -261,7 +260,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         DM_Vel vel;
         vel.vel_tmp = _vel;
 
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&vel, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], &vel, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -273,8 +272,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
     void On(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
         *(uint64_t *)(&send_data[0]) = 0xFCFFFFFFFFFFFFFF;
-
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -286,7 +284,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
     void Off(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
         *(uint64_t *)(&send_data[0]) = 0xFDFFFFFFFFFFFFFF;
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -298,7 +296,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
     void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
         *(uint64_t *)(&send_data[0]) = 0xFBFFFFFFFFFFFFFF;
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
 
