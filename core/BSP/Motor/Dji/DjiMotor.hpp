@@ -2,7 +2,7 @@
 #pragma once
 // 基础DJI电机实现
 #include "../MotorBase.hpp"
-#include "../HAL/CAN/can_hal.hpp"
+#include "../BSP/state_watch.hpp"
 #include "can.h"
 #include <cstdint>
 #include <cstring> // 添加头文件
@@ -57,17 +57,16 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      * @param can_id can的初始id 比如3508与20066就是0x200
      * @param params 初始化转换国际单位的参数
      */
-    DjiMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], const uint8_t (&send_idxs)[N], Parameters params)
+    DjiMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs, Parameters params)
         : init_address(Init_id), params_(params)
     {
         // 初始化 recv_idxs_ 和 send_idxs_
         for (uint8_t i = 0; i < N; ++i)
         {
             recv_idxs_[i] = recv_idxs[i];
-            send_idxs_[i] = send_idxs[i];
             motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
         }
-        
+        send_idxs_ = send_idxs;
     }
 
   public:
@@ -80,7 +79,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
     {
-        const uint16_t received_id = HAL::CAN::ICanDevice::extract_id(RxHeader);
+        const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
 
         for (uint8_t i = 0; i < N; ++i)
         {
@@ -108,8 +107,8 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void setCAN(int16_t data, int id)
     {
-        msd[(id - 1) * 2] = data >> 8;
-        msd[(id - 1) * 2 + 1] = data << 8 >> 8;
+        msd.Data[(id - 1) * 2] = data >> 8;
+        msd.Data[(id - 1) * 2 + 1] = data << 8 >> 8;
     }
 
     /**
@@ -120,7 +119,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void sendCAN(CAN_HandleTypeDef *han, uint32_t pTxMailbox)
     {
-        this->send_can_frame(send_idxs_, msd, 8, pTxMailbox);
+        CAN::BSP::Can_Send(han, send_idxs_, msd.Data, pTxMailbox);
     }
 
   protected:
@@ -192,8 +191,8 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
     const int16_t init_address;    // 初始地址
     DjiMotorfeedback feedback_[N]; // 反馈数据
     uint8_t recv_idxs_[N];         // ID索引
-    uint32_t send_idxs_[N];
-    uint8_t msd[8];
+    uint32_t send_idxs_;
+    CAN::BSP::send_data msd;
 
 
 
@@ -210,7 +209,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
 template <uint8_t N> class GM2006 : public DjiMotorBase<N>
 {
   public:
-    GM2006(uint16_t Init_id, const uint8_t (&recv_idxs)[N], const uint8_t (&send_idxs)[N])
+    GM2006(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs)
         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
                           // 直接构造参数对象
                           Parameters(36.0, 0.18 / 36.0, 16384, 10, 8192))
@@ -240,7 +239,7 @@ template <uint8_t N> class GM3508 : public DjiMotorBase<N>
      * @param Init_id 初始ID
      * @param recv_idxs_ 电机ID列表
      */
-    GM3508(uint16_t Init_id, const uint8_t (&recv_idxs)[N], const uint8_t (&send_idxs)[N])
+    GM3508(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs)
         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
                           // 直接构造参数对象
                           Parameters(1.0, 0.3 / 1.0, 16384, 20, 8192))
@@ -270,7 +269,7 @@ template <uint8_t N> class GM6020 : public DjiMotorBase<N>
      * @param Init_id 初始ID
      * @param recv_idxs_ 电机ID列表
      */
-    GM6020(uint16_t Init_id, const uint8_t (&recv_idxs)[N], const uint8_t (&send_idxs)[N])
+    GM6020(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs)
         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
                           // 直接构造参数对象
                           Parameters(1.0, 0.7 * 1.0, 16384, 3, 8192))
@@ -285,7 +284,7 @@ template <uint8_t N> class GM6020 : public DjiMotorBase<N>
  *
  */
 
-inline GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, {0x200});
+inline GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
 
 
 } // namespace BSP::Motor::Dji
