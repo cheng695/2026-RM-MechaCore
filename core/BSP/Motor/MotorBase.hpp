@@ -181,7 +181,7 @@ namespace BSP::Motor
         {
             for (uint8_t i = 0; i < N; i++)
             {
-                if (this->state_watch_[i].getStatus() != BSP::WATCH_STATE::Status::ONLINE)
+                if (this->state_watch_[i].GetStatus() != BSP::WATCH_STATE::Status::ONLINE)
                 {
                     return i + 1; // 返回掉线电机的编号（从1开始计数）
                 }

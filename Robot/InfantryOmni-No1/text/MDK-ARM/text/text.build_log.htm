@@ -1,0 +1,74 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.40.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: a WHC, a, LIC=Y2B1Q-NT8G7-06FQU-SI2XF-BGK9R-R47X3
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.40.0.3
+Toolchain Path:  F:\keil5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.22
+Assembler:       Armasm.exe V6.22
+Linker/Locator:  ArmLink.exe V6.22
+Library Manager: ArmAr.exe V6.22
+Hex Converter:   FromElf.exe V6.22
+CPU DLL:         SARMCM3.DLL V5.40.0.3
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+F:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\text\MDK-ARM\text.uvprojx
+Project File Date:  11/16/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.22', folder: 'F:\keil5\ARM\ARMCLANG\Bin'
+Build target 'text'
+Note: source file '.\core\HAL\CAN\interface\can_bus.hpp' - object file renamed from 'text\can_bus.o' to 'text\can_bus_1.o'.
+Note: source file '.\core\HAL\CAN\interface\can_device.hpp' - object file renamed from 'text\can_device.o' to 'text\can_device_1.o'.
+Note: source file '.\core\HAL\CAN\impl\can_bus_impl.hpp' - object file renamed from 'text\can_bus_impl.o' to 'text\can_bus_impl_1.o'.
+Note: source file '.\core\HAL\CAN\impl\can_device_impl.hpp' - object file renamed from 'text\can_device_impl.o' to 'text\can_device_impl_1.o'.
+Note: source file '.\core\HAL\UART\interface\uart_bus.hpp' - object file renamed from 'text\uart_bus.o' to 'text\uart_bus_1.o'.
+Note: source file '.\core\HAL\UART\impl\uart_bus_impl.hpp' - object file renamed from 'text\uart_bus_impl.o' to 'text\uart_bus_impl_1.o'.
+Note: source file '.\core\HAL\UART\impl\uart_device_impl.hpp' - object file renamed from 'text\uart_device_impl.o' to 'text\uart_device_impl_1.o'.
+Note: source file '.\core\Alg\PID\pid.hpp' - object file renamed from 'text\pid.o' to 'text\pid_1.o'.
+Note: source file '.\core\Alg\Feedforward\Feedforward.hpp' - object file renamed from 'text\Feedforward.o' to 'text\feedforward_1.o'.
+Note: source file '.\core\BSP\RemoteControl\DT7.hpp' - object file renamed from 'text\DT7.o' to 'text\dt7_1.o'.
+Note: source file '.\core\BSP\Common\StateWatch\state_watch.hpp' - object file renamed from 'text\state_watch.o' to 'text\state_watch_1.o'.
+core/BSP/Motor/Dji/DjiMotor.hpp(4): warning: #pragma once in main file [-Wpragma-once-outside-header]
+    4 | #pragma once
+      |         ^
+1 warning generated.
+compiling DjiMotor.hpp...
+linking...
+Program Size: Code=16526 RO-data=458 RW-data=12 ZI-data=2492  
+FromELF: creating hex file...
+"text\text.axf" - 0 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM::CMSIS@6.1.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.1.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.3.0.0.pack
+                Keil::STM32F4xx_DFP@3.0.0
+                STMicroelectronics STM32F4 Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_text
+  F:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@6.1.0
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

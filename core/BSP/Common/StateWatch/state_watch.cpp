@@ -59,3 +59,22 @@ void BSP::WATCH_STATE::StateWatch::CheckStatus()
         }
     }
 }
+
+
+void BSP::WATCH_STATE::StateWatch::CheckStatus()
+{
+    uint32_t time_diff;
+    
+    if (update_time_ < last_update_time_) {
+        // 处理溢出
+        time_diff = update_time_ + (0xFFFFFFFF - last_update_time_);
+    } else {
+        time_diff = update_time_ - last_update_time_;
+    }
+
+    if (time_diff >= timeout_threshold_) {
+        status_ = Status::OFFLINE;
+    } else {
+        status_ = Status::ONLINE;
+    }
+}

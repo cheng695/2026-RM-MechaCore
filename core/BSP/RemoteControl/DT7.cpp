@@ -8,11 +8,30 @@ namespace BSP::REMOTE_CONTROL
 // 主要逻辑：构造与数据解析
 // ============================================================================================================
 
-// 构造函数：初始化基类与成员
-RemoteController::RemoteController(int timeThreshold  = 100)
-    : state_watch_(timeThreshold), channels_({0}), mouse_({0}), keyboard_(0)
+/**
+ * @brief 归一化轴值辅助函数：将坐标值归一化到 -1.0 ~ 1.0 范围
+ * @param value 原始坐标值（范围约 -660 ~ 660）
+ * @param tolerance 容差偏移量，用于修正零点偏移（例如当前是3但本应该是0）
+ * @return 归一化后的浮点值，范围 [-1.0, 1.0]
+ * @note 先使用容差修正偏移量，然后将修正后的值除以 660.0 进行归一化
+ */
+static inline float discreteAxis(int16_t value, int16_t tolerance)
 {
+    // 使用容差修正偏移量：先减去 tolerance 修正偏移
+    const int16_t corrected_value = value - tolerance;
+    
+    // 将修正后的坐标值（范围约 -660 ~ 660）归一化到 -1.0~1.0
+    const float normalized = static_cast<float>(corrected_value) / 660.0f;
+    
+    // 夹取到 [-1.0, 1.0] 范围
+    if (normalized > 1.0f)
+        return 1.0f;
+    else if (normalized < -1.0f)
+        return -1.0f;
+    else
+        return normalized;
 }
+
 
 // 解析原始 18 字节数据（提取通道/开关/鼠标/键盘并更新坐标与时间戳）
 void RemoteController::parseData(const uint8_t *data)
@@ -66,29 +85,7 @@ void RemoteController::parseData(const uint8_t *data)
 // 内部辅助函数：工具与解析实现（模块内部使用）
 // ============================================================================================================
 
-/**
- * @brief 归一化轴值辅助函数：将坐标值归一化到 -1.0 ~ 1.0 范围
- * @param value 原始坐标值（范围约 -660 ~ 660）
- * @param tolerance 容差偏移量，用于修正零点偏移（例如当前是3但本应该是0）
- * @return 归一化后的浮点值，范围 [-1.0, 1.0]
- * @note 先使用容差修正偏移量，然后将修正后的值除以 660.0 进行归一化
- */
-static inline float discreteAxis(int16_t value, int16_t tolerance)
-{
-    // 使用容差修正偏移量：先减去 tolerance 修正偏移
-    const int16_t corrected_value = value - tolerance;
-    
-    // 将修正后的坐标值（范围约 -660 ~ 660）归一化到 -1.0~1.0
-    const float normalized = static_cast<float>(corrected_value) / 660.0f;
-    
-    // 夹取到 [-1.0, 1.0] 范围
-    if (normalized > 1.0f)
-        return 1.0f;
-    else if (normalized < -1.0f)
-        return -1.0f;
-    else
-        return normalized;
-}
+
 
 /**
  * @brief 按位提取数据（支持跨字节）
