@@ -4,6 +4,7 @@
 #pragma once
 #include "../MotorBase.hpp"
 #include "../BSP/state_watch.hpp"
+#include "HAL/CAN/can_hal.hpp"
 namespace BSP::Motor::DM
 {
     // 参数结构体定义
@@ -159,7 +160,7 @@ namespace BSP::Motor::DM
      */
     void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
     {
-        const uint16_t received_id = CAN::BSP::CAN_ID(RxHeader);
+        const uint16_t received_id = HAL::CAN::ICanDevice::extract_id(RxHeader);
 
         void SendCAN()
         {
@@ -219,7 +220,7 @@ namespace BSP::Motor::DM
         this->send_data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
         this->send_data[7] = tor_tmp;
 
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX1);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -250,20 +251,7 @@ namespace BSP::Motor::DM
             DM_Vel vel;
             vel.vel_tmp = _vel;
 
-            tx_frame.id = init_address + send_idxs_[motor_index - 1];
-            can->send(tx_frame);
-        }
-
-        /**
-         * @brief 使能DM电机
-         *
-         * @param hcan 电机的can句柄
-         * @param motor_index 电机序号从1开始
-         */
-        void On(HAL::CAN::ICanDevice *can, uint8_t motor_index)
-        {
-            *(uint64_t *)(&tx_frame.data[0]) = 0xFCFFFFFFFFFFFFFF;
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&posvel, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], &posvel, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -283,66 +271,7 @@ namespace BSP::Motor::DM
 
             tx_frame.id = init_address + send_idxs_[motor_index - 1];
 
-            can->send(tx_frame);
-        }
-
-        /**
-         * @brief 失能DM电机
-         *
-         * @param hcan 电机的can句柄
-         * @param motor_index 电机序号从1开始
-         */
-        void Off(HAL::CAN::ICanDevice *can, uint8_t motor_index)
-        {
-            *(uint64_t *)(&tx_frame.data[0]) = 0xFDFFFFFFFFFFFFFF;
-            tx_frame.id = init_address + send_idxs_[motor_index - 1];
-            tx_frame.mailbox = 1;
-            can->send(tx_frame);
-        }
-
-        /**
-         * @brief 清除DM电机错误
-         *
-         * @param hcan 电机的can句柄
-         * @param motor_index 电机序号从1开始
-         */
-        void ClearErr(HAL::CAN::ICanDevice *can, uint8_t motor_index)
-        {
-            *(uint64_t *)(&tx_frame.data[0]) = 0xFBFFFFFFFFFFFFFF;
-
-            tx_frame.id = init_address + send_idxs_[motor_index - 1];
-            can->send(tx_frame);
-        }
-
-    protected:
-        struct alignas(uint64_t) DMMotorfeedback
-        {
-            uint8_t id : 4;
-            uint8_t err : 4;
-            uint16_t angle;
-            uint16_t velocity : 12;
-            uint16_t torque : 12;
-            uint8_t T_Mos;
-            uint8_t T_Rotor;
-        };
-
-        struct alignas(uint64_t) DM_VelPos
-        {
-            float pos_tmp;
-            float vel_tmp;
-        };
-
-        struct alignas(uint32_t) DM_Vel
-        {
-            float vel_tmp;
-        };
-
-    private:
-        const int16_t init_address; // 初始地址
-
-        uint8_t recv_idxs_[N];  // ID索引
-        uint32_t send_idxs_[N]; // 每个电机的发送ID
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], (uint8_t *)&vel, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], &vel, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -355,7 +284,7 @@ namespace BSP::Motor::DM
     {
         *(uint64_t *)(&send_data[0]) = 0xFCFFFFFFFFFFFFFF;
 
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -367,7 +296,7 @@ namespace BSP::Motor::DM
     void Off(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
         *(uint64_t *)(&send_data[0]) = 0xFDFFFFFFFFFFFFFF;
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
     /**
@@ -379,7 +308,7 @@ namespace BSP::Motor::DM
     void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
     {
         *(uint64_t *)(&send_data[0]) = 0xFBFFFFFFFFFFFFFF;
-        CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], this->send_data, 8, CAN_TX_MAILBOX1);
     }
 
 
