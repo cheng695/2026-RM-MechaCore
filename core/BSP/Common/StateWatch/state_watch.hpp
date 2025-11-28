@@ -30,8 +30,10 @@ namespace BSP::WATCH_STATE
              * @brief 构造函数
              * @param TimeThreshold 超时时间阈值（毫秒）
              */
+            StateWatch() : timeout_ms_(100), update_time_(0), last_update_time_(0), status_(Status::OFFLINE) {}
+
             StateWatch(uint32_t TimeThreshold)
-                : TimeThreshold_(TimeThreshold), timeout_ms_(0), update_time_(0), last_update_time_(0), status_(Status::OFFLINE) {}
+                : timeout_ms_(TimeThreshold), update_time_(0), last_update_time_(0), status_(Status::OFFLINE) {}
 
 
             /**
@@ -65,7 +67,7 @@ namespace BSP::WATCH_STATE
             uint32_t GetTimeout() const { return timeout_ms_; }
 
         private:
-            uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+            uint32_t TimeThreshold_;
             uint32_t timeout_ms_;             // 超时时间(毫秒)
             uint32_t update_time_;            // 当前数据更新时间
             uint32_t last_update_time_;       // 上次数据更新时间

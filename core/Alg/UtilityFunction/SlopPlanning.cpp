@@ -1,4 +1,4 @@
-#include "Alg/UtilityFunction/SlopePlanning.hpp"
+#include "../UtilityFunction/SlopePlanning.hpp"
 #include <math.h>
 
 void Alg::Utility::SlopePlanning::TIM_Calculate_PeriodElapsedCallback()

@@ -41,6 +41,10 @@ class UartDevice : public IUartDevice
     bool receive_dma_idle(Data &data) override;
     void clear_ore_error(Data &data) override;
 
+    // 实现回调机制
+    void register_rx_callback(RemoteDataCallback callback) override;
+    void trigger_rx_callbacks(const Data &data) override;
+
     UART_HandleTypeDef *get_handle() const override;
 
   private:
@@ -52,6 +56,9 @@ class UartDevice : public IUartDevice
     bool is_dma_rx_ongoing_;
     // 空闲中断状态
     bool is_idle_enabled_;
+
+    // 存储注册的回调函数
+    std::vector<RemoteDataCallback> rx_callbacks_;
 };
 
 } // namespace HAL::UART

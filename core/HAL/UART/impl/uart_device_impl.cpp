@@ -106,6 +106,25 @@ bool UartDevice::receive_dma_idle(Data &data)
     return false;
 }
 
+void UartDevice::register_rx_callback(RemoteDataCallback callback)
+{
+    if (callback)
+    {
+        rx_callbacks_.push_back(callback);
+    }
+}
+
+void UartDevice::trigger_rx_callbacks(const Data &data)
+{
+    for (auto &callback : rx_callbacks_)
+    {
+        if (callback)
+        {
+            callback(data);
+        }
+    }
+}
+
 void UartDevice::clear_ore_error(Data &data)
 {
     if (__HAL_UART_GET_FLAG(handle_, UART_FLAG_ORE) != RESET)
@@ -121,3 +140,4 @@ UART_HandleTypeDef *UartDevice::get_handle() const
 }
 
 } // namespace HAL::UART
+

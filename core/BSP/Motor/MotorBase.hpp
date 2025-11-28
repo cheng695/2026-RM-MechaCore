@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "core/BSP/Common/StateWatch/state_watch.hpp"
-#include "core/HAL/CAN/can_hal.hpp"
+#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../user/core/HAL/CAN/can_hal.hpp"
 
 namespace BSP::Motor
 {
@@ -35,11 +35,13 @@ namespace BSP::Motor
         virtual void Parse(const HAL::CAN::Frame &frame) = 0;
 
     public:
-        MotorBase(uint32_t timeThreshold = 100) : state_watch_()
+        MotorBase(uint32_t timeThreshold = 100)
+            : state_watch_{}  // 确保数组被默认初始化
         {
             for (int i = 0; i < N; i++) 
             {
-                new (&state_watch_[i]) BSP::WATCH_STATE::StateWatch(timeThreshold);
+                // 直接构造 StateWatch 对象
+                state_watch_[i] = BSP::WATCH_STATE::StateWatch(timeThreshold);
             }
         }
 
