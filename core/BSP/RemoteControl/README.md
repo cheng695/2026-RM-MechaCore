@@ -122,6 +122,7 @@ S1 和 S2 均为**三位开关**，状态编码如下：
 
 ```cpp
 #include "BSP/RemoteControl/DT7.hpp"
+using BSP::REMOTE_CONTROL::DT7;
 ```
 
 ### 2. 创建遥控器对象
@@ -129,7 +130,7 @@ S1 和 S2 均为**三位开关**，状态编码如下：
 ```cpp
 // 创建遥控器对象，设置超时时间为 100ms
 // 如果在 100ms 内没有接收到数据，设备将被标记为离线
-BSP::REMOTE_CONTROL::RemoteController remote_controller(100);
+DT7 dt7(100);
 ```
 
 ### 3. 配置 UART 接收缓冲区
@@ -172,7 +173,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     if (huart == &huart1)
     {
         // 解析接收到的数据
-        remote_controller.parseData(dt7_rx_buffer);
+        dt7.parseData(dt7_rx_buffer);
         
         // 继续接收下一帧数据
         HAL_UART_Receive_IT(&huart1, dt7_rx_buffer, 18);
@@ -213,15 +214,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         if (Size == 18)
         {
             // 解析接收到的数据
-            remote_controller.parseData(dt7_rx_buffer);
+            dt7.parseData(dt7_rx_buffer);
         }
-        
-        // 清除 ORE 错误（如果存在）并重启接收
-        if (__HAL_UART_GET_FLAG(huart, UART_FLAG_ORE) != RESET)
-        {
-            __HAL_UART_CLEAR_OREFLAG(huart);
-        }
-        
         // 继续接收下一帧数据
         HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dt7_rx_buffer, 18);
     }
@@ -313,7 +307,7 @@ uint8_t get_s1() const;  // S1 开关状态
 uint8_t get_s2() const;  // S2 开关状态
 
 // 使用示例
-if (remote_controller.get_s1() == BSP::REMOTE_CONTROL::RemoteController::SwitchPosition::UP)
+if (dt7.get_s1() == DT7::SwitchPosition::UP)
 {
     // S1 在上位置
 }
@@ -343,14 +337,14 @@ bool get_mouseRight() const;  // 鼠标右键状态
 bool get_key(Keyboard key) const;
 
 // 使用示例：单键检测
-if (remote_controller.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_W))
+if (dt7.get_key(DT7::KEY_W))
 {
     // W 键被按下
 }
 
 // 使用示例：组合键检测
-if (remote_controller.get_key(RemoteController::KEY_SHIFT) && 
-    remote_controller.get_key(RemoteController::KEY_W))
+if (dt7.get_key(DT7::KEY_SHIFT) && 
+    dt7.get_key(DT7::KEY_W))
 {
     // Shift + W 被按下
 }
@@ -370,16 +364,16 @@ bool isConnected() const;              // 检查是否在线
 uint32_t getDisconnectedTime() const;  // 获取断联时间（毫秒）
 
 // 使用示例
-if (remote_controller.isConnected())
+if (dt7.isConnected())
 {
     // 遥控器在线，使用数据
-    float left_x = remote_controller.get_left_x();
+    float left_x = dt7.get_left_x();
     // ...
 }
 else
 {
     // 遥控器离线，执行安全措施
-    uint32_t offline_time = remote_controller.getDisconnectedTime();
+    uint32_t offline_time = dt7.getDisconnectedTime();
     // ...
 }
 ```
@@ -389,9 +383,10 @@ else
 ```cpp
 #include "BSP/RemoteControl/DT7.hpp"
 #include "usart.h"
+using BSP::REMOTE_CONTROL::DT7;
 
 // 全局对象
-BSP::REMOTE_CONTROL::RemoteController remote_controller(100);
+DT7 dt7(100);
 uint8_t dt7_rx_buffer[18] = {0};
 
 // 初始化函数
@@ -407,13 +402,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     if (huart == &huart1 && Size == 18)
     {
         // 解析数据
-        remote_controller.parseData(dt7_rx_buffer);
-        
-        // 清除 ORE 错误并重启接收
-        if (__HAL_UART_GET_FLAG(huart, UART_FLAG_ORE) != RESET)
-        {
-            __HAL_UART_CLEAR_OREFLAG(huart);
-        }
+        dt7.parseData(dt7_rx_buffer);
+        // 重启接收
         HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dt7_rx_buffer, 18);
     }
 }
@@ -421,20 +411,20 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 // 主循环中使用
 void MainLoop(void)
 {
-    if (remote_controller.isConnected())
+    if (dt7.isConnected())
     {
         // 获取摇杆数据
-        float left_x = remote_controller.get_left_x();
-        float left_y = remote_controller.get_left_y();
-        float right_x = remote_controller.get_right_x();
-        float right_y = remote_controller.get_right_y();
+        float left_x = dt7.get_left_x();
+        float left_y = dt7.get_left_y();
+        float right_x = dt7.get_right_x();
+        float right_y = dt7.get_right_y();
         
         // 获取开关状态
-        uint8_t s1 = remote_controller.get_s1();
-        uint8_t s2 = remote_controller.get_s2();
+        uint8_t s1 = dt7.get_s1();
+        uint8_t s2 = dt7.get_s2();
         
         // 检测按键
-        if (remote_controller.get_key(RemoteController::KEY_W))
+        if (dt7.get_key(BSP::REMOTE_CONTROL::DT7::KEY_W))
         {
             // W 键被按下
         }
@@ -454,7 +444,6 @@ void MainLoop(void)
 |---------|------|---------|
 | ⚠️ **缓冲区大小** | DT7 数据包固定为 18 字节 | 接收缓冲区必须至少为 18 字节 |
 | ⚠️ **接收重启** | 使用中断或 DMA 模式时，必须在回调中重新启动接收 | 在回调函数中调用接收函数重新启动接收 |
-| ⚠️ **ORE 错误处理** | 高速接收时可能出现 ORE（过载错误） | 在回调中检查并清除 `UART_FLAG_ORE` 错误标志 |
 | ⚠️ **超时设置** | 超时时间需根据通信频率调整 | DT7 通常以约 100Hz 发送数据，建议超时时间设置为 50-100ms |
 | ⚠️ **线程安全** | 本库未实现线程安全机制 | 如果从多个线程访问，需要自行添加互斥锁保护 |
 | ⚠️ **数据有效性** | `parseData()` 仅检查空指针 | 不验证数据包正确性（如校验和），应用层可根据需要添加验证 |
@@ -477,4 +466,3 @@ void MainLoop(void)
 ## 许可证
 
 Copyright SZPU-RCIA (c) 2025
-
