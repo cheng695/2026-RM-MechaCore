@@ -1,0 +1,1593 @@
+[2025-11-25 17:16:23]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\can.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\dma.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\freertos.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\gpio.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\main.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\stm32f4xx_hal_msp.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\stm32f4xx_hal_timebase_tim.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\stm32f4xx_it.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\system_stm32f4xx.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\tim.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\usart.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\croutine.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\list.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\queue.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\tasks.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\timers.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\startup_stm32f407xx.s': object (.o) file not exist
+
+[2025-11-25 17:16:26]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol Communication (referred from freertos.o).
+Error: L6218E: Undefined symbol Control (referred from freertos.o).
+Error: L6218E: Undefined symbol Remote (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 3 error messages.
+
+
+[2025-11-25 17:20:00]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol Communication (referred from freertos.o).
+Error: L6218E: Undefined symbol Control (referred from freertos.o).
+Error: L6218E: Undefined symbol Remote (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 3 error messages.
+
+
+[2025-11-25 17:27:15]	[info] incremental build: 28 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\FSM\alg_fsm.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Filter\Filter.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\PID\pid.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\Slope.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\alg_pid.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 17:27:16]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/APP/PowerLimit.o -MMD ./../user/core/APP/PowerLimit.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/Alg/UtilityFunction/SlopPlanning.cpp:1:10: fatal error: 'Alg/UtilityFunction/SlopePlanning.hpp' file not found
+    1 | #include "Alg/UtilityFunction/SlopePlanning.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/Alg/ADRC/adrc.cpp:1:
+./../user/core/Alg/ADRC\adrc.hpp:4:10: fatal error: 'Alg/ADRC/AdrcBase.hpp' file not found
+    4 | #include "Alg/ADRC/AdrcBase.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/Alg/Slope/alg_pid.c:14:
+./../user/core/Alg/Slope\alg_pid.h:17:10: fatal error: 'drv_math.h' file not found
+   17 | #include "drv_math.h"
+      |          ^~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/Feedforward/Feedforward.cpp:1:10: fatal error: 'Alg/Feedforward/Feedforward.hpp' file not found
+    1 | #include "Alg/Feedforward/Feedforward.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/Slope/Slope.cpp:14:10: fatal error: 'alg_slope.h' file not found
+   14 | #include "alg_slope.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/StringWheel/StringWheel.cpp:2:10: fatal error: 'arm_math.h' file not found
+    2 | #include "arm_math.h" 
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 17:29:45]	[info] incremental build: 25 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\Slope.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\alg_pid.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 17:29:46]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/Alg/ADRC/adrc.o -MMD ./../user/core/Alg/ADRC/adrc.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+In file included from ./../user/core/Alg/Slope/alg_pid.c:14:
+./../user/core/Alg/Slope\alg_pid.h:17:10: fatal error: 'drv_math.h' file not found
+   17 | #include "drv_math.h"
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/Feedforward/Feedforward.cpp:1:10: fatal error: 'Alg/Feedforward/Feedforward.hpp' file not found
+    1 | #include "Alg/Feedforward/Feedforward.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/Slope/Slope.cpp:14:10: fatal error: 'alg_slope.h' file not found
+   14 | #include "alg_slope.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/UtilityFunction/SlopPlanning.cpp:1:10: fatal error: '../Alg/Utillity/SlopePlanning.hpp' file not found
+    1 | #include "../Alg/Utillity/SlopePlanning.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/StringWheel/StringWheel.cpp:2:10: fatal error: 'arm_math.h' file not found
+    2 | #include "arm_math.h" 
+      |          ^~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/Alg/ADRC/adrc.cpp:1:
+./../user/core/Alg/ADRC\adrc.hpp:4:10: fatal error: 'Alg/ADRC/AdrcBase.hpp' file not found
+    4 | #include "Alg/ADRC/AdrcBase.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 17:53:52]	[info] incremental build: 24 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\Slope.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\alg_pid.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 17:53:53]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/HAL/ASSERT/assert.o -MMD ./../user/core/HAL/ASSERT/assert.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/Alg/Slope/Slope.cpp:14:10: fatal error: 'alg_slope.h' file not found
+   14 | #include "alg_slope.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/Alg/Slope/alg_pid.c:14:
+./../user/core/Alg/Slope\alg_pid.h:17:10: fatal error: 'drv_math.h' file not found
+   17 | #include "drv_math.h"
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/UtilityFunction/SlopPlanning.cpp:1:10: fatal error: 'Alg/UtilityFunction/SlopePlanning.hpp' file not found
+    1 | #include "Alg/UtilityFunction/SlopePlanning.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/Alg/ADRC/adrc.cpp:1:
+./../user/core/Alg/ADRC\adrc.hpp:4:10: fatal error: 'Alg/ADRC/AdrcBase.hpp' file not found
+    4 | #include "Alg/ADRC/AdrcBase.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/StringWheel/StringWheel.cpp:2:10: fatal error: 'arm_math.h' file not found
+    2 | #include "arm_math.h" 
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/Feedforward/Feedforward.cpp:1:10: fatal error: 'Alg/Feedforward/Feedforward.hpp' file not found
+    1 | #include "Alg/Feedforward/Feedforward.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:00:41]	[info] incremental build: 24 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\Slope.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\alg_pid.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:00:43]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/RemoteControl/DT7.o -MMD ./../user/core/BSP/RemoteControl/DT7.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/Alg/ADRC/adrc.cpp:1:
+./../user/core/Alg/ADRC\adrc.hpp:4:10: fatal error: 'Alg/ADRC/AdrcBase.hpp' file not found
+    4 | #include "Alg/ADRC/AdrcBase.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/StringWheel/StringWheel.cpp:2:10: fatal error: 'arm_math.h' file not found
+    2 | #include "arm_math.h" 
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/UtilityFunction/SlopPlanning.cpp:1:10: fatal error: 'Alg/UtilityFunction/SlopePlanning.hpp' file not found
+    1 | #include "Alg/UtilityFunction/SlopePlanning.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/Alg/Feedforward/Feedforward.cpp:1:10: fatal error: 'Alg/Feedforward/Feedforward.hpp' file not found
+    1 | #include "Alg/Feedforward/Feedforward.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:01:21]	[info] incremental build: 20 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:01:22]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/Alg/Feedforward/Feedforward.o -MMD ./../user/core/Alg/Feedforward/Feedforward.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/StringWheel/StringWheel.cpp:2:10: fatal error: 'arm_math.h' file not found
+    2 | #include "arm_math.h" 
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/Feedforward/Feedforward.cpp:1:10: fatal error: 'Alg/Feedforward/Feedforward.hpp' file not found
+    1 | #include "Alg/Feedforward/Feedforward.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:01:43]	[info] incremental build: 19 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:01:44]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/Alg/UtilityFunction/SlopPlanning.o -MMD ./../user/core/Alg/UtilityFunction/SlopPlanning.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/Alg/StringWheel/StringWheel.cpp:2:10: fatal error: 'arm_math.h' file not found
+    2 | #include "arm_math.h" 
+      |          ^~~~~~~~~~~~
+1 error generated.
+./../user/core/Alg/UtilityFunction/SlopPlanning.cpp:1:10: fatal error: 'Alg/UtilityFunction/SlopePlanning.hpp' file not found
+    1 | #include "Alg/UtilityFunction/SlopePlanning.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:02:00]	[info] incremental build: 18 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:02:00]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/Alg/UtilityFunction/SlopPlanning.o -MMD ./../user/core/Alg/UtilityFunction/SlopPlanning.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/Alg/StringWheel/StringWheel.cpp:1:10: fatal error: '../Algorithm/StringWheel.hpp' file not found
+    1 | #include "../Algorithm/StringWheel.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../Algorithm/FSM/alg_fsm.hpp' file not found
+    3 | #include "../Algorithm/FSM/alg_fsm.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+./../user/core/Alg/UtilityFunction/SlopPlanning.cpp:1:10: fatal error: 'Alg/UtilityFunction/SlopePlanning.hpp' file not found
+    1 | #include "Alg/UtilityFunction/SlopePlanning.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:04:44]	[info] incremental build: 18 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:04:45]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/Common/StateWatch/state_watch.o -MMD ./../user/core/BSP/Common/StateWatch/state_watch.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:3:10: fatal error: '../BSP/SimpleKey/SimpleKey.hpp' file not found
+    3 | #include "../BSP/SimpleKey/SimpleKey.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+
+[2025-11-25 18:04:53]	[info] incremental build: 16 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:04:53]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/RemoteControl/DT7.o -MMD ./../user/core/BSP/RemoteControl/DT7.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+In file included from ./../user/core/APP/Heat_Control.cpp:1:
+./../user/core/APP\../APP/Heat_Control.hpp:68:31: error: expected class name
+   68 | class HeatController : public Class_FSM {
+      |                               ^
+./../user/core/APP\../APP/Heat_Control.hpp:75:5: error: use of undeclared identifier 'BSP'
+   75 |     BSP::Key::SimpleKey fireRisingEdgeDetector;  // 上升沿检测器
+      |     ^
+./../user/core/APP/Heat_Control.cpp:2:10: fatal error: '../../User/BSP/DWT/DWT.hpp' file not found
+    2 | #include "../../User/BSP/DWT/DWT.hpp" // 用于时间计算
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:05:13]	[info] incremental build: 16 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:05:14]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/RemoteControl/DT7.o -MMD ./../user/core/BSP/RemoteControl/DT7.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/APP/PowerLimit.cpp:20:10: fatal error: 'crt_chassis.h' file not found
+   20 | #include "crt_chassis.h"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:05:25]	[info] incremental build: 15 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:05:26]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/RemoteControl/DT7.o -MMD ./../user/core/BSP/RemoteControl/DT7.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:75:22: error: use of undeclared identifier 'timeout_threshold_'; did you mean 'TimeThreshold_'?
+   75 |     if (time_diff >= timeout_threshold_) {
+      |                      ^~~~~~~~~~~~~~~~~~
+      |                      TimeThreshold_
+./../user/core/BSP/Common/StateWatch\state_watch.hpp:68:22: note: 'TimeThreshold_' declared here
+   68 |             uint32_t TimeThreshold_;          // 超时时间阈值（毫秒）
+      |                      ^
+2 errors generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:07:00]	[info] incremental build: 12 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:07:01]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/RemoteControl/DT7.o -MMD ./../user/core/BSP/RemoteControl/DT7.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:64:36: error: redefinition of 'CheckStatus'
+   64 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:33:36: note: previous definition is here
+   33 | void BSP::WATCH_STATE::StateWatch::CheckStatus()
+      |                                    ^
+1 error generated.
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from ./../user/core/BSP/RemoteControl/DT7.cpp:1:
+./../user/core/BSP/RemoteControl\DT7.hpp:9:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    9 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:08:52]	[info] incremental build: 10 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:08:52]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\../Task/MotorTask.hpp:4:2: error: invalid preprocessing directive
+    4 | #incldue "FreeRTOS.h"
+      |  ^
+1 error generated.
+
+[2025-11-25 18:09:06]	[info] incremental build: 8 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:09:06]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/HAL/ASSERT/assert.o -MMD ./../user/core/HAL/ASSERT/assert.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/HAL/ASSERT/assert.cpp:9:10: fatal error: 'core/HAL/LOGGER/logger.hpp' file not found
+    9 | #include "core/HAL/LOGGER/logger.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:09:21]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+
+[2025-11-25 18:09:22]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol Communication (referred from freertos.o).
+Error: L6218E: Undefined symbol Control (referred from freertos.o).
+Error: L6218E: Undefined symbol Remote (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 3 error messages.
+
+
+[2025-11-25 18:09:58]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol Communication (referred from freertos.o).
+Error: L6218E: Undefined symbol Control (referred from freertos.o).
+Error: L6218E: Undefined symbol Remote (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 3 error messages.
+
+
+[2025-11-25 18:13:56]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+
+[2025-11-25 18:13:56]	[done]
+	build successfully !
+
+[2025-11-25 18:42:48]	[info] incremental build: 7 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\freertos.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\tim.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ChassisTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\CommunicationTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\startup_stm32f407xx.s': source file has been changed.
+
+[2025-11-25 18:42:49]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/RemoteTask.o -MMD ./../user/Task/RemoteTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/RemoteTask.cpp:1:2: error: invalid preprocessing directive
+    1 | #incldue "RemoteTask.hpp"
+      |  ^
+./../user/Task/RemoteTask.cpp:8:9: error: use of undeclared identifier 'osDelay'
+    8 |         osDelay(1);
+      |         ^
+2 errors generated.
+
+[2025-11-25 18:43:25]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\startup_stm32f407xx.s': source file has been changed.
+
+[2025-11-25 18:43:27]	[done]
+	build successfully !
+
+[2025-11-25 18:46:10]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+
+[2025-11-25 18:46:11]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:10: fatal error: 'MotorBase.hpp' file not found
+    6 | #include "MotorBase.hpp"
+      |          ^~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:47:21]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+
+[2025-11-25 18:47:22]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:6:10: fatal error: 'core/BSP/Common/StateWatch/state_watch.hpp' file not found
+    6 | #include "core/BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:47:40]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+
+[2025-11-25 18:47:41]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:7:10: fatal error: 'core/HAL/CAN/can_hal.hpp' file not found
+    7 | #include "core/HAL/CAN/can_hal.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:48:03]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:7:10: fatal error: 'BSP/Common/StateWatch/state_watch.hpp' file not found
+    7 | #include "BSP/Common/StateWatch/state_watch.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+[2025-11-25 18:48:24]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+
+[2025-11-25 18:48:26]	[done]
+	build successfully !
+
+[2025-11-27 16:06:48]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+
+[2025-11-27 16:06:49]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+./../user/Task\MotorTask.hpp:9:1: error: no template named 'GM3508'
+    9 | GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
+      | ^
+1 error generated.
+
+[2025-11-27 16:07:36]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+
+[2025-11-27 16:07:37]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:38:9: error: constructor for 'BSP::Motor::MotorBase<'\x04'>' must explicitly initialize the member 'state_watch_' which does not have a default constructor
+   38 |         MotorBase(uint32_t timeThreshold = 100)
+      |         ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:62:5: note: in instantiation of member function 'BSP::Motor::MotorBase<'\x04'>::MotorBase' requested here
+   62 |     DjiMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs, Parameters params)
+      |     ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:251:11: note: in instantiation of member function 'BSP::Motor::Dji::DjiMotorBase<'\x04'>::DjiMotorBase' requested here
+  251 |         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
+      |           ^
+./../user/Task\MotorTask.hpp:9:28: note: in instantiation of member function 'BSP::Motor::Dji::GM3508<'\x04'>::GM3508' requested here
+    9 | BSP::Motor::Dji::GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
+      |                            ^
+.\../user/core/BSP/Motor/MotorBase.hpp:33:38: note: member is declared here
+   33 |         BSP::WATCH_STATE::StateWatch state_watch_[N];
+      |                                      ^
+1 error generated.
+
+[2025-11-27 16:12:30]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+
+[2025-11-27 16:12:31]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:38:51: error: no matching constructor for initialization of 'BSP::WATCH_STATE::StateWatch[4]'
+   38 |         MotorBase(uint32_t timeThreshold = 100) : state_watch_()
+      |                                                   ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:62:5: note: in instantiation of member function 'BSP::Motor::MotorBase<'\x04'>::MotorBase' requested here
+   62 |     DjiMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs, Parameters params)
+      |     ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:251:11: note: in instantiation of member function 'BSP::Motor::Dji::DjiMotorBase<'\x04'>::DjiMotorBase' requested here
+  251 |         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
+      |           ^
+./../user/Task\MotorTask.hpp:9:28: note: in instantiation of member function 'BSP::Motor::Dji::GM3508<'\x04'>::GM3508' requested here
+    9 | BSP::Motor::Dji::GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
+      |                            ^
+.\../user/core/BSP/Common/StateWatch/state_watch.hpp:33:13: note: candidate constructor not viable: requires single argument 'TimeThreshold', but no arguments were provided
+   33 |             StateWatch(uint32_t TimeThreshold)
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~
+.\../user/core/BSP/Common/StateWatch/state_watch.hpp:18:11: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided
+   18 |     class StateWatch
+      |           ^~~~~~~~~~
+1 error generated.
+
+[2025-11-27 16:18:01]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-27 16:18:02]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:39:28: error: no matching constructor for initialization of 'BSP::WATCH_STATE::StateWatch'
+   39 |             : state_watch_{}  // 确保数组被默认初始化
+      |                            ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:62:5: note: in instantiation of member function 'BSP::Motor::MotorBase<'\x04'>::MotorBase' requested here
+   62 |     DjiMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs, Parameters params)
+      |     ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:251:11: note: in instantiation of member function 'BSP::Motor::Dji::DjiMotorBase<'\x04'>::DjiMotorBase' requested here
+  251 |         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
+      |           ^
+./../user/Task\MotorTask.hpp:9:28: note: in instantiation of member function 'BSP::Motor::Dji::GM3508<'\x04'>::GM3508' requested here
+    9 | BSP::Motor::Dji::GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
+      |                            ^
+.\../user/core/BSP/Common/StateWatch/state_watch.hpp:33:13: note: candidate constructor not viable: requires single argument 'TimeThreshold', but no arguments were provided
+   33 |             StateWatch(uint32_t TimeThreshold)
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~
+.\../user/core/BSP/Common/StateWatch/state_watch.hpp:18:11: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided
+   18 |     class StateWatch
+      |           ^~~~~~~~~~
+.\../user/core/BSP/Motor/MotorBase.hpp:39:28: note: in implicit initialization of array element 0 with omitted initializer
+   39 |             : state_watch_{}  // 确保数组被默认初始化
+      |                            ^
+1 error generated.
+
+[2025-11-27 16:19:37]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-27 16:19:38]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:39:28: error: no matching constructor for initialization of 'BSP::WATCH_STATE::StateWatch'
+   39 |             : state_watch_{}  // 确保数组被默认初始化
+      |                            ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:62:5: note: in instantiation of member function 'BSP::Motor::MotorBase<'\x04'>::MotorBase' requested here
+   62 |     DjiMotorBase(uint16_t Init_id, const uint8_t (&recv_idxs)[N], uint32_t send_idxs, Parameters params)
+      |     ^
+.\../user/core/BSP/Motor/Dji/DjiMotor.hpp:251:11: note: in instantiation of member function 'BSP::Motor::Dji::DjiMotorBase<'\x04'>::DjiMotorBase' requested here
+  251 |         : DjiMotorBase<N>(Init_id, recv_idxs, send_idxs,
+      |           ^
+./../user/Task\MotorTask.hpp:9:28: note: in instantiation of member function 'BSP::Motor::Dji::GM3508<'\x04'>::GM3508' requested here
+    9 | BSP::Motor::Dji::GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
+      |                            ^
+.\../user/core/BSP/Common/StateWatch/state_watch.hpp:33:13: note: candidate constructor not viable: requires single argument 'TimeThreshold', but no arguments were provided
+   33 |             StateWatch(uint32_t TimeThreshold)
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~
+.\../user/core/BSP/Common/StateWatch/state_watch.hpp:18:11: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided
+   18 |     class StateWatch
+      |           ^~~~~~~~~~
+.\../user/core/BSP/Motor/MotorBase.hpp:39:28: note: in implicit initialization of array element 0 with omitted initializer
+   39 |             : state_watch_{}  // 确保数组被默认初始化
+      |                            ^
+1 error generated.
+
+[2025-11-27 16:23:49]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-27 16:23:51]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/Common/StateWatch/state_watch.o -MMD ./../user/core/BSP/Common/StateWatch/state_watch.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:39:9: error: use of undeclared identifier 'TimeThreshold_'
+   39 |         TimeThreshold_ = update_time_ + (0xFFFFFFFF - last_update_time_);
+      |         ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:43:9: error: use of undeclared identifier 'TimeThreshold_'
+   43 |         TimeThreshold_ = update_time_ - last_update_time_;
+      |         ^
+./../user/core/BSP/Common/StateWatch/state_watch.cpp:47:9: error: use of undeclared identifier 'TimeThreshold_'
+   47 |     if (TimeThreshold_ >= timeout_ms_)
+      |         ^
+3 errors generated.
+
+[2025-11-27 16:25:48]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-27 16:25:51]	[done]
+	build successfully !
+
+[2025-11-27 19:21:43]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-27 19:21:44]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/Callback.cpp:24:31: error: use of undeclared identifier 'uart3_rx_buffer'
+   24 |                 DT7.parseData(uart3_rx_buffer);
+      |                               ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'rx_data'
+   39 |             uart3.clear_ore_error(rx_data);
+      |                                   ^
+2 errors generated.
+
+[2025-11-27 19:23:16]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-27 19:23:17]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/Callback.cpp:25:31: error: no viable conversion from 'HAL::UART::Data' to 'const uint8_t *' (aka 'const unsigned char *')
+   25 |                 DT7.parseData(uart3_rx_buffer);
+      |                               ^~~~~~~~~~~~~~~
+.\../user/core/BSP/RemoteControl/DT7.hpp:105:39: note: passing argument to parameter 'data' here
+  105 |         void parseData(const uint8_t *data); // 解析接收到的原始数据
+      |                                       ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'uart3_rx_buffer'
+   39 |             uart3.clear_ore_error(uart3_rx_buffer);
+      |                                   ^
+2 errors generated.
+
+[2025-11-28 23:23:07]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-28 23:23:09]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/Callback.cpp:24:31: error: use of undeclared identifier 'uart3_rx_buffer'
+   24 |                 DT7.parseData(uart3_rx_buffer);
+      |                               ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'rx_data'
+   39 |             uart3.clear_ore_error(rx_data);
+      |                                   ^
+2 errors generated.
+
+[2025-11-28 23:24:02]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-28 23:24:03]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/Callback.cpp:25:31: error: no viable conversion from 'HAL::UART::Data' to 'const uint8_t *' (aka 'const unsigned char *')
+   25 |                 DT7.parseData(uart3_rx_buffer);
+      |                               ^~~~~~~~~~~~~~~
+.\../user/core/BSP/RemoteControl/DT7.hpp:105:39: note: passing argument to parameter 'data' here
+  105 |         void parseData(const uint8_t *data); // 解析接收到的原始数据
+      |                                       ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'uart3_rx_buffer'
+   39 |             uart3.clear_ore_error(uart3_rx_buffer);
+      |                                   ^
+2 errors generated.
+
+[2025-11-28 23:26:15]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-28 23:26:16]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'uart3_rx_buffer'
+   39 |             uart3.clear_ore_error(uart3_rx_buffer);
+      |                                   ^
+1 error generated.
+
+[2025-11-28 23:32:41]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-28 23:32:42]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/Task/Callback.cpp:29:31: error: use of undeclared identifier 'uart3_rx_buffer'
+   29 |             uart3.receive_dma(uart3_rx_buffer);
+      |                               ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'rx_data'
+   39 |             uart3.clear_ore_error(rx_data);
+      |                                   ^
+2 errors generated.
+
+[2025-11-29 00:03:13]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\impl\..\interface\uart_device.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\interface\uart_device.hpp' has been changed.
+
+[2025-11-29 00:03:14]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/Callback.cpp:3:
+In file included from ./../user/Task\RemoteTask.hpp:6:
+In file included from .\../user/core/HAL/UART/uart_hal.hpp:13:
+In file included from .\../user/core/HAL/UART\interface/uart_bus.hpp:2:
+.\../user/core/HAL/UART\interface\uart_device.hpp:62:39: error: unknown type name 'RxCallback'; did you mean 'CAN::RxCallback'?
+   62 |     virtual void register_rx_callback(RxCallback callback) = 0;
+      |                                       ^~~~~~~~~~
+      |                                       CAN::RxCallback
+.\../user/core/HAL/CAN\interface\can_device.hpp:25:7: note: 'CAN::RxCallback' declared here
+   25 | using RxCallback = std::function<void(const Frame &)>;
+      |       ^
+./../user/Task/Callback.cpp:27:35: error: non-const lvalue reference to type 'Data' cannot bind to a temporary of type 'HAL::UART::Data *'
+   27 |                 uart3.receive_dma(&uart3_rx_buffer);
+      |                                   ^~~~~~~~~~~~~~~~
+.\../user/core/HAL/UART\interface\uart_device.hpp:56:36: note: passing argument to parameter 'data' here
+   56 |     virtual bool receive_dma(Data &data) = 0;
+      |                                    ^
+./../user/Task/Callback.cpp:28:44: error: reference to type 'const Data' could not bind to an rvalue of type 'HAL::UART::Data *'
+   28 |                 uart3.trigger_rx_callbacks(&uart3_rx_buffer);
+      |                                            ^~~~~~~~~~~~~~~~
+.\../user/core/HAL/UART\interface\uart_device.hpp:65:51: note: passing argument to parameter 'data' here
+   65 |     virtual void trigger_rx_callbacks(const Data &data) = 0;
+      |                                                   ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'rx_data'
+   39 |             uart3.clear_ore_error(rx_data);
+      |                                   ^
+4 errors generated.
+
+[2025-11-29 00:03:23]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\impl\..\interface\uart_device.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\interface\uart_device.hpp' has been changed.
+
+[2025-11-29 00:03:24]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/Callback.cpp:3:
+In file included from ./../user/Task\RemoteTask.hpp:6:
+In file included from .\../user/core/HAL/UART/uart_hal.hpp:13:
+In file included from .\../user/core/HAL/UART\interface/uart_bus.hpp:2:
+.\../user/core/HAL/UART\interface\uart_device.hpp:62:39: error: unknown type name 'RxCallback'; did you mean 'CAN::RxCallback'?
+   62 |     virtual void register_rx_callback(RxCallback callback) = 0;
+      |                                       ^~~~~~~~~~
+      |                                       CAN::RxCallback
+.\../user/core/HAL/CAN\interface\can_device.hpp:25:7: note: 'CAN::RxCallback' declared here
+   25 | using RxCallback = std::function<void(const Frame &)>;
+      |       ^
+./../user/Task/Callback.cpp:39:35: error: use of undeclared identifier 'rx_data'
+   39 |             uart3.clear_ore_error(rx_data);
+      |                                   ^
+2 errors generated.
+
+[2025-11-29 00:06:00]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\impl\..\interface\uart_device.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\interface\uart_device.hpp' has been changed.
+
+[2025-11-29 00:06:03]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/RemoteTask.o -MMD ./../user/Task/RemoteTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/RemoteTask.cpp:1:
+In file included from ./../user/Task\RemoteTask.hpp:6:
+In file included from .\../user/core/HAL/UART/uart_hal.hpp:13:
+In file included from .\../user/core/HAL/UART\interface/uart_bus.hpp:2:
+.\../user/core/HAL/UART\interface\uart_device.hpp:26:33: error: no template named 'function' in namespace 'std'
+   26 | using RemoteDataCallback = std::function<void(const HAL::UART::Data& data)>;
+      |                            ~~~~~^
+.\../user/core/HAL/UART\interface\uart_device.hpp:62:39: error: unknown type name 'RemoteDataCallback'
+   62 |     virtual void register_rx_callback(RemoteDataCallback callback) = 0;
+      |                                       ^
+2 errors generated.
+
+[2025-11-29 00:07:05]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\interface\uart_device.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\impl\..\interface\uart_device.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\interface\uart_device.hpp' has been changed.
+
+[2025-11-29 00:07:09]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/HAL/UART/impl/uart_device_impl.o -MMD ./../user/core/HAL/UART/impl/uart_device_impl.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../user/core/HAL/UART/impl/uart_device_impl.cpp:113:9: error: use of undeclared identifier 'rx_callbacks_'
+  113 |         rx_callbacks_.push_back(callback);
+      |         ^
+./../user/core/HAL/UART/impl/uart_device_impl.cpp:119:27: error: use of undeclared identifier 'rx_callbacks_'
+  119 |     for (auto &callback : rx_callbacks_)
+      |                           ^
+2 errors generated.
+
+[2025-11-29 00:08:18]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\impl\uart_device_impl.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\HAL\UART\interface\uart_device.hpp' has been changed.
+
+[2025-11-29 00:08:23]	[done]
+	build successfully !
+
+[2025-11-29 00:14:54]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+
+[2025-11-29 00:14:56]	[done]
+	build successfully !
+
+[2025-11-29 00:15:58]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': source file has been changed.
+
+[2025-11-29 00:16:00]	[done]
+	build successfully !
+
+[2025-11-29 00:26:15]	[done]
+	build successfully !
+
+[2025-11-29 00:26:36]	[done]
+	build successfully !
+
+[2025-11-29 00:30:46]	[info] incremental build: 45 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\freertos.c': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\main.c': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\croutine.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\list.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\queue.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\tasks.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\timers.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ChassisTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\CommunicationTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\Heat_Control.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\APP\PowerLimit.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\ADRC\adrc.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\FSM\alg_fsm.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Feedforward\Feedforward.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Filter\Filter.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\PID\pid.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\Slope.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\Slope\alg_pid.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\StringWheel\StringWheel.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\UtilityFunction\SlopPlanning.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\ASSERT\assert.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_bus_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\impl\can_device_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_bus.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\CAN\interface\can_device.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\DWT\DWT.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\LOGGER\logger.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_bus_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\impl\uart_device_impl.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\HAL\UART\interface\uart_bus.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\startup_stm32f407xx.s': source file has been changed.
+
+[2025-11-29 00:30:52]	[done]
+	build successfully !
+
+[2025-11-29 00:31:05]	[done]
+	build successfully !
+

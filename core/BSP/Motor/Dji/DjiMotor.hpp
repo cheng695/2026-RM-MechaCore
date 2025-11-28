@@ -3,8 +3,9 @@
 
 #pragma once
 // 基础DJI电机实现
-#include "../user/core/BSP/Motor/MotorBase.hpp"
-#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../MotorBase.hpp"
+#include "../BSP/state_watch.hpp"
+#include "HAL/CAN/can_hal.hpp"
 #include "can.h"
 #include <cstdint>
 #include <cstring> // 添加头文件
@@ -80,7 +81,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void Parse(const HAL::CAN::Frame &frame) override
     {
-        const uint16_t received_id = frame.id;
+        const uint16_t received_id = HAL::CAN::ICanDevice::extract_id(RxHeader);
 
         for (uint8_t i = 0; i < N; ++i)
         {
@@ -107,8 +108,8 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void setCAN(int16_t data, int id)
     {
-        msd.data[(id - 1) * 2] = data >> 8;
-        msd.data[(id - 1) * 2 + 1] = data << 8 >> 8;
+        msd[(id - 1) * 2] = data >> 8;
+        msd[(id - 1) * 2 + 1] = data << 8 >> 8;
     }
 
     /**
@@ -119,15 +120,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void sendCAN()
     {
-        // 修改此处以适应新的CAN接口
-        HAL::CAN::Frame frame;
-        frame.id = send_idxs_;
-        frame.dlc = 8;
-        memcpy(frame.data, msd.data, 8);
-        frame.is_extended_id = false;
-        frame.is_remote_frame = false;
-        
-        HAL::CAN::get_can_bus_instance().get_can1().send(frame);
+        this->send_can_frame(send_idxs_, msd, 8, pTxMailbox);
     }
 
   protected:
@@ -200,7 +193,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
     DjiMotorfeedback feedback_[N]; // 反馈数据
     uint8_t recv_idxs_[N];         // ID索引
     uint32_t send_idxs_;
-    HAL::CAN::Frame msd;
+    uint8_t msd[8];
 
 
 

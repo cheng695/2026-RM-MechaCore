@@ -1,0 +1,4 @@
+arm-none-eabi-objcopy --update-section ER_IROM1="C:\Users\WHC\AppData\Local\Temp\\2026OmniChassis_C_board_xzf3/PQi.bin" "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\build\2026OmniChassis_C_board/2026OmniChassis_C_board.axf" "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\build\2026OmniChassis_C_board/2026OmniChassis_C_board.elf"
+
+arm-none-eabi-objcopy: f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\build\2026OmniChassis_C_board/2026OmniChassis_C_board.elf: warning: allocated section `RW_IRAM1' not in segment
+
