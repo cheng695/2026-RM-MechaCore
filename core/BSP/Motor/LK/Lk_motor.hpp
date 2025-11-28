@@ -88,7 +88,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
 
         for (uint8_t i = 0; i < N; ++i)
         {
-            if (received_id == init_address + recv_idxs_[i])
+            for (uint8_t i = 0; i < N; ++i)
             {
                 memcpy(&feedback_[i], pData, sizeof(LkMotorFeedback));
 
@@ -105,7 +105,6 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
                 this->state_watch_[i].check();
             }
         }
-    }
 
         /**
      * @brief 设置发送数据

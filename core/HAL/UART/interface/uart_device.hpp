@@ -12,6 +12,7 @@
 #pragma once
 #include "main.h"  // 包含STM32 HAL的主头文件
 #include "usart.h" // 包含UART相关定义
+#include <functional>
 
 namespace HAL::UART
 {
@@ -22,6 +23,8 @@ struct Data
     uint8_t *buffer; // 数据缓冲区指针
     uint16_t size;   // 数据大小
 };
+
+using RemoteDataCallback = std::function<void(const HAL::UART::Data& data)>;
 
 // UART设备抽象接口
 class IUartDevice
@@ -55,6 +58,12 @@ class IUartDevice
 
     // 设置DMA连续接收并使用空闲中断检测
     virtual bool receive_dma_idle(Data &data) = 0;
+
+    // 注册接收回调函数
+    virtual void register_rx_callback(RemoteDataCallback callback) = 0;
+
+    // 触发所有注册的回调函数
+    virtual void trigger_rx_callbacks(const Data &data) = 0;
 
     // 清除ORE错误并重新启动DMA接收
     virtual void clear_ore_error(Data &data) = 0;
