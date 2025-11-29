@@ -10,8 +10,8 @@
     "rootDir": "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\MDK-ARM",
     "dumpPath": "build\\2026OmniChassis_C_board",
     "outDir": "build\\2026OmniChassis_C_board",
-    "ram": 20480,
-    "rom": 65536,
+    "ram": 131072,
+    "rom": 1048576,
     "incDirs": [
         ".",
         "../Core/Inc",
@@ -72,6 +72,7 @@
         "../user/Task/Callback.cpp",
         "../user/Task/ChassisTask.cpp",
         "../user/Task/CommunicationTask.cpp",
+        "../user/Task/ControlTask.cpp",
         "../user/Task/MotorTask.cpp",
         "../user/Task/RemoteTask.cpp",
         "../user/core/APP/Heat_Control.cpp",

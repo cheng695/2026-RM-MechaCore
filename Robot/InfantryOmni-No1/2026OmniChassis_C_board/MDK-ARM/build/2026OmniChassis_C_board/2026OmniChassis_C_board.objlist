@@ -39,6 +39,7 @@
 ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o
 ./build/2026OmniChassis_C_board/.obj/__/user/Task/ChassisTask.o
 ./build/2026OmniChassis_C_board/.obj/__/user/Task/CommunicationTask.o
+./build/2026OmniChassis_C_board/.obj/__/user/Task/ControlTask.o
 ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o
 ./build/2026OmniChassis_C_board/.obj/__/user/Task/RemoteTask.o
 ./build/2026OmniChassis_C_board/.obj/__/user/core/APP/Heat_Control.o

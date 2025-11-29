@@ -49,9 +49,10 @@
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 osThreadId COMMHandle;
-osThreadId CONTRHandle;
+osThreadId CANHandle;
 osThreadId REMOHandle;
 osThreadId ChassisTaskHandle;
+osThreadId AlgHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -60,9 +61,10 @@ osThreadId ChassisTaskHandle;
 
 void StartDefaultTask(void const * argument);
 extern void Communication(void const * argument);
-extern void Control(void const * argument);
+extern void Motor(void const * argument);
 extern void Remote(void const * argument);
 extern void Task(void const * argument);
+extern void Control(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -114,12 +116,12 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of COMM */
-  osThreadDef(COMM, Communication, osPriorityIdle, 0, 128);
+  osThreadDef(COMM, Communication, osPriorityIdle, 0, 256);
   COMMHandle = osThreadCreate(osThread(COMM), NULL);
 
-  /* definition and creation of CONTR */
-  osThreadDef(CONTR, Control, osPriorityIdle, 0, 256);
-  CONTRHandle = osThreadCreate(osThread(CONTR), NULL);
+  /* definition and creation of CAN */
+  osThreadDef(CAN, Motor, osPriorityIdle, 0, 128);
+  CANHandle = osThreadCreate(osThread(CAN), NULL);
 
   /* definition and creation of REMO */
   osThreadDef(REMO, Remote, osPriorityIdle, 0, 128);
@@ -128,6 +130,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of ChassisTask */
   osThreadDef(ChassisTask, Task, osPriorityIdle, 0, 512);
   ChassisTaskHandle = osThreadCreate(osThread(ChassisTask), NULL);
+
+  /* definition and creation of Alg */
+  osThreadDef(Alg, Control, osPriorityIdle, 0, 1024);
+  AlgHandle = osThreadCreate(osThread(Alg), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
