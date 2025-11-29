@@ -4,7 +4,7 @@
 #pragma once
 // 基础DJI电机实现
 #include "../MotorBase.hpp"
-#include "../BSP/state_watch.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
 #include "HAL/CAN/can_hal.hpp"
 #include "can.h"
 #include <cstdint>
@@ -116,11 +116,10 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
 
     /**
      * @brief               发送Can数据
-     *
      * @param han           Can句柄
      * @param pTxMailbox    邮
      */
-    void sendCAN(CAN_HandleTypeDef *han, uint32_t pTxMailbox)
+    void sendCAN(uint32_t pTxMailbox)
     {
         this->send_can_frame(send_idxs_, msd, 8, pTxMailbox);
     }

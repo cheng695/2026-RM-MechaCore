@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../BSP/MotorBase.hpp"
+#include "../BSP/Motor/MotorBase.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
 #include "../HAL/CAN/can_hal.hpp"
 #define PI 3.14159265358979323846
 namespace BSP::Motor::LK
@@ -127,7 +128,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param han Can句柄
      * @param pTxMailbox 邮箱
      */
-    void sendCAN(CAN_HandleTypeDef *han, uint8_t id, uint8_t pTxMailbox)
+    void sendCAN(uint8_t id, uint8_t pTxMailbox)
     {
         this->send_can_frame(send_idxs_[id - 1], msd, 8, pTxMailbox);
     }
@@ -136,7 +137,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void ON(CAN_HandleTypeDef *hcan, uint8_t id)
+    void ON(uint8_t id)
     {
         uint8_t data[8] = {0x88};
         this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
@@ -147,7 +148,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void OFF(CAN_HandleTypeDef *hcan, uint8_t id)
+    void OFF(uint8_t id)
     {
         uint8_t data[8] = {0x81};
         this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
@@ -158,7 +159,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * 
      * @param hcan CAN句柄
      */
-    void clear_err(CAN_HandleTypeDef *hcan, uint8_t id)
+    void clear_err(uint8_t id)
     {
         uint8_t data[8] = {0x9B};
         this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
@@ -172,7 +173,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param speed 速度限制（RPM）
      * @param id 电机ID
      */
-    void SetPositionCtrl(CAN_HandleTypeDef *hcan, uint8_t id, int32_t angle, uint16_t speed)
+    void SetPositionCtrl(uint8_t id, int32_t angle, uint16_t speed)
     {
         uint8_t data[8];
         uint32_t encoder_value = angle * 100; // 根据实际转换关系调整
@@ -196,7 +197,7 @@ template <uint8_t N> class LkMotorBase : public MotorBase<N>
      * @param torque 目标扭矩
      * @param id 电机ID
      */
-    void SetTorqueCtrl(CAN_HandleTypeDef *hcan, uint8_t id, int16_t torque)
+    void SetTorqueCtrl(uint8_t id, int16_t torque)
     {
         if (torque > 2048) torque = 2048;
         if (torque < -2048) torque = -2048;
