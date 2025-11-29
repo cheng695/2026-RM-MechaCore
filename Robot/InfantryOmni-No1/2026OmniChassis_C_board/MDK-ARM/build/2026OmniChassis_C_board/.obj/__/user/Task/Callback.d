@@ -45,8 +45,8 @@
   ..\user\core\BSP\Motor\Dji\DjiMotor.hpp \
   ..\user\core\BSP\Motor\MotorBase.hpp \
   ..\user\core\BSP\Common\StateWatch\state_watch.hpp \
-  ..\user\Task\CommunicationTask.hpp ..\user\Task\RemoteTask.hpp \
-  ..\user\core\HAL\UART\uart_hal.hpp \
+  ..\user\core\Alg\PID\pid.hpp ..\user\Task\CommunicationTask.hpp \
+  ..\user\Task\RemoteTask.hpp ..\user\core\HAL\UART\uart_hal.hpp \
   ..\user\core\HAL\UART\interface\uart_bus.hpp \
   ..\user\core\HAL\UART\interface\uart_device.hpp ..\Core\Inc\usart.h \
   ..\user\core\BSP\RemoteControl\DT7.hpp \
