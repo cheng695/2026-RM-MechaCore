@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "core/BSP/Common/StateWatch/state_watch.hpp"
-#include "core/HAL/CAN/can_hal.hpp"
+#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../user/core/HAL/CAN/can_hal.hpp"
 
 namespace BSP::Motor
 {
@@ -217,6 +217,34 @@ namespace BSP::Motor
         virtual void Parse(const HAL::CAN::Frame &frame) = 0;
 
     public:
+        MotorBase(uint32_t timeThreshold = 100)
+            : state_watch_{}  // 确保数组被默认初始化
+        {
+            for (int i = 0; i < N; i++) 
+            {
+                // 直接构造 StateWatch 对象
+                state_watch_[i] = BSP::WATCH_STATE::StateWatch(timeThreshold);
+            }
+        }
+
+        void updateTimestamp(uint8_t id)
+        {
+            if (id > 0 && id <= N)
+            {
+                state_watch_[id - 1].UpdateLastTime();
+            }
+        }
+
+        bool isConnected(uint8_t id)
+        {
+            if (id > 0 && id <= N)
+            {
+                state_watch_[id - 1].UpdateTime();
+                state_watch_[id - 1].CheckStatus();
+                return state_watch_[id - 1].GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
+            }
+            return false;
+        }
         /**
          * @brief 获取角度
          *
@@ -337,7 +365,7 @@ namespace BSP::Motor
         {
             for (uint8_t i = 0; i < N; i++)
             {
-                if (this->state_watch_[i].getStatus() != BSP::WATCH_STATE::Status::ONLINE)
+                if (this->state_watch_[i].GetStatus() != BSP::WATCH_STATE::Status::ONLINE)
                 {
                     return i + 1; // 返回掉线电机的编号（从1开始计数）
                 }
