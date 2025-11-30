@@ -209,3 +209,265 @@ These source files will be recompiled
 [2025-11-29 19:35:43]	[done]
 	build successfully !
 
+[2025-11-30 12:17:42]	[info] incremental build: 7 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\Alg\PID\pid.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\Alg\PID\pid.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\Alg\PID\pid.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-30 12:17:49]	[done]
+	build successfully !
+
+[2025-11-30 12:40:46]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-30 12:40:47]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/Callback.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+In file included from .\../user/core/BSP/Motor/MotorBase.hpp:6:
+In file included from .\../user/core/BSP/Common/StateWatch/state_watch.hpp:4:
+.\../user/core/BSP/Common/StateWatch\buzzer.hpp:15:22: error: expected ';' at end of declaration list
+   15 |             ~buzzer()
+      |                      ^
+      |                      ;
+1 error generated.
+
+[2025-11-30 12:54:58]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-30 12:55:02]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/MotorTask.o -MMD ./../user/Task/MotorTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/MotorTask.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:64:42: error: 'B_' is a private member of 'BSP::WATCH_STATE::buzzer'
+   64 |                     state_watch_[id - 1].B_();
+      |                                          ^
+./../user/Task/MotorTask.cpp:19:23: note: in instantiation of member function 'BSP::Motor::MotorBase<'\x04'>::isConnected' requested here
+   19 |         if (Motor3508.isConnected(i+1)) 
+      |                       ^
+.\../user/core/BSP/Common/StateWatch\buzzer.hpp:17:18: note: declared private here
+   17 |             void B_()
+      |                  ^
+1 error generated.
+
+[2025-11-30 12:55:27]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\state_watch.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-30 12:55:31]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/core/BSP/Common/StateWatch/state_watch.o -MMD ./../user/core/BSP/Common/StateWatch/state_watch.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/core/BSP/Common/StateWatch/state_watch.cpp:1:
+In file included from ./../user/core/BSP/Common/StateWatch\state_watch.hpp:4:
+./../user/core/BSP/Common/StateWatch\buzzer.hpp:19:17: error: use of undeclared identifier 'osDelay'
+   19 |                 osDelay(100);
+      |                 ^
+1 error generated.
+
+[2025-11-30 12:55:43]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp' has been changed.
+
+[2025-11-30 12:55:48]	[done]
+	build successfully !
+
+[2025-11-30 13:03:28]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 13:03:33]	[done]
+	build successfully !
+
+[2025-11-30 13:05:20]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 13:05:25]	[done]
+	build successfully !
+
+[2025-11-30 13:06:43]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 13:06:48]	[done]
+	build successfully !
+
+[2025-11-30 13:07:46]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 13:07:51]	[done]
+	build successfully !
+
+[2025-11-30 13:09:49]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 13:09:54]	[done]
+	build successfully !
+
+[2025-11-30 16:46:26]	[info] incremental build: 11 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\main.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\stm32f4xx_it.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\Core\Src\tim.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\CommunicationTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\startup_stm32f407xx.s': source file has been changed.
+
+[2025-11-30 16:46:29]	[done]
+	build successfully !
+
+[2025-11-30 16:53:40]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Motor\MotorBase.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Motor\MotorBase.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 16:53:41]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniChassis_C_board/.obj/__/user/Task/Callback.o -MMD ./../user/Task/Callback.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../user/Task/Callback.cpp:1:
+In file included from ./../user/Task\MotorTask.hpp:7:
+In file included from .\../user/core/BSP/Motor/Dji/DjiMotor.hpp:6:
+.\../user/core/BSP/Motor/MotorBase.hpp:64:50: error: expected ';' after expression
+   64 |                     state_watch_[id - 1].ring(id)
+      |                                                  ^
+      |                                                  ;
+1 error generated.
+
+[2025-11-30 16:53:44]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Motor\MotorBase.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp' has been changed.
+
+[2025-11-30 16:53:49]	[done]
+	build successfully !
+
+[2025-11-30 17:02:19]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\DT7.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\DT7.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\Common\StateWatch\state_watch.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\Common\StateWatch\buzzer.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\DT7.hpp' has been changed.
+
+[2025-11-30 17:02:24]	[done]
+	build successfully !
+
+[2025-11-30 20:34:17]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\Task\CommunicationTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\CommunicationTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': source file has been changed.
+
+[2025-11-30 20:34:24]	[done]
+	build successfully !
+
+[2025-11-30 20:44:26]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\DT7.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\DT7.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\ControlTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\Task\RemoteTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\..\user\core\BSP\RemoteControl\DT7.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\user\core\BSP\RemoteControl\DT7.cpp': source file has been changed.
+
+[2025-11-30 20:44:31]	[done]
+	build successfully !
+

@@ -20,7 +20,20 @@
                 "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\Core\\Src",
                 "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\Drivers\\STM32F4xx_HAL_Driver\\Src",
                 "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\Middlewares\\Third_Party\\FreeRTOS\\Source",
-                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\HAL\\UART\\impl",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\HAL\\UART\\interface",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\HAL\\UART",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\HAL\\CAN",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\HAL\\CAN\\interface",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\HAL\\CAN\\impl",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\BSP\\RemoteControl",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\BSP\\Motor",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\BSP\\Motor\\Dji",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\BSP\\Common\\StateWatch",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\Task",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\Alg\\ChassisCalculation",
+                "f:\\RCIA\\2026-RM-MechaCore\\Robot\\InfantryOmni-No1\\2026OmniChassis_C_board\\user\\core\\Alg\\PID"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

@@ -100,7 +100,7 @@ int main(void)
   MX_USART6_UART_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
+HAL_TIM_PWM_Start_IT(&htim4, TIM_CHANNEL_3);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in cmsis_os2.c) */

@@ -17,28 +17,38 @@ Library Manager: ArmAr.exe V6.22
 Hex Converter:   FromElf.exe V6.22
 CPU DLL:         SARMCM3.DLL V5.40.0.3
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
+Target DLL:      CMSIS_AGDI.dll V1.33.18.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 F:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\2026OmniChassis_C_board.uvprojx
-Project File Date:  11/26/2025
+Project File Date:  11/30/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'F:\keil5\ARM\ARMCLANG\Bin'
 Build target '2026OmniChassis_C_board'
-compiling tim.c...
-compiling freertos.c...
-assembling startup_stm32f407xx.s...
+Note: source file '..\user\core\HAL\UART\impl\uart_bus_impl.hpp' - object file renamed from '2026OmniChassis_C_board\uart_bus_impl.o' to '2026OmniChassis_C_board\uart_bus_impl_1.o'.
+Note: source file '..\user\core\HAL\UART\impl\uart_device_impl.hpp' - object file renamed from '2026OmniChassis_C_board\uart_device_impl.o' to '2026OmniChassis_C_board\uart_device_impl_1.o'.
+Note: source file '..\user\core\HAL\UART\interface\uart_bus.hpp' - object file renamed from '2026OmniChassis_C_board\uart_bus.o' to '2026OmniChassis_C_board\uart_bus_1.o'.
+Note: source file '..\user\core\HAL\CAN\interface\can_bus.hpp' - object file renamed from '2026OmniChassis_C_board\can_bus.o' to '2026OmniChassis_C_board\can_bus_1.o'.
+Note: source file '..\user\core\HAL\CAN\interface\can_device.hpp' - object file renamed from '2026OmniChassis_C_board\can_device.o' to '2026OmniChassis_C_board\can_device_1.o'.
+Note: source file '..\user\core\HAL\CAN\impl\can_bus_impl.hpp' - object file renamed from '2026OmniChassis_C_board\can_bus_impl.o' to '2026OmniChassis_C_board\can_bus_impl_1.o'.
+Note: source file '..\user\core\HAL\CAN\impl\can_device_impl.hpp' - object file renamed from '2026OmniChassis_C_board\can_device_impl.o' to '2026OmniChassis_C_board\can_device_impl_1.o'.
+Note: source file '..\user\core\BSP\RemoteControl\DT7.hpp' - object file renamed from '2026OmniChassis_C_board\DT7.o' to '2026OmniChassis_C_board\dt7_1.o'.
+Note: source file '..\user\core\BSP\Common\StateWatch\state_watch.hpp' - object file renamed from '2026OmniChassis_C_board\state_watch.o' to '2026OmniChassis_C_board\state_watch_1.o'.
+Note: source file '..\user\Task\ChassisTask.hpp' - object file renamed from '2026OmniChassis_C_board\ChassisTask.o' to '2026OmniChassis_C_board\chassistask_1.o'.
+Note: source file '..\user\Task\CommunicationTask.hpp' - object file renamed from '2026OmniChassis_C_board\CommunicationTask.o' to '2026OmniChassis_C_board\communicationtask_1.o'.
+Note: source file '..\user\Task\ControlTask.hpp' - object file renamed from '2026OmniChassis_C_board\ControlTask.o' to '2026OmniChassis_C_board\controltask_1.o'.
+Note: source file '..\user\Task\MotorTask.hpp' - object file renamed from '2026OmniChassis_C_board\MotorTask.o' to '2026OmniChassis_C_board\motortask_1.o'.
+Note: source file '..\user\Task\RemoteTask.hpp' - object file renamed from '2026OmniChassis_C_board\RemoteTask.o' to '2026OmniChassis_C_board\remotetask_1.o'.
+Note: source file '..\user\core\Alg\PID\pid.hpp' - object file renamed from '2026OmniChassis_C_board\pid.o' to '2026OmniChassis_C_board\pid_1.o'.
+compiling OmniCalculation.hpp...
+compiling ControlTask.hpp...
+compiling ControlTask.cpp...
 linking...
-2026OmniChassis_C_board\2026OmniChassis_C_board.axf: Error: L6218E: Undefined symbol Communication (referred from freertos.o).
-2026OmniChassis_C_board\2026OmniChassis_C_board.axf: Error: L6218E: Undefined symbol Control (referred from freertos.o).
-2026OmniChassis_C_board\2026OmniChassis_C_board.axf: Error: L6218E: Undefined symbol Remote (referred from freertos.o).
-2026OmniChassis_C_board\2026OmniChassis_C_board.axf: Error: L6218E: Undefined symbol Task (referred from freertos.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 4 error messages.
-"2026OmniChassis_C_board\2026OmniChassis_C_board.axf" - 4 Error(s), 0 Warning(s).
+Program Size: Code=59484 RO-data=2148 RW-data=28 ZI-data=20212  
+FromELF: creating hex file...
+"2026OmniChassis_C_board\2026OmniChassis_C_board.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -60,8 +70,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE@6.1.0
-Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

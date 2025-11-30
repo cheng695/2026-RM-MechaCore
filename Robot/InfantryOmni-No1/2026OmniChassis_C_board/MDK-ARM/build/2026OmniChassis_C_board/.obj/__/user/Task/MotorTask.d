@@ -45,4 +45,5 @@
   ..\user\core\BSP\Motor\Dji\DjiMotor.hpp \
   ..\user\core\BSP\Motor\MotorBase.hpp \
   ..\user\core\BSP\Common\StateWatch\state_watch.hpp \
+  ..\user\core\BSP\Common\StateWatch\buzzer.hpp ..\Core\Inc\tim.h \
   ..\user\core\Alg\PID\pid.hpp

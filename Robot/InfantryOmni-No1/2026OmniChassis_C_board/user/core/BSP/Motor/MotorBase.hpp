@@ -59,6 +59,10 @@ namespace BSP::Motor
             {
                 state_watch_[id - 1].UpdateTime();
                 state_watch_[id - 1].CheckStatus();
+                if(state_watch_[id - 1].GetStatus() == BSP::WATCH_STATE::Status::OFFLINE)
+                {
+                    state_watch_[id - 1].ring(id);
+                }
                 return state_watch_[id - 1].GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
             }
             return false;

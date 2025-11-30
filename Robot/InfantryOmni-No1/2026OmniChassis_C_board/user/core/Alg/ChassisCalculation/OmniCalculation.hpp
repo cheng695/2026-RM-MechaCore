@@ -240,10 +240,11 @@ namespace Alg::CalculationBase
              * 
              * 设置目标运动状态，计算速度分量，然后执行逆向运动学计算
              */
-            void OmniInvKinematics(float vx, float vy, float vw, float phase, float speed_gain)
+            void OmniInvKinematics(float vx, float vy, float vw, float phase, float speed_gain, float rotate_gain)
             {
                 SetPhase(phase);
                 SetSpeedGain(speed_gain);
+                SetRotationalGain(rotate_gain);
                 SetSignal_xyw(vx, vy, vw);
                 CalculateVelocities(); 
                 InvKinematics();

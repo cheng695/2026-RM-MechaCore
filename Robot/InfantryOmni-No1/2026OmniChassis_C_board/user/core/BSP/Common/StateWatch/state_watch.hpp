@@ -1,7 +1,7 @@
 #ifndef STATE_WATCH_HPP
 #define STATE_WATCH_HPP 
 
-#include <main.h>
+#include "buzzer.hpp"
 
 namespace BSP::WATCH_STATE 
 {
@@ -15,7 +15,7 @@ namespace BSP::WATCH_STATE
         ONLINE = 0    // 设备在线状态
     };
 
-    class StateWatch
+    class StateWatch : public buzzer
     {
         /**
          * @brief 设备在线状态监视器

@@ -1,3 +1,5 @@
+#ifndef PID_H
+#define PID_H
 
 namespace ALG::PID
 {
@@ -139,3 +141,4 @@ namespace ALG::PID
 
 } // namespace ALG::PID
 
+#endif

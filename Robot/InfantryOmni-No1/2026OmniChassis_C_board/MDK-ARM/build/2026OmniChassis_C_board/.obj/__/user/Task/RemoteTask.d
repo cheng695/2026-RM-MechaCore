@@ -43,4 +43,6 @@
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\Core\Inc\usart.h ..\user\core\BSP\RemoteControl\DT7.hpp \
-  ..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp
+  ..\user\core\BSP\RemoteControl\..\Common\StateWatch\state_watch.hpp \
+  ..\user\core\BSP\RemoteControl\..\Common\StateWatch\buzzer.hpp \
+  ..\Core\Inc\tim.h

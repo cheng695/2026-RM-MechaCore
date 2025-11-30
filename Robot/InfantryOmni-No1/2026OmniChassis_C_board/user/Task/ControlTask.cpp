@@ -10,7 +10,16 @@ ALG::PID::PID wheel_pid[4] = {
 
 void chassis_control()
 {
-    omni_ik.OmniInvKinematics(DT7.get_left_y(), DT7.get_left_x(), DT7.get_scroll_(), 0.0f, 8911.0f);
+    if(!DT7.isConnected()) 
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            wheel_pid[i].reset();
+        }
+        return;
+    }
+
+    omni_ik.OmniInvKinematics(DT7.get_left_y(), DT7.get_left_x(), DT7.get_scroll_(), 0.0f, 8911.0f, 8911.0f);
     for(int i = 0; i < 4; i++)
     {
         wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRpm(i+1));
