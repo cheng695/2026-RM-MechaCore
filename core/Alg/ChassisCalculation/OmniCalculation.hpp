@@ -1,7 +1,7 @@
 #ifndef OmniCalculation_HPP
 #define OmniCalculation_HPP
 
-#include "Alg/ChassisCalculation/CalculationBase.hpp"
+#include "../user/core/Alg/ChassisCalculation/CalculationBase.hpp"
 #include <math.h>
 
 namespace Alg::CalculationBase
@@ -212,7 +212,7 @@ namespace Alg::CalculationBase
             void CalculateVelocities()
             {
                 Vx = GetSpeedGain() * (GetSignal_x() *  cosf(GetPhase()) + GetSignal_y() * sinf(GetPhase()));
-                Vy = GetSpeedGain() * (GetSignal_x() * -sinf(GetPhase()) - GetSignal_y() * cosf(GetPhase()));
+                Vy = GetSpeedGain() * (GetSignal_x() * -sinf(GetPhase()) + GetSignal_y() * cosf(GetPhase()));
                 Vw = GetRotationalGain() * GetSignal_w();
             }
 
@@ -235,11 +235,15 @@ namespace Alg::CalculationBase
              * @param vx X方向速度
              * @param vy Y方向速度
              * @param vw 绕Z轴角速度
+             * @param phase 旋转矩阵的角度，需要包含补偿相位
+             * @param speed_gain 速度增益
              * 
              * 设置目标运动状态，计算速度分量，然后执行逆向运动学计算
              */
-            void OmniInvKinematics(float vx, float vy, float vw)
+            void OmniInvKinematics(float vx, float vy, float vw, float phase, float speed_gain)
             {
+                SetPhase(phase);
+                SetSpeedGain(speed_gain);
                 SetSignal_xyw(vx, vy, vw);
                 CalculateVelocities(); 
                 InvKinematics();

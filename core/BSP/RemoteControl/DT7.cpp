@@ -16,9 +16,6 @@ namespace BSP::REMOTE_CONTROL
  * @note 先使用容差修正偏移量，然后将修正后的值除以 660.0 进行归一化
  */
 static inline float discreteAxis(int16_t value, int16_t tolerance)
-// 构造函数：初始化基类与成员
-DT7::DT7(uint32_t timeout_ms)
-    : BSP::WATCH_STATE::StateWatch(timeout_ms), channels_({0}), mouse_({0}), keyboard_(0)
 {
     // 使用容差修正偏移量：先减去 tolerance 修正偏移
     const int16_t corrected_value = value - tolerance;
@@ -37,7 +34,7 @@ DT7::DT7(uint32_t timeout_ms)
 
 
 // 解析原始 18 字节数据（提取通道/开关/鼠标/键盘并更新坐标与时间戳）
-void DT7::parseData(const uint8_t *data)
+void RemoteController::parseData(const uint8_t *data)
 {
     if (data == nullptr)
         return;
@@ -99,7 +96,7 @@ void DT7::parseData(const uint8_t *data)
  * @return 提取的位数据（uint16_t 类型）
  * @note 从 data 数组的 startBit 位置开始，提取 length 位数据，支持跨字节边界
  */
-uint16_t DT7::extractBits(const uint8_t *data, uint32_t startBit, uint8_t length) const
+uint16_t RemoteController::extractBits(const uint8_t *data, uint32_t startBit, uint8_t length) const
 {
     uint16_t result = 0;
     uint32_t currentByte = startBit / 8;
@@ -128,7 +125,7 @@ uint16_t DT7::extractBits(const uint8_t *data, uint32_t startBit, uint8_t length
  * @return 合并后的 int16_t 值（小端序）
  * @note 将 low_byte 和 high_byte 按小端序组合成 16 位有符号整数
  */
-int16_t DT7::extract16Bits(const uint8_t low_byte, const uint8_t high_byte) const
+int16_t RemoteController::extract16Bits(const uint8_t low_byte, const uint8_t high_byte) const
 {
     return static_cast<int16_t>(low_byte | (high_byte << 8));
 }
@@ -139,7 +136,7 @@ int16_t DT7::extract16Bits(const uint8_t low_byte, const uint8_t high_byte) cons
  * @return 布尔值（非零返回 true，零返回 false）
  * @note 将整个字节转换为布尔值
  */
-bool DT7::extractBool(const uint8_t byte) const
+bool RemoteController::extractBool(const uint8_t byte) const
 {
     return byte != 0;
 }
@@ -150,7 +147,7 @@ bool DT7::extractBool(const uint8_t byte) const
  * @return 限制后的通道值（范围：CHANNEL_VALUE_MIN ~ CHANNEL_VALUE_MAX）
  * @note 将通道值限制在 [CHANNEL_VALUE_MIN, CHANNEL_VALUE_MAX] 范围内
  */
-int16_t DT7::mapChannelValue(uint16_t value) const
+int16_t RemoteController::mapChannelValue(uint16_t value) const
 {
     return std::min(std::max(static_cast<int16_t>(value),
                              static_cast<int16_t>(CHANNEL_VALUE_MIN)),
