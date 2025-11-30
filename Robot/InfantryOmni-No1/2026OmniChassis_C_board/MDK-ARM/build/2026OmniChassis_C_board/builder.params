@@ -70,7 +70,6 @@
         "../Middlewares/Third_Party/FreeRTOS/Source/tasks.c",
         "../Middlewares/Third_Party/FreeRTOS/Source/timers.c",
         "../user/Task/Callback.cpp",
-        "../user/Task/ChassisTask.cpp",
         "../user/Task/CommunicationTask.cpp",
         "../user/Task/ControlTask.cpp",
         "../user/Task/MotorTask.cpp",

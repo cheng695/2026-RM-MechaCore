@@ -729,6 +729,16 @@
               <FileType>8</FileType>
               <FilePath>..\user\core\BSP\Common\StateWatch\state_watch.hpp</FilePath>
             </File>
+            <File>
+              <FileName>FiniteStateMachine_chassis.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FiniteStateMachine_chassis.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.hpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -738,16 +748,6 @@
               <FileName>Callback.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\user\Task\Callback.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ChassisTask.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\user\Task\ChassisTask.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ChassisTask.hpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\user\Task\ChassisTask.hpp</FilePath>
             </File>
             <File>
               <FileName>CommunicationTask.cpp</FileName>

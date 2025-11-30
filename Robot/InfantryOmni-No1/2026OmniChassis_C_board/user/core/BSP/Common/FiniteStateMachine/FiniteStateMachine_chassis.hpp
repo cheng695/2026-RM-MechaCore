@@ -76,8 +76,9 @@ public:
      * 
      * @param left 左开关状态
      * @param right 右开关状态
+     * @param equipment_online 设备是否在线
      */
-    void SetState(uint8_t left, uint8_t right);
+    void SetState(uint8_t left, uint8_t right, bool equipment_online);
 
     /**
      * @brief 状态更新函数，根据左右开关状态更新底盘状态
@@ -85,7 +86,7 @@ public:
      * @param left 左开关状态
      * @param right 右开关状态
      */
-    void StateUpdate(uint8_t left, uint8_t right);
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online);
 
     /**
      * @brief 定时更新函数（用于时间统计）
@@ -117,8 +118,9 @@ public:
 
 private:
     // 左右开关状态
-    uint8_t StateLeft = 0;
-    uint8_t StateRight = 0;
+    uint8_t StateLeft = 2;
+    uint8_t StateRight = 2;
+    bool EquipmentOnline = false;
     
     // 状态运行时间计数
     uint32_t State_Run_Time[STATUS_MAX] = {0};

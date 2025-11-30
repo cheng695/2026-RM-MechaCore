@@ -14,6 +14,7 @@
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h \
+  ..\user\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.hpp \
   ..\user\..\user\core\Alg\ChassisCalculation\OmniCalculation.hpp \
   ..\user\..\user\core\Alg\ChassisCalculation\CalculationBase.hpp \
   ..\user\..\user\core\Alg\PID\pid.hpp \

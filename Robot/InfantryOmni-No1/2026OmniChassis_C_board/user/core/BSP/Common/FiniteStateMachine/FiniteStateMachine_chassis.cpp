@@ -41,8 +41,9 @@ void Class_FSM::Init()
     Status[STOP].Enter_Count = 1;
     
     // 初始化开关状态
-    StateLeft = 0;
-    StateRight = 0;
+    StateLeft = 2;
+    StateRight = 2;
+    EquipmentOnline = false;
 }
 
 /**
@@ -50,11 +51,13 @@ void Class_FSM::Init()
  *
  * @param left 左开关状态
  * @param right 右开关状态
+ * @param equipment_online 所有设备是否在线
  */
-void Class_FSM::SetState(uint8_t left, uint8_t right)
+void Class_FSM::SetState(uint8_t left, uint8_t right, bool equipment_online)
 {
     StateLeft = left;
     StateRight = right;
+    EquipmentOnline = equipment_online;
 }
 
 /**
@@ -62,17 +65,18 @@ void Class_FSM::SetState(uint8_t left, uint8_t right)
  *
  * @param left 左开关状态
  * @param right 右开关状态
+ * @param equipment_online 所有设备是否在线
  */
-void Class_FSM::StateUpdate(uint8_t left, uint8_t right)
+void Class_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online)
 {
     // 保存旧状态用于统计
     Enum_Chassis_States old_state = State_chassis;
     
     // 设置当前开关状态
-    SetState(left, right);
+    SetState(left, right, equipment_online);
     
     // 根据开关状态组合确定底盘状态
-    if (StateLeft == 2 && StateRight == 2)
+    if (StateLeft == 2 && StateRight == 2 || equipment_online == false)
     {
         State_chassis = STOP;
     }
