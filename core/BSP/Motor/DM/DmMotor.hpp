@@ -1,4 +1,5 @@
 #pragma once
+//fix：修复上传错误
 #include "../MotorBase.hpp"
 #include "core/BSP/Common/StateWatch/state_watch.hpp"
 #include "../../../HAL/CAN/can_hal.hpp"

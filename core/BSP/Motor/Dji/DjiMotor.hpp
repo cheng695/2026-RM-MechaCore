@@ -1,6 +1,6 @@
 #ifndef DJI_MOTOR_HPP
 #define DJI_MOTOR_HPP
-
+//fix：修复上传错误
 #pragma once
 // 基础DJI电机实现
 #include "../MotorBase.hpp"
