@@ -159,7 +159,7 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         const uint16_t received_id = HAL::CAN::ICanDevice::extract_id(RxHeader);
         for (uint8_t i = 0; i < N; ++i)
         {
-            if (received_id == init_address + recv_idxs_[i])
+            for (uint8_t i = 0; i < N; ++i)
             {
                 feedback_[i].id = pData[0] >> 4;
                 feedback_[i].err = pData[0] & 0x0F;
@@ -241,8 +241,8 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         DM_Vel vel;
         vel.vel_tmp = _vel;
 
-        this->send_can_frame(init_address + send_idxs_[motor_index - 1], &vel, 8, CAN_TX_MAILBOX1);
-    }
+            pbuf = (uint8_t*)&_pos;
+            vbuf = (uint8_t*)&_vel;
 
     /**
      * @brief 使能DM电机
@@ -320,28 +320,22 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         float vel_tmp;
     };
 
-  private:
-    const int16_t init_address; // 初始地址
+            uint8_t send_data[8] = {0xFD, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+        }
 
-    uint8_t recv_idxs_[N];  // ID索引
-    uint32_t send_idxs_[N]; // 每个电机的发送ID
+        /**
+         * @brief 清除DM电机错误
+         */
+        void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
+        {
+            if (motor_index < 1 || motor_index > N) return;
 
     DMMotorfeedback feedback_[N]; // 国际单位数据
     Parameters params_;           // 转国际单位参数列表
     uint8_t send_data[8];
 };
 
-template <uint8_t N> class J4310 : public DMMotorBase<N>
-{
-  private:
-    // // 定义参数生成方法
-    // Parameters GetParameters() override
-    // {
-    //     return DMMotorBase<N>::CreateParams(-12.56, 12.56, -30, 30, -10, 10, 0.0, 500, 0.0, 5.0);
-    // }
-
-  public:
-    // 子类构造时传递参数
     /**
      * @brief dji电机构造函数
      *
@@ -367,10 +361,7 @@ template <uint8_t N> class S2325 : public DMMotorBase<N>
   public:
     // 子类构造时传递参数
     /**
-     * @brief dji电机构造函数
-     *
-     * @param Init_id 初始ID
-     * @param ids 电机ID列表
+     * @brief S2325电机类
      */
     S2325(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs_)[N])
         : DMMotorBase<N>(Init_id, ids, send_idxs_, Parameters(-12.5, 12.5, -200, 200, -10, 10, 0.0, 500, 0.0, 5.0))
