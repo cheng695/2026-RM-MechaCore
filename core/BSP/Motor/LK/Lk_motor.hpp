@@ -2,9 +2,13 @@
 #define LK_MOTOR_HPP
 
 #pragma once
-
-#include "../MotorBase.hpp"
-#include "core/HAL/CAN/can_hal.hpp"
+//fix：修复上传错误
+#include "../BSP/Motor/MotorBase.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../HAL/CAN/can_hal.hpp"
+#define PI 3.14159265358979323846
+namespace BSP::Motor::LK
+{
 
 namespace BSP::Motor::LK
 {
@@ -128,27 +132,122 @@ namespace BSP::Motor::LK
 
     public:
         /**
-         * @brief 解析CAN数据
-         */
-        void Parse(const HAL::CAN::Frame &frame) override
-        {
-            for (uint8_t i = 0; i < N; ++i)
-            {
-                if (frame.id == init_address + recv_idxs_[i])
-                {
-                    const uint8_t* pData = frame.data;
-                        
-                    feedback_[i].cmd = pData[0];
-                    feedback_[i].temperature = pData[1];
-                    feedback_[i].current = (int16_t)((pData[3] << 8) | pData[2]);
-                    feedback_[i].velocity = (int16_t)((pData[5] << 8) | pData[4]);
-                    feedback_[i].angle = (uint16_t)((pData[7] << 8) | pData[6]);
+     * @brief 设置发送数据
+     * 
+     * @param data 数据发送的数据
+     * @param id 电机ID
+     */
+    void setCAN(int16_t data, int id)
+    {
+        // LK电机发送格式与DJI不同，需要根据具体命令调整
+        // 这里先使用类似DJI的格式
+        msd[(id - 1) * 2] = data >> 8;
+        msd[(id - 1) * 2 + 1] = data << 8 >> 8;
+    }
 
-                    Configure(i);
-                    this->updateTimestamp(i + 1);
-                }
-            }
-        }
+    /**
+     * @brief 发送Can数据
+     * 
+     * @param han Can句柄
+     * @param pTxMailbox 邮箱
+     */
+    void sendCAN(uint8_t id, uint8_t pTxMailbox)
+    {
+        this->send_can_frame(send_idxs_[id - 1], msd, 8, pTxMailbox);
+    }
+    /**
+     * @brief 使能电机
+     * 
+     * @param hcan CAN句柄
+     */
+    void ON(uint8_t id)
+    {
+        uint8_t data[8] = {0x88};
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
+    }
+
+    /**
+     * @brief 失能电机
+     * 
+     * @param hcan CAN句柄
+     */
+    void OFF(uint8_t id)
+    {
+        uint8_t data[8] = {0x81};
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
+    }
+
+    /**
+     * @brief 清除错误
+     * 
+     * @param hcan CAN句柄
+     */
+    void clear_err(uint8_t id)
+    {
+        uint8_t data[8] = {0x9B};
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
+    }
+
+    /**
+     * @brief 位置控制
+     * 
+     * @param hcan CAN句柄
+     * @param angle 目标角度（度）
+     * @param speed 速度限制（RPM）
+     * @param id 电机ID
+     */
+    void SetPositionCtrl(uint8_t id, int32_t angle, uint16_t speed)
+    {
+        uint8_t data[8];
+        uint32_t encoder_value = angle * 100; // 根据实际转换关系调整
+        
+        data[0] = 0xA4;
+        data[1] = 0x00;
+        data[2] = speed & 0xFF;
+        data[3] = (speed >> 8) & 0xFF;
+        data[4] = encoder_value & 0xFF;
+        data[5] = (encoder_value >> 8) & 0xFF;
+        data[6] = (encoder_value >> 16) & 0xFF;
+        data[7] = (encoder_value >> 24) & 0xFF;
+
+        this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
+    }
+
+    /**
+     * @brief 扭矩控制
+     * 
+     * @param hcan CAN句柄
+     * @param torque 目标扭矩
+     * @param id 电机ID
+     */
+    void SetTorqueCtrl(uint8_t id, int16_t torque)
+    {
+        if (torque > 2048) torque = 2048;
+        if (torque < -2048) torque = -2048;
+        uint8_t data[8];
+        
+        data[0] = 0xA1;
+        data[1] = 0x00;
+        data[2] = 0x00;
+        data[3] = 0x00;
+        data[4] = torque & 0xFF;
+        data[5] = (torque >> 8) & 0xFF;
+        data[6] = 0x00;
+        data[7] = 0x00;
+
+       this->send_can_frame(init_address + send_idxs_[id - 1], data, 8);
+    }
+
+    /**
+     * @brief 获取多圈角度
+     * 
+     * @param id 电机ID
+     * @return float 多圈角度（度）
+     */
+    float getMultiAngle(uint8_t id)
+    {
+        return multi_angle_data_[id].total_angle;
+    }
 
         /**
          * @brief LK电机的位置控制方法
