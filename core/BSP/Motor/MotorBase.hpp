@@ -3,8 +3,8 @@
 //fix：修复上传错误
 #pragma once
 
-#include "core/BSP/Common/StateWatch/state_watch.hpp"
-#include "core/HAL/CAN/can_hal.hpp"
+#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../user/core/HAL/CAN/can_hal.hpp"
 
 namespace BSP::Motor
 {

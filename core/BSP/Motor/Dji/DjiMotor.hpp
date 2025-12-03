@@ -67,7 +67,6 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
         for (uint8_t i = 0; i < N; ++i)
         {
             recv_idxs_[i] = recv_idxs[i];
-            motor_state_[i] = BSP::WATCH_STATE::StateWatch(1000);
         }
         send_idxs_ = send_idxs;
     }
@@ -80,24 +79,23 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      * @param RxHeader  接收数据的句柄
      * @param pData     接收数据的缓冲区
      */
-    void Parse(const CAN_RxHeaderTypeDef RxHeader, const uint8_t *pData)
+    void Parse(const HAL::CAN::Frame &frame) override
     {
-        const uint16_t received_id = HAL::CAN::ICanDevice::extract_id(RxHeader);
+        const uint16_t received_id = frame.id;
 
         for (uint8_t i = 0; i < N; ++i)
         {
             if (received_id == init_address + recv_idxs_[i])
             {
-                memcpy(&feedback_[i], pData, sizeof(DjiMotorfeedback));
+                memcpy(&feedback_[i], frame.data, sizeof(DjiMotorfeedback));
 
                 feedback_[i].angle = __builtin_bswap16(feedback_[i].angle);
                 feedback_[i].velocity = __builtin_bswap16(feedback_[i].velocity);
                 feedback_[i].current = __builtin_bswap16(feedback_[i].current);
 
                 Configure(i);
-                this->state_watch_[i].updateTimestamp();
-                this->state_watch_[i].check();
 
+                this->updateTimestamp(i + 1);
             }
         }
     }
@@ -110,8 +108,8 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void setCAN(int16_t data, int id)
     {
-        msd[(id - 1) * 2] = data >> 8;
-        msd[(id - 1) * 2 + 1] = data << 8 >> 8;
+        msd.data[(id - 1) * 2] = data >> 8;
+        msd.data[(id - 1) * 2 + 1] = data << 8 >> 8;
     }
 
     /**
@@ -121,7 +119,15 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
      */
     void sendCAN(uint32_t pTxMailbox)
     {
-        this->send_can_frame(send_idxs_, msd, 8, pTxMailbox);
+        // 修改此处以适应新的CAN接口
+        HAL::CAN::Frame frame;
+        frame.id = send_idxs_;
+        frame.dlc = 8;
+        memcpy(frame.data, msd.data, 8);
+        frame.is_extended_id = false;
+        frame.is_remote_frame = false;
+        
+        HAL::CAN::get_can_bus_instance().get_can1().send(frame);
     }
 
   protected:
@@ -194,7 +200,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
     DjiMotorfeedback feedback_[N]; // 反馈数据
     uint8_t recv_idxs_[N];         // ID索引
     uint32_t send_idxs_;
-    uint8_t msd[8];
+    HAL::CAN::Frame msd;
 
 
 
@@ -286,7 +292,7 @@ template <uint8_t N> class GM6020 : public DjiMotorBase<N>
  *
  */
 
-inline GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
+// inline GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
 
 
 } // namespace BSP::Motor::Dji
