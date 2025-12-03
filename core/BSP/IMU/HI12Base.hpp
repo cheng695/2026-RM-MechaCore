@@ -1,8 +1,7 @@
 #ifndef HI12BASE_HPP
 #define HI12BASE_HPP 
 
-#include "core/BSP/Common/StateWatch/state_watch.hpp"
-#include "core/HAL/UART/uart_hal.hpp"
+#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
 #include <string.h>
 
 namespace BSP::IMU
@@ -45,19 +44,20 @@ namespace BSP::IMU
 
             void crc16_update(uint16_t *currentCrc, const uint8_t *src, uint32_t lengthInBytes)
             {
-                uint32_t crc = *currentCrc;  // 使用32位中间变量
+                uint16_t crc = *currentCrc;  // 使用16位，不是32位！
                 for (uint32_t j = 0; j < lengthInBytes; ++j)
                 {
-                    uint32_t byte = src[j];
-                    crc ^= (byte << 8);  // 明确的括号
+                    crc ^= (src[j] << 8);  // 将字节左移8位后异或
                     for (uint32_t i = 0; i < 8; ++i)
                     {
-                        uint32_t temp = crc << 1;  // 使用临时变量
-                        if (crc & 0x8000)
+                        if (crc & 0x8000)  // 检查最高位
                         {
-                            temp ^= 0x1021;  // 修正异或操作
+                            crc = (crc << 1) ^ 0x1021;
                         }
-                        crc = temp;
+                        else
+                        {
+                            crc <<= 1;
+                        }
                     }
                 }
                 *currentCrc = crc;
