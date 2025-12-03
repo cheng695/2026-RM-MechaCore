@@ -1,5 +1,5 @@
 #pragma once
-//fix：修复上传错误
+//1111fix：修复上传错误
 #include "../MotorBase.hpp"
 #include "core/BSP/Common/StateWatch/state_watch.hpp"
 #include "../../../HAL/CAN/can_hal.hpp"
@@ -236,14 +236,13 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param motor_index 电机序号从1开始
      * @param _vel 给定速度
      */
-    void ctrl_Motor(uint8_t motor_index, float _vel)
+    void ctrl_Motor(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _vel)
     {
         DM_Vel vel;
         vel.vel_tmp = _vel;
 
-            pbuf = (uint8_t*)&_pos;
-            vbuf = (uint8_t*)&_vel;
-
+        this->send_can_frame(init_address + send_idxs_[motor_index - 1], &vel, 8, CAN_TX_MAILBOX1);
+    }
     /**
      * @brief 使能DM电机
      *
@@ -320,21 +319,11 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
         float vel_tmp;
     };
 
-            uint8_t send_data[8] = {0xFD, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
-        }
-
-        /**
-         * @brief 清除DM电机错误
-         */
-        void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
-        {
-            if (motor_index < 1 || motor_index > N) return;
-
     DMMotorfeedback feedback_[N]; // 国际单位数据
     Parameters params_;           // 转国际单位参数列表
     uint8_t send_data[8];
 };
+
 
     /**
      * @brief dji电机构造函数
@@ -342,6 +331,20 @@ template <uint8_t N> class DMMotorBase : public MotorBase<N>
      * @param Init_id 初始ID
      * @param ids 电机ID列表
      * @param send_idxs_ 电机发送ID列表
+     */
+template <uint8_t N> class J4310 : public DMMotorBase<N>
+{
+  private:
+    // // 定义参数生成方法
+    // Parameters GetParameters() override
+    // {
+    //     return DMMotorBase<N>::CreateParams(-12.56, 12.56, -30, 30, -10, 10, 0.0, 500, 0.0, 5.0);
+    // }
+
+  public:
+    // 子类构造时传递参数
+    /**
+     * @brief S2325电机类
      */
     J4310(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs_)[N])
         : DMMotorBase<N>(Init_id, ids, send_idxs_, Parameters(-12.56, 12.56, -30, 30, -3, 3, 0.0, 500, 0.0, 5.0))
@@ -378,3 +381,4 @@ inline J4310<1> Motor4310(0x00, {2}, {1});
 inline S2325<2> Motor2325(0x00, {1,2}, {0x201,0x202});
 
 } // namespace BSP::Motor::DM
+
