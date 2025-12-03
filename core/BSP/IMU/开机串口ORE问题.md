@@ -8,10 +8,10 @@
 堆栈溢出问题。
 
 ## 问题发现过程：
-- 逐个串口进行接收，发现是陀螺仪的串口有问题。
-- 发现每次ORE都会出现一个共同的状况，就是陀螺仪的接收数组出现错帧。
-- 把数据处理前面的判断条件（帧头，crc校验）全部注释掉，发现基本没有出现ORE问题。
-- 逐步放开注释，发现是CRC校验函数出现问题。
+- #### 逐个串口进行接收，发现是陀螺仪的串口有问题。
+- #### 发现每次ORE都会出现一个共同的状况，就是陀螺仪的接收数组出现错帧。
+- #### 把数据处理前面的判断条件（帧头，crc校验）全部注释掉，发现基本没有出现ORE问题。
+- #### 逐步放开注释，发现是CRC校验函数出现问题。
 ```c++
 void crc(uint8_t *pData)
 {
@@ -30,15 +30,19 @@ void crc(uint8_t *pData)
     }
 }
 ```
-- 逐步开放注释CRC函数中的函数，发现以下函数都没有出现问题。
+- #### 逐步开放注释CRC函数中的函数，发现以下函数都没有出现问题。
 ```c++
     payload_len = Length1 + (Length2 << 8);
     crc_calculated = 0;
     crc16_update(&crc_calculated, pData, 4);
 ```
-- 直到开放`crc16_update(&crc_calculated, pData + payload_len);`函数时就出现了ORE问题。
-- 观察`payload_len`这个变量，发现当错帧时其去到了-15872，也就是![alt text](image-2.png)
-### 结论：由于数据错帧，导致CRC校验中的这个`payload_len`变量的值变得特别大，造成访问区域出现问题，最终导致堆栈溢出。
+- #### 直到开放`crc16_update(&crc_calculated, pData + payload_len);`函数时就出现了ORE问题。
+![alt text](image.png)
+- #### 观察`payload_len`这个变量，发现当错帧时其去到了-15872，也就是说
+![alt text](ba30ceb39f6440e08a8b5621f07ac1f5.png)
+
+
+## 结论：由于数据错帧，导致CRC校验中的这个`payload_len`变量的值变得特别大，造成访问区域出现问题，最终导致堆栈溢出。
   
 ## 问题解决方法：
 
