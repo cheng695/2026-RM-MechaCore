@@ -1,0 +1,121 @@
+T5344 000:196.507   SEGGER J-Link V8.92 Log File
+T5344 000:196.624   DLL Compiled: Dec  3 2025 16:42:11
+T5344 000:196.629   Logging started @ 2025-12-06 09:58
+T5344 000:196.633   Process: F:\keil5\UV4\UV4.exe
+T5344 000:196.643 - 196.638ms 
+T5344 000:196.654 JLINK_SetWarnOutHandler(...)
+T5344 000:196.659 - 0.007ms 
+T5344 000:196.666 JLINK_OpenEx(...)
+T5344 000:203.736   Firmware: J-Link V9 compiled May  7 2021 16:26:12
+T5344 000:204.978   Firmware: J-Link V9 compiled May  7 2021 16:26:12
+T5344 000:205.209   Decompressing FW timestamp took 100 us
+T5344 000:212.123   Hardware: V9.70
+T5344 000:212.137   S/N: 602712415
+T5344 000:212.143   OEM: SEGGER
+T5344 000:212.148   Feature(s): GDB, RDI, FlashBP, FlashDL, JFlash
+T5344 000:213.246   Bootloader: (FW returned invalid version)
+T5344 000:214.568   TELNET listener socket opened on port 19021
+T5344 000:214.664   WEBSRV WEBSRV_Init(): Starting webserver thread(s)
+T5344 000:214.772   WEBSRV Failed to put socket into listener state (port 19080)
+T5344 000:214.885   WEBSRV Webserver running on local port 19081
+T5344 000:214.956   Looking for J-Link GUI Server exe at: F:\keil5\ARM\Segger\JLinkGUIServer.exe
+T5344 000:215.036   Looking for J-Link GUI Server exe at: C:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+T5344 000:215.063   Forking J-Link GUI Server: C:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+T5344 000:219.098   J-Link GUI Server info: "J-Link GUI server V8.92 "
+T5344 000:219.418 - 22.746ms returns "O.K."
+T5344 000:219.444 JLINK_GetEmuCaps()
+T5344 000:219.452 - 0.006ms returns 0xB9FF7BBF
+T5344 000:219.462 JLINK_TIF_GetAvailable(...)
+T5344 000:219.877 - 0.416ms 
+T5344 000:219.894 JLINK_SetErrorOutHandler(...)
+T5344 000:219.899 - 0.004ms 
+T5344 000:219.928 JLINK_ExecCommand("ProjectFile = "F:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_C_board\MDK-ARM\JLinkSettings.ini"", ...). 
+T5344 000:232.059   Ref file found at: F:\keil5\ARM\Segger\JLinkDevices.ref
+T5344 000:232.165   REF file references invalid XML file: C:\Program Files\SEGGER\JLink\JLinkDevices.xml
+T5344 000:233.062 - 13.134ms returns 0x00
+T5344 000:233.097 JLINK_ExecCommand("Device = STM32F407IGHx", ...). 
+T5344 000:233.793   Device "STM32F407IG" selected.
+T5344 000:234.113 - 1.000ms returns 0x00
+T5344 000:234.128 JLINK_ExecCommand("DisableConnectionTimeout", ...). 
+T5344 000:234.140   ERROR: Unknown command
+T5344 000:234.147 - 0.012ms returns 0x01
+T5344 000:234.155 JLINK_GetHardwareVersion()
+T5344 000:234.160 - 0.004ms returns 97000
+T5344 000:234.166 JLINK_GetDLLVersion()
+T5344 000:234.171 - 0.005ms returns 89200
+T5344 000:234.178 JLINK_GetOEMString(...)
+T5344 000:234.185 JLINK_GetFirmwareString(...)
+T5344 000:234.189 - 0.005ms 
+T5344 000:234.198 JLINK_GetDLLVersion()
+T5344 000:234.203 - 0.004ms returns 89200
+T5344 000:234.209 JLINK_GetCompileDateTime()
+T5344 000:234.213 - 0.005ms 
+T5344 000:234.220 JLINK_GetFirmwareString(...)
+T5344 000:234.225 - 0.004ms 
+T5344 000:234.232 JLINK_GetHardwareVersion()
+T5344 000:234.237 - 0.005ms returns 97000
+T5344 000:234.242 JLINK_GetSN()
+T5344 000:234.247 - 0.004ms returns 602712415
+T5344 000:234.254 JLINK_GetOEMString(...)
+T5344 000:234.265 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+T5344 000:235.831 - 1.566ms returns 0x00
+T5344 000:235.850 JLINK_HasError()
+T5344 000:235.863 JLINK_SetSpeed(5000)
+T5344 000:236.205 - 0.343ms 
+T5344 000:236.621 JLINK_GetId()
+T5344 000:237.046   InitTarget() start
+T5344 000:237.059    J-Link Script File: Executing InitTarget()
+T5344 000:237.365   SWD selected. Executing JTAG -> SWD switching sequence.
+T5344 000:239.927   DAP initialized successfully.
+T5344 000:248.172   InitTarget() end - Took 11.1ms
+T5344 000:249.047   Found SW-DP with ID 0x2BA01477
+T5344 000:251.884   DPIDR: 0x2BA01477
+T5344 000:251.900   CoreSight SoC-400 or earlier
+T5344 000:251.907   Scanning AP map to find all available APs
+T5344 000:252.694   AP[1]: Stopped AP scan as end of AP map has been reached
+T5344 000:252.703   AP[0]: AHB-AP (IDR: 0x24770011, ADDR: 0x00000000)
+T5344 000:252.709   Iterating through AP map to find AHB-AP to use
+T5344 000:253.857   AP[0]: Core found
+T5344 000:253.871   AP[0]: AHB-AP ROM base: 0xE00FF000
+T5344 000:254.458   CPUID register: 0x410FC241. Implementer code: 0x41 (ARM)
+T5344 000:254.474   Found Cortex-M4 r0p1, Little endian.
+T5344 000:255.237   -- Max. mem block: 0x00010C40
+T5344 000:256.003   CPU_ReadMem(4 bytes @ 0xE000EDF0)
+T5344 000:256.487   CPU_ReadMem(4 bytes @ 0xE0002000)
+T5344 000:256.980   FPUnit: 6 code (BP) slots and 2 literal slots
+T5344 000:256.991   CPU_ReadMem(4 bytes @ 0xE000EDFC)
+T5344 000:257.467   CPU_WriteMem(4 bytes @ 0xE000EDFC)
+T5344 000:257.866   CPU_ReadMem(4 bytes @ 0xE0001000)
+T5344 000:258.346   CPU_WriteMem(4 bytes @ 0xE0001000)
+T5344 000:258.732   CPU_ReadMem(4 bytes @ 0xE000ED88)
+T5344 000:259.228   CPU_WriteMem(4 bytes @ 0xE000ED88)
+T5344 000:259.612   CPU_ReadMem(4 bytes @ 0xE000ED88)
+T5344 000:260.147   CPU_WriteMem(4 bytes @ 0xE000ED88)
+T5344 000:260.655   CoreSight components:
+T5344 000:260.667   ROMTbl[0] @ E00FF000
+T5344 000:260.674   CPU_ReadMem(64 bytes @ 0xE00FF000)
+T5344 000:261.351   CPU_ReadMem(32 bytes @ 0xE000EFE0)
+T5344 000:261.848   [0][0]: E000E000 CID B105E00D PID 000BB00C SCS-M7
+T5344 000:261.855   CPU_ReadMem(32 bytes @ 0xE0001FE0)
+T5344 000:262.339   [0][1]: E0001000 CID B105E00D PID 003BB002 DWT
+T5344 000:262.347   CPU_ReadMem(32 bytes @ 0xE0002FE0)
+T5344 000:262.829   [0][2]: E0002000 CID B105E00D PID 002BB003 FPB
+T5344 000:262.836   CPU_ReadMem(32 bytes @ 0xE0000FE0)
+T5344 000:263.343   [0][3]: E0000000 CID B105E00D PID 003BB001 ITM
+T5344 000:263.351   CPU_ReadMem(32 bytes @ 0xE0040FE0)
+T5344 000:263.829   [0][4]: E0040000 CID B105900D PID 000BB9A1 TPIU
+T5344 000:263.835   CPU_ReadMem(32 bytes @ 0xE0041FE0)
+T5344 000:264.333   [0][5]: E0041000 CID B105900D PID 000BB925 ETM
+T5344 000:264.801 - 28.179ms returns 0x2BA01477
+T5344 000:271.258 JLINK_GetFirmwareString(...)
+T5344 000:271.280 - 0.022ms 
+T5344 004:020.915 JLINK_Close()
+T5344 004:023.834   OnDisconnectTarget() start
+T5344 004:023.858    J-Link Script File: Executing OnDisconnectTarget()
+T5344 004:023.890   CPU_WriteMem(4 bytes @ 0xE0042004)
+T5344 004:024.350   CPU_WriteMem(4 bytes @ 0xE0042008)
+T5344 004:024.875   OnDisconnectTarget() end - Took 1.01ms
+T5344 004:024.889   CPU_ReadMem(4 bytes @ 0xE0001000)
+T5344 004:035.085 - 14.169ms
+T5344 004:035.104   
+T5344 004:035.109   Closed
