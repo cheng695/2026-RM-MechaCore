@@ -1,5 +1,5 @@
-#ifndef OmniCalculation_HPP
-#define OmniCalculation_HPP
+#ifndef STRINGWHEEL_HPP
+#define STRINGWHEEL_HPP
 
 #include "../user/core/Alg/ChassisCalculation/CalculationBase.hpp"
 #include <math.h>
@@ -13,19 +13,19 @@ namespace Alg::CalculationBase
      * 根据四个全向轮的转速计算底盘的运动状态（速度和角速度）
      * 继承自ForwardKinematicsBase类
      */
-    class Omni_FK : public ForwardKinematicsBase
+    class String_FK : public ForwardKinematicsBase
     {
         public:
             /**
              * @brief 构造函数
-             * @param r 中心投影点到轮子投影点的距离
+             * @param r 投影带你距离盘中心
              * @param s 轮子半径
              */
-            Omni_FK(float r = 1.0f, float s = 1.0f) 
+            String_FK(float r = 1.0f, float s = 1.0f) 
                 : R(r), S(s), ChassisVx(0.0f), ChassisVy(0.0f), ChassisVw(0.0f) 
             {
-                sqrt2_S_over_4 = 1.41421356237f * R / 4.0f;
-                S_over_4R = R / (4.0f * S);
+                sqrt2_S_over_4 = 1.41421356237f * S / 4.0f;
+                S_over_4R = S / (4.0f * R);
             }
 
             /**
@@ -186,7 +186,7 @@ namespace Alg::CalculationBase
      * 根据期望的底盘运动状态计算每个轮子的目标速度
      * 继承自InverseKinematicsBase类
      */
-    class Omni_IK : public InverseKinematicsBase
+    class String_IK : public InverseKinematicsBase
     {
         public:
             /**
@@ -194,13 +194,13 @@ namespace Alg::CalculationBase
              * @param r 轮子投影点到中心距离
              * @param s 轮子半径
              */
-            Omni_IK(float r = 1.0f, float s = 1.0f) 
+            String_IK(float r = 1.0f, float s = 1.0f) 
                 : R(r), S(s) 
             {
-                sqrt2_2 = 1.414f / 2.0f;
                 for(int i = 0; i < 4; i++)
                 {
-                    Motor[i] = 0.0f;
+                    Motor_wheel[i] = 0.0f;
+                    Motor_direction[i] = 0.0f;
                 }
             }
 
@@ -224,10 +224,30 @@ namespace Alg::CalculationBase
              */
             void InvKinematics()
             {   
-                Motor[0] = (-sqrt2_2 * Vx + sqrt2_2 * Vy + Vw*R)/S;
-                Motor[1] = (-sqrt2_2 * Vx - sqrt2_2 * Vy + Vw*R)/S;
-                Motor[2] = ( sqrt2_2 * Vx - sqrt2_2 * Vy + Vw*R)/S;
-                Motor[3] = ( sqrt2_2 * Vx + sqrt2_2 * Vy + Vw*R)/S;
+                for (int i = 0; i < 4; i++)
+                {
+                    float tmp_velocity_x, tmp_velocity_y, tmp_velocity_modulus;
+
+                    tmp_velocity_x = Vx - Vw * Wheel_To_Core_Distance[i] * sinf(Wheel_Azimuth[i]);
+                    tmp_velocity_y = Vy + Vw * Wheel_To_Core_Distance[i] * cosf(Wheel_Azimuth[i]);
+                    tmp_velocity_modulus = sqrtf(tmp_velocity_x * tmp_velocity_x + tmp_velocity_y * tmp_velocity_y) / S;
+
+                    Motor_wheel[i] = tmp_velocity_modulus * 60.0f / (2.0f * 3.14159265358979f); // rad/s转RPM
+
+                    // 根据速度的xy分量分别决定舵向电机角度
+                    if (tmp_velocity_modulus == 0.0f)
+                    {
+                        // 排除除零问题，保持当前角度
+                        Motor_direction[i] = current_steer_angles[i];
+                    }
+                    else
+                    {
+                        // 没有除零问题
+                        Motor_direction[i] = atan2f(tmp_velocity_y, tmp_velocity_x);
+                    }
+                }
+                // 执行就近转位
+                _Steer_Motor_Kinematics_Nearest_Transposition();
             }
 
             /**
@@ -289,8 +309,10 @@ namespace Alg::CalculationBase
             float Vw{0.0f};       // 角速度分量
             float R;              // 轮子投影点到中心距离
             float S;              // 轮子半径
-            float Motor[4];       // 四个电机的目标速度
-            float sqrt2_2;        // 预计算值: sqrt(2)/2
+            float Motor_wheel[4]; // 轮向电机的目标速度
+            float Motor_direction[4];   // 舵向电机的旋转方向
+            const float Wheel_Azimuth[4] = {0, M_PI/2, M_PI, 3*M_PI/2}; // 轮安装方位角（弧度）
+            float current_steer_angles[4] = {0};  // 当前舵向电机角度
     };
 }
 
