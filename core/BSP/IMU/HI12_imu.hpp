@@ -19,7 +19,7 @@ namespace BSP::IMU
              * @param huart UART句柄，用于与IMU传感器通信
              */
             HI12_float() 
-                : offset(6), acc{0}, gyro{0}, angle{0}, quaternion{0}
+                : offset(6), acc{0}, gyro{0}, angle{0}, quaternion{0}, last_angle(0), add_angle(0)
             {
             }
 
@@ -105,6 +105,16 @@ namespace BSP::IMU
             }
 
             /**
+             * @brief 获取角速度数据
+             * @param index 索引值 (0:x轴, 1:y轴, 2:z轴)
+             * @return 对应轴的角速度值 (单位: rpm)
+             */
+            float GetGyroRPM(int index)
+            {
+                return gyro[index] / 6.0f;
+            }
+
+            /**
              * @brief 获取角度数据
              * @param index 索引值 (0:roll, 1:pitch, 2:yaw)
              * @return 对应轴的角度值 (单位: °)
@@ -143,12 +153,36 @@ namespace BSP::IMU
             {
                 return angle[2] + 180.0f;
             }
+
+            /**
+             * @brief 获取累计Yaw角度数据(0-360)
+             * @return 对应轴的累计角度值 (单位: °)
+             * 
+             */
+            float GetAddYaw()
+            {
+                float lastData = this->last_angle;
+                float Data = this->angle[2] + 180.0f;
+
+                if (Data - lastData < -180) // 正转
+                    this->add_angle += (360 - lastData + Data);
+                else if (Data - lastData > 180) // 反转
+                    this->add_angle += -(360 - Data + lastData);
+                else
+                    this->add_angle += (Data - lastData);
+
+                this->last_angle = Data;
+
+                return this->add_angle;
+            }
         private:
             int offset;              ///< 数据偏移量
             float acc[3];            ///< 加速度数据 [x, y, z]
             float gyro[3];           ///< 角速度数据 [x, y, z]
             float angle[3];          ///< 欧拉角数据 [roll, pitch, yaw]
             float quaternion[4];     ///< 四元数数据 [w, x, y, z]
+            float last_angle;
+            float add_angle;
     };
 
     /**

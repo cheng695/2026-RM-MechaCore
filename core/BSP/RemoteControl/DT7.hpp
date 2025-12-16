@@ -6,7 +6,8 @@
 // =======================================================================================================
 // 头文件包含
 // =======================================================================================================
-#include "../Common/StateWatch/state_watch.hpp"
+#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 #include <stdint.h>
 #include <algorithm>
 
@@ -45,6 +46,7 @@ namespace BSP::REMOTE_CONTROL
             int16_t left_stick_y;  // 左摇杆Y坐标（已减去中值）
             int16_t right_stick_x; // 右摇杆X坐标（已减去中值）
             int16_t right_stick_y; // 右摇杆Y坐标（已减去中值）
+            int16_t scroll;
         };
 
         // 摇杆位置（每轴 -1.0~1.0）
@@ -143,6 +145,10 @@ namespace BSP::REMOTE_CONTROL
         {
             statewatch_.UpdateTime();
             statewatch_.CheckStatus();
+            if(statewatch_.GetStatus() == BSP::WATCH_STATE::Status::OFFLINE)
+            {
+                BSP::WATCH_STATE::BuzzerManagerSimple::getInstance().requestRemoteRing();
+            }
             return statewatch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
         }
         

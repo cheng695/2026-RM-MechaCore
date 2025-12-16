@@ -2,6 +2,7 @@
 #define HI12BASE_HPP 
 
 #include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 #include <string.h>
 
 namespace BSP::IMU
@@ -9,7 +10,7 @@ namespace BSP::IMU
     class HI12Base
     {
         public:
-            HI12Base(int timeThreshold = 100) : state_watch_(timeThreshold) 
+            HI12Base(int timeThreshold = 100) : statewatch_(timeThreshold) 
             {
             }
             virtual ~HI12Base() = default;
@@ -104,14 +105,18 @@ namespace BSP::IMU
             
             void updateTimestamp()
             {
-                state_watch_.UpdateLastTime();
+                statewatch_.UpdateLastTime();
             }
 
             bool isConnected()
             {
-                state_watch_.UpdateTime();
-                state_watch_.CheckStatus();
-                return state_watch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
+                statewatch_.UpdateTime();
+                statewatch_.CheckStatus();
+                if(statewatch_.GetStatus() == BSP::WATCH_STATE::Status::OFFLINE)
+                {
+                    BSP::WATCH_STATE::BuzzerManagerSimple::getInstance().requestIMURing();
+                }
+                return statewatch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
             }
 
             void SetUart(UART_HandleTypeDef *huart)
@@ -159,7 +164,7 @@ namespace BSP::IMU
             }
 
         private:
-            BSP::WATCH_STATE::StateWatch state_watch_;
+            BSP::WATCH_STATE::StateWatch statewatch_;
             UART_HandleTypeDef *huart_;
             uint8_t Header1;
             uint8_t Header2;
