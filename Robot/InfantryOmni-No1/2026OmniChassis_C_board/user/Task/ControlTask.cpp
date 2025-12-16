@@ -1,5 +1,4 @@
 #include "ControlTask.hpp"
-#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"  
 
 Class_FSM chassis_fsm;   
 Alg::CalculationBase::Omni_IK omni_ik(1, 1);
@@ -75,7 +74,7 @@ void chassis_not_follow()
     }
 }
 
-float target_yaw = 0.0f;
+
 extern "C"{
 void Control(void const * argument)
 {
@@ -88,9 +87,8 @@ void Control(void const * argument)
         // 更新蜂鸣器管理器，处理队列中的响铃请求
         BSP::WATCH_STATE::BuzzerManagerSimple::getInstance().update();
         
-        //main_loop(DT7.get_s1(), DT7.get_s2(), check_online());
-        target_yaw += DT7.get_left_x();
-        yaw_pid.UpDate(target_yaw, Motor6020.getAddAngleDeg(1));
+        main_loop(DT7.get_s1(), DT7.get_s2(), check_online());
+
         osDelay(1);
     } 
 }
