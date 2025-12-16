@@ -62,14 +62,14 @@ namespace BSP::Motor::DM
         /**
          * @brief 构造函数
          */
-        DMMotorBase(uint16_t Init_id, const uint8_t (&recv_ids)[N], uint32_t send_ids, Parameters params)
+        DMMotorBase(uint16_t Init_id, const uint8_t (&recv_ids)[N], const uint32_t (&send_ids)[N], Parameters params)
             : init_address(Init_id), params_(params)
         {
             for (uint8_t i = 0; i < N; ++i)
             {
                 recv_idxs_[i] = recv_ids[i];
+                send_idxs_[i] = send_ids[i];
             }
-            send_idxs_ = send_ids;
         }
 
     private:
@@ -141,7 +141,7 @@ namespace BSP::Motor::DM
         /**
          * @brief DM电机的MIT控制方法
          */
-        void ctrl_Mit(float _pos, float _vel, 
+        void ctrl_Mit(uint8_t id, float _pos, float _vel, 
                 float _KP, float _KD, float _torq)
         {
             uint16_t pos_tmp, vel_tmp, kp_tmp, kd_tmp, tor_tmp;
@@ -162,7 +162,7 @@ namespace BSP::Motor::DM
             send_data[7] = tor_tmp;
 
             HAL::CAN::Frame frame;
-            frame.id = send_idxs_;
+            frame.id = send_idxs_[id - 1];
             frame.dlc = 8;
             memcpy(frame.data, send_data, sizeof(send_data));
             frame.is_extended_id = false;
@@ -175,7 +175,7 @@ namespace BSP::Motor::DM
         /**
          * @brief DM电机的角度速度控制方法
          */
-        void ctrl_AngleVelocity(float _pos, float _vel)
+        void ctrl_AngleVelocity(uint8_t id, float _pos, float _vel)
         {
             uint8_t data[8];
             uint8_t *pbuf, *vbuf;
@@ -190,7 +190,7 @@ namespace BSP::Motor::DM
             }
 
             HAL::CAN::Frame frame;
-            frame.id = 0X100 + send_idxs_;
+            frame.id = 0X100 + send_idxs_[id - 1];
             frame.dlc = 8;
             memcpy(frame.data, data, sizeof(data));
             frame.is_extended_id = false;
@@ -202,7 +202,7 @@ namespace BSP::Motor::DM
         /**
          * @brief DM电机的速度控制方法
          */
-        void ctrl_Velocity(float _vel)
+        void ctrl_Velocity(uint8_t id, float _vel)
         {
             uint8_t data[8] = {0};
             uint8_t *vbuf = (uint8_t*)&_vel;
@@ -213,7 +213,7 @@ namespace BSP::Motor::DM
             }
 
             HAL::CAN::Frame frame;
-            frame.id = 0X200 + send_idxs_;
+            frame.id = 0X200 + send_idxs_[id - 1];
             frame.dlc = 8;
             memcpy(frame.data, data, sizeof(data));
             frame.is_extended_id = false;
@@ -227,22 +227,22 @@ namespace BSP::Motor::DM
          * @brief 使能DM电机
          * @param mod 模式可以有3种: MIT = 0, ANGLEVELOCITY = 1, VELOCITY = 2
          */
-        void On(Model mod)
+        void On(uint8_t id, Model mod)
         {
             uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC};
             
             HAL::CAN::Frame frame;
             if(mod == Model::MIT)
             {
-                frame.id = send_idxs_;
+                frame.id = send_idxs_[id - 1];
             }
             else if(mod == Model::ANGLEVELOCITY)
             {
-                frame.id = 0x100 + send_idxs_;
+                frame.id = 0x100 + send_idxs_[id - 1];
             }
             else if(mod == Model::VELOCITY)
             {
-                frame.id = 0x200 + send_idxs_;
+                frame.id = 0x200 + send_idxs_[id - 1];
             }
             frame.dlc = 8;
             memcpy(frame.data, send_data, sizeof(send_data));
@@ -256,22 +256,22 @@ namespace BSP::Motor::DM
          * @brief 失能DM电机
          * @param mod 模式可以有3种: MIT = 0, ANGLEVELOCITY = 1, VELOCITY = 2
          */
-        void Off(Model mod)
+        void Off(uint8_t id, Model mod)
         {
             uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD};
 
             HAL::CAN::Frame frame;
             if(mod == Model::MIT)
             {
-                frame.id = send_idxs_;
+                frame.id = send_idxs_[id - 1];
             }
             else if(mod == Model::ANGLEVELOCITY)
             {
-                frame.id = 0x100 + send_idxs_;
+                frame.id = 0x100 + send_idxs_[id - 1];
             }
             else if(mod == Model::VELOCITY)
             {
-                frame.id = 0x200 + send_idxs_;
+                frame.id = 0x200 + send_idxs_[id - 1];
             }
             frame.dlc = 8;
             memcpy(frame.data, send_data, sizeof(send_data));
@@ -285,22 +285,22 @@ namespace BSP::Motor::DM
          * @brief 清除DM电机错误
          * @param mod 模式可以有3种: MIT = 0, ANGLEVELOCITY = 1, VELOCITY = 2
          */
-        void ClearErr(Model mod)
+        void ClearErr(uint8_t id, Model mod)
         {
             uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB};
 
             HAL::CAN::Frame frame;
             if(mod == Model::MIT)
             {
-                frame.id = send_idxs_;
+                frame.id = send_idxs_[id - 1];
             }
             else if(mod == Model::ANGLEVELOCITY)
             {
-                frame.id = 0x100 + send_idxs_;
+                frame.id = 0x100 + send_idxs_[id - 1];
             }
             else if(mod == Model::VELOCITY)
             {
-                frame.id = 0x200 + send_idxs_;
+                frame.id = 0x200 + send_idxs_[id - 1];
             }
             frame.dlc = 8;
             memcpy(frame.data, send_data, sizeof(send_data));
@@ -313,7 +313,7 @@ namespace BSP::Motor::DM
     protected:
         const int16_t init_address;
         uint8_t recv_idxs_[N];
-        uint32_t send_idxs_;
+        uint32_t send_idxs_[N];
         DMMotorfeedback feedback_[N];
         Parameters params_;
     };
@@ -325,7 +325,7 @@ namespace BSP::Motor::DM
     class J4310 : public DMMotorBase<N>
     {
     public:
-        J4310(uint16_t Init_id, const uint8_t (&ids)[N], uint32_t send_idxs)
+        J4310(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
             : DMMotorBase<N>(Init_id, ids, send_idxs, 
                             Parameters(-12.56f, 12.56f, -45.0f, 45.0f, -18.0f, 18.0f, 0.0f, 500.0f, 0.0f, 5.0f))
         {
@@ -339,7 +339,7 @@ namespace BSP::Motor::DM
     class S2325 : public DMMotorBase<N>
     {
     public:
-        S2325(uint16_t Init_id, const uint8_t (&ids)[N], uint32_t send_idxs)
+        S2325(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
             : DMMotorBase<N>(Init_id, ids, send_idxs,
                             Parameters(-12.5f, 12.5f, -50.0f, 50.0f, -10.0f, 10.0f, 0.0f, 500.0f, 0.0f, 5.0f))
         {

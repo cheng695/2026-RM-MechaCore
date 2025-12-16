@@ -55,7 +55,7 @@ void gimbal_stop()
 {
     if(MotorJ4310.getIsenable())
     {
-        MotorJ4310.Off(BSP::Motor::DM::MIT);
+        MotorJ4310.Off(0x01, BSP::Motor::DM::MIT);
         MotorJ4310.setIsenable(false);
     }
     yaw_angle_pid.reset();
@@ -71,7 +71,7 @@ void gimbal_manual()
 {
     if(!MotorJ4310.getIsenable())
     {
-        MotorJ4310.On(BSP::Motor::DM::MIT);
+        MotorJ4310.On(0x01, BSP::Motor::DM::MIT);
         MotorJ4310.setIsenable(true);
     }
     yaw_ladrc.LADRC_1(132.0f*gimbal_target.target_yaw, HI12.GetGyroRPM(2));
@@ -87,7 +87,7 @@ void gimbal_vision()
 {
     if(!MotorJ4310.getIsenable())
     {
-        MotorJ4310.On(BSP::Motor::DM::MIT);
+        MotorJ4310.On(0x01, BSP::Motor::DM::MIT);
         MotorJ4310.setIsenable(true);
     }
     yaw_angle_pid.UpDate(0.01f*gimbal_target.target_yaw, HI12.GetAddYaw());
@@ -218,7 +218,7 @@ void control(void const * argument)
 {
     // 初始化蜂鸣器管理器
     BSP::WATCH_STATE::BuzzerManagerSimple::getInstance().init();
-    MotorJ4310.Off(BSP::Motor::DM::MIT);
+    MotorJ4310.Off(0x01, BSP::Motor::DM::MIT);
     gimbal_target.target_pitch = MotorJ4310.getAddAngleDeg(1);
     gimbal_fsm_init();
     for(;;)

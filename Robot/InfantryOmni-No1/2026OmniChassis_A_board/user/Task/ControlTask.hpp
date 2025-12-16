@@ -11,6 +11,7 @@
 #include "../user/core/Alg/ADRC/adrc.hpp"
 #include "../user/core/BSP/Motor/Dji/DjiMotor.hpp"
 #include "../user/core/BSP/Motor/DM/DmMotor.hpp"
+#include "../user/core/BSP/Motor/LK/Lk_motor.hpp"
 
 typedef struct 
 {
