@@ -3,6 +3,8 @@
 
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
+#include "../user/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_chassis.hpp"
+#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 #include "../user/core/Alg/ChassisCalculation/OmniCalculation.hpp"
 #include "../user/core/Alg/PID/pid.hpp"
 #include "../user/core/BSP/RemoteControl/DT7.hpp"
@@ -10,5 +12,9 @@
 
 extern BSP::REMOTE_CONTROL::RemoteController DT7;
 extern BSP::Motor::Dji::GM3508<4> Motor3508;
+extern BSP::Motor::Dji::GM6020<1> Motor6020;
+
+extern void chassis_stop();
+extern void chassis_not_follow();
 
 #endif
