@@ -18,16 +18,16 @@ UartBus &UartBus::instance()
 
 UartBus::UartBus()
     // 初始化串口1
-    : uart1_(&huart1),
+    : uart6_(&huart6),
       // 初始化串口3
-      uart3_(&huart3),
+      uart7_(&huart7),
       // 初始化串口6
-      uart6_(&huart6)
+      uart8_(&huart8)
 {
     // 注册现有的设备
-    register_device(UartDeviceId::HAL_Uart1, &uart1_);
-    register_device(UartDeviceId::HAL_Uart3, &uart3_);
     register_device(UartDeviceId::HAL_Uart6, &uart6_);
+    register_device(UartDeviceId::HAL_Uart7, &uart7_);
+    register_device(UartDeviceId::HAL_Uart8, &uart8_);
 
     // 这里可以轻松注册更多设备
     // 例如: register_device(UartDeviceId::HAL_Uart2, &uart2_);
@@ -62,7 +62,7 @@ IUartDevice &UartBus::get_device(UartDeviceId id)
     }
 
     // 如果没有可用设备，返回uart1_（保证永远有返回值）
-    return uart1_;
+    return uart6_;
 }
 
 bool UartBus::has_device(UartDeviceId id) const
