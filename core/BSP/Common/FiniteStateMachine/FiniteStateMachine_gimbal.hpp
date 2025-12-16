@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef FINITESTATEMACHINE_CHASSIS_H
-#define FINITESTATEMACHINE_CHASSIS_H
+#ifndef FINITESTATEMACHINE_GIMBAL_H
+#define FINITESTATEMACHINE_GIMBAL_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "stdint.h"
@@ -24,11 +24,11 @@
 /**
  * @brief 底盘状态定义
  */
-enum Enum_Chassis_States
+enum Enum_Gimbal_States
 {
     STOP = 0,      // 停止状态
-    FOLLOW,        // 跟随状态
-    NOTFOLLOW,     // 非跟随状态
+    VISION,        // 视觉状态
+    MANUAL,        // 普通状态
     KEYBOARD,      // 键盘控制状态
     STATUS_COUNT   // 状态数量
 };
@@ -47,14 +47,14 @@ struct Struct_Status
 /**
  * @brief 有限自动机核心 - 基于左右开关状态切换
  */
-class Class_FSM
+class Gimbal_FSM
 {
 public:
     // 状态数组
     Struct_Status Status[STATUS_MAX];
 
     // 当前底盘状态
-    Enum_Chassis_States State_chassis;
+    Enum_Gimbal_States State_gimbal;
 
     /**
      * @brief 初始化状态机
@@ -64,7 +64,7 @@ public:
     /**
      * @brief 获取当前状态
      */
-    inline Enum_Chassis_States Get_Now_State();
+    inline Enum_Gimbal_States Get_Now_State();
 
     /**
      * @brief 获取当前状态名称
@@ -99,7 +99,7 @@ public:
      * @param state 状态
      * @return uint32_t 运行时间
      */
-    uint32_t Get_State_Run_Time(Enum_Chassis_States state);
+    uint32_t Get_State_Run_Time(Enum_Gimbal_States state);
 
     /**
      * @brief 获取状态进入次数
@@ -107,14 +107,14 @@ public:
      * @param state 状态
      * @return uint32_t 进入次数
      */
-    uint32_t Get_State_Enter_Count(Enum_Chassis_States state);
+    uint32_t Get_State_Enter_Count(Enum_Gimbal_States state);
 
     /**
      * @brief 重置状态统计信息
      * 
      * @param state 状态
      */
-    void Reset_State_Statistics(Enum_Chassis_States state);
+    void Reset_State_Statistics(Enum_Gimbal_States state);
 
 private:
     // 左右开关状态
@@ -131,17 +131,17 @@ private:
 /**
  * @brief 获取当前状态
  */
-inline Enum_Chassis_States Class_FSM::Get_Now_State()
+inline Enum_Gimbal_States Gimbal_FSM::Get_Now_State()
 {
-    return State_chassis;
+    return State_gimbal;
 }
 
 /**
  * @brief 获取当前状态名称
  */
-inline const char* Class_FSM::Get_Now_State_Name()
+inline const char* Gimbal_FSM::Get_Now_State_Name()
 {
-    return Status[State_chassis].Name;
+    return Status[State_gimbal].Name;
 }
 
 #endif

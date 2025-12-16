@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef FINITESTATEMACHINE_CHASSIS_H
-#define FINITESTATEMACHINE_CHASSIS_H
+#ifndef FINITESTATEMACHINE_LAUNCH_H
+#define FINITESTATEMACHINE_LAUNCH_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "stdint.h"
@@ -24,19 +24,22 @@
 /**
  * @brief 底盘状态定义
  */
-enum Enum_Chassis_States
+
+enum Enum_Launch_States
 {
-    STOP = 0,      // 停止状态
-    FOLLOW,        // 跟随状态
-    NOTFOLLOW,     // 非跟随状态
-    KEYBOARD,      // 键盘控制状态
-    STATUS_COUNT   // 状态数量
+    LAUNCH_STOP = 0,      // 停止状态
+    LAUNCH_CEASEFIRE,     //停火状态
+    LAUNCH_RAPIDFIRE,     // 连发状态
+    LAUNCH_SINGALSHOT,    // 单发状态
+    LAUNCH_KEYBOARD,      // 键盘控制状态
+    LAUNCH_STATUS_COUNT   // 状态数量
 };
+
 
 /**
  * @brief 状态结构体
  */
-struct Struct_Status
+struct Struct_Status_launch
 {
     const char* Name;           // 状态名称
     uint32_t Enter_Count;       // 进入次数统计
@@ -47,14 +50,14 @@ struct Struct_Status
 /**
  * @brief 有限自动机核心 - 基于左右开关状态切换
  */
-class Class_FSM
+class Launch_FSM
 {
 public:
     // 状态数组
-    Struct_Status Status[STATUS_MAX];
+    Struct_Status_launch Status[STATUS_MAX];
 
     // 当前底盘状态
-    Enum_Chassis_States State_chassis;
+    Enum_Launch_States State_launch;
 
     /**
      * @brief 初始化状态机
@@ -64,7 +67,7 @@ public:
     /**
      * @brief 获取当前状态
      */
-    inline Enum_Chassis_States Get_Now_State();
+    inline Enum_Launch_States Get_Now_State();
 
     /**
      * @brief 获取当前状态名称
@@ -99,7 +102,7 @@ public:
      * @param state 状态
      * @return uint32_t 运行时间
      */
-    uint32_t Get_State_Run_Time(Enum_Chassis_States state);
+    uint32_t Get_State_Run_Time(Enum_Launch_States state);
 
     /**
      * @brief 获取状态进入次数
@@ -107,14 +110,14 @@ public:
      * @param state 状态
      * @return uint32_t 进入次数
      */
-    uint32_t Get_State_Enter_Count(Enum_Chassis_States state);
+    uint32_t Get_State_Enter_Count(Enum_Launch_States state);
 
     /**
      * @brief 重置状态统计信息
      * 
      * @param state 状态
      */
-    void Reset_State_Statistics(Enum_Chassis_States state);
+    void Reset_State_Statistics(Enum_Launch_States state);
 
 private:
     // 左右开关状态
@@ -131,17 +134,17 @@ private:
 /**
  * @brief 获取当前状态
  */
-inline Enum_Chassis_States Class_FSM::Get_Now_State()
+inline Enum_Launch_States Launch_FSM::Get_Now_State()
 {
-    return State_chassis;
+    return State_launch;
 }
 
 /**
  * @brief 获取当前状态名称
  */
-inline const char* Class_FSM::Get_Now_State_Name()
+inline const char* Launch_FSM::Get_Now_State_Name()
 {
-    return Status[State_chassis].Name;
+    return Status[State_launch].Name;
 }
 
 #endif
