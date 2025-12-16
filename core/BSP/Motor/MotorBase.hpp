@@ -1,6 +1,6 @@
 #ifndef MOTOR_BASE_HPP
 #define MOTOR_BASE_HPP
-
+//1111fix：修复上传错误
 #pragma once
 
 #include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
@@ -9,20 +9,16 @@
 
 namespace BSP::Motor
 {
-    template <uint8_t N> class MotorBase
+template <uint8_t N> class MotorBase
+{
+  protected:
+    struct UnitData
     {
-    protected:
-        struct UnitData
-        {
-            double angle_Deg; // 单位度角度
-            double angle_Rad; // 单位弧度角度
+        double angle_Deg; // 单位度角度
+        double angle_Rad; // 单位弧度角度
 
-            double velocity_Rad; // 单位弧度速度
-            double velocity_Rpm; // 单位rpm
-
-            double current_A;     // 单位安培
-            double torque_Nm;     // 单位牛米
-            double temperature_C; // 单位摄氏度
+        double velocity_Rad; // 单位弧度速度
+        double velocity_Rpm; // 单位rpm
 
             double last_angle;  // 上一次位置
             double add_angle;   // 增量位置
@@ -80,18 +76,6 @@ namespace BSP::Motor
                 }
                 return state_watch_[id_state - 1].GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
             }
-            return false;
-        }
-        /**
-         * @brief 获取角度
-         *
-         * @param id can的id号，电机id - 初始id，例如3508的id为0x201，初始id为0x200，则id为0x201 -
-         * 0x200，也就是1,
-         * @return float
-         */
-        float getAngleDeg(uint8_t id)
-        {
-            return this->unit_data_[id - 1].angle_Deg;
         }
 
         /**

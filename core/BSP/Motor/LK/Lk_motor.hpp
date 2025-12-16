@@ -1,6 +1,3 @@
-#ifndef LK_MOTOR_HPP
-#define LK_MOTOR_HPP
-
 #pragma once
 
 #include "../user/core/BSP/Motor/MotorBase.hpp"
@@ -84,46 +81,15 @@ namespace BSP::Motor::LK
             }
         }
 
-    private:
-        void Configure(size_t i)
+        // 初始化电机数据
+        for (uint8_t i = 0; i < N; ++i)
         {
-            const auto &params = params_;
-
-            this->unit_data_[i].angle_Deg = feedback_[i].angle * params.encoder_to_deg;
-            this->unit_data_[i].angle_Rad = this->unit_data_[i].angle_Deg * params.deg_to_rad;
-            this->unit_data_[i].velocity_Rad = feedback_[i].velocity * params.rpm_to_radps;
-            this->unit_data_[i].velocity_Rpm = feedback_[i].velocity * params.encoder_to_rpm;
-            this->unit_data_[i].current_A = feedback_[i].current * params.feedback_to_current_coefficient;
-            this->unit_data_[i].torque_Nm = feedback_[i].current * params.current_to_torque_coefficient;
-            this->unit_data_[i].temperature_C = feedback_[i].temperature;
-
-            // 多圈角度计算
-            if (multi_angle_data_[i].allow_accumulate) 
-            {
-                if (!multi_angle_data_[i].is_initialized)
-                {
-                    multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
-                    multi_angle_data_[i].is_initialized = true;
-                }
-                else
-                {
-                    double last_angle = multi_angle_data_[i].last_angle;
-                    double delta = this->unit_data_[i].angle_Deg - last_angle;
-                    
-                    // 处理360°跳变
-                    if (delta > 180.0) 
-                        delta -= 360.0;
-                    else if (delta < -180.0) 
-                        delta += 360.0;
-                    
-                    multi_angle_data_[i].total_angle += delta;
-                    this->unit_data_[i].add_angle = delta;
-                }
-            }
-            
-            multi_angle_data_[i].last_angle = this->unit_data_[i].angle_Deg;
-            this->unit_data_[i].last_angle = this->unit_data_[i].angle_Deg;
+            multi_angle_data_[i].total_angle = 0.0;
+            multi_angle_data_[i].last_angle = 0.0;
+            multi_angle_data_[i].allow_accumulate = false;
+            multi_angle_data_[i].is_initialized = false;
         }
+    }
 
         HAL::CAN::Frame msd;
 
@@ -133,23 +99,24 @@ namespace BSP::Motor::LK
             */
         void Parse(const HAL::CAN::Frame &frame) override
         {
-            for (uint8_t i = 0; i < N; ++i)
+            if (received_id == init_address + recv_idxs_[i])
             {
-                if (frame.id == init_address + recv_idxs_[i])
-                {
-                    const uint8_t* pData = frame.data;
-                        
-                    feedback_[i].cmd = pData[0];
-                    feedback_[i].temperature = pData[1];
-                    feedback_[i].current = (int16_t)((pData[3] << 8) | pData[2]);
-                    feedback_[i].velocity = (int16_t)((pData[5] << 8) | pData[4]);
-                    feedback_[i].angle = (uint16_t)((pData[7] << 8) | pData[6]);
+                memcpy(&feedback_[i], pData, sizeof(LkMotorFeedback));
 
-                    Configure(i);
-                    this->updateTimestamp(i + 1);
-                }
+                // 转换字节序
+                feedback_[i].cmd = pData[0];
+                feedback_[i].temperature = pData[1];               
+                feedback_[i].current = (int16_t)((pData[3] << 8) | pData[2]);
+                feedback_[i].velocity = (int16_t)((pData[5] << 8) | pData[4]);
+                feedback_[i].angle = (uint16_t)((pData[7] << 8) | pData[6]);
+
+                // 调用Configure处理数据
+                Configure(i, feedback_[i]);
+                this->state_watch_[i].updateTimestamp();
+                this->state_watch_[i].check();
             }
         }
+    }
 
         /**
          * @brief               发送Can数据
@@ -307,4 +274,5 @@ namespace BSP::Motor::LK
     //inline LK4005<4> Motor4005(0, {1, 2, 3, 4}, {1, 2, 3, 4});
 } // namespace BSP::Motor::LK
 
-#endif
+
+

@@ -1,10 +1,11 @@
 #ifndef DJI_MOTOR_HPP
 #define DJI_MOTOR_HPP
-
+//1111fix：修复上传错误
 #pragma once
 // 基础DJI电机实现
-#include "../user/core/BSP/Motor/MotorBase.hpp"
-#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "../MotorBase.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
+#include "HAL/CAN/can_hal.hpp"
 #include "can.h"
 #include <cstdint>
 #include <cstring> // 添加头文件
@@ -113,11 +114,10 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
 
     /**
      * @brief               发送Can数据
-     *
      * @param han           Can句柄
      * @param pTxMailbox    邮
      */
-    void sendCAN()
+    void sendCAN(uint32_t pTxMailbox)
     {
         // 修改此处以适应新的CAN接口
         HAL::CAN::Frame frame;
