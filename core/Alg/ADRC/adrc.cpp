@@ -1,6 +1,6 @@
 #include "adrc.hpp"
 
-float Alg::ADRC::FirstLADRC::LADRC_1(float input, float feedback)
+float ALG::ADRC::FirstLADRC::LADRC_1(float input, float feedback)
 {
     LESO_1(feedback);
     LSEF_1(input);
@@ -8,7 +8,7 @@ float Alg::ADRC::FirstLADRC::LADRC_1(float input, float feedback)
     return U;
 }
 
-void Alg::ADRC::FirstLADRC::LSEF_1(float target)
+void ALG::ADRC::FirstLADRC::LSEF_1(float target)
 {
     KP = GetWc();
 
@@ -16,7 +16,7 @@ void Alg::ADRC::FirstLADRC::LSEF_1(float target)
     U = (U0 - Z2) / GetB0();
 }
 
-void Alg::ADRC::FirstLADRC::LESO_1(float feedback)
+void ALG::ADRC::FirstLADRC::LESO_1(float feedback)
 {
     Beta1 = 2.0f * GetW0();
     Beta2 = GetW0() * GetW0();
@@ -31,7 +31,7 @@ void Alg::ADRC::FirstLADRC::LESO_1(float feedback)
 
 
 
-float Alg::ADRC::SecondLADRC::LADRC_2(float input, float feedback)
+float ALG::ADRC::SecondLADRC::LADRC_2(float input, float feedback)
 {
     TD_2(input);
     LESO_2(feedback);
@@ -40,7 +40,7 @@ float Alg::ADRC::SecondLADRC::LADRC_2(float input, float feedback)
     return U;
 }
 
-void Alg::ADRC::SecondLADRC::LSEF_2()
+void ALG::ADRC::SecondLADRC::LSEF_2()
 {
     KP = GetWc() * GetWc();
     KD = 2.0f * GetWc();
@@ -49,7 +49,7 @@ void Alg::ADRC::SecondLADRC::LSEF_2()
     U = (U0 - Z3) / GetB0();
 }
 
-void Alg::ADRC::SecondLADRC::LESO_2(float feedback)
+void ALG::ADRC::SecondLADRC::LESO_2(float feedback)
 {
     Beta1 = 3.0f * GetW0();
     Beta2 = 3.0f * GetW0() * GetW0();
@@ -62,7 +62,7 @@ void Alg::ADRC::SecondLADRC::LESO_2(float feedback)
     Z3 += GetH() * (Beta3 * E);
 }
 
-void Alg::ADRC::SecondLADRC::TD_2(float input)
+void ALG::ADRC::SecondLADRC::TD_2(float input)
 { 
     float fh= -R * R * (V1 - input) - 2 * R * V2;
     V1 += V2 * GetH();

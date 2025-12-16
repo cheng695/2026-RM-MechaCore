@@ -3,7 +3,7 @@
 
 #include "../ADRC/AdrcBase.hpp"
 
-namespace Alg::ADRC
+namespace ALG::ADRC
 {
     class FirstLADRC : public AdrcBase
     {

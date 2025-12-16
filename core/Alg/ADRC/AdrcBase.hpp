@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-namespace Alg::ADRC
+namespace ALG::ADRC
 {
     class AdrcBase
     {
