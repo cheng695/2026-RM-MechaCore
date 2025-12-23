@@ -8,7 +8,6 @@
 #include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
 #include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 
-extern BSP::REMOTE_CONTROL::RemoteController DT7;
 extern uint8_t CommunicationData[18];;
 
 class BoardCommunication

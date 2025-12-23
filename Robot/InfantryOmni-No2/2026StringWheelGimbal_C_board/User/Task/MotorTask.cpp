@@ -1,6 +1,6 @@
 #include "MotorTask.hpp"
 
-BSP::Motor::Dji::GM3508<4> Motor3508(0x200, {1, 4}, 0x200);
+BSP::Motor::Dji::GM3508<2> Motor3508(0x200, {1, 4}, 0x200);
 BSP::Motor::Dji::GM6020<1> Motor6020(0x204, {2}, 0x1FF);
 BSP::Motor::Dji::GM2006<1> Motor2006(0x200, {5}, 0x200);
 BSP::Motor::DM::J4310<1> MotorJ4310(0x00, {2}, {0x01});

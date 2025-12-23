@@ -54,5 +54,9 @@
   ..\user\..\user\core\HAL\UART\uart_hal.hpp \
   ..\user\..\user\core\HAL\UART\interface\uart_bus.hpp \
   ..\user\..\user\core\HAL\UART\interface\uart_device.hpp \
-  ..\Core\Inc\usart.h ..\user\..\user\core\BSP\RemoteControl\DT7.hpp \
+  ..\Core\Inc\usart.h ..\user\..\user\Task\ControlTask.hpp \
+  ..\user\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.hpp \
+  ..\user\..\user\core\Alg\ChassisCalculation\OmniCalculation.hpp \
+  ..\user\..\user\core\Alg\ChassisCalculation\CalculationBase.hpp \
+  ..\user\..\user\core\BSP\RemoteControl\DT7.hpp \
   ..\user\Task\RemoteTask.hpp
