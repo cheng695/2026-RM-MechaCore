@@ -329,8 +329,7 @@ namespace Alg::CalculationBase
                     {
                         // 需要反转扣圈情况
                         Motor_direction[i] = NormalizeAngle(tmp_delta_angle + M_PI, 2.0f * M_PI) + current_steer_angles[i];
-                        params_.Target_Wheel_Omega[i] *= -1.0f;
-                        params_.Speed[i] *= -1.0f;
+                        Motor_wheel[i] *= -1.0f;
                     }
                 }
             }
@@ -359,8 +358,8 @@ namespace Alg::CalculationBase
                 {
                     float tmp_velocity_x, tmp_velocity_y, tmp_velocity_modulus;
 
-                    tmp_velocity_x = Vx - Vw * Wheel_To_Core_Distance[i] * sinf(Wheel_Azimuth[i]);
-                    tmp_velocity_y = Vy + Vw * Wheel_To_Core_Distance[i] * cosf(Wheel_Azimuth[i]);
+                    tmp_velocity_x = Vx - Vw * R * sinf(Wheel_Azimuth[i]);
+                    tmp_velocity_y = Vy + Vw * R * cosf(Wheel_Azimuth[i]);
                     tmp_velocity_modulus = sqrtf(tmp_velocity_x * tmp_velocity_x + tmp_velocity_y * tmp_velocity_y) / S;
 
                     Motor_wheel[i] = tmp_velocity_modulus * 60.0f / (2.0f * M_PI); // rad/s转RPM

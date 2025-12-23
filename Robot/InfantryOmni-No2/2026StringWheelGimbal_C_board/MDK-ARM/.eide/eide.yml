@@ -5,7 +5,6 @@ deviceName: STM32F407IGHx
 packDir: .pack/Keil/STM32F4xx_DFP.3.0.0
 srcDirs:
   - ../User
-  - ../../../../core
 virtualFolder:
   name: <virtual_root>
   files: []
@@ -144,8 +143,6 @@ virtualFolder:
         - path: ../User/Task/CommunicationTask.hpp
         - path: ../User/Task/ControlTask.cpp
         - path: ../User/Task/ControlTask.hpp
-        - path: ../User/Task/ImuTask.cpp
-        - path: ../User/Task/ImuTask.hpp
         - path: ../User/Task/MotorTask.cpp
         - path: ../User/Task/MotorTask.hpp
       folders: []

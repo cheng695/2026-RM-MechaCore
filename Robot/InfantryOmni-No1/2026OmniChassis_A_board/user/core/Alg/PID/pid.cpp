@@ -4,6 +4,15 @@
 
 namespace ALG::PID
 {
+    /** 
+     * PID类构造函数，现在可以先理解为初始化用
+     * @param kp 比例增益
+     * @param ki 积分增益
+     * @param kd 微分增益
+     * @param max 输出最大值
+     * @param integral_limit 积分限幅
+     * @param integral_separation_threshold_ 积分分离阈值
+     */
     PID::PID(float kp, float ki, float kd, float max, float integral_limit, float integral_separation_threshold_) 
         : max_(max), min_(-max), integral_limit_(integral_limit), integral_separation_threshold_(integral_separation_threshold_)
     {

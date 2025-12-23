@@ -42,8 +42,19 @@
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  ..\Core\Inc\usart.h ..\user\..\user\core\BSP\RemoteControl\DT7.hpp \
+  ..\Core\Inc\usart.h ..\user\..\user\Task\ControlTask.hpp \
+  ..\user\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.hpp \
+  ..\user\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp \
+  ..\Core\Inc\tim.h \
+  ..\user\..\user\core\Alg\ChassisCalculation\OmniCalculation.hpp \
+  ..\user\..\user\core\Alg\ChassisCalculation\CalculationBase.hpp \
+  ..\user\..\user\core\Alg\PID\pid.hpp \
+  ..\user\..\user\core\BSP\RemoteControl\DT7.hpp \
   ..\user\..\user\core\BSP\Common\StateWatch\state_watch.hpp \
   ..\user\..\user\core\BSP\Common\StateWatch\buzzer.hpp \
-  ..\Core\Inc\tim.h \
-  ..\user\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp
+  ..\user\..\user\core\BSP\Motor\Dji\DjiMotor.hpp \
+  ..\user\..\user\core\BSP\Motor\MotorBase.hpp \
+  ..\user\..\user\core\HAL\CAN\can_hal.hpp \
+  ..\user\..\user\core\HAL\CAN\interface\can_bus.hpp \
+  ..\user\..\user\core\HAL\CAN\interface\can_device.hpp \
+  ..\Core\Inc\can.h

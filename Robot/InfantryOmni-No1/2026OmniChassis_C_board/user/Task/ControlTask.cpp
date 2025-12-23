@@ -2,7 +2,8 @@
 
 Class_FSM chassis_fsm;   
 Alg::CalculationBase::Omni_IK omni_ik(1, 1);
-ALG::PID::PID yaw_pid(5.0f, 0.0f, 0.0f, 25000.0f, 2500.0f, 200.0f);
+ALG::PID::PID YawAngle_pid(0.0f, 0.0f, 0.0f, 25000.0f, 2500.0f, 200.0f);
+ALG::PID::PID YawVelocity_pid(0.0f, 0.0f, 0.0f, 25000.0f, 2500.0f, 200.0f);
 ALG::PID::PID wheel_pid[4] = {
     ALG::PID::PID(5.0f, 0.0f, 0.0f, 16385.0f, 2500.0f, 200.0f),
     ALG::PID::PID(5.0f, 0.0f, 0.0f, 16385.0f, 2500.0f, 200.0f),
@@ -17,15 +18,15 @@ void chassis_fsm_init()
 
 bool check_online()
 {
-    for(int i = 0; i < 4; i++)
-    {
-        if(!Motor3508.isConnected(i+1))
-        {
-            return false;
-        }
-    }
+    // for(int i = 0; i < 4; i++)
+    // {
+    //     if(!Motor3508.isConnected(i+1))
+    //     {
+    //         return false;
+    //     }
+    // }
 
-    if(!DT7.isConnected())
+    if(!DT7.isConnected() || !Motor6020.isConnected(1))
     {
         return false;
     }
@@ -62,16 +63,22 @@ void chassis_stop()
     for(int i = 0; i < 4; i++)
     {
         wheel_pid[i].reset();
+        YawVelocity_pid.reset();
+        YawAngle_pid.reset();
     }
 }
 
+float YawTarget = 0.0f;
 void chassis_not_follow()
 {
-    omni_ik.OmniInvKinematics(DT7.get_left_y(), DT7.get_left_x(), DT7.get_scroll_(), 0.0f, 8911.0f, 8911.0f);
-    for(int i = 0; i < 4; i++)
-    {
-        wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRpm(i+1));
-    }
+    // omni_ik.OmniInvKinematics(DT7.get_left_y(), DT7.get_left_x(), DT7.get_scroll_(), 0.0f, 8911.0f, 8911.0f);
+    // for(int i = 0; i < 4; i++)
+    // {
+    //     wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRpm(i+1));
+    // }
+    YawTarget += 0.1f*DT7.get_left_x();
+    YawAngle_pid.UpDate(YawTarget, Motor6020.getAddAngleDeg(1));
+    YawVelocity_pid.UpDate(YawAngle_pid.getOutput(), Motor6020.getVelocityRpm(1));
 }
 
 
