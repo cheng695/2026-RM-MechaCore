@@ -1,200 +1,215 @@
-/**
- * @file PowerTask.hpp
- * @brief 离线拟合功率控制任务头文件
- * @details 基于物理模型的功率估算和限制控制，使用离线拟合参数
- */
-
 #pragma once
-#include "Variable.hpp"
-#include "RM_RefereeSystem.h"
-#include "drv_math.h"
-#include "Tools.hpp"
-// #include "../BSP/Power/PM01.hpp"
-// #include "../BSP/SuperCap/SuperCap.hpp"
-#define My_PI 3.14152653529799323                    // 圆周率π的近似值
 
-// 电机参数定义
-#define toque_const_3508 0.00036621                  // 3508电机扭矩常数 (Nm/A)
-#define rpm_to_rads_3508 0.0029088820f               // 3508电机RPM转rad/s换算系数
+#include "../Algorithm/alg_pid.hpp"
+#include "../Motor/Dji/DjiMotor.hpp"
+#include "../BSP/Tools.hpp"
+#include "../BSP/Variable.hpp"
+namespace STPowerControl
+{ 
 
-#define toque_const_6020 0.000128173828f             // 6020电机扭矩常数 (Nm/A)  
-#define rpm_to_rads_6020 0.104719555f                // 6020电机RPM转rad/s换算系数
-
-#define pMAX 150.0f                                  // 最大功率限制值 (W)
-
-
-// 声明全局对象
-extern Tools_t Tools_p;
-extern BSP::Motor::Dji::GM6020<4> Motor6020;
-extern BSP::Motor::Dji::GM3508<4> Motor3508;
-
-/**
- * @brief 功率数据管理类
- * @detail 管理离线拟合的功率模型参数和实时功率估算
- */
-class PowerDataManager
+class PowerUpData_t
 {
+private:
 public:
-    // 离线拟合参数 - 基于物理模型
-    struct OfflineParams {
-        float k1; // 铜损系数 (I²R损耗)
-        float k2; // 机械功率系数 (T×W)  
-        float k3; // 铁损系数 (W²铁损)
-        float k4; // 固定损耗 (常数项)
+    float MAXPower;         // 最大允许功率 (W)
+
+    // 功率模型系数（离线拟合）
+    float k1;               // 电流相关功率系数
+    float k2;               // 转速相关功率系数  
+    float k3 ;       // 固定损耗功率系数
+    float k4;               // 备用系数
+    float k0;               // 备用系数
+
+    float Energy;           // 能量累积值
+
+    float EstimatedPower;   // 功率估算值 (W)
+    float Cur_EstimatedPower; // 当前功率估算值 (W)
+
+    float Initial_Est_power[4]; // 初始功率估算数组
+
+    float EffectivePower;   // 有效功率值
+
+    float pMaxPower[4];     // 各电机最大功率分配值
+    double Cmd_MaxT[4];     // 各电机最大扭矩指令
+
+    bool Init_flag;         // 初始化完成标志
+
+    // 误差阈值参数
+    float E_lower;          // 误差下限阈值
+    float E_upper;          // 误差上限阈值
+
+    // 功率控制目标值
+    float target_full_power;    // 全功率目标值
+    float target_base_power;    // 基础功率目标值
+
+    float cur_power;            // 当前功率值
+
+    // 功率控制PID参数
+    float full_kp = 0.1;        // 全功率控制比例系数
+    float base_kp = 0.1;        // 基础功率控制比例系数
+
+    float base_Max_power;       // 基础最大功率
+    float full_Max_power;       // 全最大功率
+    float Single_power[4];  // 新增：存储单个电机的拟合功率
+         /**
+         * @brief 等比缩放最大分配功率
+         * @param pid PID控制器对象数组
+         * @param motor 电机对象
+         */
+        void UpScaleMaxPow(PID *pid);
         
-        OfflineParams() : k1(1e-5f), k2(1e-5f), k3(1e-5f), k4(0.0f) {}
-    };
-
-    OfflineParams wheel_params;  // 轮向电机3508参数
-    OfflineParams steer_params;  // 舵向电机6020参数
-    
-    // 功率状态
-    float estimated_power;       // 总估算功率
-    float current_power;         // 当前实际功率
-    float power_limit;           // 功率限制值
-    
-    // 能量环参数
-    float target_base_power;     // 基础功率目标
-    float target_full_power;     // 全功率目标  
-    float base_kp, full_kp;      // 能量环比例系数
-    float base_max_power;        // 基础最大功率
-    float full_max_power;        // 全最大功率
-
-    PowerDataManager();
+        /**
+         * @brief 计算应分配的力矩
+         * @param final_Out 最终输出数组
+         * @param motor 电机对象
+         * @param pid PID控制器对象数组
+         * @param toque_const 扭矩常数
+         * @param rpm_to_rads RPM转rad/s系数
+         */
+        void UpCalcMaxTorque(float *final_Out,PID *pid);
+        float PowerEstimate_3508(float *final_Out,PID * pid);
+    /**
+     * @brief 计算3508电机最大扭矩并输出控制电流
+     * @param final_Out 输出电流指令数组
+     * @param pid PID控制器数组
+     */
+    void UpCalcMaxTorque_3508(float *final_Out, PID *pid);
     
     /**
-     * @brief 加载离线拟合参数
+     * @brief 计算6020电机最大扭矩并输出控制电流
+     * @param final_Out 输出电流指令数组
+     * @param pid PID控制器数组
      */
-    void LoadOfflineParams(const OfflineParams& wheel, const OfflineParams& steer);
-    
-    /**
-     * @brief 更新功率估算
-     */
-    void UpdatePowerEstimation();
-    
+    void UpCalcMaxTorque_6020(float *final_Out, PID *pid);
     /**
      * @brief 能量环控制
+     * @detail 实现能量管理和分配
      */
     void EnergyLoop();
-    
-    /**
-     * @brief 获取当前可用最大功率
-     */
-    float GetAvailableMaxPower() const;
 
-private:
-    // 采样数据缓存
-    float wheel_samples[2][4];   // 轮向电机采样数据
-    float steer_samples[2][4];   // 舵向电机采样数据
-    
-    void CalculateMotorPower(BSP::Motor::Dji::Dji_Motor& motor, 
-                           const OfflineParams& params, 
-                           float samples[2][4],
-                           float& effective_power);
+    /**
+     * @brief 离线拟合功率估算
+     * @param current 电流(A)
+     * @param speed   转速(rpm)
+     * @return 估算功率(W)
+     */
+    float EstimatePower(float current, float speed)
+    {
+        // 离线拟合公式：P = k1 * current + k2 * speed + k3
+        return k1 * current + k2 * speed + k3;
+    }
 };
 
-/**
- * @brief 功率限制控制器
- * @detail 基于二次方程解析解的功率限制算法
- */
-class PowerLimitController
+class PowerTask_t
 {
 public:
-    // 功率分配配置
-    struct PowerAllocation {
-        float steer_ratio;       // 舵向功率分配比例
-        float wheel_ratio;       // 轮向功率分配比例
-        float steer_max_output;  // 舵向最大输出
-        float wheel_max_output;  // 轮向最大输出
-        
-        PowerAllocation() : steer_ratio(0.4f), wheel_ratio(0.6f), 
-                          steer_max_output(30000.0f), wheel_max_output(16384.0f) {}
-    };
-
-    PowerAllocation allocation;
-    
-    // 限制状态
-    float cmd_max_torque[4];     // 各电机最大扭矩指令
-    float p_max_power[4];        // 各电机最大分配功率
-
-    PowerLimitController();
-    
     /**
-     * @brief 计算功率限制后的最大扭矩
+     * @brief 构造函数
+     * @detail 初始化轮向和舵向功率控制参数（离线拟合参数）
      */
-    void CalculateMaxTorque(float* final_output, 
-                          BSP::Motor::Dji::Dji_Motor& motor,
-                          PID* pid_controller,
-                          const PowerDataManager::OfflineParams& params,
-                          float max_power);
-    
-    /**
-     * @brief 等比缩放功率分配
-     */
-    void ScalePowerAllocation(PID* pid_controller, float max_power);
+    PowerTask_t()
+    {
+        // 轮向电机功率数据初始化（离线拟合参数）
+        Wheel_PowerData.MAXPower     = 60;        // 最大功率60W
+        Wheel_PowerData.k1           =1.0f;       // 离线拟合电流系数
+        Wheel_PowerData.k2           =1.0f;       // 离线拟合转速系数
+        Wheel_PowerData.k3           =1.0f;       // 离线拟合固定损耗
+        Wheel_PowerData.k4           = 1.0f;
+        Wheel_PowerData.k0           = 0.0f;
+        Wheel_PowerData.E_upper      = 1000;         // 误差上限
+        Wheel_PowerData.E_lower      = 500;          // 误差下限
 
-private:
+        // 舵向电机功率数据初始化（离线拟合参数）
+        String_PowerData.MAXPower = 60 * 0.6f;       // 最大功率36W（60%）
+        String_PowerData.k1       = 0.183f;          // 离线拟合电流系数
+        String_PowerData.k2       = 8.78f;           // 离线拟合转速系数
+        String_PowerData.k3       = 5.0f;            // 离线拟合固定损耗
+        String_PowerData.E_upper  = 500;             // 误差上限
+        String_PowerData.E_lower  = 100;             // 误差下限
+			// 离线拟合功率数据结构
+	//公式: P = k1*T² + k2*w² + T*w + k3*T + k4*w + k0
+//R²: 0.873201
+//RMSE: 13.939929
+//参数: [ 2.44673055  0.01843153 -2.31935427  0.09656956  1.53806005]
+           
+        // 3508电机功率数据初始化（离线拟合参数）
+        T3508_powerdata.k1 =2.44673055f;
+        T3508_powerdata.k2 = 0.01843153f;
+        T3508_powerdata.k3 =-2.31935427f;
+        T3508_powerdata.k4 =0.09656956f;
+        T3508_powerdata.k0 =1.53806005;
+    }
+
+    PowerUpData_t String_PowerData;  // 舵向电机功率数据
+    PowerUpData_t Wheel_PowerData;   // 轮向电机功率数据
+    PowerUpData_t T3508_powerdata;
+
     /**
-     * @brief 求解二次方程得到限制扭矩
+     * @brief 获取轮向电机估算功率
+     * @return 轮向电机功率估算值
      */
-    float SolveQuadraticForTorque(float omega, float k1, float k2, float k3, 
-                                float max_power, float torque_constant);
+    inline float GetEstWheelPow()
+    {
+        return Wheel_PowerData.EstimatedPower;
+    }
+
+    /**
+     * @brief 获取舵向电机估算功率
+     * @return 舵向电机功率估算值
+     */
+    inline float GetEstStringPow()
+    {
+        return String_PowerData.EstimatedPower;
+    }
+
+    /**
+     * @brief 设置最大功率限制
+     * @param maxPower 最大功率值
+     */
+    inline void setMaxPower(float maxPower)
+    {
+        Wheel_PowerData.MAXPower  = maxPower;            // 轮向电机功率限制
+        String_PowerData.MAXPower = maxPower * 0.4f;     // 舵向电机限制40%的功率上限
+    }
+
+    /**
+     * @brief 获取最大功率限制
+     * @return 最大功率值
+     */
+    inline uint16_t getMAXPower()
+    {
+        return Wheel_PowerData.MAXPower;
+    }
+
+    /**
+     * @brief 更新功率估算
+     * @param current 电流(A)
+     * @param speed   转速(rpm)
+     */
+    void UpdateWheelPower(float current, float speed)
+    {
+        Wheel_PowerData.EstimatedPower = Wheel_PowerData.EstimatePower(current, speed);
+    }
+
+    void UpdateStringPower(float current, float speed)
+    {
+        String_PowerData.EstimatedPower = String_PowerData.EstimatePower(current, speed);
+    }
 };
+// namespace SGPowerControl (瞻顾遗迹，如在昨日，令人长号不自禁)
 
 /**
- * @brief 主功率控制任务
- * @detail 集成功率估算和限制控制的完整解决方案
+ * @brief 浮点数相等比较函数
+ * @param a 第一个浮点数
+ * @param b 第二个浮点数  
+ * @return 是否相等（容差1e-5）
  */
-class PowerControlTask
+static inline bool floatEqual(float a, float b)
 {
-public:
-    PowerDataManager power_data;
-    PowerLimitController limit_controller;
-    
-    // 实时功率状态
-    float total_power;           // 系统总功率
-    float steer_power;           // 舵向功率
-    float wheel_power;           // 轮向功率
-    
+    return fabs(a - b) < 1e-5f;
+}
 
-        // 功率计算临时变量
-    float effective_power_steer;
-    float effective_power_wheel;
-    
-    PowerControlTask();
-    
-    /**
-     * @brief 初始化功率控制任务
-     */
-    bool Initialize();
-    
-    /**
-     * @brief 执行功率控制循环
-     */
-    void Execute();
-    
-    /**
-     * @brief 设置功率限制
-     */
-    void SetPowerLimit(float limit);
-    
-    /**
-     * @brief 获取当前功率状态
-     */
-    float GetCurrentPower() const { return total_power; }
-    
-    /**
-     * @brief 更新电机控制输出（应用功率限制）
-     */
-    void UpdateMotorOutputs();
 
-private:
+}//namespace SGPowerControl(瞻顾遗迹，如在昨日，令人长号不自禁)
 
-    /**
-     * @brief 更新所有电机采样数据
-     */
-    void UpdateMotorSamples();
-};
-
-// 全局功率控制实例
-extern PowerControlTask GlobalPowerControl;
+extern STPowerControl::PowerTask_t PowerControl;
