@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <algorithm>
 
-#define DT7_LIB_VERSION "v1.0.0"
+#define DT7_LIB_VERSION "v1.0.1"
 
 namespace BSP::REMOTE_CONTROL
 {
@@ -110,12 +110,12 @@ namespace BSP::REMOTE_CONTROL
         // 精简对外接口（仅保留这个外部接口）
         // ======================================================
 
-        // 通道数据（含滚轮）
-        inline int16_t get_ch0() const { return channels_.ch0; }
-        inline int16_t get_ch1() const { return channels_.ch1; }
-        inline int16_t get_ch2() const { return channels_.ch2; }
-        inline int16_t get_ch3() const { return channels_.ch3; }
-        inline int16_t get_scroll() const { return channels_.scroll; }
+        // 通道数据（含滚轮），支持死区补偿（默认无补偿）
+        inline int16_t get_ch0(int16_t dead_zone = 0) const { return channels_.ch0 - dead_zone; }
+        inline int16_t get_ch1(int16_t dead_zone = 0) const { return channels_.ch1 - dead_zone; }
+        inline int16_t get_ch2(int16_t dead_zone = 0) const { return channels_.ch2 - dead_zone; }
+        inline int16_t get_ch3(int16_t dead_zone = 0) const { return channels_.ch3 - dead_zone; }
+        inline int16_t get_scroll(int16_t dead_zone = 0) const { return channels_.scroll - dead_zone; }
         // 摇杆数据
         inline float get_left_x() const { return stick_position_.left_x; }
         inline float get_left_y() const { return stick_position_.left_y; }
