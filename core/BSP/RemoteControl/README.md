@@ -249,22 +249,26 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 void parseData(const uint8_t *data);
 ```
 
-### 通道数据获取（原始值）
+### 通道数据获取（原始值，支持死区/零点补偿）
 
-| 函数 | 对应通道 | 数据类型 | 返回值范围 |
-|------|---------|---------|-----------|
-| `get_ch0()` | 通道 0（右摇杆 X） | `int16_t` | 364 ~ 1684（中值：1024） |
-| `get_ch1()` | 通道 1（右摇杆 Y） | `int16_t` | 364 ~ 1684（中值：1024） |
-| `get_ch2()` | 通道 2（左摇杆 X） | `int16_t` | 364 ~ 1684（中值：1024） |
-| `get_ch3()` | 通道 3（左摇杆 Y） | `int16_t` | 364 ~ 1684（中值：1024） |
-| `get_scroll()` | 滚轮原始值 | `int16_t` | 范围取决于滚轮硬件 |
+| 函数 | 对应通道 | 数据类型 | 返回值范围 | 说明 |
+|------|---------|---------|-----------|------|
+| `get_ch0(int16_t dead_zone = 0)` | 通道 0（右摇杆 X） | `int16_t` | 364 ~ 1684（中值：1024） | 返回值为 `ch0 - dead_zone` |
+| `get_ch1(int16_t dead_zone = 0)` | 通道 1（右摇杆 Y） | `int16_t` | 364 ~ 1684（中值：1024） | 返回值为 `ch1 - dead_zone` |
+| `get_ch2(int16_t dead_zone = 0)` | 通道 2（左摇杆 X） | `int16_t` | 364 ~ 1684（中值：1024） | 返回值为 `ch2 - dead_zone` |
+| `get_ch3(int16_t dead_zone = 0)` | 通道 3（左摇杆 Y） | `int16_t` | 364 ~ 1684（中值：1024） | 返回值为 `ch3 - dead_zone` |
+| `get_scroll(int16_t dead_zone = 0)` | 滚轮原始值 | `int16_t` | 范围取决于滚轮硬件 | 返回值为 `scroll - dead_zone` |
 
 ```cpp
-int16_t get_ch0() const;      // 通道 0（右摇杆 X）
-int16_t get_ch1() const;      // 通道 1（右摇杆 Y）
-int16_t get_ch2() const;      // 通道 2（左摇杆 X）
-int16_t get_ch3() const;      // 通道 3（左摇杆 Y）
-int16_t get_scroll() const;   // 滚轮原始值
+// 通道原始值，支持传入“死区/偏移补偿”参数，默认 0 表示不补偿
+int16_t get_ch0(int16_t dead_zone = 0) const;      // 通道 0（右摇杆 X）
+int16_t get_ch1(int16_t dead_zone = 0) const;      // 通道 1（右摇杆 Y）
+int16_t get_ch2(int16_t dead_zone = 0) const;      // 通道 2（左摇杆 X）
+int16_t get_ch3(int16_t dead_zone = 0) const;      // 通道 3（左摇杆 Y）
+int16_t get_scroll(int16_t dead_zone = 0) const;   // 滚轮原始值
+
+// 使用示例：对右摇杆 X 轴做 10 个单位的零点补偿
+int16_t rx_raw = remote_controller.get_ch0(10);
 ```
 
 ### 摇杆位置获取（归一化）
@@ -471,7 +475,7 @@ void MainLoop(void)
 | 项目 | 信息 |
 |------|------|
 | **库名称** | DT7 遥控器库 |
-| **当前版本** | `v1.0.0` |
+| **当前版本** | `v1.0.1` |
 | **命名空间** | `BSP::REMOTE_CONTROL` |
 
 ## 许可证
