@@ -1,0 +1,37 @@
+# Keil MDK-ARM Build Artifacts
+MDK-ARM/Listings/
+MDK-ARM/Objects/
+MDK-ARM/*.uvguix.*
+MDK-ARM/*.uvoptx
+*.bak
+*.dep
+*.map
+*.o
+*.d
+*.axf
+*.elf
+*.crf
+*.htm
+*.lnp
+*.sct
+*.lst
+JLinkLog.txt
+*.scvd
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# VS Code (Optional: keep settings.json if shared, ignore User specific)
+.vscode/
+
+# System
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Generated Images (Optional, based on your scripts)
+# User/core/Alg/PowerControl-TestVersion/PythonProject/picture/

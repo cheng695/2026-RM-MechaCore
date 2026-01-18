@@ -45,7 +45,9 @@
   ..\Core\Inc\usart.h ..\User\..\User\core\BSP\RemoteControl\DT7.hpp \
   ..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp \
   ..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp \
-  ..\Core\Inc\tim.h ..\User\..\User\Task\MotorTask.hpp \
+  ..\Core\Inc\tim.h \
+  ..\User\..\User\core\Alg\PowerControl-TestVersion\PowerControlTestVersion.hpp \
+  ..\User\..\User\Task\MotorTask.hpp \
   ..\User\..\User\core\HAL\CAN\can_hal.hpp \
   ..\User\..\User\core\HAL\CAN\interface\can_bus.hpp \
   ..\User\..\User\core\HAL\CAN\interface\can_device.hpp \
@@ -59,4 +61,8 @@
   ..\User\..\User\core\Alg\PID\pid.hpp \
   ..\User\..\User\core\BSP\Motor\Dji\DjiMotor.hpp \
   ..\User\..\user\core\BSP\Motor\MotorBase.hpp \
-  ..\User\..\User\core\BSP\Motor\LK\Lk_motor.hpp
+  ..\User\..\User\core\BSP\Motor\LK\Lk_motor.hpp \
+  ..\User\..\User\core\Alg\UtilityFunction\SlopePlanning.hpp \
+  ..\User\..\User\core\Alg\PowerControl\PowerControl.hpp \
+  ..\User\..\User\core\Alg\PowerControl\PowerControlBase.hpp \
+  ..\User\..\User\Task\SerialTask.hpp

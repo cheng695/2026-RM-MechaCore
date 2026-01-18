@@ -1,5 +1,6 @@
 #include "CommunicationTask.hpp"
 #include "../User/Task/MotorTask.hpp"
+#include "../User/Task/SerialTask.hpp"
 
 BoardCommunication Cboard;
 uint8_t CommunicationData[18];
@@ -34,24 +35,23 @@ void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6)
 
     // 写入帧尾（协议要求 0x00 0x00 0x80 0x7F）
     *((uint32_t*)&send_str2[sizeof(float) * 6]) = 0x7F800000; // 小端存储为 00 00 80 7F
-
 }
 
 void BoardCommunicationTX()
 {
     auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)};
+    HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)}; 
     uart6.transmit_dma(uart6_tx_buffer);
 }
 
 
 extern "C" {
-void Communication(void const * argument)
+void Communication(void const * argument) 
 {
     //BoardCommunicationInit();
     for(;;)
     {
-        vofa_send(motor_direction[0], motor_direction[1], motor_direction[2], motor_direction[3], 0.0f, 360.0f);
+        vofa_send(0, Motor6020.getVelocityRads(2), Motor6020.getCurrent(2), 0, 0, Motor6020.getVelocityRpm(2));
         BoardCommunicationTX();
         osDelay(5);
     }

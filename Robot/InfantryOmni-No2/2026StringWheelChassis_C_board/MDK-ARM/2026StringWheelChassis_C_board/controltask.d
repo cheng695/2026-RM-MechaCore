@@ -46,7 +46,9 @@
   ..\Core\Inc\usart.h ..\User\..\User\core\BSP\RemoteControl\DT7.hpp \
   ..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp \
   ..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp \
-  ..\Core\Inc\tim.h ..\User\..\User\core\BSP\IMU\HI12_imu.hpp \
+  ..\Core\Inc\tim.h \
+  ..\User\..\User\core\Alg\PowerControl-TestVersion\PowerControlTestVersion.hpp \
+  ..\User\..\User\core\BSP\IMU\HI12_imu.hpp \
   ..\User\..\User\core\BSP\IMU\HI12Base.hpp \
   ..\User\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.hpp \
   ..\User\..\user\core\Alg\ChassisCalculation\StringWheel.hpp \
@@ -57,4 +59,7 @@
   ..\User\..\user\core\HAL\CAN\can_hal.hpp \
   ..\User\..\user\core\HAL\CAN\interface\can_bus.hpp \
   ..\User\..\user\core\HAL\CAN\interface\can_device.hpp \
-  ..\Core\Inc\can.h ..\User\..\User\core\BSP\Motor\LK\Lk_motor.hpp
+  ..\Core\Inc\can.h ..\User\..\User\core\BSP\Motor\LK\Lk_motor.hpp \
+  ..\User\..\User\core\Alg\UtilityFunction\SlopePlanning.hpp \
+  ..\User\..\User\core\Alg\PowerControl\PowerControl.hpp \
+  ..\User\..\User\core\Alg\PowerControl\PowerControlBase.hpp

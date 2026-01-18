@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../User</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Include;../User;../Drivers/CMSIS/Device/ST/STM32F4xx/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -804,6 +804,21 @@
               <FileType>8</FileType>
               <FilePath>..\User\core\Alg\UtilityFunction\SlopPlanning.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PowerControlTestVersion.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\core\Alg\PowerControl-TestVersion\PowerControlTestVersion.hpp</FilePath>
+            </File>
+            <File>
+              <FileName>PowerControl.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\core\Alg\PowerControl\PowerControl.hpp</FilePath>
+            </File>
+            <File>
+              <FileName>PowerControlBase.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\core\Alg\PowerControl\PowerControlBase.hpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -925,6 +940,9 @@
               <FilePath>..\User\Task\SerialTask.hpp</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Startup</GroupName>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

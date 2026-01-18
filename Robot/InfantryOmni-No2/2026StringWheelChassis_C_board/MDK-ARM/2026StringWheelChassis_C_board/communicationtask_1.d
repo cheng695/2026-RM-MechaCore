@@ -45,4 +45,5 @@
   ..\Core\Inc\usart.h ..\User\..\User\core\BSP\RemoteControl\DT7.hpp \
   ..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp \
   ..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp \
-  ..\Core\Inc\tim.h
+  ..\Core\Inc\tim.h \
+  ..\User\..\User\core\Alg\PowerControl-TestVersion\PowerControlTestVersion.hpp

@@ -171,7 +171,7 @@ Reset_Handler    PROC
         IMPORT  SystemInit
         IMPORT  __main
 
-                 LDR     R0, =SystemInit
+                LDR     R0, =SystemInit
                  BLX     R0
                  LDR     R0, =__main
                  BX      R0
@@ -185,7 +185,7 @@ NMI_Handler     PROC
                 ENDP
 HardFault_Handler\
                 PROC
-                EXPORT  HardFault_Handler          [WEAK]
+                EXPORT  HardFault_Handler         [WEAK]
                 B       .
                 ENDP
 MemManage_Handler\

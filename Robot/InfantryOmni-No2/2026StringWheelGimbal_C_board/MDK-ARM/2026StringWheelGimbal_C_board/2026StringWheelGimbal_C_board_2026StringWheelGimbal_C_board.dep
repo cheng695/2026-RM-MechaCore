@@ -892,7 +892,7 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
 F (..\User\core\HAL\UART\uart_hal.hpp)(0x6929D149)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_hal.o -MMD)
-I (..\User\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)
+I (..\User\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -922,7 +922,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
 I (..\Core\Inc\usart.h)(0x6943EC81)
 F (..\User\core\HAL\UART\interface\uart_bus.cpp)(0x6929D149)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus.o -MMD)
-I (..\User\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)
+I (..\User\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -951,11 +951,11 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
 I (..\Core\Inc\usart.h)(0x6943EC81)
-I (..\User\core\HAL\UART\interface\..\impl\uart_bus_impl.hpp)(0x693589DF)
-I (..\User\core\HAL\UART\interface\..\impl\..\interface\uart_bus.hpp)(0x69357C13)
+I (..\User\core\HAL\UART\interface\..\impl\uart_bus_impl.hpp)(0x6945135E)
+I (..\User\core\HAL\UART\interface\..\impl\..\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\core\HAL\UART\interface\..\impl\uart_device_impl.hpp)(0x6929D149)
 I (..\User\core\HAL\UART\interface\..\impl\..\interface\uart_device.hpp)(0x6929D149)
-F (..\User\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus_1.o -MMD)
+F (..\User\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus_1.o -MMD)
 I (..\User\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -1012,9 +1012,9 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
 I (..\Core\Inc\usart.h)(0x6943EC81)
-F (..\User\core\HAL\UART\impl\uart_bus_impl.cpp)(0x693589EA)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus_impl.o -MMD)
-I (..\User\core\HAL\UART\impl\uart_bus_impl.hpp)(0x693589DF)
-I (..\User\core\HAL\UART\impl\..\interface\uart_bus.hpp)(0x69357C13)
+F (..\User\core\HAL\UART\impl\uart_bus_impl.cpp)(0x69451379)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus_impl.o -MMD)
+I (..\User\core\HAL\UART\impl\uart_bus_impl.hpp)(0x6945135E)
+I (..\User\core\HAL\UART\impl\..\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\core\HAL\UART\impl\..\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -1044,8 +1044,8 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
 I (..\Core\Inc\usart.h)(0x6943EC81)
 I (..\User\core\HAL\UART\impl\uart_device_impl.hpp)(0x6929D149)
-F (..\User\core\HAL\UART\impl\uart_bus_impl.hpp)(0x693589DF)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus_impl_1.o -MMD)
-I (..\User\core\HAL\UART\impl\..\interface\uart_bus.hpp)(0x69357C13)
+F (..\User\core\HAL\UART\impl\uart_bus_impl.hpp)(0x6945135E)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/uart_bus_impl_1.o -MMD)
+I (..\User\core\HAL\UART\impl\..\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\core\HAL\UART\impl\..\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -1475,7 +1475,6 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
-F (..\User\core\HAL\ASSERT\assert.cpp)(0x6929D149)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/assert.o -MMD)
 F (..\User\core\HAL\ASSERT\assert.cpp)(0x6929D149)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/assert_1.o -MMD)
 F (..\User\core\HAL\ASSERT\asster.hpp)(0x6929D149)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/asster.o -MMD)
 F (..\User\core\Alg\ADRC\adrc.cpp)(0x69357D4E)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/adrc.o -MMD)
@@ -1490,7 +1489,7 @@ F (..\User\core\Alg\Filter\Filter.hpp)(0x6929D149)(-xc++ -std=c++17 --target=arm
 F (..\User\core\Alg\PID\pid.cpp)(0x6929D149)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/pid.o -MMD)
 I (..\User\core\Alg\PID\pid.hpp)(0x692BC564)
 F (..\User\core\Alg\PID\pid.hpp)(0x692BC564)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/pid_1.o -MMD)
-F (..\User\core\BSP\Common\StateWatch\buzzer_manager.cpp)(0x6937CD3C)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/buzzer_manager.o -MMD)
+F (..\User\core\BSP\Common\StateWatch\buzzer_manager.cpp)(0x6943F198)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/buzzer_manager.o -MMD)
 I (..\User\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
@@ -1725,7 +1724,7 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
 I (..\Core\Inc\tim.h)(0x6943EC81)
-F (..\User\core\BSP\Motor\MotorBase.hpp)(0x6943ED2F)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/motorbase.o -MMD)
+F (..\User\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/motorbase.o -MMD)
 I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -1773,8 +1772,8 @@ I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
 I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
 I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
 I (..\Core\Inc\can.h)(0x6943EC80)
-F (..\User\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943ED2F)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/lk_motor.o -MMD)
-I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943ED2F)
+F (..\User\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943F2DB)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/lk_motor.o -MMD)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
 I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -1822,8 +1821,8 @@ I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
 I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
 I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
 I (..\Core\Inc\can.h)(0x6943EC80)
-F (..\User\core\BSP\Motor\DM\DmMotor.hpp)(0x6943ED2F)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/dmmotor.o -MMD)
-I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943ED2F)
+F (..\User\core\BSP\Motor\DM\DmMotor.hpp)(0x6943F2C9)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/dmmotor.o -MMD)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
 I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -1871,7 +1870,55 @@ I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
 I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
 I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
 I (..\Core\Inc\can.h)(0x6943EC80)
-F (..\User\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943ED2F)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/djimotor.o -MMD)
+F (..\User\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943F2E7)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/djimotor.o -MMD)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
+I (..\Core\Inc\can.h)(0x6943EC80)
 F (..\User\core\BSP\RemoteControl\DT7.cpp)(0x692C3B41)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/dt7.o -MMD)
 I (..\User\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
 I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
@@ -1961,58 +2008,77 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
 I (..\Core\Inc\tim.h)(0x6943EC81)
-F (..\User\Task\Callback.cpp)(0x6936D3B3)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/callback.o -MMD)
+F (..\User\Task\Callback.cpp)(0x694514F4)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/callback.o -MMD)
 I (..\User\Task\MotorTask.hpp)(0x693AC27F)
-I (..\User\../user/core/HAL/CAN/can_hal.hpp)(0x6929D149)
-I (..\User\../user/core/HAL/CAN/interface/can_bus.hpp)(0x6929D149)
-I (..\User\../user/core/HAL/CAN/interface/can_device.hpp)(0x6929D149)
-I (../Core/Inc/can.h)(0x6943EC80)
-I (../Core/Inc/main.h)(0x6943EC82)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x68AF6D25)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6943EC82)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x68AF6D25)
-I (F:\keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x68AF6D25)
-I (F:\keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x68AF6D25)
-I (F:\keil5\ARM\ARMCC\include\functional)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\_defs.h)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\_config.h)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\config.h)(0x53105A3C)
-I (F:\keil5\ARM\ARMCC\include\cstdint)(0x588B8344)
-I (..\User\../user/Task/ControlTask.hpp)(0x69414F11)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x68AF6CA6)
-I (../Core/Inc/FreeRTOSConfig.h)(0x6943EC80)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x68AF6CA6)
-F (..\User\Task\CommunicationTask.cpp)(0x693930C9)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/communicationtask.o -MMD)
-I (..\User\Task\CommunicationTask.hpp)(0x69393064)
+I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
+I (..\Core\Inc\can.h)(0x6943EC80)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\User\..\user\Task\ControlTask.hpp)(0x69414F11)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\Task\CommunicationTask.hpp)(0x69451591)
+I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
+I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
+I (..\Core\Inc\usart.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
+I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp)(0x693BB62C)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.hpp)(0x693D0F48)
+I (..\User\..\user\core\Alg\PID\pid.hpp)(0x692BC564)
+I (..\User\..\user\core\Alg\ADRC\adrc.hpp)(0x69357D3D)
+I (..\User\..\user\core\Alg\ADRC\..\ADRC\AdrcBase.hpp)(0x69357F45)
+I (..\User\..\user\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943F2E7)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
+I (..\User\..\user\core\BSP\Motor\DM\DmMotor.hpp)(0x6943F2C9)
+I (..\User\..\user\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943F2DB)
+I (..\User\Task\CommunicationTask.hpp)(0x69451591)
+I (..\User\Task\SerialTask.hpp)(0x6945140E)
+F (..\User\Task\CommunicationTask.cpp)(0x694515D2)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/communicationtask.o -MMD)
+I (..\User\Task\CommunicationTask.hpp)(0x69451591)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
 I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
@@ -2028,7 +2094,7 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
 I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
-I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -2061,7 +2127,7 @@ I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
 I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
 I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
 I (..\Core\Inc\tim.h)(0x6943EC81)
-F (..\User\Task\CommunicationTask.hpp)(0x69393064)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/communicationtask_1.o -MMD)
+F (..\User\Task\CommunicationTask.hpp)(0x69451591)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/communicationtask_1.o -MMD)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
 I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
@@ -2077,7 +2143,7 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
 I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
-I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -2112,67 +2178,71 @@ I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
 I (..\Core\Inc\tim.h)(0x6943EC81)
 F (..\User\Task\ControlTask.cpp)(0x69415F9A)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/controltask.o -MMD)
 I (..\User\Task\ControlTask.hpp)(0x69414F11)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x68AF6CA6)
-I (F:\keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
-I (F:\keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
-I (../Core/Inc/FreeRTOSConfig.h)(0x6943EC80)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x68AF6CA6)
-I (..\User\../user/Task/CommunicationTask.hpp)(0x69393064)
-I (..\User\../user/core/HAL/UART/uart_hal.hpp)(0x6929D149)
-I (..\User\../user/core/HAL/UART/interface/uart_bus.hpp)(0x69357C13)
-I (..\User\../user/core/HAL/UART/interface/uart_device.hpp)(0x6929D149)
-I (../Core/Inc/main.h)(0x6943EC82)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x68AF6D25)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6943EC82)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x68AF6D25)
-I (../Core/Inc/usart.h)(0x6943EC81)
-I (F:\keil5\ARM\ARMCC\include\functional)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\_defs.h)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\_config.h)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\config.h)(0x53105A3C)
-I (F:\keil5\ARM\ARMCC\include\cstdint)(0x588B8344)
-I (..\User\../user/core/BSP/RemoteControl/DT7.hpp)(0x6931A39B)
-I (..\User\../user/core/BSP/Common/StateWatch/state_watch.hpp)(0x6937C764)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\Task\CommunicationTask.hpp)(0x69451591)
+I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
+I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\Core\Inc\usart.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
+I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp)(0x693BB62C)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.hpp)(0x693D0F48)
+I (..\User\..\user\core\Alg\PID\pid.hpp)(0x692BC564)
+I (..\User\..\user\core\Alg\ADRC\adrc.hpp)(0x69357D3D)
+I (..\User\..\user\core\Alg\ADRC\..\ADRC\AdrcBase.hpp)(0x69357F45)
+I (..\User\..\user\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943F2E7)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
+I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
+I (..\Core\Inc\can.h)(0x6943EC80)
+I (..\User\..\user\core\BSP\Motor\DM\DmMotor.hpp)(0x6943F2C9)
+I (..\User\..\user\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943F2DB)
 F (..\User\Task\ControlTask.hpp)(0x69414F11)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/controltask_1.o -MMD)
-F (..\User\Task\ImuTask.cpp)(0x69357C4D)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/imutask.o -MMD)
-I (..\User\Task\ImuTask.hpp)(0x69357BFD)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
 I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
@@ -2187,8 +2257,9 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\Task\CommunicationTask.hpp)(0x69451591)
 I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
-I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
 I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
 I (..\Core\Inc\main.h)(0x6943EC82)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
@@ -2217,109 +2288,258 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
 I (..\Core\Inc\usart.h)(0x6943EC81)
-I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
-I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
 I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
 I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
 I (..\Core\Inc\tim.h)(0x6943EC81)
-F (..\User\Task\ImuTask.hpp)(0x69357BFD)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/imutask_1.o -MMD)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
-I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
-I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
-I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x69357C13)
-I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
-I (..\Core\Inc\main.h)(0x6943EC82)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
-I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
-I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
-I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
-I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
-I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
-I (..\Core\Inc\usart.h)(0x6943EC81)
 I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
 I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
-I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
-I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
-I (..\Core\Inc\tim.h)(0x6943EC81)
-F (..\User\Task\MotorTask.cpp)(0x69415FAD)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/motortask.o -MMD)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp)(0x693BB62C)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.hpp)(0x693D0F48)
+I (..\User\..\user\core\Alg\PID\pid.hpp)(0x692BC564)
+I (..\User\..\user\core\Alg\ADRC\adrc.hpp)(0x69357D3D)
+I (..\User\..\user\core\Alg\ADRC\..\ADRC\AdrcBase.hpp)(0x69357F45)
+I (..\User\..\user\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943F2E7)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
+I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
+I (..\Core\Inc\can.h)(0x6943EC80)
+I (..\User\..\user\core\BSP\Motor\DM\DmMotor.hpp)(0x6943F2C9)
+I (..\User\..\user\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943F2DB)
+F (..\User\Task\MotorTask.cpp)(0x694515FC)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/motortask.o -MMD)
 I (..\User\Task\MotorTask.hpp)(0x693AC27F)
-I (..\User\../user/core/HAL/CAN/can_hal.hpp)(0x6929D149)
-I (..\User\../user/core/HAL/CAN/interface/can_bus.hpp)(0x6929D149)
-I (..\User\../user/core/HAL/CAN/interface/can_device.hpp)(0x6929D149)
-I (../Core/Inc/can.h)(0x6943EC80)
-I (../Core/Inc/main.h)(0x6943EC82)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x68AF6D25)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6943EC82)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x68AF6D25)
-I (F:\keil5\ARM\ARMCC\include\stdint.h)(0x588B8344)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x68AF6D25)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x68AF6D25)
-I (F:\keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x68AF6D25)
-I (F:\keil5\ARM\ARMCC\include\functional)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\_defs.h)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\_config.h)(0x564D4E5E)
-I (F:\keil5\ARM\ARMCC\include\rw\config.h)(0x53105A3C)
-I (F:\keil5\ARM\ARMCC\include\cstdint)(0x588B8344)
-I (..\User\../user/Task/ControlTask.hpp)(0x69414F11)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x68AF6CA6)
-I (../Core/Inc/FreeRTOSConfig.h)(0x6943EC80)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x68AF6CA6)
-I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x68AF6CA6)
+I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
+I (..\Core\Inc\can.h)(0x6943EC80)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\User\..\user\Task\ControlTask.hpp)(0x69414F11)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\Task\CommunicationTask.hpp)(0x69451591)
+I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
+I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
+I (..\Core\Inc\usart.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
+I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp)(0x693BB62C)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.hpp)(0x693D0F48)
+I (..\User\..\user\core\Alg\PID\pid.hpp)(0x692BC564)
+I (..\User\..\user\core\Alg\ADRC\adrc.hpp)(0x69357D3D)
+I (..\User\..\user\core\Alg\ADRC\..\ADRC\AdrcBase.hpp)(0x69357F45)
+I (..\User\..\user\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943F2E7)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
+I (..\User\..\user\core\BSP\Motor\DM\DmMotor.hpp)(0x6943F2C9)
+I (..\User\..\user\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943F2DB)
 F (..\User\Task\MotorTask.hpp)(0x693AC27F)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/motortask_1.o -MMD)
+I (..\User\..\user\core\HAL\CAN\can_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_bus.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\CAN\interface\can_device.hpp)(0x6929D149)
+I (..\Core\Inc\can.h)(0x6943EC80)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\User\..\user\Task\ControlTask.hpp)(0x69414F11)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\Task\CommunicationTask.hpp)(0x69451591)
+I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
+I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
+I (..\Core\Inc\usart.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
+I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp)(0x693BB62C)
+I (..\User\..\user\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.hpp)(0x693D0F48)
+I (..\User\..\user\core\Alg\PID\pid.hpp)(0x692BC564)
+I (..\User\..\user\core\Alg\ADRC\adrc.hpp)(0x69357D3D)
+I (..\User\..\user\core\Alg\ADRC\..\ADRC\AdrcBase.hpp)(0x69357F45)
+I (..\User\..\user\core\BSP\Motor\Dji\DjiMotor.hpp)(0x6943F2E7)
+I (..\User\..\user\core\BSP\Motor\MotorBase.hpp)(0x6943F2F6)
+I (..\User\..\user\core\BSP\Motor\DM\DmMotor.hpp)(0x6943F2C9)
+I (..\User\..\user\core\BSP\Motor\LK\Lk_motor.hpp)(0x6943F2DB)
+F (..\User\Task\SerialTask.cpp)(0x69451408)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/serialtask.o -MMD)
+I (..\User\Task\SerialTask.hpp)(0x6945140E)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
+I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\Core\Inc\usart.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
+I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)
+F (..\User\Task\SerialTask.hpp)(0x6945140E)(-xc++ -std=c++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User-I./RTE/_2026StringWheelGimbal_C_board-IF:/keil5/ARM/PACK/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o 2026stringwheelgimbal_c_board/serialtask_1.o -MMD)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x68AF6CA6)
+I (..\Core\Inc\FreeRTOSConfig.h)(0x6943EC80)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\semphr.h)(0x68AF6CA6)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\include\event_groups.h)(0x68AF6CA6)
+I (..\User\..\user\core\HAL\UART\uart_hal.hpp)(0x6929D149)
+I (..\User\..\user\core\HAL\UART\interface\uart_bus.hpp)(0x6945136E)
+I (..\User\..\user\core\HAL\UART\interface\uart_device.hpp)(0x6929D149)
+I (..\Core\Inc\main.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x68AF6D25)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x6943EC82)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x68AF6D25)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x68AF6D25)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x68AF6D25)
+I (..\Core\Inc\usart.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\IMU\HI12_imu.hpp)(0x693BBB65)
+I (..\User\..\user\core\BSP\IMU\HI12Base.hpp)(0x6937D3CA)
+I (..\User\..\user\core\BSP\Common\StateWatch\state_watch.hpp)(0x6937C764)
+I (..\User\..\user\core\BSP\Common\StateWatch\buzzer_manager.hpp)(0x6937CCBE)
+I (..\Core\Inc\tim.h)(0x6943EC81)
+I (..\User\..\user\core\BSP\RemoteControl\DT7.hpp)(0x6931A39B)

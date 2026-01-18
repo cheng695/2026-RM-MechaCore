@@ -10,7 +10,7 @@
       <TargetName>2026StringWheelGimbal_C_board</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -740,11 +740,6 @@
               <FilePath>..\User\core\HAL\ASSERT\assert.cpp</FilePath>
             </File>
             <File>
-              <FileName>assert.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\core\HAL\ASSERT\assert.cpp</FilePath>
-            </File>
-            <File>
               <FileName>asster.hpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\core\HAL\ASSERT\asster.hpp</FilePath>
@@ -905,16 +900,6 @@
               <FilePath>..\User\Task\ControlTask.hpp</FilePath>
             </File>
             <File>
-              <FileName>ImuTask.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Task\ImuTask.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ImuTask.hpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\User\Task\ImuTask.hpp</FilePath>
-            </File>
-            <File>
               <FileName>MotorTask.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Task\MotorTask.cpp</FilePath>
@@ -923,6 +908,16 @@
               <FileName>MotorTask.hpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Task\MotorTask.hpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialTask.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Task\SerialTask.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SerialTask.hpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Task\SerialTask.hpp</FilePath>
             </File>
           </Files>
         </Group>
