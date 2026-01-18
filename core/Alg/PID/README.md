@@ -221,8 +221,9 @@ void MultiMotorControl()
    - 直到系统开始**振荡**（来回抖动）
 
 3. **减小 Kp 到约 60%**
-   - 如果振荡时 Kp = 20，就设为 12 左右
-
+   
+- 如果振荡时 Kp = 20，就设为 12 左右
+   
 4. **加入 Ki 消除稳态误差**
    - 如果系统稳定后还有一点偏差，就加 Ki
    - 从很小的值开始（比如 0.01）
@@ -351,3 +352,31 @@ PID 对控制周期敏感，如果周期不固定，效果会很差。
 // 确保控制任务以固定周期运行
 // 通常用定时器中断，1ms 周期
 ```
+
+## 调用示例
+
+### 初始化
+
+```cpp
+// 第一个数据kp 第二个ki 第三个kd 第四个最大输出 第五个积分限幅 第六个积分隔离阈值
+// 创建数组的
+ALG::PID::PID translational_pid[2] = {
+    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),
+    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f)
+};
+// 创建单个
+ALG::PID::PID rotational_pid(200.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f);
+```
+
+### 调用
+
+```cpp
+// 重置 都置为0
+translational_pid[0].reset();
+translational_pid[1].reset();
+rotational_pid.reset();
+
+// 计算 期望和反馈
+translational_pid[0].UpDate(chassis_target.target_translation_x, string_fk.GetChassisVx()); 
+```
+
