@@ -1,94 +1,202 @@
+# LOGGER - 日志系统
 
-# Logger 彩色日志库
+> 📚 **前置知识**：无
+>
+> 调试必备工具！能帮你打印信息到电脑上查看。
 
-这是一个基于SEGGER RTT的轻量级彩色日志库，支持在VSCode或其他支持ANSI颜色的终端中显示不同颜色的日志输出。该库实现了单例模式，提供了不同日志级别的输出方法。
+---
 
-## 功能特点
+## 🎯 这个模块是干什么的？
 
-- 支持TRACE、INFO、WARNING、ERROR、FATAL等多个日志级别
-- 每个日志级别使用不同的颜色，易于区分
-- 采用懒汉式单例模式设计，无需手动初始化
-- 基于SEGGER RTT实现，适用于嵌入式系统
-- 支持可变参数格式化（与printf风格相同）
+**调试代码时最头疼的问题是什么？**
 
-## 使用方法
+看不到程序里发生了什么！
 
-### 基本用法
+```
+你的代码:
+    x = Calculate();  // x 到底算出来是多少？
+    if (x > 100) {...}  // 这个条件到底进没进？
+    motor.Send(y);  // y 是多少？
+```
+
+LOGGER 让你能够**打印变量值到电脑上看**！
+
+---
+
+## 📖 为什么不用 printf？
+
+`printf` 需要串口，而且：
+
+- 占用 UART 资源
+- 速度慢
+- 影响实时性
+
+我们用的是 **SEGGER RTT**：
+
+- 通过调试器（ST-Link/J-Link）输出
+- 速度非常快
+- 不占用外设资源
+
+---
+
+## 🔧 使用方法
+
+### 包含头文件
 
 ```cpp
-#include "User/HAL/LOGGER/logger.hpp"
-
-void example_function() {
-    // 获取日志实例（单例）
-    auto& log = HAL::LOGGER::Logger::getInstance();
-    
-    // 不同级别的日志
-    log.trace("这是跟踪信息");  // 青色
-    log.info("这是一般信息");   // 绿色
-    log.warning("这是警告信息"); // 黄色
-    log.error("这是错误信息");  // 红色
-    log.fatal("这是致命错误");  // 紫色
-    
-    // 支持格式化输出
-    int value = 42;
-    log.info("当前值: %d", value);
-    
-    // 可以直接使用printf风格
-    log.printf("这是无颜色的输出: %d\r\n", value); // 注意printf需要手动添加换行符
-}
+#include "HAL/LOGGER/logger.hpp"
 ```
 
-### 日志级别与颜色对应关系
-
-| 日志级别 | 颜色 | 前缀    | 方法名    | 使用场景     |
-| -------- | ---- | ------- | --------- | ------------ |
-| TRACE    | 青色 | [TRACE] | trace()   | 详细追踪信息 |
-| INFO     | 绿色 | [INFO]  | info()    | 一般提示信息 |
-| WARNING  | 黄色 | [WARN]  | warning() | 警告信息     |
-| ERROR    | 红色 | [ERROR] | error()   | 错误信息     |
-| FATAL    | 紫色 | [FATAL] | fatal()   | 致命错误     |
-
-### 高级用法
-
-#### 使用通用log方法
-
-如果需要更灵活地控制日志级别，可以使用通用的`log`方法：
+### 打印不同级别的信息
 
 ```cpp
-auto& log = HAL::LOGGER::Logger::getInstance();
-log.log(HAL::LOGGER::LogLevel::INFO, "自定义日志: %d", value);
+// 普通信息（白色）
+LOG_INFO("Motor speed: %.2f", speed);
+
+// 警告信息（黄色）
+LOG_WARN("Power too high: %.1f W", power);
+
+// 错误信息（红色）
+LOG_ERROR("Motor %d disconnected!", motor_id);
+
+// 调试信息（灰色）
+LOG_DEBUG("Entering function xxx");
 ```
 
-#### 在C文件中使用
+### 格式化输出
 
-如果在C文件中使用，需要使用`extern "C"`包装：
+支持 printf 风格的格式化：
 
-```c
-#ifdef __cplusplus
-extern "C" {
-#endif
+```cpp
+int count = 10;
+float value = 3.14159f;
+char name[] = "Motor1";
 
-#include "User/HAL/LOGGER/logger.hpp"
+// 整数
+LOG_INFO("Count: %d", count);
 
-void c_function(void) {
-    HAL::LOGGER::Logger::getInstance().info("C函数中的日志");
-}
+// 浮点数
+LOG_INFO("Value: %.2f", value);  // 3.14
 
-#ifdef __cplusplus
-}
-#endif
+// 字符串
+LOG_INFO("Name: %s", name);
+
+// 多个变量
+LOG_INFO("Motor %s: speed=%.1f count=%d", name, value, count);
 ```
 
-## 实现细节
+---
 
-日志库使用ANSI转义序列来实现彩色输出，通过SEGGER RTT输出到调试终端：
+## 📊 实际应用示例
 
-- 每个日志调用分为三部分：颜色前缀 + 实际内容 + 颜色重置
-- 自动添加换行符，无需手动添加
-- 单例模式确保全局只有一个日志实例
+### 调试 PID
 
-## 注意事项
-- 确保VSCode或其他终端支持ANSI颜色
-- 使用`printf`方法需要手动添加换行符，而其他如`info()`等方法会自动添加
-- 在资源受限的系统中，频繁的日志输出可能会影响性能
-- 需要在json文件中配置RTT相关参数
+```cpp
+void DebugPID()
+{
+    float target = 1000.0f;
+    float current = motor.getVelocityRpm(1);
+    float output = pid.UpDate(target, current);
+
+    // 每隔一段时间打印一次（避免刷屏太快）
+    static int count = 0;
+    if (++count >= 100)  // 每 100 次打印一次
+    {
+        LOG_INFO("PID: T=%.1f C=%.1f E=%.1f O=%.1f",
+                 target, current, pid.getError(), output);
+        count = 0;
+    }
+}
+```
+
+### 调试遥控器
+
+```cpp
+void DebugRemote()
+{
+    LOG_INFO("Remote: LX=%.2f LY=%.2f S1=%d S2=%d",
+             remote.get_left_x(),
+             remote.get_left_y(),
+             remote.get_s1(),
+             remote.get_s2());
+}
+```
+
+### 检测问题
+
+```cpp
+void CheckMotor()
+{
+    if (!motor.isConnected(1, 0x201))
+    {
+        LOG_ERROR("Motor 1 offline!");
+    }
+
+    float temp = motor.getTemperature(1);
+    if (temp > 80)
+    {
+        LOG_WARN("Motor 1 overheating: %.1f C", temp);
+    }
+}
+```
+
+---
+
+## 🖥️ 查看日志
+
+### 使用 SEGGER RTT Viewer
+
+1. 下载并安装 [SEGGER RTT Viewer](https://www.segger.com/products/debug-probes/j-link/tools/rtt-viewer/)
+2. 连接调试器（ST-Link 需要用 J-Link OB 模式）
+3. 打开 RTT Viewer，选择对应芯片
+4. 连接后即可看到打印的信息
+
+### 使用 Ozone（更强大）
+
+SEGGER Ozone 调试器也支持 RTT，并且能结合调试功能。
+
+---
+
+## ⚠️ 注意事项
+
+### 1. 不要打印太频繁
+
+```cpp
+// 错误：每毫秒打印一次，刷屏太快
+while (1)
+{
+    LOG_INFO("...");  // 不要这样！
+    HAL_Delay(1);
+}
+
+// 正确：控制打印频率
+static int count = 0;
+if (++count >= 1000)  // 每秒打印一次
+{
+    LOG_INFO("...");
+    count = 0;
+}
+```
+
+### 2. 中断中少用
+
+在中断里打印可能影响实时性，尽量只在任务中打印。
+
+### 3. 打印浮点数
+
+有些嵌入式系统 printf 不支持 %f，但我们的 LOGGER 是支持的。
+
+---
+
+## 📁 文件结构
+
+```
+LOGGER/
+├── logger.hpp         # 日志接口
+├── logger.cpp         # 实现
+├── README.md          # 本文档
+└── SEGGER/            # SEGGER RTT 库文件
+    ├── SEGGER_RTT.c
+    ├── SEGGER_RTT.h
+    └── ...
+```
