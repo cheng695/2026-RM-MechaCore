@@ -1,0 +1,40 @@
+# Keil MDK
+*.uvoptx
+*.uvguix.*
+*.scvd
+MDK-ARM/DebugConfig/
+MDK-ARM/Listings/
+MDK-ARM/Objects/
+MDK-ARM/RTE/
+
+# Compiler output
+*.o
+*.d
+*.crf
+*.htm
+*.dep
+*.map
+*.lnp
+*.axf
+*.elf
+*.bin
+*.hex
+*.lib
+
+# STM32CubeMX
+.mxproject
+# .ioc files should be version controlled
+
+# VS Code
+.vscode/
+
+# J-Link
+JLinkLog.txt
+*.jlink
+
+# Python/General
+__pycache__/
+*.pyc
+*.bak
+*.tmp
+*.swp
