@@ -1,22 +1,22 @@
 #include "CommunicationTask.hpp"
 
 BoardCommunication Cboard;
-uint8_t CommunicationData[18];
+uint8_t CommunicationData[22];
 uint8_t send_str2[sizeof(float) * 8]; 
 
 void BoardCommunicationInit()
 {
-    // auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    // HAL::UART::Data uart6_rx_buffer{CommunicationData, sizeof(CommunicationData)};
-    // uart6.receive_dma_idle(uart6_rx_buffer);
-    // uart6.register_rx_callback([](const HAL::UART::Data &data) 
-    // {
-    //     if(data.size >= 18 && data.buffer != nullptr)
-    //     {
-    //         Cboard.updateTimestamp();
-    //         DT7.parseData(data.buffer);
-    //     }
-    // });
+    auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+    HAL::UART::Data uart6_rx_buffer{CommunicationData, sizeof(CommunicationData)};
+    uart6.receive_dma_idle(uart6_rx_buffer);
+    uart6.register_rx_callback([](const HAL::UART::Data &data) 
+    {
+        if(data.size >= 18 && data.buffer != nullptr)
+        {
+            Cboard.updateTimestamp();
+            DT7.parseData(data.buffer);
+        }
+    });
 }
 
 void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6) 

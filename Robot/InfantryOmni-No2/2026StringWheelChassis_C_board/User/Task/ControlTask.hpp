@@ -10,6 +10,8 @@
 #include "../User/core/Alg/PID/pid.hpp"
 #include "../User/core/BSP/Motor/Dji/DjiMotor.hpp"
 #include "../User/core/BSP/Motor/LK/Lk_motor.hpp"
+#include "../User/core/Alg/UtilityFunction/SlopePlanning.hpp"
+#include "../User/core/Alg/PowerControl/PowerControl.hpp"
 
 typedef struct 
 {
@@ -32,7 +34,12 @@ extern BSP::IMU::HI12_float HI12;
 extern BSP::REMOTE_CONTROL::RemoteController DT7;
 extern BoardCommunication Cboard;
 
+extern ControlTask chassis_target;
 extern Output_chassis chassis_output;
 extern float motor_direction[4];
+extern float motor_wheel[4];
+
+extern Alg::CalculationBase::String_FK string_fk;
+extern Alg::Utility::SlopePlanning string_target[3];
 
 #endif

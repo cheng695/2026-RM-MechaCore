@@ -8,7 +8,7 @@
 #include "../User/core/BSP/Common/StateWatch/state_watch.hpp"
 #include "../User/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 
-extern uint8_t CommunicationData[18];;
+extern uint8_t CommunicationData[22];;
 
 class BoardCommunication
 {
@@ -33,9 +33,17 @@ class BoardCommunication
             }
             return statewatch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
         }
+        
+        void SetYawAngle(uint8_t *data)
+        { 
+            memcpy(&YawAngal, data, sizeof(float));
+        }
+        
+        float GetYawAngle() { return YawAngal; }
 
     private:
         BSP::WATCH_STATE::StateWatch statewatch_;
+        float YawAngal;
 };
 
 #endif

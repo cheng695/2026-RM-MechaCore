@@ -1,34 +1,108 @@
 #include "../UtilityFunction/SlopePlanning.hpp"
 #include <math.h>
 
-void Alg::Utility::SlopePlanning::TIM_Calculate_PeriodElapsedCallback()
+/**
+ * @brief 斜坡规划主计算函数，实现平滑过渡控制
+ * 
+ * 该函数根据目标值和当前规划值的差异，按照设定的上升/下降斜率，
+ * 计算并更新输出值，实现平滑过渡，避免输出值突变。
+ * 
+ * 特殊处理逻辑：当真实值位于目标值和当前规划值之间时，
+ * 直接将输出值设置为真实值，快速响应系统状态变化。
+ */
+void Alg::Utility::SlopePlanning::TIM_Calculate_PeriodElapsedCallback(float target, float feedback)
 {
-    // 优先处理真实值在目标和当前规划值之间的情况
-    if (((target_ >= nowReal_) && (nowReal_ >= nowPlanning_)) || 
-        ((target_ <= nowReal_) && (nowReal_ <= nowPlanning_))) 
+    SetTarget(target);
+    SetNowReal(feedback);
+    // 规划为当前真实值优先的额外逻辑
+    if ((Target >= Now_Real && Now_Real >= Now_Planning) || (Target <= Now_Real && Now_Real <= Now_Planning))
     {
-        output_ = nowReal_;
-        nowPlanning_ = output_;
-        return;  // 直接返回，避免后续逻辑覆盖
+        Out = Now_Real;
     }
 
-    float delta = target_ - nowPlanning_;
-    float absDelta = fabs(delta);
-
-    // 根据方向选择增量值
-    float stepValue = (delta > 0) ? increaseValue_ : decreaseValue_;
-
-    if (absDelta > stepValue) 
+    if (Now_Planning > 0.0f)
     {
-        // 需要多步逼近
-        output_ = nowPlanning_ + ((delta > 0) ? stepValue : -stepValue);
-    } 
-    else 
+        if (Target > Now_Planning)
+        {
+            // 正值加速
+            if (fabs(Now_Planning - Target) > Increase_Value)
+            {
+                Out += Increase_Value;
+            }
+            else
+            {
+                Out = Target;
+            }
+        }
+        else if (Target < Now_Planning)
+        {
+            // 正值减速
+            if (fabs(Now_Planning - Target) > Decrease_Value)
+            {
+                Out -= Decrease_Value;
+            }
+            else
+            {
+                Out = Target;
+            }
+        }
+    }
+    else if (Now_Planning < 0.0f)
     {
-        // 直接到达目标
-        output_ = target_;
+        if (Target < Now_Planning)
+        {
+            // 负值加速
+            if (fabs(Now_Planning - Target) > Increase_Value)
+            {
+                Out -= Increase_Value;
+            }
+            else
+            {
+                Out = Target;
+            }
+        }
+        else if (Target > Now_Planning)
+        {
+            // 负值减速
+            if (fabs(Now_Planning - Target) > Decrease_Value)
+            {
+                Out += Decrease_Value;
+            }
+            else
+            {
+                Out = Target;
+            }
+        }
+    }
+    else
+    {
+        if (Target > Now_Planning)
+        {
+            // 0值正加速
+            if (fabs(Now_Planning - Target) > Increase_Value)
+            {
+                Out += Increase_Value;
+            }
+            else
+            {
+                Out = Target;
+            }
+        }
+        else if (Target < Now_Planning)
+        {
+            // 0值负加速
+            if (fabs(Now_Planning - Target) > Increase_Value)
+            {
+                Out -= Increase_Value;
+            }
+            else
+            {
+                Out = Target;
+            }
+        }
     }
 
-    // 更新规划值
-    nowPlanning_ = output_;
+    // 善后工作
+    Now_Planning = Out;
 }
+

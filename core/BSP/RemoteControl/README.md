@@ -72,11 +72,15 @@ public:
     float get_scroll_();   // 滚轮
 
     // ========== 通道原始数据（已减去中值）==========
-    int16_t get_ch0(int16_t dead_zone = 0);
-    int16_t get_ch1(int16_t dead_zone = 0);
-    int16_t get_ch2(int16_t dead_zone = 0);
-    int16_t get_ch3(int16_t dead_zone = 0);
-    int16_t get_scroll(int16_t dead_zone = 0);
+    // ========== 通道原始数据（已减去中值）==========
+    int16_t get_ch0();
+    int16_t get_ch1();
+    int16_t get_ch2();
+    int16_t get_ch3();
+    int16_t get_scroll();
+
+    // ========== 设置 ==========
+    void SetDeadzone(float deadzone); // 设置死区 (默认 10.0f)
 
     // ========== 开关数据 ==========
     uint8_t get_s1();  // 左开关 (1:上, 3:中, 2:下)
@@ -154,9 +158,12 @@ void ControlTask()
 
     // ========== 方式二：原始值（带死区）==========
     // 范围 -660 到 +660，用于需要更大分辨率的场景
+    
+    // 可以在初始化时设置死区（默认10）
+    // remote.SetDeadzone(50.0f);
 
-    int16_t ch0 = remote.get_ch0(50);  // 50 是死区，小于 50 的值会变成 0
-    int16_t ch1 = remote.get_ch1(50);
+    int16_t ch0 = remote.get_ch0();  // 获取原始值
+    int16_t ch1 = remote.get_ch1();
 }
 ```
 
@@ -299,12 +306,11 @@ void ChassisControlByRemote()
 摇杆有机械误差，中间位置可能不是精确的 0。使用**死区**：
 
 ```cpp
-// 死区 50，小于 50 的值会变成 0
-int16_t ch = remote.get_ch0(50);
+// 在初始化时设置死区
+remote.SetDeadzone(20.0f); // 设置死区为 20 (对应原始数据 -660~660 的范围)
 
-// 或者用归一化值时自己处理
-float x = remote.get_left_x();
-if (fabs(x) < 0.1f) x = 0;  // 10% 以内算作 0
+// 获取到的数据会自动进行死区处理（小于死区的值归零）
+float x = remote.get_left_x(); 
 ```
 
 ### Q2: 遥控器一直显示掉线？

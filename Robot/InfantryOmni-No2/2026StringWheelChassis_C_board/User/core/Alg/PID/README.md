@@ -499,3 +499,25 @@ pid.setIntegralLimit(smaller_limit);
 
 **最后更新：** 2025-10-19
 
+## 调用示例
+### 初始化
+```cpp
+// 第一个数据kp 第二个ki 第三个kd 第四个最大输出 第五个积分限幅 第六个积分隔离阈值
+// 创建数组的
+ALG::PID::PID translational_pid[2] = {
+    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),
+    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f)
+};
+// 创建单个
+ALG::PID::PID rotational_pid(200.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f);
+```
+### 调用
+```cpp
+// 重置 都置为0
+translational_pid[0].reset();
+translational_pid[1].reset();
+rotational_pid.reset();
+
+// 计算 期望和反馈
+translational_pid[0].UpDate(chassis_target.target_translation_x, string_fk.GetChassisVx()); 
+```

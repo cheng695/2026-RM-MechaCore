@@ -3,6 +3,19 @@
 BSP::Motor::Dji::GM3508<4> Motor3508(0x200, {1, 2, 3, 4}, 0x200);
 BSP::Motor::Dji::GM6020<4> Motor6020(0x204, {1, 2, 3, 4}, 0x1FE);
 
+void Parse(const HAL::CAN::Frame &frame) 
+{
+    const uint16_t received_id = frame.id;
+
+    if (received_id == 0x212)
+    {
+        pm01.pm_voltage = (float)(int32_t)((frame.data[1] << 8) | frame.data[0]) / 100.0f;
+        pm01.pm_current = (float)(int32_t)((frame.data[3] << 8) | frame.data[2]) / 100.0f;
+        pm01.pm_power = pm01.pm_voltage * pm01.pm_current;
+    }
+}
+
+
 void MotorInit(void)
 {
     static auto &can1 = HAL::CAN::get_can_bus_instance().get_device(HAL::CAN::CanDeviceId::HAL_Can1);
@@ -12,6 +25,7 @@ void MotorInit(void)
     {
         Motor3508.Parse(frame);
         Motor6020.Parse(frame);
+        //Parse(frame);
     });
     can2.register_rx_callback([](const HAL::CAN::Frame &frame) 
     {
@@ -38,8 +52,10 @@ void Motor(void const * argument)
     for(;;)
     {
         motor_control_logic();
-        osDelay(2);
+        osDelay(5);
     } 
 }
 
 }
+
+powerMeter pm01;

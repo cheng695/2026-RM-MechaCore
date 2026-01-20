@@ -101,7 +101,11 @@ targets:
         - .cmsis/include
         - RTE/_2026StringWheelChassis_C_board
       libList: []
-    excludeList: []
+    excludeList:
+      - ../User/core/APP/PowerLimitTask.cpp
+      - ../User/core/APP/PowerLimit.cpp
+      - ../User/core/APP/Heat_Control.cpp
+      - ../User/core/APP/control.cpp
     toolchain: AC6
     toolchainConfigMap:
       AC5:
@@ -269,6 +273,6 @@ targets:
       OpenOCD:
         baseAddr: "0x08000000"
         bin: ""
-        interface: stlink
-        target: stm32f1x
+        interface: cmsis-dap-v1
+        target: stm32f4x
     uploader: JLink

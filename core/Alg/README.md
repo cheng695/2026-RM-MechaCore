@@ -16,6 +16,8 @@
 | [Feedforward](./Feedforward/README.md)               | 前馈控制     | ✅ 已有 |
 | [Slope](./Slope/README.md)                           | 斜坡函数     | ✅ 已有 |
 | [UtilityFunction](./UtilityFunction/README.md)       | 工具函数     | ✅ 已有 |
+| [PowerControl](./PowerControl/README.md)             | 功率控制     | ✅ 已有 |
+| [PowerControl-TestVersion](./PowerControl-TestVersion/README.md) | 功率控制前瞻(电机功率模型及测试版) | ✅ 已有 |
 
 ---
 
@@ -26,6 +28,7 @@ ALG::PID        - PID控制器
 ALG::ADRC       - 自抗扰控制器
 Alg::CalculationBase  - 运动学计算
 Alg::Feedforward      - 前馈控制
+Alg::PowerControl     - 功率控制
 ```
 
 ---
@@ -51,5 +54,6 @@ APP/BSP
 | 底盘速度解算      | ChassisCalculation |
 | 信号平滑/噪声滤除 | Filter             |
 | 上坡补偿          | Feedforward        |
+| 裁判系统功率限制  | PowerControl       |
 | 状态机控制逻辑    | FSM                |
 | 输入平滑过渡      | Slope              |

@@ -1,7 +1,6 @@
 #include "MotorTask.hpp"
 #include "CommunicationTask.hpp"
 #include "SerialTask.hpp"
-
 extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
     HAL::CAN::Frame rx_frame;
