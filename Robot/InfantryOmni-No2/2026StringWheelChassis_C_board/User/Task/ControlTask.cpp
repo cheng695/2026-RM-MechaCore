@@ -69,10 +69,10 @@ bool check_online()
         }
     }
 
-    if(!DT7.isConnected())
-    {
-        isconnected = false;
-    }
+    // if(!Cboard.isConnected() || !DT7.isConnected())
+    // {
+    //     isconnected = false;
+    // }
     
     if(!isconnected)
     {
