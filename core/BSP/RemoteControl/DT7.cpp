@@ -48,8 +48,8 @@ void RemoteController::parseData(const uint8_t *data)
     channels_.ch2 = mapChannelValue(extractBits(data, 22, 11));
     channels_.ch3 = mapChannelValue(extractBits(data, 33, 11));
     channels_.scroll = extract16Bits(data[16], data[17]); // 解析滚轮/滑轮值
-    channels_.s1 = extractBits(data, 44, 2);
-    channels_.s2 = extractBits(data, 46, 2);
+    channels_.s1 = extractBits(data, 46, 2);
+    channels_.s2 = extractBits(data, 44, 2);
     
     // 摇杆原始坐标（以中值为中心，范围为-660~660）
     coordinates_.left_stick_x = DeadzoneCompensation(channels_.ch2 - CHANNEL_VALUE_MID);
