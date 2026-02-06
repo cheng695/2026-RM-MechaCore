@@ -67,32 +67,58 @@ void Gimbal_FSM::SetState(uint8_t left, uint8_t right, bool equipment_online)
  * @param right 右开关状态
  * @param equipment_online 所有设备是否在线
  */
-void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online)
-{
+void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool vision_flag)
+{ 
     // 保存旧状态用于统计
     Enum_Gimbal_States old_state = State_gimbal;
     
     // 设置当前开关状态
     SetState(left, right, equipment_online);
-    
-    // 根据开关状态组合确定底盘状态
-    if (StateLeft == 2 && StateRight == 2 || equipment_online == false)
+
+    if (equipment_online == false || (left == 2 && right == 2))
     {
         State_gimbal = STOP;
+        return; // 直接结束，不用看后面的
     }
-    else if (StateLeft == 3 && StateRight == 2 || StateLeft == 2 && StateRight == 3)
+    
+    switch (State_gimbal)
     {
-        State_gimbal = MANUAL;
+        case STOP:
+            State_gimbal = MANUAL;
+            break;
+
+        case MANUAL:
+            if(left == 1)
+            {
+                if(vision_flag)
+                {
+                    State_gimbal = VISION;
+                }
+            }
+            else if(left == 3 && right == 3)
+            {
+                if(vision_flag /*&& 按下右键（后面再加）*/)
+                {
+                    State_gimbal = VISION;
+                }
+            }
+            break;
+
+        case VISION:
+            if(left != 1)
+            {
+                State_gimbal = MANUAL;
+            }
+            else if(!vision_flag)
+            {
+                State_gimbal = MANUAL;
+            }
+            break;
+        
+        default:
+            State_gimbal = STOP;
+            break;
     }
-    else if (StateLeft == 1 && StateRight == 1)
-    {
-        State_gimbal = VISION;
-    }
-    else if(StateLeft == 3 && StateRight == 3)
-    {
-        State_gimbal = KEYBOARD;
-    }
-    // 其他组合保持原有状态
     
     // 如果状态发生变化，更新统计信息
     if (old_state != State_gimbal) {

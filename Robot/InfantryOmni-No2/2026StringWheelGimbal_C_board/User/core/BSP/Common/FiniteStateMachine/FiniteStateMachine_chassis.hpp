@@ -29,7 +29,6 @@ enum Enum_Chassis_States
     STOP = 0,      // 停止状态
     FOLLOW,        // 跟随状态
     NOTFOLLOW,     // 非跟随状态
-    KEYBOARD,      // 键盘控制状态
     STATUS_COUNT   // 状态数量
 };
 
@@ -47,7 +46,7 @@ struct Struct_Status
 /**
  * @brief 有限自动机核心 - 基于左右开关状态切换
  */
-class Class_FSM
+class Chassis_FSM
 {
 public:
     // 状态数组
@@ -86,7 +85,7 @@ public:
      * @param left 左开关状态
      * @param right 右开关状态
      */
-    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online);
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool *alphabet);
 
     /**
      * @brief 定时更新函数（用于时间统计）
@@ -131,7 +130,7 @@ private:
 /**
  * @brief 获取当前状态
  */
-inline Enum_Chassis_States Class_FSM::Get_Now_State()
+inline Enum_Chassis_States Chassis_FSM::Get_Now_State()
 {
     return State_chassis;
 }
@@ -139,7 +138,7 @@ inline Enum_Chassis_States Class_FSM::Get_Now_State()
 /**
  * @brief 获取当前状态名称
  */
-inline const char* Class_FSM::Get_Now_State_Name()
+inline const char* Chassis_FSM::Get_Now_State_Name()
 {
     return Status[State_chassis].Name;
 }

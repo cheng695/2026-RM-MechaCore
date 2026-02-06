@@ -86,7 +86,7 @@ public:
      * @param left 左开关状态
      * @param right 右开关状态
      */
-    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online);
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool vision_flag);
 
     /**
      * @brief 定时更新函数（用于时间统计）

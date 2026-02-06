@@ -28,10 +28,10 @@
 enum Enum_Launch_States
 {
     LAUNCH_STOP = 0,      // 停止状态
-    LAUNCH_CEASEFIRE,     //停火状态
-    LAUNCH_RAPIDFIRE,     // 连发状态
-    LAUNCH_SINGALSHOT,    // 单发状态
-    LAUNCH_KEYBOARD,      // 键盘控制状态
+    LAUNCH_CEASEFIRE,
+    LAUNCH_ONLY,
+    LAUNCH_AUTO,
+    LAUNCH_JAM,
     LAUNCH_STATUS_COUNT   // 状态数量
 };
 
@@ -58,6 +58,9 @@ public:
 
     // 当前底盘状态
     Enum_Launch_States State_launch;
+    
+    // 上一次不同的状态（记录上一个状态）
+    Enum_Launch_States Last_Different_State;
 
     /**
      * @brief 初始化状态机
@@ -88,8 +91,16 @@ public:
      * 
      * @param left 左开关状态
      * @param right 右开关状态
+     * @param equipment_online 设备是否在线
+     * @param Change 左键是否有松开过
+     * @param time 单发超时阈值时间
+     * @param Vision 视觉给的的模式 0：停火，1：单发，2：连发
+     * @param is_vision 视觉标志位是否真 是否右键加视觉标志位为真
+     * @param is_shoot 单发时是否打了一发
+     * @param is_jamming 是否检测到卡弹
+     * @param alphabet 处理过的键盘输入字母是1还是0；数组的26，27分别是左键右键
      */
-    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online);
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool Change, float time, uint8_t Vision, bool is_vision, bool is_shoot, bool is_jamming, bool *alphabet);
 
     /**
      * @brief 定时更新函数（用于时间统计）
