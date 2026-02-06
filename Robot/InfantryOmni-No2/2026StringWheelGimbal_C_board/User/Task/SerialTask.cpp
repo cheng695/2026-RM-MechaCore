@@ -18,7 +18,8 @@ uint8_t DT7Rx_buffer[18];
 /* 按键 ---------------------------------------------------------------------------------------------------*/
 bool is_change;
 bool is_vision;
-bool alphabet[28];
+bool last_is_vision = false; // 上一次是不是视觉模式
+bool alphabet[28];  // 27：鼠标左键，28：鼠标右键
 BSP::Key::SimpleKey Key_z;
 BSP::Key::SimpleKey Key_x;
 BSP::Key::SimpleKey Key_b;
@@ -60,6 +61,11 @@ void SerialInit()
     });
 }
 
+/* 键鼠逻辑 ---------------------------------------------------------------------------------------------*/
+/**
+ * @brief 原始状态更新，放置于SimpleKey中
+ * 
+ */
 void KeyUpdate()
 {
     Key_z.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_Z));
@@ -69,40 +75,69 @@ void KeyUpdate()
     Mouse_right.update(DT7.get_mouseRight());
 }
 
+/**
+ * @brief 键鼠逻辑处理
+ * 
+ * @param alphabet 
+ */
 void KeyProcess(bool *alphabet)
 {
-    alphabet[1] = Key_b.getToggleState();
-
+    /* --- 1. 判定是否进入视觉托管模式 --- */
     if(vision.getVisionFlag())
     {
-        if(DT7.get_s1 == 3 && DT7.get_s2 == 3)
+        // 如果是键鼠模式 (3,3)，不仅要 visionFlag 还要按住右键
+        if(DT7.get_s1() == 3 && DT7.get_s2() == 3) 
         {
-            if(Mouse_right.getPress())
-            {
-                is_vision = true;
-            }
+            is_vision = Mouse_right.getPress(); // 可以直接赋值
         }
-        else
+        else // 遥控模式，只要 visionFlag 就托管
         {
             is_vision = true;
         }
     }
-    // Z 和 X 的互斥逻辑
-    if (Key_z.getRisingEdge())  // 如果 Z 刚被按下
+    else
     {
-        alphabet[25] = true;    // Z 变真
-        alphabet[23] = false;   // X 强制变假
+        is_vision = false;
     }
-    else if (Key_x.getRisingEdge()) // 如果 X 刚被按下
+    // 检测是否刚刚退出视觉模式（下降沿），如果是，为了安全最好重置一下
+    if (last_is_vision && !is_vision) { alphabet[23]=0; alphabet[25]=0; } 
+    /* --- 2. 执行逻辑 --- */
+    if(is_vision)
     {
-        alphabet[23] = true;    // X 变真
-        alphabet[25] = false;   // Z 强制变假
+        // 视觉完全接管 Z/X 状态
+        uint8_t mode = vision.getVisionMode();
+        if(mode == 0)      { alphabet[25] = false; alphabet[23] = false; }
+        else if(mode == 1) { alphabet[25] = true;  alphabet[23] = false; }
+        else if(mode == 2) { alphabet[25] = false; alphabet[23] = true;  }
     }
-    else if (Mouse_left.getRisingEdge() && launch_fsm.Get_Now_State() == LAUNCH_CEASEFIRE) // 如果左键按下 且 当前是停火状态
+    else
     {
-        alphabet[23] = true; 
-        alphabet[25] = false;   
+        // 手动逻辑
+        if (Key_z.getRisingEdge())
+        {
+            alphabet[25] = true;
+            alphabet[23] = false;
+        }
+        else if (Key_x.getRisingEdge())
+        {
+            alphabet[23] = true;
+            alphabet[25] = false;
+        }
+        else if (Mouse_left.getRisingEdge() && launch_fsm.Get_Now_State() == LAUNCH_CEASEFIRE)
+        {
+            alphabet[23] = true; 
+            alphabet[25] = false;   
+        }
+
+
     }
+    alphabet[26] = Mouse_left.getPress();
+    // 鼠标左键有没有松开过
+    is_change = Mouse_left.getFallingEdge(); 
+    // B键独立，任何时候都能控制
+    alphabet[1] = Key_b.getToggleState();
+
+    last_is_vision = is_vision; 
 }
 
 /* 任务函数 --------------------------------------------------------------------------------------------*/
@@ -119,7 +154,9 @@ void Serial(void const * argument)
     SerialInit();
     for(;;)
     {
-        osDelay(1);
+        KeyUpdate();
+        KeyProcess(alphabet);
+        osDelay(5);
     }
 }
 

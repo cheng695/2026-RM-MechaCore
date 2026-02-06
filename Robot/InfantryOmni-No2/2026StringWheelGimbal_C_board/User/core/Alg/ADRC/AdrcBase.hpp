@@ -111,5 +111,6 @@ namespace ALG::ADRC
         this->max = max;
     }
 }
+
 #endif
 

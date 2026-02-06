@@ -2,7 +2,7 @@
 #define FEEDFORWARD_HPP 
 
 #include <math.h>
-#define PI 3.1415926535897932384626433832795
+#define MY_PI 3.141592653589
 #define g 9.80665
 
 namespace Alg::Feedforward 
@@ -86,7 +86,7 @@ namespace Alg::Feedforward
             void SetSlope(double slope)
             {
                 slope_ = slope;
-                slope_rad_ = slope_ * PI / 180.0;                
+                slope_rad_ = slope_ * MY_PI / 180.0;                
                 total_force = m_ * g * sin(slope_rad_);
             }
 
@@ -169,6 +169,214 @@ namespace Alg::Feedforward
             float sqrt2 = sqrtf(2.0f);  // 预计算值: √2
             float S;                    // 轮子半径，用于力到扭矩的转换计算
 
+    };
+
+
+    /**
+     * @class Acceleration
+     * @brief 加速度前馈控制器
+     * 
+     * 根据目标速度的变化率（即加速度）计算相应的前馈补偿量
+     */
+    class Acceleration
+    {
+        public:
+            /**
+             * @brief 构造函数
+             * @param k_acc_ 加速度前馈系数
+             * @param control_cycle_ 控制周期(s)
+             */
+            Acceleration(float k_acc_, float control_cycle_)
+            {
+                last_target_speed = 0.0f;
+                acc_ff = 0.0f;
+                k_acc = k_acc_;
+                control_cycle = control_cycle_;
+            }
+
+            /**
+             * @brief 计算加速度前馈值
+             * @param target_speed 目标速度 单位与控制器期望速度一致
+             * 
+             * 根据目标速度变化率计算加速度前馈值
+             */
+            void AccelerationFeedforward(float target_speed)
+            {
+                // 计算速度变化率（即加速度）
+                acc_ff = (target_speed - last_target_speed) / control_cycle;
+                // 计算前馈输出
+                feedforward = k_acc * acc_ff;
+                // 更新上次目标速度
+                last_target_speed = target_speed;
+            }
+
+            /**
+             * @brief 获取前馈输出值
+             * @return 前馈输出值 单位与速度控制器具有相同的量纲维度
+             */
+            float getFeedforward()
+            {
+                return feedforward;
+            }
+
+        private:
+            float last_target_speed;    // 上一次的目标速度
+            float control_cycle;        // 控制周期
+            float acc_ff;               // 加速度
+            float k_acc;                // 前馈系数
+            float feedforward;          // 前馈输出
+    };
+
+    /**
+     * @class Velocity
+     * @brief 速度前馈控制器
+     * 
+     * 根据目标速度的变化率计算速度前馈补偿量
+     */
+    class Velocity
+    {
+        public:
+            /**
+             * @brief 构造函数
+             * @param k_vel_ 速度前馈系数
+             * @param control_cycle_ 控制周期(s)
+             */
+            Velocity(float k_vel_, float control_cycle_)
+            {
+                last_target_angle = 0.0f;
+                ff_velocity = 0.0f;
+                k_vel = k_vel_;
+                control_cycle = control_cycle_;
+            }
+
+            /**
+             * @brief 计算速度前馈值
+             * @param target_angle 目标角度 单位与角度控制器期望（反馈）同单位
+             * 
+             * 根据目标角度变化率计算速度前馈值
+             */
+            void VelocityFeedforward(float target_angle)
+            {
+                // 计算速度变化率
+                ff_velocity = (target_angle - last_target_angle) / control_cycle;
+                // 计算前馈输出
+                feedforward = k_vel * ff_velocity;
+                // 更新上次目标速度
+                last_target_angle = target_angle;
+            }
+
+            /**
+             * @brief 获取前馈输出值
+             * @return 前馈输出值 单位与角度控制器具有相同的量纲维度
+             */
+            float getFeedforward()
+            {
+                return feedforward;
+            }
+
+        private:
+            float last_target_angle;      // 上一次的目标角度
+            float control_cycle;          // 控制周期
+            float k_vel;                  // 前馈系数
+            float ff_velocity;            // 速度
+            float feedforward;            // 前馈输出
+    };
+
+    /**
+     * @class Gravity
+     * @brief 重力前馈控制器
+     * 
+     * 用于补偿由于重力引起的系统静态误差
+     */
+    class Gravity
+    {
+        public:
+            /**
+             * @brief 构造函数
+             * @param k_gravity_ 重力补偿系数
+             * @param phi_ 相位补偿（单位 度）补偿到水平，水平为0点
+             */
+            Gravity(float k_gravity_, float phi_)
+            {
+                k_gravity = k_gravity_;
+                phi = phi_;
+                feedforward = 0.0f;
+            }
+
+            /**
+             * @brief 计算重力前馈值
+             * @param theta 当前角度（单位 度）
+             * 
+             * 根据当前角度和相位补偿计算重力前馈值
+             */
+            void GravityFeedforward(float theta)
+            {
+                feedforward = k_gravity * cosf((theta + phi) * 3.1415926f / 180.0f);
+            }
+
+            /**
+             * @brief 获取前馈输出值
+             * @return 前馈输出值
+             */
+            float getFeedforward()
+            {
+                return feedforward;
+            }
+
+        private:
+            float k_gravity;    // 重力系数
+            float phi;          // 相位补偿（单位 度） 补偿到水平，水平为0点
+            float feedforward;  // 前馈输出
+    };
+
+    /**
+     * @class Friction
+     * @brief 摩擦力前馈控制器
+     * 
+     * 根据目标值的方向提供恒定的摩擦力补偿
+     */
+    class Friction
+    {
+        public:
+            /**
+             * @brief 构造函数
+             * @param friction_value_ 摩擦力补偿值 与控制器输出同量纲
+             */
+            Friction(float friction_value_)
+            {
+                friction_value = friction_value_;
+                feedforward = 0.0f;
+            }
+
+            /**
+             * @brief 计算摩擦力前馈值
+             * @param target 目标值 无单位限制
+             * 
+             * 根据目标值正负方向施加摩擦力补偿
+             */
+            void FrictionFeedforward(float target)
+            {
+                if (target > 0.0f) {
+                    feedforward = friction_value;
+                } else if (target < 0.0f) {
+                    feedforward = -friction_value;
+                } else {
+                    feedforward = 0.0f;
+                }
+            }
+
+            /**
+             * @brief 获取前馈输出值
+             * @return 前馈输出值 
+             */
+            float getFeedforward()
+            {
+                return feedforward;
+            }
+
+        private:
+            float friction_value;   // 摩擦力补偿值
+            float feedforward;      // 前馈输出
     };
 }
 

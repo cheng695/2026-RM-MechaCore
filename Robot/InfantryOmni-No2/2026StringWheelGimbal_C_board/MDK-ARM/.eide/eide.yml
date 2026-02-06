@@ -5,6 +5,8 @@ deviceName: STM32F407IGHx
 packDir: .pack/Keil/STM32F4xx_DFP.3.0.0
 srcDirs:
   - ../User
+  - ../USB_DEVICE
+  - ../Middlewares/ST/STM32_USB_Device_Library
 virtualFolder:
   name: <virtual_root>
   files: []
@@ -54,6 +56,9 @@ virtualFolder:
             - path: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
             - path: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
             - path: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+            - path: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
+            - path: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c
+            - path: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c
           folders: []
         - name: CMSIS
           files:
@@ -333,8 +338,8 @@ targets:
         baseAddr: ""
         bin: ""
         cpuInfo:
-          cpuName: "null"
-          vendor: "null"
+          cpuName: STM32F407IG
+          vendor: ST
         otherCmds: ""
         proType: 1
         speed: 8000

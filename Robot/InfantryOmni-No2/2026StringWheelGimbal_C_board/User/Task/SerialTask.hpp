@@ -13,5 +13,8 @@ extern uint8_t HI12RX_buffer[82];
 extern BSP::REMOTE_CONTROL::RemoteController DT7;
 extern uint8_t DT7Rx_buffer[18];
 
+extern bool is_change;
+extern bool is_vision;
+extern bool alphabet[28];
 
 #endif

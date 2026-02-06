@@ -2,9 +2,11 @@
 
 float ALG::ADRC::FirstLADRC::LADRC_1(float input, float feedback)
 {
+    TD_1(input);
     LESO_1(feedback);
-    LSEF_1(input);
-    std::clamp(U, GetMin(), GetMax());
+    LSEF_1(V1); // Use V1 (TD output) instead of raw input
+    
+    U = std::clamp(U, GetMin(), GetMax());
     return U;
 }
 
@@ -20,11 +22,21 @@ void ALG::ADRC::FirstLADRC::LESO_1(float feedback)
 {
     Beta1 = 2.0f * GetW0();
     Beta2 = GetW0() * GetW0();
-
+ 
     E = feedback - Z1;
     
     Z1 += GetH() * (Beta1 * E + Z2 + GetB0() * U);
     Z2 += GetH() * (Beta2 * E);
+}
+
+void ALG::ADRC::FirstLADRC::TD_1(float input)
+{
+    float err = input - V1;
+    float delta = R * GetH();
+    
+    if (err > delta) V1 += delta;
+    else if (err < -delta) V1 -= delta;
+    else V1 = input;
 }
 
 
@@ -36,7 +48,7 @@ float ALG::ADRC::SecondLADRC::LADRC_2(float input, float feedback)
     TD_2(input);
     LESO_2(feedback);
     LSEF_2();
-    std::clamp(U, GetMin(), GetMax());
+    U = std::clamp(U, GetMin(), GetMax());
     return U;
 }
 

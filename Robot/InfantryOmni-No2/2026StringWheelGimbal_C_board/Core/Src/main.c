@@ -23,6 +23,7 @@
 #include "dma.h"
 #include "tim.h"
 #include "usart.h"
+#include "../USB_DEVICE/App/usbd_cdc_if.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -100,7 +101,7 @@ int main(void)
   MX_USART6_UART_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_PWM_Start_IT(&htim4, TIM_CHANNEL_3);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
@@ -146,7 +147,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 6;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();

@@ -101,7 +101,7 @@ namespace BSP::WATCH_STATE
         static constexpr uint32_t RING_INTERVAL_MS = 500;  // 响铃间隔时间（毫秒）
         
         // 蜂鸣器参数
-        static constexpr uint16_t BUZZER_PWM_VALUE = 256;   // 蜂鸣器PWM值
+        static constexpr uint16_t BUZZER_PWM_VALUE = 238;   // 蜂鸣器PWM值
         static constexpr uint16_t SHORT_BEEP_MS = 100;      // 短响铃持续时间（毫秒）
         static constexpr uint16_t LONG_BEEP_MS = 500;       // 长响铃持续时间（毫秒）
         static constexpr uint16_t LONGLONG_BEEP_MS = 1000;  // 超长响铃持续时间（毫秒）

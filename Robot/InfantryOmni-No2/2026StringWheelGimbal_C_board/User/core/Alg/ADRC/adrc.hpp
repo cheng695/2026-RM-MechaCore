@@ -20,10 +20,11 @@ namespace ALG::ADRC
              * @param h_ 采样周期
              * @param max 输出最大值限制
              */
-            FirstLADRC(float wc_, float w0_, float b0_, float h_, float max)
-                    : KP(0), Beta1(0), Beta2(0), U0(0), U(0), E(0), Z1(0), Z2(0)
+            FirstLADRC(float wc_, float w0_, float b0_, float h_, float r_, float max)
+                    : KP(0), Beta1(0), Beta2(0), U0(0), U(0), E(0), Z1(0), Z2(0), R(0), V1(0), Friction(0)
             {
                 SetMinMax(-max, max);
+                SetR(r_);
                 Set_WcW0B0H(wc_, w0_, b0_, h_);
             }
 
@@ -44,6 +45,24 @@ namespace ALG::ADRC
              * @param feedback 反馈值
              */
             void LESO_1(float feedback);
+
+            /**
+             * @brief 跟踪微分器
+             * @param input 目标输入值
+             */
+            void TD_1(float input);
+
+             /**
+             * @brief 设置跟踪微分器参数R
+             * @param r_ 跟踪速度参数
+             */
+            void SetR(float r_) { R = r_; };
+
+             /**
+             * @brief 设置库伦摩擦前馈
+             * @param f 摩擦补偿值(电流单位)
+             */
+            void SetFriction(float f) { Friction = f; };
 
             /**
              * @brief 获取观测状态Z1
@@ -71,6 +90,7 @@ namespace ALG::ADRC
                 Z1 = z1;
                 Z2 = z2;
                 U = 0.0f;
+                V1 = 0.0f;
             }
         private:
             float KP;      // 比例增益系数
@@ -81,6 +101,9 @@ namespace ALG::ADRC
             float E;       // 跟踪误差
             float Z1;      // ESO状态变量1（跟踪目标值）
             float Z2;      // ESO状态变量2（总扰动估计）
+            float R;       // 跟踪微分器参数
+            float V1;      // TD状态变量1（跟踪目标值）
+            float Friction;// 库伦摩擦补偿
     };
 
     class SecondLADRC : public AdrcBase

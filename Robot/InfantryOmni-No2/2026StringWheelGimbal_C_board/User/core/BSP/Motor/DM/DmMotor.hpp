@@ -96,6 +96,7 @@ namespace BSP::Motor::DM
             this->unit_data_[i].angle_Deg = this->unit_data_[i].angle_Rad * params.rad_to_deg;
 
             this->unit_data_[i].velocity_Rad = uint_to_float(feedback_[i].velocity, params.V_MIN, params.V_MAX, 12);
+            this->unit_data_[i].velocity_Rpm = this->unit_data_[i].velocity_Rad * 60 / (2 * 3.14159265358979323846);
             this->unit_data_[i].torque_Nm = uint_to_float(feedback_[i].torque, params.T_MIN, params.T_MAX, 12);
             this->unit_data_[i].temperature_C = feedback_[i].T_Mos;
 
@@ -327,7 +328,7 @@ namespace BSP::Motor::DM
     public:
         J4310(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
             : DMMotorBase<N>(Init_id, ids, send_idxs, 
-                            Parameters(-12.56f, 12.56f, -45.0f, 45.0f, -18.0f, 18.0f, 0.0f, 500.0f, 0.0f, 5.0f))
+                            Parameters(-12.56f, 12.56f, -30.0f, 30.0f, -3.0f, 3.0f, 0.0f, 500.0f, 0.0f, 5.0f))
         {
         }
     };

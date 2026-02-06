@@ -24,6 +24,7 @@ namespace ALG::PID
             float feedback_;                       // 反馈值
             float error_;                          // 当前误差值 (target - feedback)
             float integral_limit_;                 // 积分限幅值，限制积分项的最大绝对值
+
             float integral_separation_threshold_;  // 积分分离阈值，误差大于该值时停止积分
 
 
@@ -40,6 +41,7 @@ namespace ALG::PID
             void setIntegralSeparation(float threshold);
             float getOutput();
             float getError();
+            float getK(int index);
     };
 
     /**
@@ -138,6 +140,18 @@ namespace ALG::PID
     {
         return error_;
     }
+
+    /**
+     * @brief 获取PID参数
+     *
+     * @param index 参数索引 KP:0 KI:1 KD:2
+     * @return float
+     */
+    inline float PID::getK(int index)
+    {
+        return k_[index];
+    }
+
 
 } // namespace ALG::PID
 

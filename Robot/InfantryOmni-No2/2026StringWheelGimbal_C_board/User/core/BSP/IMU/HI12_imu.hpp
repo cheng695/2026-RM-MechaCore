@@ -104,11 +104,16 @@ namespace BSP::IMU
                 return gyro[index];
             }
 
-            /**
+            /**5
              * @brief 获取角速度数据
              * @param index 索引值 (0:x轴, 1:y轴, 2:z轴)
-             * @return 对应轴的角速度值 (单位: rpm)
+             * @return 对应轴的角速度值 (单位: rad/s)
              */
+            float GetGyroRad(int index)
+            {
+                return gyro[index] * 0.0174532925f;
+            }
+
             float GetGyroRPM(int index)
             {
                 return gyro[index] / 6.0f;
