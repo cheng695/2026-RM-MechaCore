@@ -80,7 +80,7 @@ namespace ALG::PowerControl
                     // 3. 计算衰减系数 rho
                     if (PowerConsumption > 1e-4f) 
                     {
-                        rho = ((PowerTotal - CorrectionConstant) - GenerateElectricity) / PowerConsumption;
+                        rho = ((PowerMax - CorrectionConstant) - GenerateElectricity) / PowerConsumption;
                     } 
                     else 
                     {
@@ -249,6 +249,75 @@ namespace ALG::PowerControl
             float B;
             float C;
             float Delta;                // b^2-4ac
+            
+
+    };
+
+    class EnergyRing
+    {
+        public:
+            EnergyRing(float abundanceline, float povertyline, float pmin_restriction)
+            {
+                PowerMax = 0.0f;
+                AbundanceLine = abundanceline;
+                PovertyLine = povertyline;
+                Pmin_restriction = pmin_restriction;
+            }
+            void energyring(float AbundanceOut, float PovertyOut, float P_referee, float CurrentEnergy, bool isShift)
+            {
+                float PowerMax_abundance = P_referee - AbundanceOut;
+                float PowerMax_poverty = P_referee - PovertyOut;
+                
+                // 1. 如果剩余能量小于贫困线，强制限制为80%
+                if (CurrentEnergy < PovertyLine)
+                {
+                    PowerMax = 0.8f * P_referee;
+                }
+                // 2. 如果按下Shift (加速)
+                else if (isShift)
+                {
+                    PowerMax = PowerMax_poverty;
+                }
+                // 3. Shift未按下
+                else
+                {
+                    if (CurrentEnergy >= AbundanceLine)
+                    {
+                        PowerMax = PowerMax_abundance;
+                    }
+                    else // 在贫困线和富足线之间
+                    {
+                        PowerMax = P_referee;
+                    }
+                }
+
+                // 最小功率保障 (使用0.7倍防止死锁，但受上述逻辑控制)
+                Pmin_restriction = 0.7f * P_referee;
+                if(PowerMax < Pmin_restriction)
+                {
+                    PowerMax = Pmin_restriction;
+                }
+            }
+
+            float GetAbundanceLine()
+            {
+                return AbundanceLine;
+            }
+
+            float GetPovertyLine()
+            {
+                return PovertyLine;
+            }
+
+            float GetPowerMax()
+            {
+                return PowerMax;
+            }
+        private:
+            float PowerMax;
+            float AbundanceLine;    // 富足线
+            float PovertyLine;      // 穷困线
+            float Pmin_restriction; // 最小底盘功率
     };
 }
 

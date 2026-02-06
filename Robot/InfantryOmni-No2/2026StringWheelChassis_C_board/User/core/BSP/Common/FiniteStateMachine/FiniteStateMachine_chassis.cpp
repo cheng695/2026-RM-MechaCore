@@ -18,7 +18,6 @@ static const char* State_Names[STATUS_COUNT] = {
     "STOP",
     "FOLLOW", 
     "NOTFOLLOW",
-    "KEYBOARD"
 };
 
 /**
@@ -67,7 +66,7 @@ void Chassis_FSM::SetState(uint8_t left, uint8_t right, bool equipment_online)
  * @param right 右开关状态
  * @param equipment_online 所有设备是否在线
  */
-void Chassis_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online)
+void Chassis_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool *alphabet)
 {
     // 保存旧状态用于统计
     Enum_Chassis_States old_state = State_chassis;
@@ -76,23 +75,47 @@ void Chassis_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online
     SetState(left, right, equipment_online);
     
     // 根据开关状态组合确定底盘状态
-    if (StateLeft == 2 && StateRight == 2 || equipment_online == false)
+    // 根据开关状态组合确定底盘状态
+    if (equipment_online == false)
     {
         State_chassis = STOP;
     }
-    else if (StateLeft == 3 && StateRight == 2)
+    // 左上 (1)
+    else if (StateLeft == 1)
     {
-        State_chassis = FOLLOW;
+        if (StateRight == 1 || StateRight == 2 || StateRight == 3) State_chassis = NOTFOLLOW; 
+        else State_chassis = FOLLOW; // 默认
     }
-    else if (StateLeft == 2 && StateRight == 3)
+    // 左中 (3)
+    else if (StateLeft == 3)
     {
-        State_chassis = NOTFOLLOW;
+        if (StateRight == 1) State_chassis = FOLLOW;         // 左中右上 → 跟随
+        else if (StateRight == 3)   // 左中右中 → 键鼠
+        {
+            if(alphabet[21])
+            {
+                State_chassis = NOTFOLLOW;
+            }
+            else
+            {
+                State_chassis = FOLLOW;
+            }
+        }
+        else if (StateRight == 2) State_chassis = NOTFOLLOW; // 左中右下 → 不跟随
+        else State_chassis = FOLLOW; // 默认
     }
-    else if(StateLeft == 3 && StateRight == 3)
+    // 左下 (2)
+    else if (StateLeft == 2)
     {
-        State_chassis = KEYBOARD;
+        if (StateRight == 1) State_chassis = FOLLOW;         // 左下右上 → 跟随
+        else if (StateRight == 3) State_chassis = NOTFOLLOW; // 左下右中 → 不跟随
+        else if (StateRight == 2) State_chassis = STOP;      // 左下右下 → 停止
+        else State_chassis = FOLLOW; // 默认
     }
-    // 其他组合保持原有状态
+    else
+    {
+        State_chassis = FOLLOW; // 默认
+    }
     
     // 如果状态发生变化，更新统计信息
     if (old_state != State_chassis) {

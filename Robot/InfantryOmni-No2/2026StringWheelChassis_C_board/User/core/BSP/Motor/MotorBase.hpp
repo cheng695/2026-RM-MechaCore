@@ -151,7 +151,7 @@ namespace BSP::Motor
 
         /**
          * @brief 获取速度    单位：(rpm)
-         * 这里转子速度，不是输出轴的
+         * 这里输出轴的速度，不是转子的速度
          * @param id CAN id
          * @return float
          */

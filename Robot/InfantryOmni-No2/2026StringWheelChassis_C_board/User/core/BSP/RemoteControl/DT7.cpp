@@ -48,15 +48,15 @@ void RemoteController::parseData(const uint8_t *data)
     channels_.ch2 = mapChannelValue(extractBits(data, 22, 11));
     channels_.ch3 = mapChannelValue(extractBits(data, 33, 11));
     channels_.scroll = extract16Bits(data[16], data[17]); // 解析滚轮/滑轮值
-    channels_.s1 = extractBits(data, 44, 2);
-    channels_.s2 = extractBits(data, 46, 2);
+    channels_.s1 = extractBits(data, 46, 2);
+    channels_.s2 = extractBits(data, 44, 2);
     
     // 摇杆原始坐标（以中值为中心，范围为-660~660）
-    coordinates_.left_stick_x = channels_.ch2 - CHANNEL_VALUE_MID;
-    coordinates_.left_stick_y = channels_.ch3 - CHANNEL_VALUE_MID;
-    coordinates_.right_stick_x = channels_.ch0 - CHANNEL_VALUE_MID;
-    coordinates_.right_stick_y = channels_.ch1 - CHANNEL_VALUE_MID;
-    coordinates_.scroll = channels_.scroll - CHANNEL_VALUE_MID;
+    coordinates_.left_stick_x = DeadzoneCompensation(channels_.ch2 - CHANNEL_VALUE_MID);
+    coordinates_.left_stick_y = DeadzoneCompensation(channels_.ch3 - CHANNEL_VALUE_MID);
+    coordinates_.right_stick_x = DeadzoneCompensation(channels_.ch0 - CHANNEL_VALUE_MID);
+    coordinates_.right_stick_y = DeadzoneCompensation(channels_.ch1 - CHANNEL_VALUE_MID);
+    coordinates_.scroll = DeadzoneCompensation(channels_.scroll - CHANNEL_VALUE_MID);
 
     // 摇杆位置（归一化到 -1.0~1.0，分别赋值四个轴）
     stick_position_.left_x = discreteAxis(coordinates_.left_stick_x, 0);

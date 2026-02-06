@@ -348,8 +348,8 @@ namespace Alg::CalculationBase
              */
             void CalculateVelocities()
             {
-                Vx = GetSpeedGain() * (GetSignal_x() *  cosf(GetPhase()) + GetSignal_y() * sinf(GetPhase()));
-                Vy = GetSpeedGain() * (GetSignal_x() * -sinf(GetPhase()) + GetSignal_y() * cosf(GetPhase()));
+                Vx = GetSpeedGain() * GetSignal_x();
+                Vy = GetSpeedGain() * GetSignal_y();
                 Vw = GetRotationalGain() * GetSignal_w();
             }
 
@@ -373,10 +373,17 @@ namespace Alg::CalculationBase
                     Motor_wheel[i] = /*GetSpeedGain()**/tmp_velocity_modulus * 60.0f / (2.0f * M_PI); // rad/s转RPM
 
                     // 根据速度的xy分量分别决定舵向电机角度
-                    if (tmp_velocity_modulus == 0.0f)
+                    // if (tmp_velocity_modulus == 0.0f)
+                    // {
+                    //     // 排除除零问题，保持当前角度， 后面是45度抱死
+                    //     //Motor_direction[i] = atan2f((R * cosf(Wheel_Azimuth[i])), (-R * sinf(Wheel_Azimuth[i]))) + Phase[i];
+                    //     Motor_direction[i] = current_steer_angles[i];//atan2f((R * cosf(Wheel_Azimuth[i])), (-R * sinf(Wheel_Azimuth[i]))) + Phase[i];
+                    // }
+                    if (tmp_velocity_modulus < 0.05f) // Use a small threshold
                     {
-                        // 排除除零问题，保持当前角度， 后面是45度抱死
-                        Motor_direction[i] = current_steer_angles[i];//atan2f((R * cosf(Wheel_Azimuth[i])), (-R * sinf(Wheel_Azimuth[i]))) + Phase[i];
+                        // Velociy is near zero, keep current angle to prevent swerving on startup
+                        Motor_direction[i] = current_steer_angles[i];
+                        Motor_wheel[i] = 0.0f; // Ensure wheel speed is zero
                     }
                     else
                     {

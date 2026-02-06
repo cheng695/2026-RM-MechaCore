@@ -60,12 +60,7 @@ namespace ALG::ADRC
              * @return 控制输出值
              */
             float GetU() const { return U; }
-
-            /**
-             * @brief 重置控制器状态
-             * @param z1 初始状态Z1
-             * @param z2 初始状态Z2
-             */
+           
             void Reset(float z1 = 0.0f, float z2 = 0.0f)
             {
                 Z1 = z1;

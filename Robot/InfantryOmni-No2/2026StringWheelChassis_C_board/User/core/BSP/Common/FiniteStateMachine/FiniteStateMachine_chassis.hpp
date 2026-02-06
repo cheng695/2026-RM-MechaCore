@@ -29,7 +29,6 @@ enum Enum_Chassis_States
     STOP = 0,      // 停止状态
     FOLLOW,        // 跟随状态
     NOTFOLLOW,     // 非跟随状态
-    KEYBOARD,      // 键盘控制状态
     STATUS_COUNT   // 状态数量
 };
 
@@ -86,7 +85,7 @@ public:
      * @param left 左开关状态
      * @param right 右开关状态
      */
-    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online);
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool *alphabet);
 
     /**
      * @brief 定时更新函数（用于时间统计）
