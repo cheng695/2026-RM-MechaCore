@@ -82,13 +82,31 @@ void KeyUpdate()
  */
 void KeyProcess(bool *alphabet)
 {
+    alphabet[26] = Mouse_left.getPress();
+    alphabet[27] = Mouse_right.getPress();
+
+    // 鼠标左键有没有松开过
+    is_change = Mouse_left.getFallingEdge(); 
+
+    // 左键也能开启摩擦轮，B键反转
+    static bool friction_wheel_state = false;
+    if (Key_b.getRisingEdge()) 
+    {
+        friction_wheel_state = !friction_wheel_state;
+    }
+    if (Mouse_left.getRisingEdge()) 
+    {
+        friction_wheel_state = true;
+    }
+    alphabet[1] = friction_wheel_state;
+
     /* --- 1. 判定是否进入视觉托管模式 --- */
     if(vision.getVisionFlag())
     {
         // 如果是键鼠模式 (3,3)，不仅要 visionFlag 还要按住右键
         if(DT7.get_s1() == 3 && DT7.get_s2() == 3) 
         {
-            is_vision = Mouse_right.getPress(); // 可以直接赋值
+            is_vision = alphabet[27]; // 可以直接赋值
         }
         else // 遥控模式，只要 visionFlag 就托管
         {
@@ -131,11 +149,6 @@ void KeyProcess(bool *alphabet)
 
 
     }
-    alphabet[26] = Mouse_left.getPress();
-    // 鼠标左键有没有松开过
-    is_change = Mouse_left.getFallingEdge(); 
-    // B键独立，任何时候都能控制
-    alphabet[1] = Key_b.getToggleState();
 
     last_is_vision = is_vision; 
 }

@@ -107,6 +107,17 @@ class Supercapacitor
         Supercapacitor(uint32_t id_)
         {
             id = id_;
+            last_update_time = 0;
+        } 
+
+        /**
+         * @brief 检查超级电容是否在线
+         * @param timeout_ms 超时时间(ms)
+         * @return true 在线
+         */
+        bool isConnected(uint32_t timeout_ms = 100)
+        {
+            return (HAL_GetTick() - last_update_time) < timeout_ms;
         } 
 
         /**
@@ -128,6 +139,7 @@ class Supercapacitor
 
                 Power_10times /= 10;    // 转换为实际电管功率值       
                 Power /= -10;           // 转换为实际电机+放电（正的）功率 
+                last_update_time = HAL_GetTick();
             }
         }
 
@@ -219,6 +231,7 @@ class Supercapacitor
         float RatedPower;       // 等级功率
         uint8_t Instruction;    // 超电指令 0:开启 1:关闭
         float BufferEnergy;     // 缓冲能量
+        uint32_t last_update_time; // 上次更新时间
 };
 
 extern Supercapacitor supercap; // 超电类声明

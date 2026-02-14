@@ -55,11 +55,14 @@ ALG::PID::PID energy_pid[2] = {
 };
 
 /* 功率控制 -------------------------------------------------------------------------------------------------*/
-ALG::PowerControl::PowerControl<4> power3508;
-ALG::PowerControl::PowerControl<4> power6020;
-ALG::PowerControl::EnergyRing energy_ring(1288.5f, 250.0f, 48.0f);
+ALG::PowerControl::PowerControl<4> power3508;   // 3508功率控制算法
+ALG::PowerControl::PowerControl<4> power6020;   // 6020功率控制算法
+ALG::PowerControl::EnergyRing energy_ring(1288.5f, 250.0f, 48.0f);  // 能量环
+ALG::PowerControl::PowerControlStrategy power_strategy(1288.5f); // 上限功率和剩余能量逻辑处理
 float coefficients3508[6] = { 2.144951, -0.002828, 0.000025, 0.016525,  0.115369, 0.000015 };   // 3508
 float coefficients6020[6] = { 1.586024,  0.013252, 0.000229, 0.530772,  7.509297, 0.000320 };   // 6020
+
+
 
 /* 期望值与输出 ----------------------------------------------------------------------------------------------*/
 Alg::Utility::SlopePlanning string_target[3] = {
@@ -194,7 +197,7 @@ void SetTarget()
                 float vx_Handle, vy_Handle, vw_Handle;
                 vx_Handle = alphabet[22] - alphabet[18];
                 vy_Handle = alphabet[3] - alphabet[0];
-                vw_Handle = alphabet[16] - alphabet[4];
+                vw_Handle = alphabet[23];
                 
                 // 小陀螺时进行相位补偿
                 if (vw_Handle != 0.0f) 
@@ -207,7 +210,7 @@ void SetTarget()
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(alphabet[16] || alphabet[4])   // 小陀螺
+                if(alphabet[23])   // 小陀螺
                 {
                     string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, string_fk.GetChassisVw()); 
                     chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
@@ -262,7 +265,7 @@ void SetTarget()
                 float vx_Handle, vy_Handle, vw_Handle;
                 vx_Handle = alphabet[22] - alphabet[18];
                 vy_Handle = alphabet[3] - alphabet[0];
-                vw_Handle = alphabet[16] - alphabet[4];
+                vw_Handle = alphabet[23];
                 
                 // 小陀螺时进行相位补偿
                 if (vw_Handle != 0.0f) 
@@ -372,15 +375,27 @@ void chassis_notfollow()
     }
     
     // 功率控制
-    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), alphabet[26]);
-    float PowerMax = energy_ring.GetPowerMax();
-    //float PowerMax = 60.0f;
-    supercap.setInstruction(0);
+    bool isSupercapOnline = supercap.isConnected(); // 电容连接状态
+    bool isRefereeOnline = !RM_RefereeSystem::RM_RefereeSystemDir(); // 裁判系统连接状态
+    
+    // 更新功率策略
+    power_strategy.Update(isSupercapOnline, isRefereeOnline, 
+                          (float)ext_power_heat_data_0x0201.chassis_power_limit, 
+                          ext_power_heat_data_0x0202.chassis_power_buffer, 
+                          supercap.GetCurrentEnergy());
 
-    supercap.setRatedPower(ext_power_heat_data_0x0201.chassis_power_limit);
-    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);
+    float input_limit = power_strategy.GetInputLimit(); // 基础上限功率
+    float input_energy = power_strategy.GetInputEnergy();   // 剩余能量
+
+    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(input_energy));   // 富足环
+    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(input_energy));     // 贫困环
+    // 能量环逻辑
+    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), input_limit, input_energy, alphabet[26], alphabet[27]);
+    float PowerMax = energy_ring.GetPowerMax(); // 最终上限功率
+
+    supercap.setInstruction(0); // 开启超电
+    supercap.setRatedPower(input_limit);    // 给超电设置裁判系统上限功率
+    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);  // 给超电设置剩余缓冲能量
 
     float I6020[4], I3508[4], I_other[4], V6020[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
@@ -394,7 +409,7 @@ void chassis_notfollow()
     }
     float pmax6020 = PowerMax*0.5f; // 6020电机先吃50%
     float pmax3508 = PowerMax*0.5f; // 3508电机吃50%
-    // if(pmax6020 > 50.0f)
+    // if(pmax6020 > 50.0f) 这个可能没什么用，主要是想给6020少一点功率，放着先
     // {
     //     pmax6020 = 50.0f;
     //     pmax3508 = PowerMax - pmax6020;
@@ -457,15 +472,26 @@ void chassis_follow()
     }
     
     // 功率控制
-    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), alphabet[26]);
-    float PowerMax = energy_ring.GetPowerMax();
-    //float PowerMax = 60.0f;
-    supercap.setInstruction(0);
+    bool isSupercapOnline = supercap.isConnected();
+    bool isRefereeOnline = !RM_RefereeSystem::RM_RefereeSystemDir();
+    // 更新功率策略
+    power_strategy.Update(isSupercapOnline, isRefereeOnline, 
+                          (float)ext_power_heat_data_0x0201.chassis_power_limit, 
+                          ext_power_heat_data_0x0202.chassis_power_buffer, 
+                          supercap.GetCurrentEnergy());
 
-    supercap.setRatedPower(ext_power_heat_data_0x0201.chassis_power_limit);
-    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);
+    float input_limit = power_strategy.GetInputLimit(); // 基础上限功率
+    float input_energy = power_strategy.GetInputEnergy();   // 剩余能量
+
+    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(input_energy));   // 富足环
+    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(input_energy));     // 贫困环
+    // 能量环逻辑
+    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), input_limit, input_energy, alphabet[26], alphabet[27]);
+    float PowerMax = energy_ring.GetPowerMax(); // 最终上限功率
+    
+    supercap.setInstruction(0); // 开启超电
+    supercap.setRatedPower(input_limit);    // 给超电设置裁判系统上限功率
+    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);  // 给超电设置剩余缓冲能量
 
     float I6020[4], I3508[4], I_other[4], V6020[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
@@ -479,7 +505,7 @@ void chassis_follow()
     }
     float pmax6020 = PowerMax*0.5f; // 6020电机先吃50%
     float pmax3508 = PowerMax*0.5f; // 3508电机吃50%
-    // if(pmax6020 > 50.0f)
+    // if(pmax6020 > 50.0f) 这个可能没什么用，主要是想给6020少一点功率，放着先
     // {
     //     pmax6020 = 50.0f;
     //     pmax3508 = PowerMax - pmax6020;

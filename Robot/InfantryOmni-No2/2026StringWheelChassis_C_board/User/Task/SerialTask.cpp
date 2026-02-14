@@ -9,17 +9,19 @@ uint8_t power_buffer[12];
 Power power;
 
 /* 按键 ---------------------------------------------------------------------------------------------------*/
-bool alphabet[28];
+bool alphabet[28];  // ctrl 28, shift 27
 BSP::Key::SimpleKey Key_w;
 BSP::Key::SimpleKey Key_s;
 BSP::Key::SimpleKey Key_a;
 BSP::Key::SimpleKey Key_d;
 BSP::Key::SimpleKey Key_q;
-BSP::Key::SimpleKey Key_e;
-BSP::Key::SimpleKey Key_c;
-BSP::Key::SimpleKey Key_v;
+BSP::Key::SimpleKey Key_x;
+BSP::Key::SimpleKey Key_r;
+BSP::Key::SimpleKey Key_f;
 BSP::Key::SimpleKey Key_shift;
 BSP::Key::SimpleKey Key_ctrl;
+BSP::Key::SimpleKey Mouse_left;
+BSP::Key::SimpleKey Mouse_right;
 
 /* 设备通讯回调与数据解析 -------------------------------------------------------------------------------------*/
 void SerivalInit()
@@ -58,11 +60,13 @@ void KeyUpdate()
     Key_a.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_A));
     Key_d.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_D));
     Key_q.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_Q));
-    Key_e.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_E));
-    Key_c.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_C));
-    Key_v.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_V));
+    Key_x.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_X));
+    Key_r.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_R));
+    Key_f.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_F));
     Key_shift.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_SHIFT));
     Key_ctrl.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_CTRL));
+    Mouse_left.update(DT7.get_mouseLeft());
+    Mouse_right.update(DT7.get_mouseRight());
 }
 
 void KeyProcess(bool *alphabet)
@@ -72,28 +76,32 @@ void KeyProcess(bool *alphabet)
     alphabet[0]  = Key_a.getPress();    // 左（按下）
     alphabet[3]  = Key_d.getPress();    // 右（按下）
     alphabet[26] = Key_shift.getPress();    // 超电（按下）
+    alphabet[23] = Key_x.getPress();    // X小陀螺（按下）
 
-    if (Key_q.getRisingEdge())  // 向左小陀螺（单点，再点停下）
+    alphabet[16] = !Key_q.getToggleState();  // 底盘是否跟随（单点）默认跟随
+
+    // Ctrl键 主动补电模式（单点，与Shift/左键/右键互锁）
+    if (Key_ctrl.getRisingEdge())
     {
-        alphabet[16] = !alphabet[16];
-        if(alphabet[16]) alphabet[4] = false;
+        alphabet[27] = !alphabet[27];
     }
-    if (Key_e.getRisingEdge())  // 向右小陀螺（单点，再点停下）
+    // 如果按下了加速(Shift)或开火(左键/右键)，则强制退出补电模式
+    if (Key_shift.getPress() || Mouse_left.getPress() || Mouse_right.getPress())
     {
-        alphabet[4] = !alphabet[4];
-        if(alphabet[4]) alphabet[16] = false;
+        alphabet[27] = false;
     }
 
-    if (Key_c.getRisingEdge())  // 底盘跟随（单点）
+    if(Key_ctrl.getPress() && Key_shift.getPress() && Key_f.getPress())
     {
-        alphabet[2] = !alphabet[2];
-        if(alphabet[2]) alphabet[21] = false;
+        alphabet[5] = true; // 不信任裁判系统
+        alphabet[17] = false;
     }
-    if (Key_v.getRisingEdge())  // 底盘不跟随（单点）
+    else if(Key_ctrl.getPress() && Key_shift.getPress() && Key_r.getPress())
     {
-        alphabet[21] = !alphabet[21];
-        if(alphabet[21]) alphabet[2] = false;
+        alphabet[17] = true; // 信任裁判系统
+        alphabet[5] = false;
     }
+    
 }
 
 extern "C" {

@@ -253,9 +253,20 @@ namespace ALG::PowerControl
 
     };
 
+    /**
+     * @brief 能量环控制类
+     * @details 根据当前能量状态动态调整底盘最大功率限制，实现智能功率分配
+     *          通过设置富足线和贫困线来判断当前能量状态，并据此调整功率输出策略
+     */
     class EnergyRing
     {
         public:
+            /**
+             * @brief 构造函数
+             * @param abundanceline 富足线阈值 (J) - 当能量高于此值时认为能量充足
+             * @param povertyline 贫困线阈值 (J) - 当能量低于此值时认为能量不足
+             * @param pmin_restriction 最小功率限制 (W) - 防止功率过低导致系统死锁
+             */
             EnergyRing(float abundanceline, float povertyline, float pmin_restriction)
             {
                 PowerMax = 0.0f;
@@ -263,61 +274,190 @@ namespace ALG::PowerControl
                 PovertyLine = povertyline;
                 Pmin_restriction = pmin_restriction;
             }
-            void energyring(float AbundanceOut, float PovertyOut, float P_referee, float CurrentEnergy, bool isShift)
+
+            /**
+             * @brief 能量环主控制算法
+             * @details 根据裁判系统能量信息和操作状态，动态计算当前允许的最大功率
+             * 
+             * @param AbundanceOut 富足环输出
+             * @param PovertyOut 贫困环输出
+             * @param P_referee 裁判系统允许的最大功率 (W)
+             * @param CurrentEnergy 当前剩余能量 (J)
+             * @param isShift 是否按下Shift键 (加速模式)
+             * @param isPower 是否处于充电模式 (忽略能量环逻辑，强行80%给底盘，20%给超电)
+             * 
+             * @note 功率分配优先级：
+             *       1. 充电模式 → 固定80%功率
+             *       2. 能量不足(<贫困线) → 强制80%功率
+             *       3. 加速模式（shift按下） → 使用贫困功率限制
+             *       4. 能量充足(≥富足线) → 使用富足功率限制
+             *       5. 正常模式 → 满等级功率运行
+             *       6. 所有情况都需满足最小功率保障
+             */
+            void energyring(float AbundanceOut, float PovertyOut, float P_referee, float CurrentEnergy, bool isShift, bool isPower)
             {
-                float PowerMax_abundance = P_referee - AbundanceOut;
-                float PowerMax_poverty = P_referee - PovertyOut;
-                
-                // 1. 如果剩余能量小于贫困线，强制限制为80%
-                if (CurrentEnergy < PovertyLine)
+                if(isPower)
                 {
+                    // 充电模式：固定使用80%的裁判功率
                     PowerMax = 0.8f * P_referee;
                 }
-                // 2. 如果按下Shift (加速)
-                else if (isShift)
-                {
-                    PowerMax = PowerMax_poverty;
-                }
-                // 3. Shift未按下
                 else
                 {
-                    if (CurrentEnergy >= AbundanceLine)
+                    // 计算两种功率限制值
+                    float PowerMax_abundance = P_referee - AbundanceOut;  // 富足状态下的功率上限
+                    float PowerMax_poverty = P_referee - PovertyOut;      // 贫困状态下的功率上限
+                    
+                    // 1. 如果剩余能量小于贫困线，强制限制为80%
+                    if (CurrentEnergy < PovertyLine)
                     {
-                        PowerMax = PowerMax_abundance;
+                        PowerMax = 0.8f * P_referee;
                     }
-                    else // 在贫困线和富足线之间
+                    // 2. 如果按下Shift (加速模式)
+                    else if (isShift)
                     {
-                        PowerMax = P_referee;
+                        PowerMax = PowerMax_poverty;
                     }
-                }
+                    // 3. Shift未按下的一般情况
+                    else
+                    {
+                        if (CurrentEnergy >= AbundanceLine)
+                        {
+                            // 能量充足：使用富足功率限制
+                            PowerMax = PowerMax_abundance;
+                        }
+                        else // 在贫困线和富足线之间
+                        {
+                            // 能量中等：满等级功率运行
+                            PowerMax = P_referee;
+                        }
+                    }
 
-                // 最小功率保障 (使用0.7倍防止死锁，但受上述逻辑控制)
-                Pmin_restriction = 0.7f * P_referee;
-                if(PowerMax < Pmin_restriction)
-                {
-                    PowerMax = Pmin_restriction;
+                    // 最小功率保障机制：防止功率过低导致系统死锁
+                    Pmin_restriction = 0.7f * P_referee;
+                    if(PowerMax < Pmin_restriction)
+                    {
+                        PowerMax = Pmin_restriction;
+                    }
                 }
             }
 
+            /**
+             * @brief 获取富足线阈值
+             * @return float 富足线能量值 (J)
+             */
             float GetAbundanceLine()
             {
                 return AbundanceLine;
             }
 
+            /**
+             * @brief 获取贫困线阈值
+             * @return float 贫困线能量值 (J)
+             */
             float GetPovertyLine()
             {
                 return PovertyLine;
             }
 
+            /**
+             * @brief 获取当前计算的最大功率限制
+             * @return float 最大功率限制值 (W)
+             */
             float GetPowerMax()
             {
                 return PowerMax;
             }
+
         private:
-            float PowerMax;
-            float AbundanceLine;    // 富足线
-            float PovertyLine;      // 穷困线
-            float Pmin_restriction; // 最小底盘功率
+            float PowerMax;             // 当前计算得出的最大功率限制 (W)
+            float AbundanceLine;        // 富足线阈值 (J) - 能量充足判断标准
+            float PovertyLine;          // 贫困线阈值 (J) - 能量不足判断标准
+            float Pmin_restriction;     // 最小功率限制 (W) - 防止死锁的安全下限
+    };
+
+    /**
+     * @brief 上限功率与剩余能量策略管理类
+     */
+    class PowerControlStrategy
+    {
+        public:
+            /**
+             * @brief 构造函数，初始化功率控制策略
+             * @param abundanceline 富足线阈值 (J)，用于超级电容满能量的判断基准
+             */
+            PowerControlStrategy(float abundanceline)
+            {
+                last_valid_limit = 60.0f; // 默认功率限制 (W)
+                input_limit = 60.0f;      // 初始功率限制 (W)
+                input_energy = 0.0f;      // 初始能量反馈 (J)
+                AbundanceLine = abundanceline;
+            }
+
+            /**
+             * @brief 更新 上限功率 与 剩余能量 策略
+             * @param isSupercapOnline 超电在线状态
+             * @param isRefereeOnline 裁判系统在线状态
+             * @param referee_limit 裁判系统功率限制
+             * @param referee_buffer 裁判系统缓冲能量
+             * @param supercap_energy 超电剩余能量
+             */
+            void Update(bool isSupercapOnline, bool isRefereeOnline, float referee_limit, float referee_buffer, float supercap_energy)
+            {
+                // 若裁判系统在线，更新裁判系统功率上限
+                if (isRefereeOnline) last_valid_limit = referee_limit;
+
+                // 1. 电容连接，裁判断连
+                if (isSupercapOnline && !isRefereeOnline)
+                {
+                    input_limit = last_valid_limit;
+                    input_energy = supercap_energy;
+                }
+                // 2. 电容断连，裁判连接
+                else if (!isSupercapOnline && isRefereeOnline)
+                {
+                    // 隐形能量池逻辑：若缓冲满(接近60J)，认为电容有电，允许爆发
+                    if (referee_buffer > 55.0f)
+                    {
+                        input_limit = last_valid_limit; 
+                        input_energy = AbundanceLine; // 假装能量充足，骗过EnergyRing
+                    }
+                    else
+                    {
+                        input_limit = last_valid_limit; // 正常功率
+                        input_energy = 0.0f; // 假装能量耗尽，触发保护
+                    }
+                }
+                // 3. 双断连
+                else if (!isSupercapOnline && !isRefereeOnline)
+                {
+                    input_limit = last_valid_limit;
+                    input_energy = 0.0f;
+                }
+                // 4. 正常情况
+                else
+                {
+                    input_limit = referee_limit;
+                    input_energy = supercap_energy;
+                }
+            }
+
+            /**
+             * @brief 获取当前使用的功率上限
+             * @return float 功率上限 (W)
+             */
+            float GetInputLimit() const { return input_limit; }
+
+            /**
+             * @brief 获取当前使用的能量反馈值
+             * @return float 能量值 (J)
+             */
+            float GetInputEnergy() const { return input_energy; }
+
+        private:
+            float last_valid_limit;     // 最后一次有效的功率上限 (W)
+            float input_limit;          // 当前使用的功率上限 (W)
+            float input_energy;         // 当前使用的能量反馈 (J)
+            float AbundanceLine;        // 富足线 (J)，用于伪造满能量状态
     };
 }
 
