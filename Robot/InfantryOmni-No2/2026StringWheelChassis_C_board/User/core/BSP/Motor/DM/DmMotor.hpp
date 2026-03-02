@@ -124,8 +124,8 @@ namespace BSP::Motor::DM
                 {
                     const uint8_t* pData = frame.data;
                         
-                    feedback_[i].id = (pData[0] >> 4) & 0xF;
-                    feedback_[i].err = pData[0] & 0xF;
+                    feedback_[i].id = pData[0] & 0xF;
+                    feedback_[i].err = (pData[0] >> 4) & 0xF;
                     feedback_[i].angle = (pData[1] << 8) | pData[2];
                     feedback_[i].velocity = (pData[3] << 4) | (pData[4] >> 4);
                     feedback_[i].torque = ((pData[4] & 0xF) << 8) | pData[5];
@@ -342,6 +342,17 @@ namespace BSP::Motor::DM
         S2325(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
             : DMMotorBase<N>(Init_id, ids, send_idxs,
                             Parameters(-12.5f, 12.5f, -50.0f, 50.0f, -10.0f, 10.0f, 0.0f, 500.0f, 0.0f, 5.0f))
+        {
+        }
+    };
+
+    template <uint8_t N> 
+    class J4340 : public DMMotorBase<N>
+    {
+    public:
+        J4340(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
+            : DMMotorBase<N>(Init_id, ids, send_idxs, 
+                            Parameters(-3.14, 3.14f, -50.0f, 50.0f, -9.0f, 9.0f, 0.0f, 500.0f, 0.0f, 5.0f))
         {
         }
     };

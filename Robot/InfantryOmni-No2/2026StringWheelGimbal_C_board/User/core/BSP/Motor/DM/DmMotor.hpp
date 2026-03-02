@@ -347,6 +347,17 @@ namespace BSP::Motor::DM
         }
     };
 
+    template <uint8_t N> 
+    class J4340 : public DMMotorBase<N>
+    {
+    public:
+        J4340(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
+            : DMMotorBase<N>(Init_id, ids, send_idxs, 
+                            Parameters(-3.14, 3.14f, -50.0f, 50.0f, -9.0f, 9.0f, 0.0f, 500.0f, 0.0f, 5.0f))
+        {
+        }
+    };
+
 } // namespace BSP::Motor::DM
 
 #endif
