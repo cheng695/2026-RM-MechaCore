@@ -129,6 +129,9 @@ namespace BSP::REMOTE_CONTROL
         inline int16_t get_right_stick_y() const { return coordinates_.right_stick_y; }
         inline int16_t get_scroll_660() const { return coordinates_.scroll; }
         // 鼠标数据
+        inline int16_t get_mouseX() const { return mouse_.x; }
+        inline int16_t get_mouseY() const { return mouse_.y; }
+        inline int16_t get_mouseZ() const { return mouse_.z; }
         inline bool get_mouseLeft() const { return mouse_.left; }
         inline bool get_mouseRight() const { return mouse_.right; }
         // 开关数据
