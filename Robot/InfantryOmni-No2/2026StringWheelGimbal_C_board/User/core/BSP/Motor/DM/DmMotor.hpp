@@ -125,8 +125,8 @@ namespace BSP::Motor::DM
                 {
                     const uint8_t* pData = frame.data;
                         
-                    feedback_[i].id = (pData[0] >> 4) & 0xF;
-                    feedback_[i].err = pData[0] & 0xF;
+                    feedback_[i].id = pData[0] & 0xF;
+                    feedback_[i].err = (pData[0] >> 4) & 0xF;
                     feedback_[i].angle = (pData[1] << 8) | pData[2];
                     feedback_[i].velocity = (pData[3] << 4) | (pData[4] >> 4);
                     feedback_[i].torque = ((pData[4] & 0xF) << 8) | pData[5];

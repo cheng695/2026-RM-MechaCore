@@ -275,4 +275,4 @@ targets:
         bin: ""
         interface: cmsis-dap-v1
         target: stm32f4x
-    uploader: JLink
+    uploader: OpenOCD

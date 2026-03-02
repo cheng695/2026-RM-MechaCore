@@ -20,9 +20,11 @@ bool is_change;
 bool is_vision;
 bool last_is_vision = false; // 上一次是不是视觉模式
 bool alphabet[28];  // 27：鼠标左键，28：鼠标右键
-BSP::Key::SimpleKey Key_z;
 BSP::Key::SimpleKey Key_x;
+BSP::Key::SimpleKey Key_v;
 BSP::Key::SimpleKey Key_b;
+BSP::Key::SimpleKey Key_r;
+BSP::Key::SimpleKey Key_g;
 BSP::Key::SimpleKey Mouse_left;
 BSP::Key::SimpleKey Mouse_right;
 
@@ -68,8 +70,10 @@ void SerialInit()
  */
 void KeyUpdate()
 {
-    Key_z.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_Z));
     Key_x.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_X));
+    Key_r.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_R));
+    Key_g.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_G));
+    Key_v.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_V));
     Key_b.update(DT7.get_key(BSP::REMOTE_CONTROL::RemoteController::KEY_B));
     Mouse_left.update(DT7.get_mouseLeft());
     Mouse_right.update(DT7.get_mouseRight());
@@ -82,23 +86,30 @@ void KeyUpdate()
  */
 void KeyProcess(bool *alphabet)
 {
+    alphabet[23] = Key_x.getPress();
     alphabet[26] = Mouse_left.getPress();
     alphabet[27] = Mouse_right.getPress();
 
     // 鼠标左键有没有松开过
     is_change = Mouse_left.getFallingEdge(); 
 
-    // 左键也能开启摩擦轮，B键反转
-    static bool friction_wheel_state = false;
-    if (Key_b.getRisingEdge()) 
+    // 左键也能开启摩擦轮，R开摩擦轮，G关摩擦轮
+    if (Key_r.getRisingEdge()) 
     {
-        friction_wheel_state = !friction_wheel_state;
+        alphabet[17] = true;    // R为1
+        alphabet[6] = false;   // G为0
+    }
+    else if(Key_g.getRisingEdge())
+    {
+        alphabet[17] = false;   // R为0
+        alphabet[6] = true;    // G为1
     }
     if (Mouse_left.getRisingEdge()) 
     {
-        friction_wheel_state = true;
+        alphabet[17] = true;    // R为1
+        alphabet[6] = false;   // G为0
     }
-    alphabet[1] = friction_wheel_state;
+
 
     /* --- 1. 判定是否进入视觉托管模式 --- */
     if(vision.getVisionFlag())
@@ -106,7 +117,7 @@ void KeyProcess(bool *alphabet)
         // 如果是键鼠模式 (3,3)，不仅要 visionFlag 还要按住右键
         if(DT7.get_s1() == 3 && DT7.get_s2() == 3) 
         {
-            is_vision = alphabet[27]; // 可以直接赋值
+            is_vision = alphabet[27]; 
         }
         else // 遥控模式，只要 visionFlag 就托管
         {
@@ -118,33 +129,38 @@ void KeyProcess(bool *alphabet)
         is_vision = false;
     }
     // 检测是否刚刚退出视觉模式（下降沿），如果是，为了安全最好重置一下
-    if (last_is_vision && !is_vision) { alphabet[23]=0; alphabet[25]=0; } 
+    if (last_is_vision && !is_vision) { alphabet[12]=0; alphabet[13]=0; } 
+    static bool fire_state = false;
     /* --- 2. 执行逻辑 --- */
     if(is_vision)
     {
-        // 视觉完全接管 Z/X 状态
+        // 视觉完全接管 单发连发（M连，N单） 状态 ！！：B true是单发，false是连发
         uint8_t mode = vision.getVisionMode();
-        if(mode == 0)      { alphabet[25] = false; alphabet[23] = false; }
-        else if(mode == 1) { alphabet[25] = true;  alphabet[23] = false; }
-        else if(mode == 2) { alphabet[25] = false; alphabet[23] = true;  }
+        if(mode == 0)      { alphabet[12] = false; alphabet[13] = false; }
+        else if(mode == 1) { alphabet[12] = false;  alphabet[13] = true; }
+        else if(mode == 2) { alphabet[12] = true; alphabet[13] = false;  }
     }
     else
     {
-        // 手动逻辑
-        if (Key_z.getRisingEdge())
+        if(Key_b.getRisingEdge())
         {
-            alphabet[25] = true;
-            alphabet[23] = false;
+            fire_state = !fire_state;
         }
-        else if (Key_x.getRisingEdge())
+        // 手动逻辑
+        if (fire_state)
         {
-            alphabet[23] = true;
-            alphabet[25] = false;
+            alphabet[13] = true;
+            alphabet[12] = false;
+        }
+        else if (!fire_state)
+        {
+            alphabet[12] = true;
+            alphabet[13] = false;
         }
         else if (Mouse_left.getRisingEdge() && launch_fsm.Get_Now_State() == LAUNCH_CEASEFIRE)
         {
-            alphabet[23] = true; 
-            alphabet[25] = false;   
+            alphabet[12] = true; 
+            alphabet[13] = false;   
         }
 
 

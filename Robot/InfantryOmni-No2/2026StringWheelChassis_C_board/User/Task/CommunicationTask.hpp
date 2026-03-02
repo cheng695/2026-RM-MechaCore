@@ -162,8 +162,8 @@ class Supercapacitor
             send_data[3] = (buffer_int >> 8) & 0xFF; // 缓冲能量高字节
             send_data[4] = buffer_int & 0xFF;        // 缓冲能量低字节
 
-            send_data[5] = 0;  // 保留字节
-            send_data[6] = 0;  // 保留字节
+            send_data[5] = isSupercapOnline;  // 超电连接标志
+            send_data[6] = isRefereeOnline;   // 裁判系统连接标志
             send_data[7] = 0;  // 保留字节
             
             HAL::CAN::Frame frame;
@@ -203,6 +203,16 @@ class Supercapacitor
             BufferEnergy = energy;
         }
 
+        void setSupercapOnline(bool online)
+        {
+            isSupercapOnline = online;
+        }
+
+        void setRefereeOnline(bool online)
+        {
+            isRefereeOnline = online;
+        }
+
         /**
          * @brief 获取电管功率
          * @return 功率值(W)
@@ -232,6 +242,8 @@ class Supercapacitor
         uint8_t Instruction;    // 超电指令 0:开启 1:关闭
         float BufferEnergy;     // 缓冲能量
         uint32_t last_update_time; // 上次更新时间
+        bool isSupercapOnline;
+        bool isRefereeOnline;
 };
 
 extern Supercapacitor supercap; // 超电类声明

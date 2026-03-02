@@ -5,7 +5,8 @@
 namespace ALG::PID
 {
     PID::PID(float kp, float ki, float kd, float max, float integral_limit, float integral_separation_threshold_) 
-        : max_(max), min_(-max), integral_limit_(integral_limit), integral_separation_threshold_(integral_separation_threshold_)
+        : max_(max), min_(-max), integral_limit_(integral_limit), integral_separation_threshold_(integral_separation_threshold_),
+          d_filtered_(0.0f), alpha_d_(0.15f)
     {
         // 设定增益
         k_[0] = kp;
@@ -39,8 +40,10 @@ namespace ALG::PID
 
         k_out_[1] = k_[1] * integral_;
 
-        // 微分项
-        k_out_[2] = k_[2] * (error_ - previous_error_);
+        // 微分项 (不完全微分，带低通滤波消除啸叫)
+        float d_raw = error_ - previous_error_;
+        d_filtered_ = d_filtered_ * (1.0f - alpha_d_) + d_raw * alpha_d_;
+        k_out_[2] = k_[2] * d_filtered_;
 
         // 计算输出
         output_ = k_out_[0] + k_out_[1] + k_out_[2];

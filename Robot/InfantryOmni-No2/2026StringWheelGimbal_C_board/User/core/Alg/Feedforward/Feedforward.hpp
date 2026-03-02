@@ -378,6 +378,173 @@ namespace Alg::Feedforward
             float friction_value;   // 摩擦力补偿值
             float feedforward;      // 前馈输出
     };
+
+    /**
+     * @class GimbalFullCompensation
+     * @brief 云台全补偿前馈控制器
+     * 
+     * 结合了基于速度的摩擦力前馈（带零速死区线性化处理）与基于模型差分的加速度前馈，
+     * 用于克服云台转动时的摩擦阻力和惯性迟滞，提供极高的动态跟踪性能。
+     */
+    class GimbalFullCompensation
+    {
+        public:
+            /**
+             * @brief 构造函数
+             * @param kJ 转动惯量前馈系数，需要调整到与实际J相等
+             * @param dt 控制周期(s)
+             * @param viscousfriction 粘性摩擦系数
+             * @param coulombfriction 库伦摩擦系数
+             */
+            GimbalFullCompensation(float kJ = 0.0f, float dt = 0.001f, float viscousfriction = 0.0f, float coulombfriction = 0.0f)
+                : k_J(kJ), control_dt(dt), torque(0.0f), friction(0.0f),
+                  acc_feedforward(0.0f), last_ref_velocity(0.0f), filtered_acc(0.0f), 
+                  ViscousFriction(viscousfriction), CoulombFriction(coulombfriction){}
+
+            /**
+             * @brief 摩擦力 + 惯量前馈
+             * @param feedback_velocity 反馈速度(RPM)，用于摩擦力补偿 k*θ̇ + sgn(θ̇)*fc
+             * @param ref_velocity 期望速度(RPM)，用于差分求角加速度 θ̈_r
+             * 
+             * 输出: friction = k_J * θ̈_r + k * θ̇ + sgn(θ̇) * fc
+             */
+            void MomentOfInertiaTuning(float feedback_velocity, float ref_velocity)
+            {
+                // 摩擦力补偿: k * θ̇ + sgn(θ̇) * fc
+                // 使用平滑过渡代替sgn，消除零速附近抖颤，也就是零点线性化。
+                float deadzone = 3.0f;  // 死区阈值(RPM)，在此范围内线性过渡
+                float sgn;
+                if (feedback_velocity > deadzone)
+                    sgn = 1.0f;
+                else if (feedback_velocity < -deadzone)
+                    sgn = -1.0f;
+                else
+                    sgn = feedback_velocity / deadzone;  // 线性过渡
+                friction = ViscousFriction * feedback_velocity + sgn * CoulombFriction;
+
+                // 角加速度前馈: k_J * θ̈_r (对期望速度差分 + 低通滤波)
+                float ref_acc_raw = (ref_velocity - last_ref_velocity) / control_dt;
+                last_ref_velocity = ref_velocity;
+                // 一阶低通滤波（0.1~0.3之间调整）
+                float alpha = 0.15f;
+                filtered_acc = filtered_acc * (1.0f - alpha) + ref_acc_raw * alpha;
+                acc_feedforward = k_J * filtered_acc;
+
+                // 总前馈 = 摩擦力 + 惯量前馈
+                torque = friction + acc_feedforward;
+            }
+
+            /**
+             * @brief 获取总扭矩输出
+             * @return 扭矩值
+             */
+            float getTorque()
+            {
+                return torque;
+            }
+
+            /**
+             * @brief 获取摩擦力前馈输出
+             * @return 摩擦力前馈量
+             */
+            float getFriction()
+            {
+                return friction;
+            }
+
+            /**
+             * @brief 获取角加速度前馈输出
+             * @return 角加速度前馈量
+             */
+            float getAccFeedforward()
+            {
+                return acc_feedforward;
+            }
+
+            /**
+             * @brief 设置转动惯量前馈系数
+             * @param kJ 新的k_J值
+             */
+            void setKJ(float kJ) { k_J = kJ; }
+
+        private:
+            float k_J;                // 转动惯量前馈系数
+            float control_dt;         // 控制周期(s)
+            float torque;             // 总扭矩输出
+            float friction;           // 摩擦力前馈输出
+            float acc_feedforward;    // 角加速度前馈量
+            float last_ref_velocity;  // 上一次期望速度
+            float filtered_acc;       // 低通滤波后的角加速度
+            float ViscousFriction;    // 粘性摩擦力系数
+            float CoulombFriction;    // 库伦摩擦力系数
+    };
+
+    /**
+     * @class UDE
+     * @brief 不确定性与扰动估计器 (Uncertainty and Disturbance Estimator)
+     * 
+     * 用于实时观测并补偿系统所受到的外界扰动（如底盘甩尾、碰撞干扰），
+     * 通过比较理论模型产生的加速度与实际加速度，反推干扰量并前馈补偿。
+     */
+    class UDE
+    {
+        public:
+            /**
+             * @brief 构造函数
+             * @param a_ 系统特征系数a
+             * @param b_ 系统特征系数b（控制增益）
+             */
+            UDE(float a_, float b_)
+            {
+                a = a_;
+                b = b_;
+                Feedback = 0.0f;
+                Output = 0.0f;
+                X_dot = 0.0f;
+                Input = 0.0f;
+            }
+
+            /**
+             * @brief 重置观测器状态
+             * 
+             * 在切换状态或重新启动时调用，防止历史过时的观测数据产生错误补偿
+             */
+            void ResetState()
+            {
+                Output = 0.0f;
+                X_dot = 0.0f;
+                Input = 0.0f;
+            }
+
+            /**
+             * @brief UDE 观测器状态更新
+             * @param Input_ 上一控制周期的系统输入（遵守物理因果律的历史输出量）
+             * @param X_dot_ 当前系统状态的导数观测值（如当前实际的角加速度）
+             */
+            void UDE_Update(float Input_, float X_dot_)
+            {
+                Input = Input_;
+                X_dot = X_dot_;
+                
+                Output = 1/b * (X_dot - a * Feedback - b * Input);
+            }
+
+            /**
+             * @brief 获取 UDE 扰动补偿输出
+             * @return 扰动补偿前馈量
+             */
+            float getOutput()
+            {
+                return Output;
+            }
+
+        private:
+            float Output;   // UDE 扰动补偿输出
+            float X_dot;    // 当前系统状态的导数观测值
+            float a, b;     // 系统特征系数
+            float Input;    // 上一控制周期的系统输入
+            float Feedback; // 上一控制周期的系统状态
+    };
 }
 
 #endif

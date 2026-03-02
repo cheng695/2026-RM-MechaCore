@@ -401,15 +401,19 @@ namespace ALG::PowerControl
              * @param referee_buffer 裁判系统缓冲能量
              * @param supercap_energy 超电剩余能量
              */
-            void Update(bool isSupercapOnline, bool isRefereeOnline, float referee_limit, float referee_buffer, float supercap_energy)
+            void Update(bool isSupercapOnline, bool isRefereeOnline, float referee_limit, float referee_buffer, float supercap_energy, bool *alphabet)
             {
                 // 若裁判系统在线，更新裁判系统功率上限
                 if (isRefereeOnline) last_valid_limit = referee_limit;
 
                 // 1. 电容连接，裁判断连
-                if (isSupercapOnline && !isRefereeOnline)
+                if (isSupercapOnline && (!isRefereeOnline || alphabet[5]))
                 {
                     input_limit = last_valid_limit;
+                    if(input_limit < 60.0f)
+                    {
+                        input_limit = 60.0f;
+                    }
                     input_energy = supercap_energy;
                 }
                 // 2. 电容断连，裁判连接
@@ -428,9 +432,13 @@ namespace ALG::PowerControl
                     }
                 }
                 // 3. 双断连
-                else if (!isSupercapOnline && !isRefereeOnline)
+                else if (!isSupercapOnline && (!isRefereeOnline || alphabet[5]))
                 {
                     input_limit = last_valid_limit;
+                    if(input_limit < 60.0f)
+                    {
+                        input_limit = 60.0f;
+                    }
                     input_energy = 0.0f;
                 }
                 // 4. 正常情况

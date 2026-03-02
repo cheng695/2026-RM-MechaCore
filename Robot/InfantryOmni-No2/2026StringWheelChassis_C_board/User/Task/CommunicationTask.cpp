@@ -85,7 +85,7 @@ void Communication(void const * argument)
     BoardCommunicationInit();
     for(;;)
     {
-        //vofa_send(supercap.GetPower_10times(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), 1288.5f, 250.0f, energy_ring.GetPowerMax(), supercap.GetPower(), ext_power_heat_data_0x0202.chassis_power_buffer, 60.0f);
+        // vofa_send(supercap.GetPower_10times(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), 1288.5f, 250.0f, energy_ring.GetPowerMax(), supercap.GetPower(), ext_power_heat_data_0x0202.chassis_power_buffer, 60.0f);
         BoardCommunicationTX();
         osDelay(5);
     }

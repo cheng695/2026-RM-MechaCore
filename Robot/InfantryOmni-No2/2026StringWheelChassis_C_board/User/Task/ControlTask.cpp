@@ -103,7 +103,7 @@ bool check_online()
 
     if(RM_RefereeSystem::RM_RefereeSystemDir())
     {
-        isconnected = false;
+        // isconnected = false;
     }
     
     if(!isconnected)
@@ -166,7 +166,7 @@ void CalculateFollow()
     while (follow_error < -1.5707963267f) follow_error += 2 * 1.5707963267f;
 
     // 死区处理 (防止小误差震荡)
-    if(fabs(follow_error) < 0.05f) follow_error = 0.0f;
+    if(fabs(follow_error) < 0.1f) follow_error = 0.0f;
     
     follow_pid.UpDate(0.0f, follow_error);
 }
@@ -228,7 +228,7 @@ void SetTarget()
                 // 只在陀螺模式下进行相位补偿
                 if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f) 
                 {
-                    psi = -0.08f * 18.0f * DT7.get_scroll_();
+                    psi = -0.035f * 18.0f * DT7.get_scroll_();
                 }
 
                 CalculateTranslation_xy(Cboard.GetYawAngle(), DT7.get_left_x(), DT7.get_left_y(), -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
@@ -288,7 +288,7 @@ void SetTarget()
                 // 只在陀螺模式下进行相位补偿
                 if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f)
                 { 
-                    psi = -0.08f * 18.0f * DT7.get_scroll_();
+                    psi = -0.035f * 18.0f * DT7.get_scroll_();
                 }
                 CalculateTranslation_xy(Cboard.GetYawAngle(), DT7.get_left_x(), DT7.get_left_y(), -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
@@ -378,11 +378,14 @@ void chassis_notfollow()
     bool isSupercapOnline = supercap.isConnected(); // 电容连接状态
     bool isRefereeOnline = !RM_RefereeSystem::RM_RefereeSystemDir(); // 裁判系统连接状态
     
+    supercap.setSupercapOnline(isSupercapOnline);
+    supercap.setRefereeOnline(isRefereeOnline);
+
     // 更新功率策略
     power_strategy.Update(isSupercapOnline, isRefereeOnline, 
                           (float)ext_power_heat_data_0x0201.chassis_power_limit, 
                           ext_power_heat_data_0x0202.chassis_power_buffer, 
-                          supercap.GetCurrentEnergy());
+                          supercap.GetCurrentEnergy(), alphabet);
 
     float input_limit = power_strategy.GetInputLimit(); // 基础上限功率
     float input_energy = power_strategy.GetInputEnergy();   // 剩余能量
@@ -474,11 +477,15 @@ void chassis_follow()
     // 功率控制
     bool isSupercapOnline = supercap.isConnected();
     bool isRefereeOnline = !RM_RefereeSystem::RM_RefereeSystemDir();
+
+    supercap.setSupercapOnline(isSupercapOnline);
+    supercap.setRefereeOnline(isRefereeOnline);
+
     // 更新功率策略
     power_strategy.Update(isSupercapOnline, isRefereeOnline, 
                           (float)ext_power_heat_data_0x0201.chassis_power_limit, 
                           ext_power_heat_data_0x0202.chassis_power_buffer, 
-                          supercap.GetCurrentEnergy());
+                          supercap.GetCurrentEnergy(), alphabet);
 
     float input_limit = power_strategy.GetInputLimit(); // 基础上限功率
     float input_energy = power_strategy.GetInputEnergy();   // 剩余能量

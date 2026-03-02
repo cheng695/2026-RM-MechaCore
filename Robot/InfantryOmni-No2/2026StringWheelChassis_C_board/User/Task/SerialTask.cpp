@@ -27,13 +27,13 @@ BSP::Key::SimpleKey Mouse_right;
 void SerivalInit()
 {
     auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);    // 裁判系统
-    //auto &uart3 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart3);  // 遥控器
+    // auto &uart3 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart3);  // 遥控器
     
     HAL::UART::Data uart1_rx_buffer{referee_buffer, 1};
-    //HAL::UART::Data uart3_rx_buffer{DT7Rx_buffer, 18};
+    // HAL::UART::Data uart3_rx_buffer{DT7Rx_buffer, 18};
 
     uart1.receive(uart1_rx_buffer);
-    //uart3.receive_dma_idle(uart3_rx_buffer);
+    // uart3.receive_dma_idle(uart3_rx_buffer);
 
     uart1.register_rx_callback([](const HAL::UART::Data &data) 
     {
@@ -78,7 +78,7 @@ void KeyProcess(bool *alphabet)
     alphabet[26] = Key_shift.getPress();    // 超电（按下）
     alphabet[23] = Key_x.getPress();    // X小陀螺（按下）
 
-    alphabet[16] = !Key_q.getToggleState();  // 底盘是否跟随（单点）默认跟随
+    alphabet[16] = Key_q.getToggleState();  // 底盘是否跟随（单点）默认跟随
 
     // Ctrl键 主动补电模式（单点，与Shift/左键/右键互锁）
     if (Key_ctrl.getRisingEdge())

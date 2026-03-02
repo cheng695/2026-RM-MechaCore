@@ -33,8 +33,29 @@ class BoardCommunication
             return statewatch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
         }
 
+        void SetHeatLimit(uint8_t *data)
+        {
+            memcpy(&shooter_barrel_heat_limit, data, sizeof(uint16_t));
+        }
+
+        void SetHeatCool(uint8_t *data)
+        {
+            memcpy(&shooter_barrel_cooling_value, data, sizeof(uint16_t));
+        }
+
+        uint16_t GetHeatLimit()
+        {
+            return shooter_barrel_heat_limit;
+        }
+        
+        uint16_t GetHeatCool()
+        {
+            return shooter_barrel_cooling_value;
+        }
     private:
         BSP::WATCH_STATE::StateWatch statewatch_;
+        uint16_t shooter_barrel_heat_limit; // 枪口热量上限
+        uint16_t shooter_barrel_cooling_value; // 热量冷却
 };
 
 

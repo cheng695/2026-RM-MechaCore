@@ -49,7 +49,7 @@ extern "C"
             }
         }
 
-        //// 遥控器
+        // // 遥控器
         // else if(huart->Instance == USART3)
         // {
         //     HAL::UART::Data uart3_rx_buffer{DT7Rx_buffer, sizeof(DT7Rx_buffer)};

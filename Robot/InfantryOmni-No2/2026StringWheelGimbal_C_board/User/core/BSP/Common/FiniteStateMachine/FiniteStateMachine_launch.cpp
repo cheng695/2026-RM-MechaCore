@@ -87,9 +87,9 @@ void Launch_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
         State_launch = LAUNCH_STOP;
         return; 
     }
-    if(left == 3 && right == 3) // 键鼠下的停止位 B为1
+    if(left == 3 && right == 3) // 键鼠下的停止位 
     {
-        if(!alphabet[1]/*按键B为0*/)
+        if(!alphabet[17]/*按键T为1*/)
         {
             State_launch = LAUNCH_STOP;
             return; 
@@ -141,15 +141,15 @@ void Launch_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
                     }
                     else // 左键没有被按下
                     {
-                        if(alphabet[25] && !alphabet[23]/*按键Z为1,按键X为0*/)
+                        if(alphabet[13] && !alphabet[12]/*按键N为1,按键M为0*/)
                         {
                             State_launch = LAUNCH_ONLY;
                         }
-                        else if(!alphabet[25] && alphabet[23]/*按键Z为0,按键X为1*/)
+                        else if(!alphabet[13] && alphabet[12]/*按键N为0,按键M为1*/)
                         {
                             State_launch = LAUNCH_AUTO;
                         }
-                        else if(!alphabet[25] && !alphabet[23]/*按键Z为0,按键X为0*/)
+                        else if(!alphabet[12] && !alphabet[13]/*按键N为0,按键M为0*/)
                         {
                             State_launch = LAUNCH_CEASEFIRE;
                         }
@@ -230,19 +230,19 @@ void Launch_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
                         if(State_Run_Time[LAUNCH_ONLY] > time)  // 键鼠单发时间超过阈值 则切连发
                         {
                             State_launch = LAUNCH_AUTO;
-                            // 同步按键状态：模拟按下了X键，松开Z键
-                            alphabet[23] = true;
-                            alphabet[25] = false;
+                            // 同步按键状态：模拟按下了M键，松开N键
+                            alphabet[12] = true;
+                            alphabet[13] = false;
                         }
-                        else if(!alphabet[25] && alphabet[23]/*按键Z为0,按键X为1*/)
-                        {
-                            State_launch = LAUNCH_AUTO;
-                        }
-                        else if(alphabet[25] && !alphabet[23]/*按键Z为1,按键X为0*/)
+                        if(alphabet[13] && !alphabet[12]/*按键N为1,按键M为0*/)
                         {
                             State_launch = LAUNCH_ONLY;
                         }
-                        else if(!alphabet[25] && !alphabet[23]/*按键Z为0,按键X为0*/)
+                        else if(!alphabet[13] && alphabet[12]/*按键N为0,按键M为1*/)
+                        {
+                            State_launch = LAUNCH_AUTO;
+                        }
+                        else if(!alphabet[12] && !alphabet[13]/*按键N为0,按键M为0*/)
                         {
                             State_launch = LAUNCH_CEASEFIRE;
                         }
@@ -321,15 +321,15 @@ void Launch_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
                 }
                 else
                 {
-                    if(!alphabet[25] && alphabet[23]/*按键Z为0,按键X为1*/)
-                    {
-                        State_launch = LAUNCH_AUTO;
-                    }
-                    else if(alphabet[25] && !alphabet[23]/*按键Z为1,按键X为0*/)
+                    if(alphabet[13] && !alphabet[12]/*按键N为1,按键M为0*/)
                     {
                         State_launch = LAUNCH_ONLY;
                     }
-                    else if(!alphabet[25] && !alphabet[23]/*按键Z为0,按键X为0*/)
+                    else if(!alphabet[13] && alphabet[12]/*按键N为0,按键M为1*/)
+                    {
+                        State_launch = LAUNCH_AUTO;
+                    }
+                    else if(!alphabet[12] && !alphabet[13]/*按键N为0,按键M为0*/)
                     {
                         State_launch = LAUNCH_CEASEFIRE;
                     }
