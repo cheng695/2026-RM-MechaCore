@@ -21,16 +21,19 @@ namespace Alg::CalculationBase
              * @param r 中心投影点到轮子投影点的距离
              * @param s 轮子半径
              * @param n 轮子数量
-             * @param wheel_azimuth 轮子方位角 Wheel_Azimuth = {0, M_PI/2, M_PI, 3*M_PI/2}
-             * @param wheel_direction 轮子坐标 wheel_direction = {45*M_PI/180, 135*M_PI/180, 225*M_PI/180, 315*M_PI/180}
+             * @param wheel_azimuth 轮子方位角 轮子自身的滚轮朝向（即允许自由滚动的方向）相对于底盘自身坐标系 X 轴正方向的夹角
+             * @param wheel_direction 轮子坐标 “底盘几何中心”指向“当前轮子中心安装点”的这个向量，与底盘自身坐标系 X 轴正方向的夹角。
              */
-            Omni_FK(float r = 1.0f, float s = 1.0f, float n = 4.0f, const float wheel_azimuth[4], const float wheel_direction[4]) 
-                : R(r), S(s), N(n), ChassisVx(0.0f), ChassisVy(0.0f), ChassisVw(0.0f) 
+            Omni_FK(float r, float s, float n, float wheel_azimuth[4], float wheel_direction[4]) 
+                : R(r), S(s), N(n)
             {
                 for(int i = 0; i < 4; i++)
                 {
-                    Wheel_Azimuth[i] = wheel_azimuth[i];
-                    Wheel_Direction[i] = wheel_direction[i];
+                    ChassisVx = 0.0f; 
+                    ChassisVy = 0.0f;
+                    ChassisVw = 0.0f;
+                    WheelAzimuth[i] = wheel_azimuth[i];
+                    WheelDirection[i] = wheel_direction[i];
                 }
             }
 
@@ -43,20 +46,25 @@ namespace Alg::CalculationBase
             void ForKinematics()
             {
                 float wheel_vx = 0.0f, wheel_vy = 0.0f, sumVw = 0.0f;
+                // 【核心修复】必须清零上一帧的累加结果！
+                ChassisVx = 0.0f;
+                ChassisVy = 0.0f;
+                ChassisVw = 0.0f;
+                
                 for(int i = 0; i < 4; i++)
                 {
-                    wheel_vx = S * Get_w(i) * cosf(Wheel_Azimuth[i]);
-                    wheel_vy = S * Get_w(i) * sinf(Wheel_Azimuth[i]);
+                    wheel_vx = S * Get_w(i) * cosf(WheelAzimuth[i]);
+                    wheel_vy = S * Get_w(i) * sinf(WheelAzimuth[i]);
 
                     ChassisVx += wheel_vx;
                     ChassisVy += wheel_vy;
 
                     // 计算角速度贡献 (基于轮子安装位置)
-                    float delta_angle = Wheel_Azimuth[i] - Wheel_Direction[i];
+                    float delta_angle = WheelAzimuth[i] - WheelDirection[i];
                     ChassisVw += (Get_w(i) * S * sinf(delta_angle)) / R;
                 }
-                ChassisVx /= N;
-                ChassisVy /= N;
+                ChassisVx /= (N/2);
+                ChassisVy /= (N/2);
                 ChassisVw /= N;
             }
 
@@ -110,14 +118,14 @@ namespace Alg::CalculationBase
              * @param index 轮索引(0-3)
              * @return 对应轮的安装方位角
              */
-            float GetWheel_Azimuth(int index) { return Wheel_Azimuth[index]; }
+            float GetWheelAzimuth(int index) { return WheelAzimuth[index]; }
 
             /**
              * @brief 轮子的位置方向角
              * @param index 轮索引(0-3)
              * @return 对应轮的安装方向
              */
-            float GetWheel_Direction(int index) { return Wheel_Direction[index]; }
+            float GetWheelDirection(int index) { return WheelDirection[index]; }
         
 
         private:
@@ -127,8 +135,8 @@ namespace Alg::CalculationBase
             float ChassisVx;         // 底盘X方向速度
             float ChassisVy;         // 底盘Y方向速度
             float ChassisVw;         // 底盘绕Z轴角速度
-            const float Wheel_Azimuth[4];   // 轮安装方位角（弧度）滚动方向角（相对于车体x轴）
-            const float Wheel_Direction[4]; // 轮子的位置方向角（从车体中心指向轮子的方向）(弧度)
+            float WheelAzimuth[4];   // 轮安装方位角（弧度）滚动方向角（相对于车体x轴）
+            float WheelDirection[4]; // 轮子的位置方向角（从车体中心指向轮子的方向）(弧度)
     };
 
 
@@ -149,18 +157,17 @@ namespace Alg::CalculationBase
              * @param r 中心投影点到轮子投影点距离
              * @param s 轮子半径
              * @param n 轮子数量
-             * @param wheel_azimuth 轮子方位角 Wheel_Azimuth = {0, M_PI/2, M_PI, 3*M_PI/2}
-             * @param wheel_coordinate 轮子坐标 Wheel_Coordinate = {{x1, y1}, {x2, y2}, {x3, y3}, {x4, y4}}
+             * @param wheel_azimuth 轮子方位角 轮子自身的滚轮朝向（即允许自由滚动的方向）相对于底盘自身坐标系 X 轴正方向的夹角
+             * @param wheel_direction 轮子坐标 “底盘几何中心”指向“当前轮子中心安装点”的这个向量，与底盘自身坐标系 X 轴正方向的夹角。
              */
-            Omni_ID(float r = 1.0f, float s = 1.0f, float n = 4.0f, const float wheel_azimuth[4], const float wheel_coordinate[4][2]) 
+            Omni_ID(float r, float s, float n, float wheel_azimuth[4], float wheel_direction[4]) 
                 : R(r), S(s), N(n)
             {
                 for(int i = 0; i < 4; i++)
                 {
                     MotorTorque[i] = 0.0f;
                     WheelAzimuth[i] = wheel_azimuth[i];
-                    Wheel_Coordinates[i][0] = wheel_coordinate[i][0];
-                    Wheel_Coordinates[i][1] = wheel_coordinate[i][1];
+                    WheelDirection[i] = wheel_direction[i];
                 }
             }
 
@@ -174,7 +181,7 @@ namespace Alg::CalculationBase
             {
                 for(int i = 0; i < 4; i++)
                 {
-                    MotorTorque[i] = (cosf(Wheel_Azimuth[i]) / N * GetFx() + sinf(Wheel_Azimuth[i]) / N * GetFy() + (-Wheel_Coordinates[i][1] * cosf(Wheel_Azimuth[i]) + Wheel_Coordinates[i][0] * sinf(Wheel_Azimuth[i])) / N * GetTorque()) * S;
+                    MotorTorque[i] = (cosf(WheelAzimuth[i]) / (N/2) * GetFx() + sinf(WheelAzimuth[i]) / (N/2) * GetFy() + (R * sinf(WheelAzimuth[i] - WheelDirection[i])) / N * GetTorque()) * S;
                 }
             }
 
@@ -211,22 +218,22 @@ namespace Alg::CalculationBase
              * @param index 轮索引(0-3)
              * @return 对应轮的安装方位角
              */
-            float GetWheel_Azimuth(int index) { return Wheel_Azimuth[index]; }
+            float GetWheelAzimuth(int index) { return WheelAzimuth[index]; }
 
             /**
-             * @brief 获取指定轮的安装坐标
+             * @brief 获取指定轮的位置方向角
              * @param index 轮索引(0-3)
-             * @return 对应轮的安装坐标
+             * @return 对应轮的位置方向角
              */
-            float GetWheel_Coordinates(int index) { return Wheel_Coordinates[index][0], Wheel_Coordinates[index][1]; }
+            float GetWheelDirection(int index) { return WheelDirection[index]; }
         
         private:
             float R;              // 轮子投影点到中心距离
             float S;              // 轮子半径
             float N;              // 轮子数量
             float MotorTorque[4]; // 四个电机的扭矩
-            const float Wheel_Azimuth[4];   // 轮安装方位角（弧度）滚动方向角（相对于车体x轴）
-            const float Wheel_Coordinates[4][2]; // 轮安装坐标(x)(y)
+            float WheelAzimuth[4];   // 轮安装方位角（弧度）滚动方向角（相对于车体x轴）
+            float WheelDirection[4]; // 轮子的位置方向角（从车体中心指向轮子的方向）(弧度)
     };
 
 
@@ -246,18 +253,17 @@ namespace Alg::CalculationBase
              * @brief 构造函数
              * @param r 轮子投影点到中心距离
              * @param s 轮子半径
-             * @param wheel_azimuth 轮子方位角 Wheel_Azimuth = {0, M_PI/2, M_PI, 3*M_PI/2}
-             * @param wheel_coordinate 轮子坐标 Wheel_Coordinate = {{x1, y1}, {x2, y2}, {x3, y3}, {x4, y4}}
+             * @param wheel_azimuth 轮子方位角 轮子自身的滚轮朝向（即允许自由滚动的方向）相对于底盘自身坐标系 X 轴正方向的夹角
+             * @param wheel_direction 轮子坐标 “底盘几何中心”指向“当前轮子中心安装点”的这个向量，与底盘自身坐标系 X 轴正方向的夹角。
              */
-            Omni_IK(float r = 1.0f, float s = 1.0f, const float wheel_azimuth[4], const float wheel_coordinate[4][2]) 
+            Omni_IK(float r, float s, float wheel_azimuth[4], float wheel_direction[4]) 
                 : R(r), S(s) 
             {
                 for(int i = 0; i < 4; i++)
                 {
                     Motor[i] = 0.0f;
                     WheelAzimuth[i] = wheel_azimuth[i];
-                    Wheel_Coordinates[i][0] = wheel_coordinate[i][0];
-                    Wheel_Coordinates[i][1] = wheel_coordinate[i][1];
+                    WheelDirection[i] = wheel_direction[i];
                 }
             }
 
@@ -268,8 +274,8 @@ namespace Alg::CalculationBase
              */
             void CalculateVelocities()
             {
-                Vx = GetSpeedGain() * (GetSignal_x() *  cosf(GetPhase()) + GetSignal_y() * sinf(GetPhase()));
-                Vy = GetSpeedGain() * (GetSignal_x() * -sinf(GetPhase()) + GetSignal_y() * cosf(GetPhase()));
+                Vx = GetSpeedGain() * GetSignal_x();
+                Vy = GetSpeedGain() * GetSignal_y();
                 Vw = GetRotationalGain() * GetSignal_w();
             }
 
@@ -277,13 +283,13 @@ namespace Alg::CalculationBase
              * @brief 执行逆向运动学计算(小心符号问题)
              * 
              * 根据已计算的速度分量，计算四个轮子的目标转速
-             * 使用麦克纳姆轮逆向运动学公式
+             * 使用极坐标角公式
              */
             void InvKinematics()
             {   
                 for(int i = 0; i < 4; i++)
                 {
-                    Motor[i] = (cosf(WheelAzimuth[i]) * Vx + sinf(WheelAzimuth[i]) * Vy + Vw * (-Wheel_Coordinates[i][1] * cosf(WheelAzimuth[i]) + Wheel_Coordinates[i][0] * sinf(Wheel_Azimuth[i]))) / S;
+                    Motor[i] = (cosf(WheelAzimuth[i]) * Vx + sinf(WheelAzimuth[i]) * Vy + Vw * R * sinf(WheelAzimuth[i] - WheelDirection[i])) / S;
                 }
             }
 
@@ -345,14 +351,14 @@ namespace Alg::CalculationBase
              * @param index 轮索引(0-3)
              * @return 对应轮的安装方位角
              */
-            float GetWheel_Azimuth(int index) { return Wheel_Azimuth[index]; }
+            float GetWheelAzimuth(int index) { return WheelAzimuth[index]; }
 
             /**
-             * @brief 获取指定轮的安装坐标
+             * @brief 获取指定轮的位置方向角
              * @param index 轮索引(0-3)
-             * @return 对应轮的安装坐标
+             * @return 对应轮的位置方向角
              */
-            float GetWheel_Coordinates(int index) { return Wheel_Coordinates[index][0], Wheel_Coordinates[index][1]; }
+            float GetWheelDirection(int index) { return WheelDirection[index]; }
 
         private:
             float Vx{0.0f};       // X方向速度分量
@@ -361,8 +367,8 @@ namespace Alg::CalculationBase
             float R;              // 轮子投影点到中心距离
             float S;              // 轮子半径
             float Motor[4];       // 四个电机的目标速度
-            const float Wheel_Azimuth[4];   // 轮安装方位角（弧度）滚动方向角（相对于车体x轴）
-            const float Wheel_Coordinates[4][2]; // 轮安装坐标(x)(y)
+            float WheelAzimuth[4];   // 轮安装方位角（弧度）滚动方向角（相对于车体x轴）
+            float WheelDirection[4]; // 轮子的位置方向角（从车体中心指向轮子的方向）(弧度)
     };
 }
 
