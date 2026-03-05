@@ -25,11 +25,11 @@ uint32_t demo_time; // 测试时间戳
 void BoardCommunicationInit()
 {
     auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    HAL::UART::Data uart6_rx_buffer{BoardTx, sizeof(BoardTx)};
+    HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
     uart6.receive_dma_idle(uart6_rx_buffer);
     uart6.register_rx_callback([](const HAL::UART::Data &data) 
     {
-        if(data.size >= 18 && data.buffer != nullptr)
+        if(data.size >= 4 && data.buffer != nullptr)
         {
             Cboard.updateTimestamp();
             Cboard.SetHeatLimit(data.buffer);
@@ -172,30 +172,30 @@ void Vision::dataReceive()
 /* 通讯发送 ------------------------------------------------------------------------------------------------*/
 void BoardCommunicationTX()
 {
-    // float angle = Motor6020.getAngleRad(1);
-    // bool scroll = (gimbal_fsm.Get_Now_State() == MANUAL) && (launch_fsm.Get_Now_State() == LAUNCH_AUTO || launch_fsm.Get_Now_State() == LAUNCH_ONLY || launch_fsm.Get_Now_State() == LAUNCH_JAM);
-    // memcpy(BoardTx, DT7Rx_buffer, sizeof(DT7Rx_buffer));
-    // memcpy(BoardTx+18, &angle, sizeof(float));
-    // memcpy(BoardTx+22, &scroll, sizeof(bool));
-
-    // auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    // HAL::UART::Data uart6_tx_buffer{BoardTx, sizeof(BoardTx)}; 
-    // uart6.transmit_dma(uart6_tx_buffer);
+    float angle = Motor6020.getAngleRad(1);
+    bool scroll = (gimbal_fsm.Get_Now_State() == MANUAL) && (launch_fsm.Get_Now_State() == LAUNCH_AUTO || launch_fsm.Get_Now_State() == LAUNCH_ONLY || launch_fsm.Get_Now_State() == LAUNCH_JAM);
+    memcpy(BoardTx, DT7Rx_buffer, sizeof(DT7Rx_buffer));
+    memcpy(BoardTx+18, &angle, sizeof(float));
+    memcpy(BoardTx+22, &scroll, sizeof(bool));
 
     auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)}; 
+    HAL::UART::Data uart6_tx_buffer{BoardTx, sizeof(BoardTx)}; 
     uart6.transmit_dma(uart6_tx_buffer);
+
+    // auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+    // HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)}; 
+    // uart6.transmit_dma(uart6_tx_buffer);
 }
  
 
 extern "C" {
 void Communication(void const * argument)
 {
-    //BoardCommunicationInit();
+    BoardCommunicationInit();
     for(;;)
     {
         // vofa_send(HI12.GetAddYaw(), gimbal_target.target_yaw, MotorJ4310.getAddAngleDeg(1), gimbal_target.target_pitch, HI12.GetGyroRPM(2), VisionPitchTarget);
-        vofa_send(gimbal_target.target_yaw, HI12.GetGyroRPM(2), heat_control.GetShot(), heat_control.GetNowHeat(), heat_control.GetMaxHeat(), Motor3508.getCurrent(2));
+        //vofa_send(gimbal_target.target_yaw, HI12.GetGyroRPM(2), heat_control.GetShot(), heat_control.GetNowHeat(), heat_control.GetMaxHeat(), Motor3508.getCurrent(2));
         BoardCommunicationTX();
         vision.Data_send();
         

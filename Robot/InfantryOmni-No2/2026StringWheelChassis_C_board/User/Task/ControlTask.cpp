@@ -88,31 +88,29 @@ Output_chassis chassis_output;  // 底盘输出
 bool check_online()
 {
     bool isconnected = true;
-    for(int i = 0; i < 4; i++)
-    {
-        if(!Motor3508.isConnected(i+1, i+1) || !Motor6020.isConnected(i+1, i+5))
-        {
-            isconnected = false;
-        }
-    }
+    // for(int i = 0; i < 4; i++)
+    // {
+    //     if(!Motor3508.isConnected(i+1, i+1) || !Motor6020.isConnected(i+1, i+5))
+    //     {
+    //         isconnected = false;
+    //     }
+    // }
 
-    if(/*!Cboard.isConnected() ||*/ !DT7.isConnected())
-    {
-        isconnected = false;
-    }
+    // if(/*!Cboard.isConnected() ||*/ !DT7.isConnected())
+    // {
+    //     isconnected = false;
+    // }
 
-    if(RM_RefereeSystem::RM_RefereeSystemDir())
-    {
-        // isconnected = false;
-    }
+    // if(RM_RefereeSystem::RM_RefereeSystemDir())
+    // {
+    //     // isconnected = false;
+    // }
     
-    if(!isconnected)
-    {
-        return false;
-    }
+    // if(!isconnected)
+    // {
+    //     return false;
+    // }
 
- 
-    
     return true;
 }
 

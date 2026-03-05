@@ -48,6 +48,23 @@ extern "C"
                 uart6.trigger_rx_callbacks(uart6_rx_buffer);
             }
         }
+        // 裁判系统通讯
+        else if (huart->Instance == USART1) 
+        {
+            // 使用系统传进来的 Size 表示这一包真正的长度，而不是写死 512
+            HAL::UART::Data uart1_rx_buffer{referee_buffer, Size};
+            auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
+            
+            if(huart == uart1.get_handle())
+            {
+                // 注意：在触发数据解析前，需要先配置下一次DMA接收，长度必须是最大缓冲区大小
+                HAL::UART::Data next_rx_buffer{referee_buffer, 512};
+                uart1.receive_dma_idle(next_rx_buffer);
+                
+                // 触发刚刚收到的这一帧不定长数据的回调解析
+                uart1.trigger_rx_callbacks(uart1_rx_buffer);
+            }
+        }
 
         // // 遥控器
         // else if(huart->Instance == USART3)
@@ -66,18 +83,6 @@ extern "C"
     // 定长数据接收
     void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     {
-        // 裁判系统通讯
-        if (huart->Instance == USART1) 
-        {
-            HAL::UART::Data uart1_rx_buffer{referee_buffer, 1};
-            auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
-            
-            if(huart == uart1.get_handle())
-            {
-                uart1.receive(uart1_rx_buffer);
-                uart1.trigger_rx_callbacks(uart1_rx_buffer);
-            }
-        }
     }
 
 /* 错误处理 ---------------------------------------------------------------------------------------------*/
@@ -91,13 +96,14 @@ extern "C"
             __HAL_UART_CLEAR_FEFLAG(huart);
             __HAL_UART_CLEAR_PEFLAG(huart);
             
+            // 强制解锁HAL库的状态机，这是解决HAL_BUSY导致DMA无法重启的关键
+            huart->RxState = HAL_UART_STATE_READY;
+            huart->Lock = HAL_UNLOCKED;
+
             // 错误后也需要重启接收
-            HAL::UART::Data uart1_rx_buffer{referee_buffer, 1};
+            HAL::UART::Data uart1_rx_buffer{referee_buffer, sizeof(referee_buffer)};
             auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
-            if(huart == uart1.get_handle())
-            {
-                uart1.receive(uart1_rx_buffer);
-            }
+            uart1.receive_dma_idle(uart1_rx_buffer);
         }
         else if (huart->Instance == USART6) // 板间通讯
         {

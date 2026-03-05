@@ -3,9 +3,8 @@
 
 BSP::REMOTE_CONTROL::RemoteController DT7;
 uint8_t DT7Rx_buffer[18];
-uint8_t referee_buffer[1];
-
 uint8_t power_buffer[12];
+uint8_t referee_buffer[512];
 Power power;
 
 /* 按键 ---------------------------------------------------------------------------------------------------*/
@@ -27,20 +26,23 @@ BSP::Key::SimpleKey Mouse_right;
 void SerivalInit()
 {
     auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);    // 裁判系统
-    // auto &uart3 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart3);  // 遥控器
+
     
-    HAL::UART::Data uart1_rx_buffer{referee_buffer, 1};
+    HAL::UART::Data uart1_rx_buffer{referee_buffer, sizeof(referee_buffer)};
     // HAL::UART::Data uart3_rx_buffer{DT7Rx_buffer, 18};
 
-    uart1.receive(uart1_rx_buffer);
+    uart1.receive_dma_idle(uart1_rx_buffer);
     // uart3.receive_dma_idle(uart3_rx_buffer);
 
     uart1.register_rx_callback([](const HAL::UART::Data &data) 
     {
-
-        if(data.size == 1 && data.buffer != nullptr)
+        if(data.size > 0 && data.buffer != nullptr)
         {
-            RM_RefereeSystem::RM_RefereeSystemParse(data.buffer);
+            for(uint16_t i = 0; i < data.size; i++) 
+            {
+                // 注意这里必须要传 &data.buffer[i] 代表当前第i个字节的地址
+                RM_RefereeSystem::RM_RefereeSystemParse(&data.buffer[i]);
+            }
         }
     });
     // uart3.register_rx_callback([](const HAL::UART::Data &data) 

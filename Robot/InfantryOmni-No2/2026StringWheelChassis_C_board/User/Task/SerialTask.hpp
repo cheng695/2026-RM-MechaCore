@@ -14,7 +14,7 @@ extern BSP::REMOTE_CONTROL::RemoteController DT7;
 extern uint8_t DT7Rx_buffer[18];
 extern uint8_t power_buffer[12];
 extern bool alphabet[28];
-extern uint8_t referee_buffer[1];
+extern uint8_t referee_buffer[512];
 
 class Power
 {

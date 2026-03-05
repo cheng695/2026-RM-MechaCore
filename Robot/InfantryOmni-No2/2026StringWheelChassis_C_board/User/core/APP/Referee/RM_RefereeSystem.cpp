@@ -2,7 +2,8 @@
 #include "../User/core/BSP/Common/StateWatch/state_watch.hpp"
 #include "memory"
 #include "string.h"
-#define RM_RefereeSystemHuart huart6
+extern UART_HandleTypeDef huart1;
+#define RM_RefereeSystemHuart huart1
 using namespace RM_RefereeSystem;
 using namespace RM_RefereeSystemCRC;
 // 死亡时间
@@ -33,7 +34,8 @@ namespace RM_RefereeSystem
 // 初始化
 void RM_RefereeSystemInit()
 {
-    HAL_UART_Receive_IT(&RM_RefereeSystemHuart, &RM_RefereeSystemp8Data, sizeof(RM_RefereeSystemp8Data));
+    // 绝对不能在这里调用 HAL_UART_Receive_IT，否则会开启 RXNEIE 导致 DMA IDLE 中断失效并且疯狂触发 ORE
+    // HAL_UART_Receive_IT(&RM_RefereeSystemHuart, &RM_RefereeSystemp8Data, sizeof(RM_RefereeSystemp8Data));
 }
 // 设置颜色
 void RM_RefereeSystemSetColor(int color)
@@ -262,7 +264,7 @@ ext_client_custom_character_t RM_RefereeSystemSetStr(char *name, uint32_t layer,
 void RM_RefereeSystemDelete(const char operate, const char number)
 {
     // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    while(RM_RefereeSystemHuart.gState != HAL_UART_STATE_READY);
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -294,7 +296,7 @@ void RM_RefereeSystemDelete(const char operate, const char number)
 void RM_RefereeSystemSendData1(const graphic_data_struct_t graphic_data_struct)
 {
     // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    while(RM_RefereeSystemHuart.gState != HAL_UART_STATE_READY);
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -317,14 +319,13 @@ void RM_RefereeSystemSendData1(const graphic_data_struct_t graphic_data_struct)
     memcpy((void *)(RM_RefereeSystemDataTemp.data + idx), &graphic_data_struct, sizeof(graphic_data_struct));
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
-    Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
     HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf)); // 统一使用DMA
 }
 // 数据发送客户端绘制1,2,5,7个图形
 void RM_RefereeSystemSendDataN(const graphic_data_struct_t graphic_data_struct[], int size)
 {
     // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    while(RM_RefereeSystemHuart.gState != HAL_UART_STATE_READY);
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -379,14 +380,13 @@ void RM_RefereeSystemSendDataN(const graphic_data_struct_t graphic_data_struct[]
     }
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
-    Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
     HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf));
 }
 // 数据发送客户端绘制字符串
 void RM_RefereeSystemSendStr(const ext_client_custom_character_t ext_client_custom_character)
 {
     // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    while(RM_RefereeSystemHuart.gState != HAL_UART_STATE_READY);
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -413,7 +413,6 @@ void RM_RefereeSystemSendStr(const ext_client_custom_character_t ext_client_cust
            ext_client_custom_character.grapic_data_struct.end_angle);
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
-    Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
     HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf)); // 统一使用DMA
 }
 
@@ -431,7 +430,7 @@ map_robot_data_t map_robot_data;
 void RM_daohangtx(const map_robot_data_t map_robot_data)
 {
     // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    while(RM_RefereeSystemHuart.gState != HAL_UART_STATE_READY);
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
