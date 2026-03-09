@@ -30,6 +30,7 @@ enum Enum_Chassis_States
     FOLLOW,        // 跟随状态
     NOTFOLLOW,     // 非跟随状态
     KEYBOARD,      // 键盘控制状态
+    TRANSFORM,     // 变形状态
     STATUS_COUNT   // 状态数量
 };
 
@@ -85,7 +86,11 @@ public:
      * @param left 左开关状态
      * @param right 右开关状态
      */
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_chassis.hpp
     void StateUpdate(uint8_t left, uint8_t right);
+=======
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool vision_flag, bool transform_flag);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.hpp
 
     /**
      * @brief 定时更新函数（用于时间统计）
@@ -115,6 +120,11 @@ public:
      */
     void Reset_State_Statistics(Enum_Chassis_States state);
 
+    /**
+     * @brief 获取当前状态本次进入后的持续时间
+     */
+    inline uint32_t Get_Current_Duration();
+
 private:
     // 左右开关状态
     uint8_t StateLeft = 0;
@@ -140,6 +150,14 @@ inline Enum_Chassis_States Class_FSM::Get_Now_State()
 inline const char* Class_FSM::Get_Now_State_Name()
 {
     return Status[State_chassis].Name;
+}
+
+/**
+ * @brief 获取当前状态本次进入后的持续时间（单位取决于TIM_Update调用频率）
+ */
+inline uint32_t Gimbal_FSM::Get_Current_Duration()
+{
+    return State_Run_Time[State_gimbal];
 }
 
 #endif

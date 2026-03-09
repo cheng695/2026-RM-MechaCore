@@ -156,7 +156,18 @@ namespace BSP::Motor::DM
             send_data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
             send_data[7] = tor_tmp;
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
             CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX1);
+=======
+            HAL::CAN::Frame frame;
+            frame.id = send_idxs_[id - 1];
+            frame.dlc = 8;
+            memcpy(frame.data, send_data, sizeof(send_data));
+            frame.is_extended_id = false;
+            frame.is_remote_frame = false;
+            
+            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
 
 
@@ -206,10 +217,34 @@ namespace BSP::Motor::DM
          */
         void On(CAN_HandleTypeDef *hcan, uint8_t motor_index)
         {
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
             if (motor_index < 1 || motor_index > N) return;
 
             uint8_t send_data[8] = {0xFC, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
             CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+=======
+            uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC};
+            
+            HAL::CAN::Frame frame;
+            if(mod == Model::MIT)
+            {
+                frame.id = send_idxs_[id - 1];
+            }
+            else if(mod == Model::ANGLEVELOCITY)
+            {
+                frame.id = 0x100 + send_idxs_[id - 1];
+            }
+            else if(mod == Model::VELOCITY)
+            {
+                frame.id = 0x200 + send_idxs_[id - 1];
+            }
+            frame.dlc = 8;
+            memcpy(frame.data, send_data, sizeof(send_data));
+            frame.is_extended_id = false;
+            frame.is_remote_frame = false;
+            
+            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
         
         /**
@@ -219,8 +254,30 @@ namespace BSP::Motor::DM
         {
             if (motor_index < 1 || motor_index > N) return;
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
             uint8_t send_data[8] = {0xFD, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
             CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+=======
+            HAL::CAN::Frame frame;
+            if(mod == Model::MIT)
+            {
+                frame.id = send_idxs_[id - 1];
+            }
+            else if(mod == Model::ANGLEVELOCITY)
+            {
+                frame.id = 0x100 + send_idxs_[id - 1];
+            }
+            else if(mod == Model::VELOCITY)
+            {
+                frame.id = 0x200 + send_idxs_[id - 1];
+            }
+            frame.dlc = 8;
+            memcpy(frame.data, send_data, sizeof(send_data));
+            frame.is_extended_id = false;
+            frame.is_remote_frame = false;
+            
+            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
 
         /**
@@ -230,8 +287,35 @@ namespace BSP::Motor::DM
         {
             if (motor_index < 1 || motor_index > N) return;
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
             uint8_t send_data[8] = {0xFB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
             CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+=======
+            HAL::CAN::Frame frame;
+            if(mod == Model::MIT)
+            {
+                frame.id = send_idxs_[id - 1];
+            }
+            else if(mod == Model::ANGLEVELOCITY)
+            {
+                frame.id = 0x100 + send_idxs_[id - 1];
+            }
+            else if(mod == Model::VELOCITY)
+            {
+                frame.id = 0x200 + send_idxs_[id - 1];
+            }
+            frame.dlc = 8;
+            memcpy(frame.data, send_data, sizeof(send_data));
+            frame.is_extended_id = false;
+            frame.is_remote_frame = false;
+            
+            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+        }
+
+        uint8_t getError(uint8_t id)
+        {
+            return feedback_[id - 1].err;
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
 
     protected:

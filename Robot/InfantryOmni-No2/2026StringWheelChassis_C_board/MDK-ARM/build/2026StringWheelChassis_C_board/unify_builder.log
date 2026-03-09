@@ -1,0 +1,1148 @@
+[2026-03-06 12:37:49]	[info] incremental build: 72 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\can.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\dma.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\freertos.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\gpio.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\main.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\stm32f4xx_hal_msp.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\stm32f4xx_hal_timebase_tim.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\stm32f4xx_it.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\system_stm32f4xx.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\tim.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\usart.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\croutine.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\list.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\queue.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\tasks.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Middlewares\Third_Party\FreeRTOS\Source\timers.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\Callback.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\CommunicationTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\MotorTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\SerialTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystemCRC.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\Alg\ADRC\adrc.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\Alg\FSM\alg_fsm.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\Alg\Feedforward\Feedforward.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\Alg\Filter\Filter.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\Alg\PID\pid.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\Alg\UtilityFunction\SlopPlanning.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\Common\StateWatch\buzzer_manager.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\Common\StateWatch\state_watch.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\RemoteControl\DT7.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\ASSERT\assert.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\CAN\impl\can_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\CAN\impl\can_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\CAN\interface\can_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\CAN\interface\can_device.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\DWT\DWT.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_ASM_ARMv7M.S': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\LOGGER\SEGGER\RTT\SEGGER_RTT_printf.c': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\LOGGER\logger.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\UART\impl\uart_bus_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\UART\impl\uart_device_impl.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\HAL\UART\interface\uart_bus.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\startup_stm32f407xx.s': object (.o) file not exist
+
+[2026-03-06 12:37:55]	[done]
+	build successfully !
+
+[2026-03-06 12:46:51]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 12:46:53]	[done]
+	build successfully !
+
+[2026-03-06 12:49:50]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 12:49:51]	[done]
+	build successfully !
+
+[2026-03-06 13:00:13]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 13:00:15]	[done]
+	build successfully !
+
+[2026-03-06 13:04:59]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 13:05:01]	[done]
+	build successfully !
+
+[2026-03-06 13:06:27]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 13:06:29]	[done]
+	build successfully !
+
+[2026-03-06 13:38:25]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 13:38:26]	[done]
+	build successfully !
+
+[2026-03-06 13:40:22]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\Callback.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\CommunicationTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\SerialTask.cpp': source file has been changed.
+
+[2026-03-06 13:40:25]	[done]
+	build successfully !
+
+[2026-03-06 13:52:03]	[done]
+	build successfully !
+
+[2026-03-06 13:52:30]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 13:52:32]	[done]
+	build successfully !
+
+[2026-03-06 14:01:40]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:01:43]	[done]
+	build successfully !
+
+[2026-03-06 14:05:44]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:05:47]	[done]
+	build successfully !
+
+[2026-03-06 14:09:03]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:09:06]	[done]
+	build successfully !
+
+[2026-03-06 14:09:51]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:09:54]	[done]
+	build successfully !
+
+[2026-03-06 14:10:29]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:10:31]	[done]
+	build successfully !
+
+[2026-03-06 14:11:55]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:11:57]	[done]
+	build successfully !
+
+[2026-03-06 14:14:51]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:14:53]	[done]
+	build successfully !
+
+[2026-03-06 14:16:41]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:16:43]	[done]
+	build successfully !
+
+[2026-03-06 14:28:50]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:28:52]	[done]
+	build successfully !
+
+[2026-03-06 14:29:32]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:29:34]	[done]
+	build successfully !
+
+[2026-03-06 14:30:55]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:30:57]	[done]
+	build successfully !
+
+[2026-03-06 14:32:35]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:32:38]	[done]
+	build successfully !
+
+[2026-03-06 14:46:02]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 14:46:05]	[done]
+	build successfully !
+
+[2026-03-06 15:01:30]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:01:32]	[done]
+	build successfully !
+
+[2026-03-06 15:08:38]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:08:40]	[done]
+	build successfully !
+
+[2026-03-06 15:17:41]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:17:44]	[done]
+	build successfully !
+
+[2026-03-06 15:32:30]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:32:32]	[done]
+	build successfully !
+
+[2026-03-06 15:34:27]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:34:30]	[done]
+	build successfully !
+
+[2026-03-06 15:42:16]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:42:18]	[done]
+	build successfully !
+
+[2026-03-06 15:44:31]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:44:34]	[done]
+	build successfully !
+
+[2026-03-06 15:57:40]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 15:57:42]	[done]
+	build successfully !
+
+[2026-03-06 16:10:09]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 16:10:11]	[done]
+	build successfully !
+
+[2026-03-06 16:11:49]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 16:11:51]	[done]
+	build successfully !
+
+[2026-03-06 16:36:26]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-06 16:36:29]	[done]
+	build successfully !
+
+[2026-03-06 17:06:02]	[done]
+	build successfully !
+
+[2026-03-06 19:05:05]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+
+[2026-03-06 19:05:07]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:198:17: error: use of undeclared identifier 'UI_send_queue'
+  198 |                 UI_send_queue.is_up_ui = false;
+      |                 ^
+./../User/Task\UITask.hpp:199:17: error: use of undeclared identifier 'UI_send_queue'
+  199 |                 UI_send_queue.size     = 0; // 复位
+      |                 ^
+./../User/Task\UITask.hpp:209:17: error: use of undeclared identifier 'UI_send_queue'
+  209 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("W", 0, 954, 495, 6));
+      |                 ^
+./../User/Task\UITask.hpp:209:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  209 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("W", 0, 954, 495, 6));
+      |                                                                               ^
+./../User/Task\UITask.hpp:226:17: error: use of undeclared identifier 'UI_send_queue'
+  226 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("power", 1, 100, 100 + 2, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:226:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  226 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("power", 1, 100, 100 + 2, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:230:17: error: use of undeclared identifier 'UI_send_queue'
+  230 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("limPower", 1, 120, 120 + 2, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:230:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  230 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("limPower", 1, 120, 120 + 2, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:234:17: error: use of undeclared identifier 'UI_send_queue'
+  234 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("cd_Init", 3, 271, 310, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:234:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  234 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("cd_Init", 3, 271, 310, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:238:17: error: use of undeclared identifier 'UI_send_queue'
+  238 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("gyro_Init", 2, 0, 360, 1450, 750, 80, 80));
+      |                 ^
+./../User/Task\UITask.hpp:238:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  238 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("gyro_Init", 2, 0, 360, 1450, 750, 80, 80));
+      |                                                                              ^
+./../User/Task\UITask.hpp:242:17: error: use of undeclared identifier 'UI_send_queue'
+  242 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("dp1", 0, 1450, 690, 1450, 750 + 61));
+      |                 ^
+./../User/Task\UITask.hpp:242:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  242 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("dp1", 0, 1450, 690, 1450, 750 + 61));
+      |                                                                             ^
+./../User/Task\UITask.hpp:248:17: error: use of undeclared identifier 'UI_send_queue'
+  248 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("p", 0, BSP::SuperCap::cap.getOutPower(), ZM_of_X, ZM_of_Y));
+      |                 ^
+./../User/Task\UITask.hpp:248:84: error: use of undeclared identifier 'BSP'
+  248 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("p", 0, BSP::SuperCap::cap.getOutPower(), ZM_of_X, ZM_of_Y));
+      |                                                                                    ^
+./../User/Task\UITask.hpp:257:17: error: use of undeclared identifier 'UI_send_queue'
+  257 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("vsA", 4, Gimbal_to_Chassis_Data.getAimX() * 2.72 + 615, Gimbal_to_Chassis_Data.getAimY() * 2.05 + 265, 12));
+      |                 ^
+./../User/Task\UITask.hpp:257:89: error: use of undeclared identifier 'Gimbal_to_Chassis_Data'
+  257 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("vsA", 4, Gimbal_to_Chassis_Data.getAimX() * 2.72 + 615, Gimbal_to_Chassis_Data.getAimY() * 2.05 + 265, 12));
+      |                                                                                         ^
+./../User/Task\UITask.hpp:257:136: error: use of undeclared identifier 'Gimbal_to_Chassis_Data'
+  257 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("vsA", 4, Gimbal_to_Chassis_Data.getAimX() * 2.72 + 615, Gimbal_to_Chassis_Data.getAimY() * 2.05 + 265, 12));
+      |                                                                                                                                        ^
+./../User/Task\UITask.hpp:263:17: error: use of undeclared identifier 'UI_send_queue'
+  263 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_130", 0, 50, 51, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:263:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  263 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_130", 0, 50, 51, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:265:17: error: use of undeclared identifier 'UI_send_queue'
+  265 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_120", 1, 60, 61, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:265:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  265 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_120", 1, 60, 61, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:267:17: error: use of undeclared identifier 'UI_send_queue'
+  267 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_110", 2, 70, 71, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:267:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  267 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_110", 2, 70, 71, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:269:17: error: use of undeclared identifier 'UI_send_queue'
+  269 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_100", 3, 80, 81, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:269:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  269 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_100", 3, 80, 81, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:271:17: error: use of undeclared identifier 'UI_send_queue'
+  271 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_90", 4, 90, 91, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:271:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  271 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_90", 4, 90, 91, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:273:17: error: use of undeclared identifier 'UI_send_queue'
+  273 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_80", 5, 100, 101, 960, 540, 380, 380));
+      |                 ^
+./../User/Task\UITask.hpp:273:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  273 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_80", 5, 100, 101, 960, 540, 380, 380));
+      |                                                                              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+12 warnings and 20 errors generated.
+
+[2026-03-06 19:05:58]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-06 19:06:00]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:10:8: error: use of undeclared identifier 'UI'
+   10 | extern UI::send_graphic_queue UI_send_queue;
+      |        ^
+./../User/Task\UITask.hpp:210:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  210 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("W", 0, 954, 495, 6));
+      |                                                                               ^
+./../User/Task\UITask.hpp:227:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  227 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("power", 1, 100, 100 + 2, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:231:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  231 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("limPower", 1, 120, 120 + 2, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:235:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  235 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("cd_Init", 3, 271, 310, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:239:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  239 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("gyro_Init", 2, 0, 360, 1450, 750, 80, 80));
+      |                                                                              ^
+./../User/Task\UITask.hpp:243:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  243 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("dp1", 0, 1450, 690, 1450, 750 + 61));
+      |                                                                             ^
+./../User/Task\UITask.hpp:249:84: error: use of undeclared identifier 'BSP'
+  249 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("p", 0, BSP::SuperCap::cap.getOutPower(), ZM_of_X, ZM_of_Y));
+      |                                                                                    ^
+./../User/Task\UITask.hpp:258:89: error: use of undeclared identifier 'Gimbal_to_Chassis_Data'
+  258 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("vsA", 4, Gimbal_to_Chassis_Data.getAimX() * 2.72 + 615, Gimbal_to_Chassis_Data.getAimY() * 2.05 + 265, 12));
+      |                                                                                         ^
+./../User/Task\UITask.hpp:258:136: error: use of undeclared identifier 'Gimbal_to_Chassis_Data'
+  258 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("vsA", 4, Gimbal_to_Chassis_Data.getAimX() * 2.72 + 615, Gimbal_to_Chassis_Data.getAimY() * 2.05 + 265, 12));
+      |                                                                                                                                        ^
+./../User/Task\UITask.hpp:264:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  264 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_130", 0, 50, 51, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:266:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  266 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_120", 1, 60, 61, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:268:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  268 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_110", 2, 70, 71, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:270:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  270 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_100", 3, 80, 81, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:272:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  272 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_90", 4, 90, 91, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:274:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  274 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_80", 5, 100, 101, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:276:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  276 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_60", 6, 110, 111, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:278:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  278 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_50", 7, 120, 121, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:280:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  280 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("angle_50", 8, 130, 131, 960, 540, 380, 380));
+      |                                                                              ^
+./../User/Task\UITask.hpp:286:76: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  286 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("write_130", 0, 120, 1210, 770));
+      |                                                                            ^
+./../User/Task\UITask.hpp:287:76: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  287 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("write_110", 1, 90, 1270, 660));
+      |                                                                            ^
+./../User/Task\UITask.hpp:288:76: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  288 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("write_90", 2, 60, 1300, 540));
+      |                                                                            ^
+./../User/Task\UITask.hpp:289:76: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  289 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("write_70", 3, 30, 1280, 420));
+      |                                                                            ^
+./../User/Task\UITask.hpp:290:76: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  290 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetInt("write_50", 4, 0, 1210, 310));
+      |                                                                            ^
+./../User/Task\UITask.hpp:296:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  296 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("cd1", 2, 570, 540, 595, 540));
+      |                                                                             ^
+./../User/Task\UITask.hpp:300:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  300 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("cd2", 2, 673, 800, 690, 785));
+      |                                                                             ^
+./../User/Task\UITask.hpp:305:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  305 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("xtl_in", 2, 1450, 750, 67));
+      |                                                                               ^
+./../User/Task\UITask.hpp:310:64: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  310 |                 RM_RefereeSystem::RM_RefereeSystemSetRectangle("dp9", 2, 1450 - 20, 750 - 61, 1450 + 20, 750 + 62));
+      |                                                                ^
+./../User/Task\UITask.hpp:314:78: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  314 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetArced("vis", 2, 166, 193, 956, 520, 360, 360));
+      |                                                                              ^
+./../User/Task\UITask.hpp:340:9: error: unknown type name 'RM_StaticTime'
+  340 |         RM_StaticTime dirTime;                                           // 运行时间
+      |         ^
+./../User/Task/UITask.cpp:59:6: error: redefinition of 'UI' as different kind of symbol
+   59 | void UI(void const * argument)
+      |      ^
+./../User/Task\UITask.hpp:58:11: note: previous definition is here
+   58 | namespace UI
+      |           ^
+25 warnings and 6 errors generated.
+
+[2026-03-06 19:16:28]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-06 19:16:30]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:10:8: error: use of undeclared identifier 'UI'
+   10 | extern UI::send_graphic_queue UI_send_queue;
+      |        ^
+./../User/Task\UITask.hpp:211:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  211 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("C01", 0, 960, 540, 4)); // 中心准星圆点
+      |                                                                               ^
+./../User/Task\UITask.hpp:213:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  213 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L01", 0, 960, 550, 960, 600)); // 上
+      |                                                                             ^
+./../User/Task\UITask.hpp:214:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  214 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L02", 0, 960, 530, 960, 480)); // 下
+      |                                                                             ^
+./../User/Task\UITask.hpp:215:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  215 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L03", 0, 940, 540, 890, 540)); // 左
+      |                                                                             ^
+./../User/Task\UITask.hpp:216:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  216 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L04", 0, 980, 540, 1030, 540));// 右
+      |                                                                             ^
+./../User/Task\UITask.hpp:221:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  221 |                 UI_send_queue.add_wz(RM_RefereeSystem::RM_RefereeSystemSetStr("S01", 1, "MODE: SPIN", 100, 900));
+      |                                                                               ^
+./../User/Task\UITask.hpp:221:89: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  221 |                 UI_send_queue.add_wz(RM_RefereeSystem::RM_RefereeSystemSetStr("S01", 1, "MODE: SPIN", 100, 900));
+      |                                                                                         ^
+./../User/Task\UITask.hpp:247:9: error: unknown type name 'RM_StaticTime'
+  247 |         RM_StaticTime dirTime;                                           // 运行时间
+      |         ^
+./../User/Task/UITask.cpp:10:6: error: redefinition of 'UI' as different kind of symbol
+   10 | void UI(void const * argument)
+      |      ^
+./../User/Task\UITask.hpp:58:11: note: previous definition is here
+   58 | namespace UI
+      |           ^
+7 warnings and 3 errors generated.
+
+[2026-03-06 19:16:59]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-06 19:17:00]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:10:8: error: use of undeclared identifier 'UI'
+   10 | extern UI::send_graphic_queue UI_send_queue;
+      |        ^
+./../User/Task\UITask.hpp:211:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  211 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle("C01", 0, 960, 540, 4)); // 中心准星圆点
+      |                                                                               ^
+./../User/Task\UITask.hpp:213:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  213 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L01", 0, 960, 550, 960, 600)); // 上
+      |                                                                             ^
+./../User/Task\UITask.hpp:214:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  214 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L02", 0, 960, 530, 960, 480)); // 下
+      |                                                                             ^
+./../User/Task\UITask.hpp:215:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  215 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L03", 0, 940, 540, 890, 540)); // 左
+      |                                                                             ^
+./../User/Task\UITask.hpp:216:77: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  216 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine("L04", 0, 980, 540, 1030, 540));// 右
+      |                                                                             ^
+./../User/Task\UITask.hpp:221:79: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  221 |                 UI_send_queue.add_wz(RM_RefereeSystem::RM_RefereeSystemSetStr("S01", 1, "MODE: SPIN", 100, 900));
+      |                                                                               ^
+./../User/Task\UITask.hpp:221:89: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+  221 |                 UI_send_queue.add_wz(RM_RefereeSystem::RM_RefereeSystemSetStr("S01", 1, "MODE: SPIN", 100, 900));
+      |                                                                                         ^
+./../User/Task\UITask.hpp:247:9: error: unknown type name 'RM_StaticTime'
+  247 |         RM_StaticTime dirTime;                                           // 运行时间
+      |         ^
+./../User/Task/UITask.cpp:10:6: error: redefinition of 'UI' as different kind of symbol
+   10 | void UI(void const * argument)
+      |      ^
+./../User/Task\UITask.hpp:58:11: note: previous definition is here
+   58 | namespace UI
+      |           ^
+7 warnings and 3 errors generated.
+
+[2026-03-06 19:26:32]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-06 19:26:34]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:10:8: error: use of undeclared identifier 'ui_ns'
+   10 | extern ui_ns::send_graphic_queue UI_send_queue;
+      |        ^
+1 error generated.
+
+[2026-03-06 19:27:07]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': source file has been changed.
+
+[2026-03-06 19:27:08]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:10:8: error: use of undeclared identifier 'ui_ns'
+   10 | extern ui_ns::send_graphic_queue UI_send_queue;
+      |        ^
+1 error generated.
+
+[2026-03-06 19:28:09]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': source file has been changed.
+
+[2026-03-06 19:28:10]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:59:19: error: no type named 'send_graphic_queue' in namespace 'ui_ns'
+   59 |     extern ui_ns::send_graphic_queue UI_send_queue;
+      |            ~~~~~~~^
+1 error generated.
+
+[2026-03-06 19:28:23]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': source file has been changed.
+
+[2026-03-06 19:28:25]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:198:17: error: use of undeclared identifier 'UI_send_queue'
+  198 |                 UI_send_queue.is_up_ui = false;
+      |                 ^
+./../User/Task\UITask.hpp:199:17: error: use of undeclared identifier 'UI_send_queue'
+  199 |                 UI_send_queue.size = 0; // 复位队列
+      |                 ^
+./../User/Task\UITask.hpp:200:17: error: use of undeclared identifier 'UI_send_queue'
+  200 |                 UI_send_queue.wz_size = 0;
+      |                 ^
+./../User/Task\UITask.hpp:210:17: error: use of undeclared identifier 'UI_send_queue'
+  210 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle((char*)"C01", 0, 960, 540, 4)); // 中心准星圆点
+      |                 ^
+./../User/Task\UITask.hpp:212:17: error: use of undeclared identifier 'UI_send_queue'
+  212 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L01", 0, 960, 550, 960, 600)); // 上
+      |                 ^
+./../User/Task\UITask.hpp:213:17: error: use of undeclared identifier 'UI_send_queue'
+  213 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L02", 0, 960, 530, 960, 480)); // 下
+      |                 ^
+./../User/Task\UITask.hpp:214:17: error: use of undeclared identifier 'UI_send_queue'
+  214 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L03", 0, 940, 540, 890, 540)); // 左
+      |                 ^
+./../User/Task\UITask.hpp:215:17: error: use of undeclared identifier 'UI_send_queue'
+  215 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L04", 0, 980, 540, 1030, 540));// 右
+      |                 ^
+./../User/Task\UITask.hpp:220:17: error: use of undeclared identifier 'UI_send_queue'
+  220 |                 UI_send_queue.add_wz(RM_RefereeSystem::RM_RefereeSystemSetStr((char*)"S01", 1, (char*)"MODE: SPIN", 100, 900));
+      |                 ^
+./../User/Task\UITask.hpp:222:17: error: use of undeclared identifier 'UI_send_queue'
+  222 |                 UI_send_queue.is_up_ui = true;
+      |                 ^
+10 errors generated.
+
+[2026-03-06 19:29:08]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': source file has been changed.
+
+[2026-03-06 19:29:10]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../User/Task/UITask.cpp:1:
+./../User/Task\UITask.hpp:312:17: error: use of undeclared identifier 'UI_send_queue'
+  312 |                 UI_send_queue.is_up_ui = false;
+      |                 ^
+./../User/Task\UITask.hpp:313:17: error: use of undeclared identifier 'UI_send_queue'
+  313 |                 UI_send_queue.size = 0; // 复位队列
+      |                 ^
+./../User/Task\UITask.hpp:314:17: error: use of undeclared identifier 'UI_send_queue'
+  314 |                 UI_send_queue.wz_size = 0;
+      |                 ^
+./../User/Task\UITask.hpp:324:17: error: use of undeclared identifier 'UI_send_queue'
+  324 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetCircle((char*)"C01", 0, 960, 540, 4)); // 中心准星圆点
+      |                 ^
+./../User/Task\UITask.hpp:326:17: error: use of undeclared identifier 'UI_send_queue'
+  326 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L01", 0, 960, 550, 960, 600)); // 上
+      |                 ^
+./../User/Task\UITask.hpp:327:17: error: use of undeclared identifier 'UI_send_queue'
+  327 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L02", 0, 960, 530, 960, 480)); // 下
+      |                 ^
+./../User/Task\UITask.hpp:328:17: error: use of undeclared identifier 'UI_send_queue'
+  328 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L03", 0, 940, 540, 890, 540)); // 左
+      |                 ^
+./../User/Task\UITask.hpp:329:17: error: use of undeclared identifier 'UI_send_queue'
+  329 |                 UI_send_queue.add(RM_RefereeSystem::RM_RefereeSystemSetLine((char*)"L04", 0, 980, 540, 1030, 540));// 右
+      |                 ^
+./../User/Task\UITask.hpp:334:17: error: use of undeclared identifier 'UI_send_queue'
+  334 |                 UI_send_queue.add_wz(RM_RefereeSystem::RM_RefereeSystemSetStr((char*)"S01", 1, (char*)"MODE: SPIN", 100, 900));
+      |                 ^
+./../User/Task\UITask.hpp:336:17: error: use of undeclared identifier 'UI_send_queue'
+  336 |                 UI_send_queue.is_up_ui = true;
+      |                 ^
+10 errors generated.
+
+[2026-03-06 19:29:57]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': source file has been changed.
+
+[2026-03-06 19:30:01]	[done]
+	build successfully !
+
+[2026-03-06 19:31:23]	[done]
+	build successfully !
+
+[2026-03-06 20:32:07]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\..\User\Task\UITask.hpp' has been changed.
+
+[2026-03-06 20:32:09]	[done]
+	build successfully !
+
+[2026-03-07 14:41:45]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+
+[2026-03-07 14:41:47]	[done]
+	build successfully !
+
+[2026-03-07 17:31:05]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+
+[2026-03-07 17:31:07]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/UITask.cpp:7:1: error: expected unqualified-id
+    7 | using namespace RM_RefereeSystem;
+      | ^
+./../User/Task/UITask.cpp:15:5: error: use of undeclared identifier 'UI_static'
+   15 |     UI_static.Init();
+      |     ^
+./../User/Task/UITask.cpp:20:9: error: use of undeclared identifier 'UI_send_queue'
+   20 |         UI_send_queue.send_wz(); 
+      |         ^
+./../User/Task/UITask.cpp:21:9: error: use of undeclared identifier 'UI_send_queue'
+   21 |         UI_send_queue.send();
+      |         ^
+4 errors generated.
+
+[2026-03-07 17:33:25]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-07 17:33:27]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/UITask.cpp:7:1: error: expected unqualified-id
+    7 | using namespace ui_ns;
+      | ^
+1 error generated.
+
+[2026-03-07 17:33:34]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-07 17:33:36]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/UITask.cpp:7:8: error: no member named 'send_graphic_queue' in namespace 'ui_ns'
+    7 | ui_ns::send_graphic_queue UI_send_queue;
+      | ~~~~~~~^
+./../User/Task/UITask.cpp:7:26: error: expected ';' after top level declarator
+    7 | ui_ns::send_graphic_queue UI_send_queue;
+      |                          ^
+      |                          ;
+./../User/Task/UITask.cpp:22:9: error: use of undeclared identifier 'UI_send_queue'
+   22 |         UI_send_queue.send_wz(); 
+      |         ^
+./../User/Task/UITask.cpp:23:9: error: use of undeclared identifier 'UI_send_queue'
+   23 |         UI_send_queue.send();
+      |         ^
+4 errors generated.
+
+[2026-03-07 17:34:04]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-07 17:34:05]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/UITask.o -MMD ./../User/Task/UITask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/UITask.cpp:7:8: error: no member named 'darw_static' in namespace 'ui_ns'
+    7 | ui_ns::darw_static UI_static;
+      | ~~~~~~~^
+./../User/Task/UITask.cpp:7:19: error: expected ';' after top level declarator
+    7 | ui_ns::darw_static UI_static;
+      |                   ^
+      |                   ;
+./../User/Task/UITask.cpp:16:5: error: use of undeclared identifier 'UI_static'
+   16 |     UI_static.Init();
+      |     ^
+./../User/Task/UITask.cpp:21:9: error: use of undeclared identifier 'UI_static'
+   21 |         UI_static.send_wz(); 
+      |         ^
+./../User/Task/UITask.cpp:22:9: error: use of undeclared identifier 'UI_static'
+   22 |         UI_static.send();
+      |         ^
+5 errors generated.
+
+[2026-03-07 17:34:39]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': object (.o) file not exist
+
+[2026-03-07 17:34:41]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol UI (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2026-03-07 17:36:03]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+
+[2026-03-07 17:36:05]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol UI (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2026-03-07 17:36:28]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol UI (referred from freertos.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2026-03-07 17:40:40]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+
+[2026-03-07 17:40:42]	[done]
+	build successfully !
+
+[2026-03-07 19:50:45]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\Core\Src\freertos.c': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\APP\Referee\RM_RefereeSystem.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\startup_stm32f407xx.s': source file has been changed.
+
+[2026-03-07 19:50:50]	[done]
+	build successfully !
+
+[2026-03-07 19:56:42]	[done]
+	build successfully !
+
+[2026-03-07 19:57:22]	[done]
+	build successfully !
+
+[2026-03-07 20:05:58]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:06:00]	[done]
+	build successfully !
+
+[2026-03-07 20:22:25]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:22:27]	[done]
+	build successfully !
+
+[2026-03-07 20:23:25]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:23:27]	[done]
+	build successfully !
+
+[2026-03-07 20:25:59]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:26:00]	[done]
+	build successfully !
+
+[2026-03-07 20:26:07]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:26:09]	[done]
+	build successfully !
+
+[2026-03-07 20:30:14]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:30:16]	[done]
+	build successfully !
+
+[2026-03-07 20:33:16]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:33:18]	[done]
+	build successfully !
+
+[2026-03-07 20:35:32]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:35:33]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:71:1: error: no matching constructor for initialization of 'Alg::Utility::SlopePlanning'
+   71 | };
+      | ^
+.\../User/core/Alg/UtilityFunction/SlopePlanning.hpp:13:11: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided
+   13 |     class SlopePlanning
+      |           ^~~~~~~~~~~~~
+.\../User/core/Alg/UtilityFunction/SlopePlanning.hpp:13:11: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 0 were provided
+   13 |     class SlopePlanning
+      |           ^~~~~~~~~~~~~
+.\../User/core/Alg/UtilityFunction/SlopePlanning.hpp:21:13: note: candidate constructor not viable: requires 2 arguments, but 0 were provided
+   21 |             SlopePlanning(float increaseValue, float decreaseValue)
+      |             ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:71:1: note: in implicit initialization of array element 2 with omitted initializer
+   71 | };
+      | ^
+1 error generated.
+
+[2026-03-07 20:35:46]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+
+[2026-03-07 20:35:47]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:71:1: error: no matching constructor for initialization of 'Alg::Utility::SlopePlanning'
+   71 | };
+      | ^
+.\../User/core/Alg/UtilityFunction/SlopePlanning.hpp:13:11: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided
+   13 |     class SlopePlanning
+      |           ^~~~~~~~~~~~~
+.\../User/core/Alg/UtilityFunction/SlopePlanning.hpp:13:11: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 0 were provided
+   13 |     class SlopePlanning
+      |           ^~~~~~~~~~~~~
+.\../User/core/Alg/UtilityFunction/SlopePlanning.hpp:21:13: note: candidate constructor not viable: requires 2 arguments, but 0 were provided
+   21 |             SlopePlanning(float increaseValue, float decreaseValue)
+      |             ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:71:1: note: in implicit initialization of array element 2 with omitted initializer
+   71 | };
+      | ^
+1 error generated.
+
+[2026-03-07 20:36:26]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+
+[2026-03-07 20:36:29]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Include -I../User -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I.cmsis/include -IRTE/_2026StringWheelChassis_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026StringWheelChassis_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:68:29: error: redefinition of 'string_target' with a different type: 'Alg::Utility::SlopePlanning[3]' vs 'Alg::Utility::SlopePlanning[2]'
+   68 | Alg::Utility::SlopePlanning string_target[3] = {
+      |                             ^
+./../User/Task\ControlTask.hpp:43:36: note: previous declaration is here
+   43 | extern Alg::Utility::SlopePlanning string_target[2];
+      |                                    ^
+1 error generated.
+
+[2026-03-07 20:36:46]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+
+[2026-03-07 20:36:49]	[done]
+	build successfully !
+
+[2026-03-07 20:38:09]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 20:38:11]	[done]
+	build successfully !
+
+[2026-03-07 21:50:07]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-07 21:50:09]	[done]
+	build successfully !
+
+[2026-03-08 14:36:08]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_chassis.cpp': source file has been changed.
+
+[2026-03-08 14:36:09]	[done]
+	build successfully !
+
+[2026-03-08 14:45:10]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-08 14:45:13]	[done]
+	build successfully !
+
+[2026-03-08 14:59:54]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\User\Task\UITask.cpp': source file has been changed.
+
+[2026-03-08 14:59:57]	[done]
+	build successfully !
+

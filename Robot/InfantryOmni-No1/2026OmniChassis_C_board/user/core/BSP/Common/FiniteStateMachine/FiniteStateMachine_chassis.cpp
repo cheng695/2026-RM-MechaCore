@@ -82,7 +82,24 @@ void Class_FSM::StateUpdate(uint8_t left, uint8_t right)
     }
     else if (StateLeft == 2 && StateRight == 3)
     {
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_chassis.cpp
         State_chassis = FOLLOW;
+=======
+        if (StateRight == 1) State_chassis = FOLLOW;         // 左中右上 → 跟随
+        else if (StateRight == 3)   // 左中右中 → 键鼠
+        {
+            if(!alphabet[16])    // q为真则跟随
+            {
+                State_chassis = FOLLOW;
+            }
+            else
+            {
+                State_chassis = NOTFOLLOW;
+            }
+        }
+        else if (StateRight == 2) State_chassis = NOTFOLLOW; // 左中右下 → 不跟随
+        else State_chassis = FOLLOW; // 默认
+>>>>>>> Stashed changes:Robot/InfantryOmni-No2/2026StringWheelChassis_C_board/User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_chassis.cpp
     }
     else if(StateLeft == 1 && StateRight == 1)
     {

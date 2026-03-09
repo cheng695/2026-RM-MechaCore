@@ -135,6 +135,21 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(Alg, Control, osPriorityIdle, 0, 1024);
   AlgHandle = osThreadCreate(osThread(Alg), NULL);
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/Core/Src/freertos.c
+=======
+  /* definition and creation of UART */
+  osThreadDef(UART, Serival, osPriorityIdle, 0, 128);
+  UARTHandle = osThreadCreate(osThread(UART), NULL);
+
+  /* definition and creation of Dispatch */
+  osThreadDef(Dispatch, Communication, osPriorityIdle, 0, 256);
+  DispatchHandle = osThreadCreate(osThread(Dispatch), NULL);
+
+  /* definition and creation of UITask */
+  osThreadDef(UITask, UI, osPriorityIdle, 0, 1024);
+  UITaskHandle = osThreadCreate(osThread(UITask), NULL);
+
+>>>>>>> Stashed changes:Robot/InfantryOmni-No2/2026StringWheelChassis_C_board/Core/Src/freertos.c
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */

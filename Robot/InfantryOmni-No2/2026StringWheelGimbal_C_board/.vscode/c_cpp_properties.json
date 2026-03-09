@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/USB_DEVICE/App",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/USB_DEVICE/Target",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/Core/Inc",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/Drivers/CMSIS/Include",
+                "f:/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board/User"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "STM32F407xx"
+            ],
+            "compilerPath": "",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}

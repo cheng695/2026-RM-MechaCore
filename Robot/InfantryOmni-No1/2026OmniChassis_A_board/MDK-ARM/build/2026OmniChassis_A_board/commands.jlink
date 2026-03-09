@@ -1,0 +1,6 @@
+r
+halt
+loadfile "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniChassis_A_board\MDK-ARM\build\2026OmniChassis_A_board\2026OmniChassis_A_board.hex"
+r
+go
+exit

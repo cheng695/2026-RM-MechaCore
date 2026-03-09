@@ -33,6 +33,10 @@ namespace BSP::Motor
         BSP::WATCH_STATE::StateWatch state_watch_[N];
 
         virtual void Parse(const HAL::CAN::Frame &frame) = 0;
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/MotorBase.hpp
+=======
+        bool is_Enable[N] = {false};
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/MotorBase.hpp
 
     public:
         MotorBase(uint32_t timeThreshold = 100)
@@ -191,6 +195,30 @@ namespace BSP::Motor
 
             return 0; // 所有电机都在线
         }
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/MotorBase.hpp
+=======
+
+        /**
+         * @brief 获取电机使能状态
+         *
+         * @return true 电机使能
+         * @return false 电机失能
+         */
+        bool getIsenable(uint8_t id)
+        {
+            return this->is_Enable[id - 1];
+        }
+
+        /**
+         * @brief 设置电机使能状态
+         * @param is_Enable true:使能  false:失能
+         */
+        void setIsenable(uint8_t id, bool enable)
+        {
+            this->is_Enable[id - 1] = enable;
+        }
+
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/MotorBase.hpp
     };
 } // namespace BSP::Motor
 

@@ -1,0 +1,595 @@
+[2026-03-09 13:40:45]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': source file has been changed.
+
+[2026-03-09 13:40:46]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:147:13: warning: enumeration values 'VISION', 'KEYBOARD', and 'STATUS_COUNT' not handled in switch [-Wswitch]
+  147 |     switch (gimbal_fsm.Get_Now_State())
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:352:63: error: too few arguments to function call, expected 5, have 4
+  352 |     gimbal_fsm.StateUpdate(left_sw, right_sw, is_online, false);
+      |     ~~~~~~~~~~~~~~~~~~~~~~                                    ^
+.\../User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.hpp:90:10: note: 'StateUpdate' declared here
+   90 |     void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool vision_flag, bool transform_flag);
+      |          ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning and 1 error generated.
+
+[2026-03-09 13:42:21]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': source file has been changed.
+
+[2026-03-09 13:42:24]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.o -MMD ./../User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.cpp:100:36: error: use of undeclared identifier 'TRANSFROM'; did you mean 'TRANSFORM'?
+  100 |                     State_gimbal = TRANSFROM;
+      |                                    ^~~~~~~~~
+      |                                    TRANSFORM
+./../User/core/BSP/Common/FiniteStateMachine\FiniteStateMachine_gimbal.hpp:33:5: note: 'TRANSFORM' declared here
+   33 |     TRANSFORM,     // 变形状态
+      |     ^
+1 error generated.
+
+[2026-03-09 13:42:31]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': object (.o) file not exist
+
+[2026-03-09 13:42:31]	[done]
+	build successfully !
+
+[2026-03-09 14:00:27]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 14:00:30]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:155:13: warning: enumeration values 'VISION', 'KEYBOARD', and 'STATUS_COUNT' not handled in switch [-Wswitch]
+  155 |     switch (now_state)
+      |             ^~~~~~~~~
+./../User/Task/ControlTask.cpp:369:13: error: use of undeclared identifier 'gimbal_manual'
+  369 |             gimbal_manual();
+      |             ^
+./../User/Task/ControlTask.cpp:372:13: error: use of undeclared identifier 'gimbal_vision'; did you mean 'gimbal_stop'?
+  372 |             gimbal_vision();
+      |             ^~~~~~~~~~~~~
+      |             gimbal_stop
+./../User/Task/ControlTask.cpp:183:6: note: 'gimbal_stop' declared here
+  183 | void gimbal_stop()
+      |      ^
+1 warning and 2 errors generated.
+
+[2026-03-09 16:45:19]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 16:45:21]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:167:44: error: use of undeclared identifier 'target_yaw'
+  167 |                 gimbal_target.target_yaw = target_yaw.filter(0.3f * -DT7.get_mouseX());
+      |                                            ^
+./../User/Task/ControlTask.cpp:319:1: error: function definition is not allowed here
+  319 | {
+      | ^
+./../User/Task/ControlTask.cpp:408:1: error: function definition is not allowed here
+  408 | {
+      | ^
+./../User/Task/ControlTask.cpp:450:1: error: function definition is not allowed here
+  450 | {
+      | ^
+./../User/Task/ControlTask.cpp:507:1: error: function definition is not allowed here
+  507 | {
+      | ^
+./../User/Task/ControlTask.cpp:526:1: error: function definition is not allowed here
+  526 | {   
+      | ^
+./../User/Task/ControlTask.cpp:559:8: error: expected unqualified-id
+  559 | extern "C"{
+      |        ^
+./../User/Task/ControlTask.cpp:572:1: error: expected '}'
+  572 | 
+      | ^
+./../User/Task/ControlTask.cpp:141:1: note: to match this '{'
+  141 | {
+      | ^
+8 errors generated.
+
+[2026-03-09 16:51:23]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 16:51:25]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:36:19: error: no type named 'UDE' in namespace 'Alg::Feedforward'
+   36 | Alg::Feedforward::UDE ude_yaw(-0.39f, 6.6f);  // UDE前馈
+      | ~~~~~~~~~~~~~~~~~~^
+./../User/Task/ControlTask.cpp:321:1: error: function definition is not allowed here
+  321 | {
+      | ^
+./../User/Task/ControlTask.cpp:410:1: error: function definition is not allowed here
+  410 | {
+      | ^
+./../User/Task/ControlTask.cpp:452:1: error: function definition is not allowed here
+  452 | {
+      | ^
+./../User/Task/ControlTask.cpp:509:1: error: function definition is not allowed here
+  509 | {
+      | ^
+./../User/Task/ControlTask.cpp:528:1: error: function definition is not allowed here
+  528 | {   
+      | ^
+./../User/Task/ControlTask.cpp:561:8: error: expected unqualified-id
+  561 | extern "C"{
+      |        ^
+./../User/Task/ControlTask.cpp:574:1: error: expected '}'
+  574 | 
+      | ^
+./../User/Task/ControlTask.cpp:143:1: note: to match this '{'
+  143 | {
+      | ^
+8 errors generated.
+
+[2026-03-09 16:51:43]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 16:51:45]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:36:19: error: no type named 'UDE' in namespace 'Alg::Feedforward'
+   36 | Alg::Feedforward::UDE ude_yaw(-0.39f, 6.6f);  // UDE前馈
+      | ~~~~~~~~~~~~~~~~~~^
+./../User/Task/ControlTask.cpp:331:32: error: use of undeclared identifier 'last_enable_ensure_4310_pitch'
+  331 |             if(HAL_GetTick() - last_enable_ensure_4310_pitch > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:335:17: error: use of undeclared identifier 'last_enable_ensure_4310_pitch'
+  335 |                 last_enable_ensure_4310_pitch = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:350:32: error: use of undeclared identifier 'last_enable_ensure_4310_yaw'
+  350 |             if(HAL_GetTick() - last_enable_ensure_4310_yaw > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:354:17: error: use of undeclared identifier 'last_enable_ensure_4310_yaw'
+  354 |                 last_enable_ensure_4310_yaw = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:367:32: error: use of undeclared identifier 'last_enable_ensure_lk4005'
+  367 |             if(HAL_GetTick() - last_enable_ensure_lk4005 > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:371:17: error: use of undeclared identifier 'last_enable_ensure_lk4005'
+  371 |                 last_enable_ensure_lk4005 = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:386:32: error: use of undeclared identifier 'last_enable_ensure_4340'
+  386 |             if(HAL_GetTick() - last_enable_ensure_4340 > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:389:17: error: use of undeclared identifier 'last_enable_ensure_4340'
+  389 |                 last_enable_ensure_4340 = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:402:5: error: use of undeclared identifier 'lk4005'
+  402 |     lk4005.reset();
+      |     ^
+./../User/Task/ControlTask.cpp:517:5: error: use of undeclared identifier 'lk4005'
+  517 |     lk4005.UpDate(gimbal_target.target_dial, MotorLK4005.getVelocityRpm(1));
+      |     ^
+./../User/Task/ControlTask.cpp:518:30: error: use of undeclared identifier 'lk4005'
+  518 |     launch_output.out_dial = lk4005.getOutput();
+      |                              ^
+./../User/Task/ControlTask.cpp:541:13: error: use of undeclared identifier 'gimbal_manual'
+  541 |             gimbal_manual();
+      |             ^
+./../User/Task/ControlTask.cpp:544:13: error: use of undeclared identifier 'gimbal_vision'; did you mean 'gimbal_stop'?
+  544 |             gimbal_vision();
+      |             ^~~~~~~~~~~~~
+      |             gimbal_stop
+./../User/Task/ControlTask.cpp:321:6: note: 'gimbal_stop' declared here
+  321 | void gimbal_stop()
+      |      ^
+14 errors generated.
+
+[2026-03-09 16:53:34]	[info] incremental build: 7 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\Alg\Feedforward\Feedforward.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\Alg\Feedforward\..\Feedforward\Feedforward.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 16:53:38]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:331:32: error: use of undeclared identifier 'last_enable_ensure_4310_pitch'
+  331 |             if(HAL_GetTick() - last_enable_ensure_4310_pitch > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:335:17: error: use of undeclared identifier 'last_enable_ensure_4310_pitch'
+  335 |                 last_enable_ensure_4310_pitch = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:350:32: error: use of undeclared identifier 'last_enable_ensure_4310_yaw'
+  350 |             if(HAL_GetTick() - last_enable_ensure_4310_yaw > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:354:17: error: use of undeclared identifier 'last_enable_ensure_4310_yaw'
+  354 |                 last_enable_ensure_4310_yaw = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:367:32: error: use of undeclared identifier 'last_enable_ensure_lk4005'
+  367 |             if(HAL_GetTick() - last_enable_ensure_lk4005 > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:371:17: error: use of undeclared identifier 'last_enable_ensure_lk4005'
+  371 |                 last_enable_ensure_lk4005 = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:386:32: error: use of undeclared identifier 'last_enable_ensure_4340'
+  386 |             if(HAL_GetTick() - last_enable_ensure_4340 > 2000)
+      |                                ^
+./../User/Task/ControlTask.cpp:389:17: error: use of undeclared identifier 'last_enable_ensure_4340'
+  389 |                 last_enable_ensure_4340 = HAL_GetTick();
+      |                 ^
+./../User/Task/ControlTask.cpp:402:5: error: use of undeclared identifier 'lk4005'
+  402 |     lk4005.reset();
+      |     ^
+./../User/Task/ControlTask.cpp:517:5: error: use of undeclared identifier 'lk4005'
+  517 |     lk4005.UpDate(gimbal_target.target_dial, MotorLK4005.getVelocityRpm(1));
+      |     ^
+./../User/Task/ControlTask.cpp:518:30: error: use of undeclared identifier 'lk4005'
+  518 |     launch_output.out_dial = lk4005.getOutput();
+      |                              ^
+./../User/Task/ControlTask.cpp:541:13: error: use of undeclared identifier 'gimbal_manual'
+  541 |             gimbal_manual();
+      |             ^
+./../User/Task/ControlTask.cpp:544:13: error: use of undeclared identifier 'gimbal_vision'; did you mean 'gimbal_stop'?
+  544 |             gimbal_vision();
+      |             ^~~~~~~~~~~~~
+      |             gimbal_stop
+./../User/Task/ControlTask.cpp:321:6: note: 'gimbal_stop' declared here
+  321 | void gimbal_stop()
+      |      ^
+13 errors generated.
+
+[2026-03-09 16:58:34]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\Alg\Feedforward\Feedforward.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\Alg\Feedforward\..\Feedforward\Feedforward.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 16:58:36]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:322:5: error: expected unqualified-id
+  322 |     if (send_seq % 2 == 0) 
+      |     ^
+./../User/Task/ControlTask.cpp:334:5: error: expected unqualified-id
+  334 |     else 
+      |     ^
+./../User/Task/ControlTask.cpp:362:45: error: too few arguments to function call, expected 2, have 1
+  362 |                 MotorJ4310.setIsenable(false);
+      |                 ~~~~~~~~~~~~~~~~~~~~~~      ^
+.\../user/core/BSP/Motor/MotorBase.hpp:229:14: note: 'setIsenable' declared here
+  229 |         void setIsenable(uint8_t id, bool enable)
+      |              ^           ~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:375:45: error: too few arguments to function call, expected 2, have 1
+  375 |                 MotorJ4310.setIsenable(false);
+      |                 ~~~~~~~~~~~~~~~~~~~~~~      ^
+.\../user/core/BSP/Motor/MotorBase.hpp:229:14: note: 'setIsenable' declared here
+  229 |         void setIsenable(uint8_t id, bool enable)
+      |              ^           ~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:388:45: error: too few arguments to function call, expected 2, have 1
+  388 |                 MotorJ4340.setIsenable(false);
+      |                 ~~~~~~~~~~~~~~~~~~~~~~      ^
+.\../user/core/BSP/Motor/MotorBase.hpp:229:14: note: 'setIsenable' declared here
+  229 |         void setIsenable(uint8_t id, bool enable)
+      |              ^           ~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:507:5: error: use of undeclared identifier 'lk4005'
+  507 |     lk4005.UpDate(gimbal_target.target_dial, MotorLK4005.getVelocityRpm(1));
+      |     ^
+./../User/Task/ControlTask.cpp:508:30: error: use of undeclared identifier 'lk4005'
+  508 |     launch_output.out_dial = lk4005.getOutput();
+      |                              ^
+./../User/Task/ControlTask.cpp:531:13: error: use of undeclared identifier 'gimbal_manual'
+  531 |             gimbal_manual();
+      |             ^
+./../User/Task/ControlTask.cpp:534:13: error: use of undeclared identifier 'gimbal_vision'; did you mean 'gimbal_stop'?
+  534 |             gimbal_vision();
+      |             ^~~~~~~~~~~~~
+      |             gimbal_stop
+./../User/Task/ControlTask.cpp:348:6: note: 'gimbal_stop' declared here
+  348 | void gimbal_stop()
+      |      ^
+9 errors generated.
+
+[2026-03-09 16:58:59]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\Alg\Feedforward\Feedforward.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\Alg\Feedforward\..\Feedforward\Feedforward.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 16:59:00]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:334:45: error: too few arguments to function call, expected 2, have 1
+  334 |                 MotorJ4310.setIsenable(false);
+      |                 ~~~~~~~~~~~~~~~~~~~~~~      ^
+.\../user/core/BSP/Motor/MotorBase.hpp:229:14: note: 'setIsenable' declared here
+  229 |         void setIsenable(uint8_t id, bool enable)
+      |              ^           ~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:347:45: error: too few arguments to function call, expected 2, have 1
+  347 |                 MotorJ4310.setIsenable(false);
+      |                 ~~~~~~~~~~~~~~~~~~~~~~      ^
+.\../user/core/BSP/Motor/MotorBase.hpp:229:14: note: 'setIsenable' declared here
+  229 |         void setIsenable(uint8_t id, bool enable)
+      |              ^           ~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:360:45: error: too few arguments to function call, expected 2, have 1
+  360 |                 MotorJ4340.setIsenable(false);
+      |                 ~~~~~~~~~~~~~~~~~~~~~~      ^
+.\../user/core/BSP/Motor/MotorBase.hpp:229:14: note: 'setIsenable' declared here
+  229 |         void setIsenable(uint8_t id, bool enable)
+      |              ^           ~~~~~~~~~~~~~~~~~~~~~~~
+./../User/Task/ControlTask.cpp:478:5: error: use of undeclared identifier 'lk4005'
+  478 |     lk4005.UpDate(gimbal_target.target_dial, MotorLK4005.getVelocityRpm(1));
+      |     ^
+./../User/Task/ControlTask.cpp:479:30: error: use of undeclared identifier 'lk4005'
+  479 |     launch_output.out_dial = lk4005.getOutput();
+      |                              ^
+./../User/Task/ControlTask.cpp:502:13: error: use of undeclared identifier 'gimbal_manual'
+  502 |             gimbal_manual();
+      |             ^
+./../User/Task/ControlTask.cpp:505:13: error: use of undeclared identifier 'gimbal_vision'; did you mean 'gimbal_stop'?
+  505 |             gimbal_vision();
+      |             ^~~~~~~~~~~~~
+      |             gimbal_stop
+./../User/Task/ControlTask.cpp:320:6: note: 'gimbal_stop' declared here
+  320 | void gimbal_stop()
+      |      ^
+7 errors generated.
+
+[2026-03-09 17:00:00]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\Alg\Feedforward\Feedforward.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\Alg\Feedforward\..\Feedforward\Feedforward.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 17:00:01]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:478:5: error: use of undeclared identifier 'lk4005'
+  478 |     lk4005.UpDate(gimbal_target.target_dial, MotorLK4005.getVelocityRpm(1));
+      |     ^
+./../User/Task/ControlTask.cpp:479:30: error: use of undeclared identifier 'lk4005'
+  479 |     launch_output.out_dial = lk4005.getOutput();
+      |                              ^
+./../User/Task/ControlTask.cpp:502:13: error: use of undeclared identifier 'gimbal_manual'
+  502 |             gimbal_manual();
+      |             ^
+./../User/Task/ControlTask.cpp:505:13: error: use of undeclared identifier 'gimbal_vision'; did you mean 'gimbal_stop'?
+  505 |             gimbal_vision();
+      |             ^~~~~~~~~~~~~
+      |             gimbal_stop
+./../User/Task/ControlTask.cpp:320:6: note: 'gimbal_stop' declared here
+  320 | void gimbal_stop()
+      |      ^
+4 errors generated.
+
+[2026-03-09 17:07:55]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\Alg\Feedforward\Feedforward.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\Alg\Feedforward\..\Feedforward\Feedforward.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 17:07:57]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:401:5: error: use of undeclared identifier 'gimbal_yaw'; did you mean 'gimbal_fsm'?
+  401 |     gimbal_yaw.MomentOfInertiaTuning(HI12.GetGyroRPM(2), gimbal_target.target_yaw);
+      |     ^~~~~~~~~~
+      |     gimbal_fsm
+./../User/Task/ControlTask.cpp:13:12: note: 'gimbal_fsm' declared here
+   13 | Gimbal_FSM gimbal_fsm;  // 云台
+      |            ^
+./../User/Task/ControlTask.cpp:401:16: error: no member named 'MomentOfInertiaTuning' in 'Gimbal_FSM'
+  401 |     gimbal_yaw.MomentOfInertiaTuning(HI12.GetGyroRPM(2), gimbal_target.target_yaw);
+      |     ~~~~~~~~~~ ^
+./../User/Task/ControlTask.cpp:403:74: error: use of undeclared identifier 'gimbal_yaw'
+  403 |     float model_comp = (fabsf(gimbal_target.target_yaw) > 1.0f) ? 0.3f * gimbal_yaw.getFriction() / 0.741f * (16384.0f / 3.0f) : 0.0f;
+      |                                                                          ^
+./../User/Task/ControlTask.cpp:583:13: warning: expression result unused [-Wunused-value]
+  583 |             gimbal_transform;
+      |             ^~~~~~~~~~~~~~~~
+1 warning and 3 errors generated.
+
+[2026-03-09 17:08:50]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\Alg\Feedforward\Feedforward.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\Alg\Feedforward\..\Feedforward\Feedforward.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp' has been changed.
+
+[2026-03-09 17:08:55]	[done]
+	build successfully !
+
+[2026-03-09 17:12:04]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-09 17:12:06]	compilation failed at : "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp", exit code: 1
+command: 
+  "F:\keil5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc++ -std=c++17 -I. -I../Core/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I.cmsis/include -IRTE/_2026OmniGimbal_C_board -D"USE_HAL_DRIVER" -D"STM32F407xx" -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mlittle-endian -D__MICROLIB -O0 -ffunction-sections -funsigned-char -fshort-enums -fshort-wchar -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/2026OmniGimbal_C_board/.obj/__/User/Task/ControlTask.o -MMD ./../User/Task/ControlTask.cpp
+   at unify_builder.Program.Main(String[] args_)
+---
+./../User/Task/ControlTask.cpp:764:96: error: no member named 'GetHeatLimit' in 'BoardCommunication'
+  764 |         heat_control.HeatControl(gimbal_target.target_surgewheel[0], current, velocity, Cboard.GetHeatLimit(), Cboard.GetHeatCool() , 0.001f, 13.0f);
+      |                                                                                         ~~~~~~ ^
+./../User/Task/ControlTask.cpp:764:119: error: no member named 'GetHeatCool' in 'BoardCommunication'
+  764 |         heat_control.HeatControl(gimbal_target.target_surgewheel[0], current, velocity, Cboard.GetHeatLimit(), Cboard.GetHeatCool() , 0.001f, 13.0f);
+      |                                                                                                                ~~~~~~ ^
+2 errors generated.
+
+[2026-03-09 17:14:15]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\CommunicationTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\CommunicationTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': object (.o) file not exist
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\CommunicationTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\CommunicationTask.hpp' has been changed.
+
+[2026-03-09 17:14:20]	[done]
+	build successfully !
+
+[2026-03-09 21:20:36]	[done]
+	build successfully !
+
+[2026-03-10 02:28:15]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Motor\LK\Lk_motor.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Motor\LK\Lk_motor.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\core\BSP\Motor\LK\Lk_motor.hpp' has been changed.
+
+[2026-03-10 02:28:20]	[done]
+	build successfully !
+
+[2026-03-10 02:33:14]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-10 02:33:15]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol gimbal_output (referred from MotorTask.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2026-03-10 02:33:53]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-10 02:33:54]	[done]
+	build successfully !
+
+[2026-03-10 02:42:59]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\SerialTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\ControlTask.hpp' has been changed.
+
+[2026-03-10 02:43:05]	[done]
+	build successfully !
+
+[2026-03-10 02:45:46]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-10 02:45:47]	[done]
+	build successfully !
+
+[2026-03-10 02:46:28]	[done]
+	build successfully !
+
+[2026-03-10 02:53:03]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\Callback.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\MotorTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\CommunicationTask.cpp': dependence 'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\MDK-ARM\..\User\Task\MotorTask.hpp' has been changed.
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\MotorTask.cpp': source file has been changed.
+
+[2026-03-10 02:53:07]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol yaw_pid (referred from MotorTask.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2026-03-10 02:53:34]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-10 02:53:35]	[done]
+	build successfully !
+
+[2026-03-10 02:53:45]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No1\2026OmniGimbal_C_board\User\Task\ControlTask.cpp': source file has been changed.
+
+[2026-03-10 02:53:47]	[done]
+	build successfully !
+
+[2026-03-10 02:54:02]	[done]
+	build successfully !
+
