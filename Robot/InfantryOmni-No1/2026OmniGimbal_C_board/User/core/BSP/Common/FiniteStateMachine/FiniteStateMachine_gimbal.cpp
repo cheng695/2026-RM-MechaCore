@@ -18,7 +18,8 @@ static const char* State_Names[STATUS_COUNT] = {
     "STOP",
     "VISION", 
     "MANUAL",
-    "KEYBOARD"
+    "KEYBOARD",
+    "TRANSFORM"
 };
 
 /**
@@ -67,7 +68,7 @@ void Gimbal_FSM::SetState(uint8_t left, uint8_t right, bool equipment_online)
  * @param right 右开关状态
  * @param equipment_online 所有设备是否在线
  */
-void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool vision_flag)
+void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool vision_flag, bool transform_flag)
 { 
     // 保存旧状态用于统计
     Enum_Gimbal_States old_state = State_gimbal;
@@ -94,12 +95,21 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
                 {
                     State_gimbal = VISION;
                 }
+                if(right == 1)
+                {
+                    State_gimbal = TRANSFORM;
+                }
             }
             else if(left == 3 && right == 3)
             {
                 if(vision_flag /*&& 按下右键（后面再加）*/)
                 {
                     State_gimbal = VISION;
+                }
+
+                if(transform_flag)
+                {
+                    State_gimbal = TRANSFORM;
                 }
             }
             break;
@@ -114,7 +124,21 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
                 State_gimbal = MANUAL;
             }
             break;
-        
+
+        case TRANSFORM:
+            if(left == 1)
+            {
+                if(right != 1)
+                {
+                    State_gimbal = MANUAL;
+                }
+            }
+            else if(!transform_flag)
+            {
+                State_gimbal = MANUAL;
+            }
+            break;
+
         default:
             State_gimbal = STOP;
             break;

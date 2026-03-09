@@ -11,6 +11,7 @@
 
 #pragma once
 #include "../interface/uart_device.hpp"
+#include <vector>
 
 namespace HAL::UART
 {

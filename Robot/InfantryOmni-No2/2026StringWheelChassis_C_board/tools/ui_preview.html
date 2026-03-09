@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>RoboMaster UI 预览工具</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #111;
+    color: #eee;
+    font-family: 'Consolas', 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 12px;
+}
+h1 {
+    font-size: 18px;
+    color: #0ff;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+.info {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+}
+.canvas-wrap {
+    border: 1px solid #333;
+    background: #000;
+    position: relative;
+    display: inline-block;
+}
+canvas { display: block; }
+#coords {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    font-size: 11px;
+    color: #666;
+    pointer-events: none;
+}
+.controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 13px;
+}
+.controls label { color: #aaa; }
+.controls input[type=range] { width: 120px; }
+.controls button {
+    background: #0aa;
+    color: #000;
+    border: none;
+    padding: 4px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+.controls button:hover { background: #0ff; }
+</style>
+</head>
+<body>
+
+<h1>⊕ RoboMaster UI 预览工具</h1>
+<p class="info">坐标系: 1920×1080 | Y轴向上 | 修改底部 drawAllUI() 函数后按 F5 刷新</p>
+
+<div class="canvas-wrap">
+    <canvas id="cv"></canvas>
+    <div id="coords">(0, 0)</div>
+</div>
+
+<div class="controls">
+    <label>缩放: <input type="range" id="scaleSlider" min="30" max="100" value="55"></label>
+    <span id="scaleVal">55%</span>
+    <button onclick="render()">🔄 刷新</button>
+    <label><input type="checkbox" id="gridToggle" checked> 网格</label>
+    <label><input type="checkbox" id="centerToggle" checked> 中心十字</label>
+</div>
+
+<script>
+// ======================== RM 颜色映射 ========================
+const RM_COLORS = {
+    0: '#F44',     // ColorRedAndBlue (红/蓝，默认红)
+    1: '#FFD700',  // ColorYellow
+    2: '#00FF00',  // ColorGreen
+    3: '#FF8C00',  // ColorOrange
+    4: '#FF00FF',  // ColorAmaranth (紫红)
+    5: '#FF69B4',  // ColorPink
+    6: '#00FFFF',  // ColorCyan
+    7: '#000000',  // ColorBlack
+    8: '#FFFFFF',  // ColorWhite
+};
+
+// ======================== 绘图状态 (模拟 RM_RefereeSystemToop) ========================
+let toop = { color: 1, width: 1, strsize: 1, operate_tpye: 1 };
+
+function setColor(c)       { toop.color = c; }
+function setWidth(w)       { toop.width = w; }
+function setStringSize(s)  { toop.strsize = s; }
+function setOperateType(t) { toop.operate_tpye = t; }
+
+// ======================== 图元收集器 ========================
+let elements = [];
+
+function addLine(name, layer, x1, y1, x2, y2) {
+    elements.push({ type:'line', name, layer, color:toop.color, width:toop.width, x1, y1, x2, y2 });
+}
+function addCircle(name, layer, cx, cy, r) {
+    elements.push({ type:'circle', name, layer, color:toop.color, width:toop.width, cx, cy, r });
+}
+function addRectangle(name, layer, x1, y1, x2, y2) {
+    elements.push({ type:'rect', name, layer, color:toop.color, width:toop.width, x1, y1, x2, y2 });
+}
+function addEllipse(name, layer, cx, cy, rx, ry) {
+    elements.push({ type:'ellipse', name, layer, color:toop.color, width:toop.width, cx, cy, rx, ry });
+}
+// RM Arc: start_angle/end_angle 度, cx/cy 圆心, rx/ry 半径
+function addArc(name, layer, startAngle, endAngle, cx, cy, rx, ry) {
+    elements.push({ type:'arc', name, layer, color:toop.color, width:toop.width, startAngle, endAngle, cx, cy, rx, ry });
+}
+function addInt(name, layer, value, x, y) {
+    elements.push({ type:'int', name, layer, color:toop.color, width:toop.width, fontSize:toop.strsize, value, x, y });
+}
+function addFloat(name, layer, value, x, y) {
+    elements.push({ type:'float', name, layer, color:toop.color, width:toop.width, fontSize:toop.strsize, value, x, y });
+}
+function addStr(name, layer, text, x, y) {
+    elements.push({ type:'str', name, layer, color:toop.color, width:toop.width, fontSize:toop.strsize, text, x, y });
+}
+
+// ======================== 画你的 UI（修改这里！）========================
+function drawAllUI() {
+    elements = [];
+
+    // ——— 从 UITask.hpp PitchLine() 完整复刻 ———
+
+    // 瞄准点
+    setColor(6); // Cyan
+    setWidth(5);
+    addCircle("W", 0, 954, 495, 6);
+
+    // pitch 指示弧 (power)
+    setColor(4); // Amaranth
+    setWidth(25);
+    addArc("power", 1, 100, 102, 960, 540, 380, 380);
+
+    // pitch 限制弧 (limPwr)
+    setColor(0); // RedAndBlue
+    setWidth(25);
+    addArc("limPwr", 1, 120, 122, 960, 540, 380, 380);
+
+    // 超电初始化弧
+    setWidth(15);
+    addArc("cd_Ini", 3, 271, 310, 960, 540, 380, 380);
+
+    // 小陀螺初始化弧
+    setWidth(25);
+    addArc("gy_Ini", 2, 0, 360, 1450, 750, 80, 80);
+
+    // 转速条
+    setWidth(35);
+    addLine("dp1", 0, 1450, 690, 1450, 811);
+
+    // ——— pitch 刻度 ———
+    setColor(8); // White
+    setWidth(25);
+    addArc("a_130", 0, 50, 51, 960, 540, 380, 380);
+    setWidth(15);
+    addArc("a_120", 1, 60, 61, 960, 540, 380, 380);
+    setWidth(25);
+    addArc("a_110", 2, 70, 71, 960, 540, 380, 380);
+    setWidth(15);
+    addArc("a_100", 3, 80, 81, 960, 540, 380, 380);
+    setWidth(25);
+    addArc("a_90",  4, 90, 91, 960, 540, 380, 380);
+    setWidth(15);
+    addArc("a_80",  5, 100, 101, 960, 540, 380, 380);
+    setWidth(25);
+    addArc("a_60",  6, 110, 111, 960, 540, 380, 380);
+    setWidth(15);
+    addArc("a_50",  7, 120, 121, 960, 540, 380, 380);
+    setWidth(25);
+    addArc("a_40",  8, 130, 131, 960, 540, 380, 380);
+
+    // pitch 刻度数字
+    setColor(8); // White
+    setStringSize(10);
+    setWidth(2);
+    addInt("w_130", 0, 120, 1210, 770);
+    addInt("w_110", 1, 90,  1270, 660);
+    addInt("w_90",  2, 60,  1300, 540);
+    addInt("w_70",  3, 30,  1280, 420);
+    addInt("w_50",  4, 0,   1210, 310);
+
+    // 超电上限位线
+    setColor(8); // White
+    setWidth(5);
+    addLine("cd1", 2, 570, 540, 595, 540);
+    // 超电下限位线
+    addLine("cd2", 2, 673, 800, 690, 785);
+
+    // 小陀螺内圆
+    setWidth(1);
+    addCircle("xt_in", 2, 1450, 750, 67);
+    addRectangle("dp9", 2, 1430, 689, 1470, 812);
+
+    // 视觉自瞄弧
+    setWidth(15);
+    addArc("vis", 2, 166, 193, 956, 520, 360, 360);
+
+    // Power: 文字
+    setColor(8); // White
+    setStringSize(15);
+    setWidth(5);
+    addStr("P", 1, "Power:", 570, 524);
+}
+
+// ======================== Canvas 渲染引擎 ========================
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const coordsDiv = document.getElementById('coords');
+let scale = 0.55;
+
+function resize() {
+    scale = parseInt(document.getElementById('scaleSlider').value) / 100;
+    document.getElementById('scaleVal').textContent = Math.round(scale * 100) + '%';
+    cv.width  = Math.round(1920 * scale);
+    cv.height = Math.round(1080 * scale);
+}
+
+// RM 坐标 → Canvas 坐标 (Y 翻转)
+function tx(x) { return x * scale; }
+function ty(y) { return (1080 - y) * scale; }
+
+function drawGrid() {
+    if (!document.getElementById('gridToggle').checked) return;
+    ctx.strokeStyle = '#1a1a1a';
+    ctx.lineWidth = 1;
+    for (let x = 0; x <= 1920; x += 120) {
+        ctx.beginPath(); ctx.moveTo(tx(x), 0); ctx.lineTo(tx(x), cv.height); ctx.stroke();
+    }
+    for (let y = 0; y <= 1080; y += 120) {
+        ctx.beginPath(); ctx.moveTo(0, ty(y)); ctx.lineTo(cv.width, ty(y)); ctx.stroke();
+    }
+    // 中心十字
+    if (document.getElementById('centerToggle').checked) {
+        ctx.strokeStyle = '#333';
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath(); ctx.moveTo(tx(960), 0); ctx.lineTo(tx(960), cv.height); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, ty(540)); ctx.lineTo(cv.width, ty(540)); ctx.stroke();
+        ctx.setLineDash([]);
+    }
+}
+
+function renderElement(el) {
+    const color = RM_COLORS[el.color] || '#FFF';
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = Math.max(1, el.width * scale);
+
+    switch (el.type) {
+        case 'line':
+            ctx.beginPath();
+            ctx.moveTo(tx(el.x1), ty(el.y1));
+            ctx.lineTo(tx(el.x2), ty(el.y2));
+            ctx.stroke();
+            break;
+
+        case 'circle':
+            ctx.beginPath();
+            ctx.arc(tx(el.cx), ty(el.cy), el.r * scale, 0, Math.PI * 2);
+            ctx.stroke();
+            break;
+
+        case 'rect':
+            ctx.beginPath();
+            ctx.rect(tx(el.x1), ty(el.y1), (el.x2 - el.x1) * scale, -(el.y2 - el.y1) * scale);
+            ctx.stroke();
+            break;
+
+        case 'ellipse':
+            ctx.beginPath();
+            ctx.ellipse(tx(el.cx), ty(el.cy), el.rx * scale, el.ry * scale, 0, 0, Math.PI * 2);
+            ctx.stroke();
+            break;
+
+        case 'arc': {
+            // RM 角度: 0° = 右 (3点钟方向)，逆时针增加
+            // Canvas: 0° = 右，顺时针增加
+            // 需要翻转 Y 轴，所以角度取负再转弧度
+            const startRad = -el.startAngle * Math.PI / 180;
+            const endRad   = -el.endAngle * Math.PI / 180;
+            ctx.beginPath();
+            ctx.ellipse(tx(el.cx), ty(el.cy), el.rx * scale, el.ry * scale, 0, startRad, endRad, true);
+            ctx.stroke();
+            break;
+        }
+
+        case 'int':
+            ctx.font = `${Math.max(8, el.fontSize * scale * 1.2)}px Consolas, monospace`;
+            ctx.fillText(String(el.value), tx(el.x), ty(el.y));
+            break;
+
+        case 'float':
+            ctx.font = `${Math.max(8, el.fontSize * scale * 1.2)}px Consolas, monospace`;
+            ctx.fillText(el.value.toFixed(3), tx(el.x), ty(el.y));
+            break;
+
+        case 'str':
+            ctx.font = `${Math.max(8, el.fontSize * scale * 1.2)}px Consolas, monospace`;
+            ctx.fillText(el.text, tx(el.x), ty(el.y));
+            break;
+    }
+}
+
+function render() {
+    resize();
+    ctx.clearRect(0, 0, cv.width, cv.height);
+
+    // 半透明背景模拟图传画面
+    ctx.fillStyle = 'rgba(20, 25, 30, 0.95)';
+    ctx.fillRect(0, 0, cv.width, cv.height);
+
+    drawGrid();
+    drawAllUI();
+
+    // 按图层排序后渲染
+    elements.sort((a, b) => a.layer - b.layer);
+    for (const el of elements) {
+        renderElement(el);
+    }
+
+    // 图元计数
+    ctx.fillStyle = '#555';
+    ctx.font = '11px Consolas';
+    ctx.fillText(`图元: ${elements.length}`, 5, cv.height - 5);
+}
+
+// 鼠标坐标显示
+cv.addEventListener('mousemove', e => {
+    const rect = cv.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) / scale;
+    const my = 1080 - (e.clientY - rect.top) / scale;
+    coordsDiv.textContent = `(${Math.round(mx)}, ${Math.round(my)})`;
+});
+
+// 事件绑定
+document.getElementById('scaleSlider').addEventListener('input', render);
+document.getElementById('gridToggle').addEventListener('change', render);
+document.getElementById('centerToggle').addEventListener('change', render);
+
+// 首次渲染
+render();
+</script>
+
+</body>
+</html>

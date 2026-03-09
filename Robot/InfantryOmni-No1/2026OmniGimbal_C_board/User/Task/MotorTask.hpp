@@ -4,6 +4,7 @@
 #include "../User/core/HAL/CAN/can_hal.hpp"
 #include "../User/Task/ControlTask.hpp"
 
+extern ALG::PID::PID yaw_pid; 
 extern ALG::PID::PID yaw_angle_pid;
 extern ALG::PID::PID yaw_velocity_pid;
 extern ALG::PID::PID pitch_manual_pid;

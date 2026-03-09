@@ -34,7 +34,7 @@ namespace BSP::Motor
         BSP::WATCH_STATE::StateWatch state_watch_[N];
         // 数据
         virtual void Parse(const HAL::CAN::Frame &frame) = 0;
-        bool is_Enable = false;
+        bool is_Enable[N] = {false};
 
     public:
         MotorBase(uint32_t timeThreshold = 100)
@@ -217,18 +217,18 @@ namespace BSP::Motor
          * @return true 电机使能
          * @return false 电机失能
          */
-        bool getIsenable()
+        bool getIsenable(uint8_t id)
         {
-            return this->is_Enable;
+            return this->is_Enable[id - 1];
         }
 
         /**
          * @brief 设置电机使能状态
          * @param is_Enable true:使能  false:失能
          */
-        void setIsenable(bool is_Enable)
+        void setIsenable(uint8_t id, bool enable)
         {
-            this->is_Enable = is_Enable;
+            this->is_Enable[id - 1] = enable;
         }
 
     };

@@ -34,7 +34,7 @@ ALG::PID::PID yaw_pid(500.0f, 0.0f, 1200.0f, 16384.0f, 30.0f, 3.0f);  // yaw轴�
 ALG::PID::PID yaw_angle_pid(2.0f, 0.0f, 7.5f, 16384.0f, 0.0f, 0.0f);        // yaw轴角速度pid（视觉模式）
 ALG::PID::PID yaw_velocity_pid(400.0f, 0.0f, 0.0f, 16384.0f, 0.0f, 0.0f);   // yaw轴角速度pid（视觉模式）
 
-ALG::PID::PID pitch_manual_pid(60.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f); // pitch轴pid（普通模式）用于设置内置pid的 KP,KD
+ALG::PID::PID pitch_manual_pid(60.0f, 0.0f, 1.5f, 0.0f, 0.0f, 0.0f); // pitch轴pid（普通模式）用于设置内置pid的 KP,KD
 ALG::PID::PID pitch_vision_pid(60.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f);  // pitch轴pid（视觉模式）用于设置内置pid的 KP,KD
 
 ALG::PID::PID dial_pid(6.0f, 0.0f, 0.0f, 10000.0f, 2500.0f, 200.0f);    // 拨盘速控pid （停火、急停模式）
@@ -76,15 +76,15 @@ bool check_online()
     //     isconnected = false;
     // }
 
-    // if(!DT7.isConnected() || !HI12.isConnected())
-    // {
-    //     isconnected = false;
-    // }
+    if(!DT7.isConnected() || !HI12.isConnected())
+    {
+        isconnected = false;
+    }
     
-    // if(!isconnected)
-    // {
-    //     return false;
-    // }
+    if(!isconnected)
+    {
+        return false;
+    }
 
     return true;
 }
@@ -124,7 +124,7 @@ float hz_to_angle(float fire_hz)
 {
     const int slots_per_rotation = 9;                         // 拨盘一圈9个弹
     const float angle_per_slot = 360.0f / slots_per_rotation; // 360/9 = 40度 (出一个蛋需要的角度)
-    const float control_period = 0.005f;                      // 5ms (200Hz的控制频率)
+    const float control_period = 0.001f;                      // 5ms (200Hz的控制频率)
     // 公式推导：
     // 1. 每秒需要出的蛋数 = fire_hz
     // 2. 每秒需要转过的角度 = fire_hz * 40度
@@ -169,7 +169,7 @@ void SetTarget()
                     mouse_y_input = 0.0f;
                 }
                 // 灵敏度
-                float pitch_sensitivity = 0.005f; 
+                float pitch_sensitivity = 0.004f; 
                 float angle_delta = mouse_y_input * pitch_sensitivity;
 
                 gimbal_target.target_pitch -= angle_delta;
@@ -265,12 +265,14 @@ void SetTarget()
                 gimbal_target.target_surgewheel[0] = 6000.0f;
                 gimbal_target.target_surgewheel[1] = -6000.0f;
                 gimbal_target.target_dial -= DT7.get_mouseLeft() * hz_to_angle(heat_control.GetNowFire());
+                //gimbal_target.target_dial -= DT7.get_mouseLeft() * hz_to_angle(13.0f);
             }
             else
             {
                 gimbal_target.target_surgewheel[0] = 6000.0f;
                 gimbal_target.target_surgewheel[1] = -6000.0f;
                 gimbal_target.target_dial -= DT7.get_scroll_() * hz_to_angle(heat_control.GetNowFire());
+                //gimbal_target.target_dial -= DT7.get_scroll_() * hz_to_angle(13.0f);
             }
             break;
         case LAUNCH_JAM:
@@ -606,7 +608,7 @@ void Control(void const * argument)
         // 热量控制
         float current[2] = {Motor3508.getCurrent(2), Motor3508.getCurrent(3)};
         float velocity[2] = {Motor3508.getVelocityRpm(2), Motor3508.getVelocityRpm(3)}; 
-        heat_control.HeatControl(gimbal_target.target_surgewheel[0], current, velocity, Cboard.GetHeatLimit(), Cboard.GetHeatCool() , 0.001f, 10.0f);
+        heat_control.HeatControl(gimbal_target.target_surgewheel[0], current, velocity, Cboard.GetHeatLimit(), Cboard.GetHeatCool() , 0.001f, 13.0f);
 
         // 1000Hz转200Hz
         control_tick++;

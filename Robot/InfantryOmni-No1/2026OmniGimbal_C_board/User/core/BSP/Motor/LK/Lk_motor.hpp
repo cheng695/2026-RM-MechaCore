@@ -135,7 +135,7 @@ namespace BSP::Motor::LK
         {
             for (uint8_t i = 0; i < N; ++i)
             {
-                if (frame.id == init_address + recv_idxs_[i])
+                if (frame.id == 0x140 + recv_idxs_[i])
                 {
                     const uint8_t* pData = frame.data;
                         
@@ -161,7 +161,7 @@ namespace BSP::Motor::LK
         {
             // 修改此处以适应新的CAN接口
             HAL::CAN::Frame frame;
-            frame.id = 140 + send_idxs_[id - 1];
+            frame.id = 0x140 + send_idxs_[id - 1];
             frame.dlc = 8;
             memcpy(frame.data, msd.data, 8);
             frame.is_extended_id = false;
@@ -175,17 +175,16 @@ namespace BSP::Motor::LK
         */
         void ctrl_Position(uint8_t id, int32_t angle, uint16_t speed)
         {
-            uint8_t data[8];
             uint32_t encoder_value = angle * 100; // 根据实际转换关系调整
             
-            data[0] = 0xA4;
-            data[1] = 0x00;
-            data[2] = speed & 0xFF;
-            data[3] = (speed >> 8) & 0xFF;
-            data[4] = encoder_value & 0xFF;
-            data[5] = (encoder_value >> 8) & 0xFF;
-            data[6] = (encoder_value >> 16) & 0xFF;
-            data[7] = (encoder_value >> 24) & 0xFF;
+            msd.data[0] = 0xA4;
+            msd.data[1] = 0x00;
+            msd.data[2] = speed & 0xFF;
+            msd.data[3] = (speed >> 8) & 0xFF;
+            msd.data[4] = encoder_value & 0xFF;
+            msd.data[5] = (encoder_value >> 8) & 0xFF;
+            msd.data[6] = (encoder_value >> 16) & 0xFF;
+            msd.data[7] = (encoder_value >> 24) & 0xFF;
 
             sendCAN(id);
         }
@@ -201,15 +200,14 @@ namespace BSP::Motor::LK
             if (torque > 2048) torque = 2048;
             if (torque < -2048) torque = -2048;
                 
-            uint8_t data[8];
-            data[0] = 0xA1;
-            data[1] = 0x00;
-            data[2] = 0x00;
-            data[3] = 0x00;
-            data[4] = torque & 0xFF;
-            data[5] = (torque >> 8) & 0xFF;
-            data[6] = 0x00;
-            data[7] = 0x00;
+            msd.data[0] = 0xA1;
+            msd.data[1] = 0x00;
+            msd.data[2] = 0x00;
+            msd.data[3] = 0x00;
+            msd.data[4] = torque & 0xFF;
+            msd.data[5] = (torque >> 8) & 0xFF;
+            msd.data[6] = 0x00;
+            msd.data[7] = 0x00;
 
             sendCAN(id);
         }
@@ -221,7 +219,8 @@ namespace BSP::Motor::LK
         {
             if (motor_index < 1 || motor_index > N) return;
 
-            uint8_t data[8] = {0x88};
+            memset(msd.data, 0, 8);
+            msd.data[0] = 0x88;
                 
             sendCAN(id);
         }
@@ -233,7 +232,8 @@ namespace BSP::Motor::LK
         {
             if (motor_index < 1 || motor_index > N) return;
 
-            uint8_t data[8] = {0x81};
+            memset(msd.data, 0, 8);
+            msd.data[0] = 0x81;
             
             sendCAN(id);
         }
@@ -245,7 +245,8 @@ namespace BSP::Motor::LK
         {
             if (motor_index < 1 || motor_index > N) return;
 
-            uint8_t data[8] = {0x9B};
+            memset(msd.data, 0, 8);
+            msd.data[0] = 0x9B;
             
             sendCAN(id);
         }
@@ -254,7 +255,8 @@ namespace BSP::Motor::LK
         {
             if (motor_index < 1 || motor_index > N) return;
             
-            uint8_t data[8] = {0x9C};
+            memset(msd.data, 0, 8);
+            msd.data[0] = 0x9C;
             
             sendCAN(id);
         }

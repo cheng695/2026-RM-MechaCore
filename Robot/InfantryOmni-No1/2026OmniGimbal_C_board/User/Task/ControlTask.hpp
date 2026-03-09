@@ -22,7 +22,6 @@ extern bool shoot;
 typedef struct 
 {
     float target_yaw;   
-    float target_pitch;
     float target_pitch_vel; // Combined logic refactor
     float target_dial;
     float target_surgewheel[2];
@@ -44,18 +43,8 @@ typedef struct
     float out_surgewheel[2];
 }Output_launch;
 
-enum Enum_Gimbal_States_TEXT
-{
-    GIMBAL_STOP = 0,
-    GIMBAL_MANUAL,
-    GIMBAL_TRANSFORM,
-};
-extern Enum_Gimbal_States_TEXT State_gimbal_text;
-
-extern BSP::Motor::Dji::GM3508<3> Motor3508;
-extern BSP::Motor::Dji::GM6020<1> Motor6020;
-extern BSP::Motor::Dji::GM2006<1> Motor2006;
-extern BSP::Motor::DM::J4310<1> MotorJ4310;
+extern BSP::Motor::Dji::GM3508<2> Motor3508;
+extern BSP::Motor::DM::J4310<2> MotorJ4310;
 extern BSP::Motor::DM::J4340<1> MotorJ4340;
 extern BSP::Motor::LK::LK4005<1> MotorLK4005;
 

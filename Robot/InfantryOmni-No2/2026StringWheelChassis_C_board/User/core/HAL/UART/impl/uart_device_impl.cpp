@@ -18,8 +18,10 @@ void UartDevice::init()
 
 void UartDevice::start()
 {
-    // 启用UART中断
-    __HAL_UART_ENABLE_IT(handle_, UART_IT_RXNE);
+    // This project uses DMA + IDLE line reception.
+    // RXNE interrupt must stay disabled in this mode, otherwise DR is not
+    // consumed by an IT receive routine and ORE will be triggered.
+    __HAL_UART_DISABLE_IT(handle_, UART_IT_RXNE);
 }
 
 bool UartDevice::transmit(const Data &data)
@@ -101,6 +103,14 @@ bool UartDevice::receive_dma_idle(Data &data)
     HAL_StatusTypeDef status = HAL_UARTEx_ReceiveToIdle_DMA(handle_, data.buffer, data.size);
     if (status == HAL_OK)
     {
+        // Keep RXNE IT disabled when using IDLE-DMA.
+        __HAL_UART_DISABLE_IT(handle_, UART_IT_RXNE);
+        // Half-transfer callback is not used in this project and can introduce
+        // unnecessary ISR load / event confusion.
+        if (handle_->hdmarx != nullptr)
+        {
+            __HAL_DMA_DISABLE_IT(handle_->hdmarx, DMA_IT_HT);
+        }
         return true;
     }
     return false;
@@ -130,7 +140,14 @@ void UartDevice::clear_ore_error(Data &data)
     if (__HAL_UART_GET_FLAG(handle_, UART_FLAG_ORE) != RESET)
     {
         __HAL_UART_CLEAR_OREFLAG(handle_);
-        HAL_UARTEx_ReceiveToIdle_DMA(handle_, data.buffer, data.size);
+        if (HAL_UARTEx_ReceiveToIdle_DMA(handle_, data.buffer, data.size) == HAL_OK)
+        {
+            __HAL_UART_DISABLE_IT(handle_, UART_IT_RXNE);
+            if (handle_->hdmarx != nullptr)
+            {
+                __HAL_DMA_DISABLE_IT(handle_->hdmarx, DMA_IT_HT);
+            }
+        }
     }
 }
 
@@ -140,4 +157,3 @@ UART_HandleTypeDef *UartDevice::get_handle() const
 }
 
 } // namespace HAL::UART
-

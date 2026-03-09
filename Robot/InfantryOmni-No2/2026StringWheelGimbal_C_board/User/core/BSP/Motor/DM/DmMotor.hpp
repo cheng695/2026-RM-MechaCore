@@ -2,18 +2,11 @@
 #define Dm_Motor_hpp
 
 #pragma once
-#include "../user/core/BSP/Motor/MotorBase.hpp"
-#include "../user/core/HAL/CAN/can_hal.hpp"
+#include "MotorBase.hpp"
+#include "HAL/CAN/can_hal.hpp"
 
 namespace BSP::Motor::DM
 {
-    enum Model
-    {
-        MIT = 0,
-        ANGLEVELOCITY = 1,
-        VELOCITY = 2
-    };
-
     // 参数结构体定义
     struct Parameters
     {
@@ -96,7 +89,6 @@ namespace BSP::Motor::DM
             this->unit_data_[i].angle_Deg = this->unit_data_[i].angle_Rad * params.rad_to_deg;
 
             this->unit_data_[i].velocity_Rad = uint_to_float(feedback_[i].velocity, params.V_MIN, params.V_MAX, 12);
-            this->unit_data_[i].velocity_Rpm = this->unit_data_[i].velocity_Rad * 60 / (2 * 3.14159265358979323846);
             this->unit_data_[i].torque_Nm = uint_to_float(feedback_[i].torque, params.T_MIN, params.T_MAX, 12);
             this->unit_data_[i].temperature_C = feedback_[i].T_Mos;
 
@@ -125,8 +117,8 @@ namespace BSP::Motor::DM
                 {
                     const uint8_t* pData = frame.data;
                         
-                    feedback_[i].id = pData[0] & 0xF;
-                    feedback_[i].err = (pData[0] >> 4) & 0xF;
+                    feedback_[i].id = (pData[0] >> 4) & 0xF;
+                    feedback_[i].err = pData[0] & 0xF;
                     feedback_[i].angle = (pData[1] << 8) | pData[2];
                     feedback_[i].velocity = (pData[3] << 4) | (pData[4] >> 4);
                     feedback_[i].torque = ((pData[4] & 0xF) << 8) | pData[5];
@@ -142,9 +134,11 @@ namespace BSP::Motor::DM
         /**
          * @brief DM电机的MIT控制方法
          */
-        void ctrl_Mit(uint8_t id, float _pos, float _vel, 
+        void ctrl_Mit(CAN_HandleTypeDef *hcan, uint8_t motor_index, float _pos, float _vel, 
                 float _KP, float _KD, float _torq)
         {
+            if (motor_index < 1 || motor_index > N) return;
+
             uint16_t pos_tmp, vel_tmp, kp_tmp, kd_tmp, tor_tmp;
             pos_tmp = float_to_uint(_pos, params_.P_MIN, params_.P_MAX, 16);
             vel_tmp = float_to_uint(_vel, params_.V_MIN, params_.V_MAX, 12);
@@ -162,6 +156,9 @@ namespace BSP::Motor::DM
             send_data[6] = ((kd_tmp & 0xF) << 4) | (tor_tmp >> 8);
             send_data[7] = tor_tmp;
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX1);
+=======
             HAL::CAN::Frame frame;
             frame.id = send_idxs_[id - 1];
             frame.dlc = 8;
@@ -170,14 +167,17 @@ namespace BSP::Motor::DM
             frame.is_remote_frame = false;
             
             HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
 
 
         /**
          * @brief DM电机的角度速度控制方法
          */
-        void ctrl_AngleVelocity(uint8_t id, float _pos, float _vel)
+        void ctrl_AngleVelocity(CAN_HandleTypeDef* hcan, uint8_t motor_index, float _pos, float _vel)
         {
+            if (motor_index < 1 || motor_index > N) return;
+
             uint8_t data[8];
             uint8_t *pbuf, *vbuf;
 
@@ -190,21 +190,16 @@ namespace BSP::Motor::DM
                 data[4 + i] = vbuf[i];
             }
 
-            HAL::CAN::Frame frame;
-            frame.id = 0X100 + send_idxs_[id - 1];
-            frame.dlc = 8;
-            memcpy(frame.data, data, sizeof(data));
-            frame.is_extended_id = false;
-            frame.is_remote_frame = false;
-            
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], data, sizeof(data));
         }
 
         /**
          * @brief DM电机的速度控制方法
          */
-        void ctrl_Velocity(uint8_t id, float _vel)
+        void ctrl_Velocity(CAN_HandleTypeDef* hcan, uint8_t motor_index, float _vel)
         {
+            if (motor_index < 1 || motor_index > N) return;
+
             uint8_t data[8] = {0};
             uint8_t *vbuf = (uint8_t*)&_vel;
 
@@ -213,23 +208,21 @@ namespace BSP::Motor::DM
                 data[i] = vbuf[i];
             }
 
-            HAL::CAN::Frame frame;
-            frame.id = 0X200 + send_idxs_[id - 1];
-            frame.dlc = 8;
-            memcpy(frame.data, data, sizeof(data));
-            frame.is_extended_id = false;
-            frame.is_remote_frame = false;
-            
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], data, sizeof(data));
         }
 
 
         /**
          * @brief 使能DM电机
-         * @param mod 模式可以有3种: MIT = 0, ANGLEVELOCITY = 1, VELOCITY = 2
          */
-        void On(uint8_t id, Model mod)
+        void On(CAN_HandleTypeDef *hcan, uint8_t motor_index)
         {
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
+            if (motor_index < 1 || motor_index > N) return;
+
+            uint8_t send_data[8] = {0xFC, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+=======
             uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC};
             
             HAL::CAN::Frame frame;
@@ -251,16 +244,53 @@ namespace BSP::Motor::DM
             frame.is_remote_frame = false;
             
             HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
         
         /**
          * @brief 失能DM电机
-         * @param mod 模式可以有3种: MIT = 0, ANGLEVELOCITY = 1, VELOCITY = 2
          */
-        void Off(uint8_t id, Model mod)
+        void Off(CAN_HandleTypeDef *hcan, uint8_t motor_index)
         {
-            uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD};
+            if (motor_index < 1 || motor_index > N) return;
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
+            uint8_t send_data[8] = {0xFD, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+=======
+            HAL::CAN::Frame frame;
+            if(mod == Model::MIT)
+            {
+                frame.id = send_idxs_[id - 1];
+            }
+            else if(mod == Model::ANGLEVELOCITY)
+            {
+                frame.id = 0x100 + send_idxs_[id - 1];
+            }
+            else if(mod == Model::VELOCITY)
+            {
+                frame.id = 0x200 + send_idxs_[id - 1];
+            }
+            frame.dlc = 8;
+            memcpy(frame.data, send_data, sizeof(send_data));
+            frame.is_extended_id = false;
+            frame.is_remote_frame = false;
+            
+            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
+        }
+
+        /**
+         * @brief 清除DM电机错误
+         */
+        void ClearErr(CAN_HandleTypeDef *hcan, uint8_t motor_index)
+        {
+            if (motor_index < 1 || motor_index > N) return;
+
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/DM/DmMotor.hpp
+            uint8_t send_data[8] = {0xFB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+            CAN::BSP::Can_Send(hcan, init_address + send_idxs_[motor_index - 1], send_data, CAN_TX_MAILBOX2);
+=======
             HAL::CAN::Frame frame;
             if(mod == Model::MIT)
             {
@@ -282,33 +312,10 @@ namespace BSP::Motor::DM
             HAL::CAN::get_can_bus_instance().get_can2().send(frame);
         }
 
-        /**
-         * @brief 清除DM电机错误
-         * @param mod 模式可以有3种: MIT = 0, ANGLEVELOCITY = 1, VELOCITY = 2
-         */
-        void ClearErr(uint8_t id, Model mod)
+        uint8_t getError(uint8_t id)
         {
-            uint8_t send_data[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB};
-
-            HAL::CAN::Frame frame;
-            if(mod == Model::MIT)
-            {
-                frame.id = send_idxs_[id - 1];
-            }
-            else if(mod == Model::ANGLEVELOCITY)
-            {
-                frame.id = 0x100 + send_idxs_[id - 1];
-            }
-            else if(mod == Model::VELOCITY)
-            {
-                frame.id = 0x200 + send_idxs_[id - 1];
-            }
-            frame.dlc = 8;
-            memcpy(frame.data, send_data, sizeof(send_data));
-            frame.is_extended_id = false;
-            frame.is_remote_frame = false;
-            
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            return feedback_[id - 1].err;
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/DM/DmMotor.hpp
         }
 
     protected:
@@ -343,17 +350,6 @@ namespace BSP::Motor::DM
         S2325(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
             : DMMotorBase<N>(Init_id, ids, send_idxs,
                             Parameters(-12.5f, 12.5f, -50.0f, 50.0f, -10.0f, 10.0f, 0.0f, 500.0f, 0.0f, 5.0f))
-        {
-        }
-    };
-
-    template <uint8_t N> 
-    class J4340 : public DMMotorBase<N>
-    {
-    public:
-        J4340(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
-            : DMMotorBase<N>(Init_id, ids, send_idxs, 
-                            Parameters(-3.14, 3.14f, -50.0f, 50.0f, -9.0f, 9.0f, 0.0f, 500.0f, 0.0f, 5.0f))
         {
         }
     };

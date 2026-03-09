@@ -47,6 +47,11 @@ namespace Alg::CalculationBase
                 float wheel_vx = 0.0f, wheel_vy = 0.0f, sumVw = 0.0f;
                 int validWheels = 0;
 
+                // 【核心修复】必须清零上一帧的累加结果！
+                ChassisVx = 0.0f;
+                ChassisVy = 0.0f;
+                ChassisVw = 0.0f;
+
                 for (int i = 0; i < 4; i++)
                 {
                     // 计算轮子在底盘坐标系中的速度分量

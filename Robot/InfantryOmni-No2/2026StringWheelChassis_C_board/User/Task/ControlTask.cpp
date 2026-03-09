@@ -65,10 +65,9 @@ float coefficients6020[6] = { 1.586024,  0.013252, 0.000229, 0.530772,  7.509297
 
 
 /* 期望值与输出 ----------------------------------------------------------------------------------------------*/
-Alg::Utility::SlopePlanning string_target[3] = {
+Alg::Utility::SlopePlanning string_target[2] = {
     Alg::Utility::SlopePlanning(0.006f, 0.006f),    // X轴斜坡规划
-    Alg::Utility::SlopePlanning(0.006f, 0.006f),    // Y轴斜坡规划
-    Alg::Utility::SlopePlanning(0.05f, 0.05f)         // Z轴旋转斜坡规划
+    Alg::Utility::SlopePlanning(0.006f, 0.006f)    // Y轴斜坡规划
 };
 
 ControlTask chassis_target;     // 底盘目标
@@ -96,20 +95,20 @@ bool check_online()
     //     }
     // }
 
-    // if(/*!Cboard.isConnected() ||*/ !DT7.isConnected())
-    // {
-    //     isconnected = false;
-    // }
+    if(/*!Cboard.isConnected() ||*/ !DT7.isConnected())
+    {
+        isconnected = false;
+    }
 
-    // if(RM_RefereeSystem::RM_RefereeSystemDir())
-    // {
-    //     // isconnected = false;
-    // }
+    if(RM_RefereeSystem::RM_RefereeSystemDir())
+    {
+        // isconnected = false;
+    }
     
-    // if(!isconnected)
-    // {
-    //     return false;
-    // }
+    if(!isconnected)
+    {
+        return false;
+    }
 
     return true;
 }
@@ -143,10 +142,8 @@ void CalculateTranslation_xy(float theta, float vx, float vy, float phi, float *
     float s = sinf(theta + psi);
     float c = cosf(theta + psi);
     // 控制量输入 (云台系)
-    //float raw_vx = 2.702f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
-    //float raw_vy = 2.702f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
-    float raw_vx = 5.0f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
-    float raw_vy = 5.0f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
+    float raw_vx = 3.5f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
+    float raw_vy = 3.5f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
     // 旋转到底盘系
     *out_vx = raw_vx * c + raw_vy * s; 
     *out_vy = raw_vx * -s + raw_vy * c;
@@ -167,6 +164,33 @@ void CalculateFollow()
     if(fabs(follow_error) < 0.1f) follow_error = 0.0f;
     
     follow_pid.UpDate(0.0f, follow_error);
+}
+
+/**
+ * @brief 限制底盘平动与旋转的合成目标速度，防止电机超速跑偏
+ */
+void LimitChassisVector(float &vx_norm, float &vy_norm, float &vw_norm)
+{
+    float MAX_LINEAR_VEL = 3.5f;   // 和 CalculateTranslation_xy 内部系数一致
+    float MAX_ROTATION_VEL = 15.0f; // 小陀螺角速度期望
+
+    float target_vx = vx_norm * MAX_LINEAR_VEL; 
+    float target_vy = vy_norm * MAX_LINEAR_VEL;
+    float target_vw = vw_norm * MAX_ROTATION_VEL;
+
+    // 半径 R 约为 0.178m
+    float vw_equivalent_linear = fabs(target_vw) * 0.178f;
+    float v_translation_magnitude = sqrtf(target_vx * target_vx + target_vy * target_vy);
+    float total_required_speed = v_translation_magnitude + vw_equivalent_linear;
+
+    float MOTOR_PHYSICAL_LIMIT = 3.6f; // 保守极限速度，3508满转极限约为 3.7 m/s
+    if (total_required_speed > MOTOR_PHYSICAL_LIMIT) 
+    {
+        float scale = MOTOR_PHYSICAL_LIMIT / total_required_speed;
+        vx_norm *= scale;
+        vy_norm *= scale;
+        vw_norm *= scale;
+    }
 }
 
 /**
@@ -197,61 +221,72 @@ void SetTarget()
                 vy_Handle = alphabet[3] - alphabet[0];
                 vw_Handle = alphabet[23];
                 
-                // 小陀螺时进行相位补偿
-                if (vw_Handle != 0.0f) 
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+
+                float target_vw_raw = 0.0f;
+                // 1. 小陀螺与跟随的动态斜坡策略
+                if(alphabet[23])   // 小陀螺: 慢速启动和停止，极度丝滑 (0.02f)
                 {
-                    psi = -0.08f*18.00f*vw_Handle;
+                    target_vw_raw = 15.0f * vw_Handle;
+                    psi = -0.12f * target_vw_raw;
                 }
+                else    // 底盘跟随: 快速响应和高压制刹车 (0.15f)，杜绝走S形
+                {
+                    CalculateFollow();  
+                    target_vw_raw = follow_pid.getOutput(); 
+                }
+
+                chassis_target.target_rotation = target_vw_raw; 
+
+                // 3. 完美的相位补偿：跟随系统物理真实旋转速度
                 
                 CalculateTranslation_xy(Cboard.GetYawAngle(), vy_Handle, vx_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
-                chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(alphabet[23])   // 小陀螺
-                {
-                    string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, string_fk.GetChassisVw()); 
-                    chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
-                }
-                else    // 底盘跟随
-                {
-                    CalculateFollow();  // 计算底盘跟随的规划
-                    chassis_target.target_rotation = follow_pid.getOutput();    // Z轴底盘跟随旋转期望
-                }                
+                chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）                
             }   
             else    // 遥控器模式的底盘跟随
             {
                 float vx, vy;
                 float psi = 0.0f;   // 不小陀螺的时候不补偿
-                // 只在陀螺模式下进行相位补偿
-                if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f) 
+                
+                float vx_Handle = DT7.get_left_x();
+                float vy_Handle = DT7.get_left_y();
+                float vw_Handle = DT7.get_scroll_();
+
+                if (Cboard.GetScroll() == true || fabs(vw_Handle) <= 0.05f) {
+                    vw_Handle = 0.0f;
+                }
+                
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+
+                float target_vw_raw = 0.0f;
+                // 1. 小陀螺与跟随的动态斜坡策略
+                if(vw_Handle != 0.0f)   // 可以小陀螺
                 {
-                    psi = -0.035f * 18.0f * DT7.get_scroll_();
+                    target_vw_raw = 15.0f * vw_Handle;
+                    psi = -0.12f * target_vw_raw;
+                }
+                else    // 底盘跟随
+                {
+                    CalculateFollow();  
+                    target_vw_raw = follow_pid.getOutput(); 
+                    
+                    // if (target_vw_raw > 15.0f) target_vw_raw = 15.0f;
+                    // if (target_vw_raw < -15.0f) target_vw_raw = -15.0f;
                 }
 
-                CalculateTranslation_xy(Cboard.GetYawAngle(), DT7.get_left_x(), DT7.get_left_y(), -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
+                // 2. 核心保护：所有旋转期望统一过斜坡
+                chassis_target.target_rotation = target_vw_raw; 
+
+                // 3. 完美的相位补偿：跟随系统物理真实旋转速度
+                
+                CalculateTranslation_xy(Cboard.GetYawAngle(), vx_Handle, vy_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(Cboard.GetScroll() == true)  // 不能小陀螺
-                {
-                    CalculateFollow();  // 计算底盘跟随的规划
-                    chassis_target.target_rotation = follow_pid.getOutput();    // Z轴底盘跟随旋转期望
-                }
-                else    // 可以小陀螺
-                {
-                    if(fabs( DT7.get_scroll_() ) > 0.05f)   // 小陀螺
-                    {
-                        string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * DT7.get_scroll_(), string_fk.GetChassisVw()); 
-                        chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
-                    }
-                    else    // 底盘跟随
-                    {
-                        CalculateFollow();  // 计算底盘跟随的规划
-                        chassis_target.target_rotation = follow_pid.getOutput();    // Z轴底盘跟随旋转期望
-                    }
-                }
             }
             break;
         case NOTFOLLOW:
@@ -265,43 +300,49 @@ void SetTarget()
                 vy_Handle = alphabet[3] - alphabet[0];
                 vw_Handle = alphabet[23];
                 
-                // 小陀螺时进行相位补偿
-                if (vw_Handle != 0.0f) 
-                {
-                    psi = -0.08f*18.00f*vw_Handle;
-                }
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+                
+                float target_vw_raw = 15.0f * vw_Handle;
+
+                chassis_target.target_rotation = target_vw_raw;
+
+                // 使用已被斜坡平滑处理过的真实旋转速度进行绝佳的相位补偿
+                psi = -0.12f * target_vw_raw;
                 
                 CalculateTranslation_xy(Cboard.GetYawAngle(), vy_Handle, vx_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, string_fk.GetChassisVw());
-                chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
             }   
             else    // 遥控器模式
             {
                 float vx, vy;
                 float psi = 0.0f;   // 不小陀螺的时候不补偿
-                // 只在陀螺模式下进行相位补偿
-                if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f)
-                { 
-                    psi = -0.035f * 18.0f * DT7.get_scroll_();
+                
+                float vx_Handle = DT7.get_left_x();
+                float vy_Handle = DT7.get_left_y();
+                float vw_Handle = DT7.get_scroll_();
+
+                if (Cboard.GetScroll() == true || fabs(vw_Handle) <= 0.05f) 
+                {
+                    vw_Handle = 0.0f;
                 }
-                CalculateTranslation_xy(Cboard.GetYawAngle(), DT7.get_left_x(), DT7.get_left_y(), -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
+                
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+
+                float target_vw_raw = 15.0f * vw_Handle;
+
+                chassis_target.target_rotation = target_vw_raw;
+
+                // 使用实时的真实旋转速度进行相位补偿
+                psi = -0.12f * target_vw_raw;
+                
+                CalculateTranslation_xy(Cboard.GetYawAngle(), vx_Handle, vy_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(Cboard.GetScroll() == true)  // 不能小陀螺
-                {
-                    chassis_target.target_rotation = 0.0f;  // Z轴不旋转
-                }
-                else    // 可以小陀螺
-                {
-                    string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * DT7.get_scroll_(), string_fk.GetChassisVw());
-                    chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
-                }
             }
             break;
         default:
@@ -355,7 +396,7 @@ void chassis_notfollow()
         stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor6020.getAngleDeg(i+1));
         stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor6020.getVelocityRpm(i+1));
 
-        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRpm(i+1));
+        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRads(i+1));
 
         chassis_output.out_string[i] = stringVelocity_pid[i].getOutput();
         //chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
@@ -428,6 +469,8 @@ void chassis_notfollow()
     {
         chassis_output.out_string[i] = power6020.getCurrentCalculate(i) * 16384.0f/3.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
+        chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
 }
 
@@ -455,7 +498,7 @@ void chassis_follow()
         stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor6020.getAngleDeg(i+1));
         stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor6020.getVelocityRpm(i+1));
 
-        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRpm(i+1));
+        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRads(i+1));
 
         chassis_output.out_string[i] = stringVelocity_pid[i].getOutput();
         //chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
@@ -528,6 +571,8 @@ void chassis_follow()
     {
         chassis_output.out_string[i] = power6020.getCurrentCalculate(i) * 16384.0f/3.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
+        chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
 }
 

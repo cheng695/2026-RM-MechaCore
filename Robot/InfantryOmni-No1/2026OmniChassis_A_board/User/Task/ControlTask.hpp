@@ -1,6 +1,7 @@
 #ifndef CONTROLTASK_HPP
 #define CONTROLTASK_HPP
 
+#include <algorithm>
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
 #include "../User/Task/CommunicationTask.hpp"
@@ -36,6 +37,7 @@ extern Output_chassis chassis_output;
 extern float motor_wheel[4];
 
 extern Alg::CalculationBase::Omni_FK omni_fk;
+extern Alg::CalculationBase::Omni_IK omni_ik;
 extern Alg::Utility::SlopePlanning omni_target[3];
 
 extern ALG::PowerControl::EnergyRing energy_ring;

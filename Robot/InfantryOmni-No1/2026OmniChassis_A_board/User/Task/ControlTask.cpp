@@ -13,27 +13,19 @@ extern bool alphabet[28];
 Chassis_FSM chassis_fsm;    // 底盘有限状态机
 
 /* 底盘解算 -------------------------------------------------------------------------------------------------*/
-float wheel_azimuth[4] = {PI_/4, -PI_/4, 5*PI_/4, -5*PI_/4};                // 轮安装方位角
-float wheel_direction[4] = {-5*PI_/4, PI_/4, -PI_/4, 5*PI_/4}; // 轮子的位置方向角
-Alg::CalculationBase::Omni_IK omni_ik(0.2f, 0.07f, wheel_azimuth, wheel_direction);  // 运动学逆解算
-Alg::CalculationBase::Omni_FK omni_fk(0.2f, 0.07f, 4.0f, wheel_azimuth, wheel_direction);  // 运动学正解算
-Alg::CalculationBase::Omni_ID omni_id(0.2f, 0.07f, 4.0f, wheel_azimuth, wheel_direction);  // 动力学逆解算
+float wheel_azimuth[4] = {-PI_/4, PI_/4, -5*PI_/4, 5*PI_/4};                // 轮安装方位角
+float wheel_direction[4] = {5*PI_/4, -PI_/4, PI_/4, -5*PI_/4}; // 轮子的位置方向角
+Alg::CalculationBase::Omni_IK omni_ik(0.24f, 0.07f, wheel_azimuth, wheel_direction);        // 运动学逆解算
+Alg::CalculationBase::Omni_FK omni_fk(0.24f, 0.07f, 4.0f, wheel_azimuth, wheel_direction);  // 运动学正解算
 
 /* 控制器 --------------------------------------------------------------------------------------------------*/
 // 用于运动学逆解，轮向作为补偿输出
 ALG::PID::PID wheel_pid[4] = {
-    ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 1号轮
-    ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 2号轮
-    ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 3号轮
-    ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 150.0f)      // 轮向速度pid 4号轮
+    ALG::PID::PID(700.0f, 0.5f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 1号轮
+    ALG::PID::PID(700.0f, 0.5f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 2号轮
+    ALG::PID::PID(700.0f, 0.5f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 3号轮
+    ALG::PID::PID(700.0f, 0.5f, 0.0f, 16384.0f, 2500.0f, 150.0f)      // 轮向速度pid 4号轮
 };  
-
-// 用于运动学正解后计算输出为力矩
-ALG::PID::PID translational_pid[2] = {
-    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),   // X方向牵引力
-    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f)    // Y方向牵引力
-};
-ALG::PID::PID rotational_pid(200.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f);    // Z轴旋转力矩
 
 ALG::PID::PID follow_pid(8.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f);  // 速度环pid 用于底盘跟随
 
@@ -48,13 +40,11 @@ ALG::PowerControl::EnergyRing energy_ring(1288.5f, 250.0f, 48.0f);  // 能量环
 ALG::PowerControl::PowerControlStrategy power_strategy(1288.5f); // 上限功率和剩余能量逻辑处理
 float coefficients3508[6] = { 2.144951, -0.002828, 0.000025, 0.016525,  0.115369, 0.000015 };   // 3508
 
-
-
 /* 期望值与输出 ----------------------------------------------------------------------------------------------*/
 Alg::Utility::SlopePlanning omni_target[3] = {
-    Alg::Utility::SlopePlanning(0.006f, 0.006f),    // X轴斜坡规划
-    Alg::Utility::SlopePlanning(0.006f, 0.006f),    // Y轴斜坡规划
-    Alg::Utility::SlopePlanning(0.05f, 0.05f)         // Z轴旋转斜坡规划
+    Alg::Utility::SlopePlanning(0.015f, 0.015f),    // X轴斜坡规划
+    Alg::Utility::SlopePlanning(0.015f, 0.015f),    // Y轴斜坡规划
+    Alg::Utility::SlopePlanning(0.05f, 0.05f)       // Z轴旋转斜坡规划
 };
 
 ControlTask chassis_target;     // 底盘目标
@@ -131,10 +121,8 @@ void CalculateTranslation_xy(float theta, float vx, float vy, float phi, float *
     float s = sinf(theta + psi);
     float c = cosf(theta + psi);
     // 控制量输入 (云台系)
-    //float raw_vx = 2.702f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
-    //float raw_vy = 2.702f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
-    float raw_vx = 5.0f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
-    float raw_vy = 5.0f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
+    float raw_vx = 4.5f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
+    float raw_vy = 4.5f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
     // 旋转到底盘系
     *out_vx = raw_vx * c + raw_vy * s; 
     *out_vy = raw_vx * -s + raw_vy * c;
@@ -188,7 +176,7 @@ void SetTarget()
                 // 小陀螺时进行相位补偿
                 if (vw_Handle != 0.0f) 
                 {
-                    //psi = -0.08f*18.00f*vw_Handle;
+                    //psi = -0.08f*13.00f*vw_Handle;
                     psi = 0.0f;
                 }
                 
@@ -199,7 +187,7 @@ void SetTarget()
                 chassis_target.target_translation_y = omni_target[1].GetOut();    // Y方向期望（左右）
                 if(alphabet[23])   // 小陀螺
                 {
-                    omni_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, omni_fk.GetChassisVw()); 
+                    omni_target[2].TIM_Calculate_PeriodElapsedCallback(13.00f * vw_Handle, omni_fk.GetChassisVw()); 
                     chassis_target.target_rotation = omni_target[2].GetOut(); // 小陀螺的期望
                 }
                 else    // 底盘跟随
@@ -215,7 +203,8 @@ void SetTarget()
                 // 只在陀螺模式下进行相位补偿
                 if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f) 
                 {
-                    psi = -0.035f * 18.0f * DT7.get_scroll_();
+                    // psi = -0.08f * 13.00f * DT7.get_scroll_();
+                    psi = 0.0f;
                 }
 
                 CalculateTranslation_xy(0.0f/*Cboard.GetYawAngle()*/, DT7.get_left_x(), DT7.get_left_y(), 0.0f, &vx, &vy, psi);  // 计算旋转矩阵
@@ -232,7 +221,7 @@ void SetTarget()
                 {
                     if(fabs( DT7.get_scroll_() ) > 0.05f)   // 小陀螺
                     {
-                        omni_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * DT7.get_scroll_(), omni_fk.GetChassisVw()); 
+                        omni_target[2].TIM_Calculate_PeriodElapsedCallback(13.00f * DT7.get_scroll_(), omni_fk.GetChassisVw()); 
                         chassis_target.target_rotation = omni_target[2].GetOut(); // 小陀螺的期望
                     }
                     else    // 底盘跟随
@@ -257,7 +246,7 @@ void SetTarget()
                 // 小陀螺时进行相位补偿
                 if (vw_Handle != 0.0f) 
                 {
-                    //psi = -0.08f*18.00f*vw_Handle;
+                    //psi = -0.08f*13.00f*vw_Handle;
                     psi = 0.0f;
                 }
                 
@@ -266,7 +255,7 @@ void SetTarget()
                 omni_target[1].TIM_Calculate_PeriodElapsedCallback(vy, omni_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = omni_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = omni_target[1].GetOut();    // Y方向期望（左右）
-                omni_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, omni_fk.GetChassisVw());
+                omni_target[2].TIM_Calculate_PeriodElapsedCallback(13.00f * vw_Handle, omni_fk.GetChassisVw());
                 chassis_target.target_rotation = omni_target[2].GetOut(); // 小陀螺的期望
             }   
             else    // 遥控器模式
@@ -276,7 +265,8 @@ void SetTarget()
                 // 只在陀螺模式下进行相位补偿
                 if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f)
                 { 
-                    psi = -0.035f * 18.0f * DT7.get_scroll_();
+                    // psi = -0.08f * 13.00f * DT7.get_scroll_();
+                    psi = 0.0f;
                 }
                 CalculateTranslation_xy(0.0f/*Cboard.GetYawAngle()*/, DT7.get_left_x(), DT7.get_left_y(), 0.0f, &vx, &vy, psi);  // 计算旋转矩阵
                 omni_target[0].TIM_Calculate_PeriodElapsedCallback(vx, omni_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
@@ -289,7 +279,7 @@ void SetTarget()
                 }
                 else    // 可以小陀螺
                 {
-                    omni_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * DT7.get_scroll_(), omni_fk.GetChassisVw());
+                    omni_target[2].TIM_Calculate_PeriodElapsedCallback(13.00f * DT7.get_scroll_(), omni_fk.GetChassisVw());
                     chassis_target.target_rotation = omni_target[2].GetOut(); // 小陀螺的期望
                 }
             }
@@ -332,19 +322,9 @@ void chassis_notfollow()
     for(int i = 0; i < 4; i++)
     {
         // 逆运动学相关 通过PID算轮向补偿
-        wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRpm(i+1));
-        //chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
-
-        // 正运动学相关 通过PID算牵引力和旋转力矩
-        translational_pid[0].UpDate(chassis_target.target_translation_x, omni_fk.GetChassisVx());
-        translational_pid[1].UpDate(chassis_target.target_translation_y, omni_fk.GetChassisVy());
-        rotational_pid.UpDate(chassis_target.target_rotation, omni_fk.GetChassisVw());
-
-        // 逆动力学 算轮向电机力矩
-        omni_id.OmniInvDynamics(translational_pid[0].getOutput(), translational_pid[1].getOutput(), rotational_pid.getOutput());
-
-        // 轮向电机力矩转控制电流
-        chassis_output.out_wheel[i] = omni_id.GetMotorTorque(i) / 19.0f / 0.7f / 0.3f * 819.2f + wheel_pid[i].getOutput();
+        wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRads(i+1));
+        chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
+        chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
     
     // 功率控制
@@ -378,7 +358,7 @@ void chassis_notfollow()
     {
         I3508[i] = chassis_output.out_wheel[i] * 20.0f/16384.0f;    // 3508电机电流（解算欲输出电流）
         I_other[i] = 0.0f;                                          // 3508电机电流（非解算欲输出电流）
-        V3508[i] = Motor3508.getVelocityRads(i+1)*(19.0f / 1.0f); // 3508电机速度（当前速度）
+        V3508[i] = Motor3508.getVelocityRads(i+1)*(268.0f / 17.0f);  // 3508电机速度（当前速度）
     }
     float pmax3508 = PowerMax; // 3508电机吃满
     power3508.DecayingCurrent(I3508, V3508, coefficients3508, I_other, 0.0f/*(-2.144951*3.0f)*/, pmax3508); // 3508电机功率控制（衰减电流法）
@@ -386,7 +366,7 @@ void chassis_notfollow()
     // 底盘输出
     for(int i = 0; i < 4; i++)
     {
-        chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
+        //chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
     }
 }
 
@@ -404,19 +384,9 @@ void chassis_follow()
     for(int i = 0; i < 4; i++)
     {
         // 逆运动学相关 通过PID算舵向输出和轮向补偿
-        wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRpm(i+1));
-        //chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
-
-        // 正运动学相关 通过PID算牵引力和旋转力矩
-        translational_pid[0].UpDate(chassis_target.target_translation_x, omni_fk.GetChassisVx());
-        translational_pid[1].UpDate(chassis_target.target_translation_y, omni_fk.GetChassisVy());
-        rotational_pid.UpDate(chassis_target.target_rotation, omni_fk.GetChassisVw());
-
-        // 逆动力学 算轮向电机力矩
-        omni_id.OmniInvDynamics(translational_pid[0].getOutput(), translational_pid[1].getOutput(), rotational_pid.getOutput());
-
-        // 轮向电机力矩转控制电流
-        chassis_output.out_wheel[i] = omni_id.GetMotorTorque(i) / 19.0f / 0.7f / 0.3f * 819.2f + wheel_pid[i].getOutput();
+        wheel_pid[i].UpDate(omni_ik.GetMotor(i), Motor3508.getVelocityRads(i+1));
+        chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
+        chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
     
     // 功率控制
@@ -450,7 +420,7 @@ void chassis_follow()
     {
         I3508[i] = chassis_output.out_wheel[i] * 20.0f/16384.0f;    // 3508电机电流（解算欲输出电流）
         I_other[i] = 0.0f;                                          // 3508电机电流（非解算欲输出电流）
-        V3508[i] = Motor3508.getVelocityRads(i+1)*(19.0f / 1.0f); // 3508电机速度（当前速度）
+        V3508[i] = Motor3508.getVelocityRads(i+1)*(268.0f / 17.0f); // 3508电机速度（当前速度）
     }
     float pmax3508 = PowerMax; // 3508电机吃满
     power3508.DecayingCurrent(I3508, V3508, coefficients3508, I_other, 0.0f/*(-2.144951*3.0f)*/, pmax3508); // 3508电机功率控制（衰减电流法）
@@ -458,7 +428,7 @@ void chassis_follow()
     // 底盘输出
     for(int i = 0; i < 4; i++)
     {
-        chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
+        //chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
     }
 }
 

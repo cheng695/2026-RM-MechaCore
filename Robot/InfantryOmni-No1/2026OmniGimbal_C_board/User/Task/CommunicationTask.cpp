@@ -32,7 +32,8 @@ void BoardCommunicationInit()
         if(data.size >= 18 && data.buffer != nullptr)
         {
             Cboard.updateTimestamp();
-
+            Cboard.SetHeatLimit(data.buffer);
+            Cboard.SetHeatCool(data.buffer+2);
         }
     });
 }

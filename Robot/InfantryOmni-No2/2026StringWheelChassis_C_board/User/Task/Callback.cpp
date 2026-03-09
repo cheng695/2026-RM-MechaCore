@@ -57,11 +57,11 @@ extern "C"
             
             if(huart == uart1.get_handle())
             {
-                // 注意：在触发数据解析前，需要先配置下一次DMA接收，长度必须是最大缓冲区大小
                 HAL::UART::Data next_rx_buffer{referee_buffer, 512};
-                uart1.receive_dma_idle(next_rx_buffer);
-                
-                // 触发刚刚收到的这一帧不定长数据的回调解析
+                if (!uart1.receive_dma_idle(next_rx_buffer))
+                {
+                    uart1.receive_dma_idle(next_rx_buffer);
+                }
                 uart1.trigger_rx_callbacks(uart1_rx_buffer);
             }
         }
@@ -91,6 +91,13 @@ extern "C"
         if (huart->Instance == USART1) // 裁判系统
         {
              // 清除错误标志并重新开启接收
+            // Read SR/DR once to fully flush stale byte state in hardware.
+            volatile uint32_t sr = huart->Instance->SR;
+            volatile uint32_t dr = huart->Instance->DR;
+            (void)sr;
+            (void)dr;
+
+            __HAL_UART_DISABLE_IT(huart, UART_IT_RXNE);
             __HAL_UART_CLEAR_OREFLAG(huart);
             __HAL_UART_CLEAR_NEFLAG(huart);
             __HAL_UART_CLEAR_FEFLAG(huart);
@@ -107,6 +114,12 @@ extern "C"
         }
         else if (huart->Instance == USART6) // 板间通讯
         {
+            volatile uint32_t sr = huart->Instance->SR;
+            volatile uint32_t dr = huart->Instance->DR;
+            (void)sr;
+            (void)dr;
+
+            __HAL_UART_DISABLE_IT(huart, UART_IT_RXNE);
             __HAL_UART_CLEAR_OREFLAG(huart);
             HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
             auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);

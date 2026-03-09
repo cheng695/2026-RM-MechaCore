@@ -65,16 +65,16 @@ void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6, float
 void BoardCommunicationTX()
 {
     // vofa
-    auto &uart3 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart3);
-    HAL::UART::Data uart3_tx_buffer{send_str2, sizeof(send_str2)}; 
-    uart3.transmit_dma(uart3_tx_buffer);
+    auto &uart7 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart7);
+    HAL::UART::Data uart7_tx_buffer{send_str2, sizeof(send_str2)}; 
+    uart7.transmit_dma(uart7_tx_buffer);
 
     // 发给上板裁判系统数据
-    memcpy(BoardTx, &ext_power_heat_data_0x0201.shooter_barrel_heat_limit, sizeof(ext_power_heat_data_0x0201.shooter_barrel_heat_limit));
-    memcpy(BoardTx+2, &ext_power_heat_data_0x0201.shooter_barrel_cooling_value, sizeof(ext_power_heat_data_0x0201.shooter_barrel_cooling_value));
-    auto &uart7 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart7);
-    HAL::UART::Data uart7_tx_buffer{BoardTx, sizeof(BoardTx)}; 
-    uart7.transmit_dma(uart7_tx_buffer);
+    // memcpy(BoardTx, &ext_power_heat_data_0x0201.shooter_barrel_heat_limit, sizeof(ext_power_heat_data_0x0201.shooter_barrel_heat_limit));
+    // memcpy(BoardTx+2, &ext_power_heat_data_0x0201.shooter_barrel_cooling_value, sizeof(ext_power_heat_data_0x0201.shooter_barrel_cooling_value));
+    // auto &uart7 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart7);
+    // HAL::UART::Data uart7_tx_buffer{BoardTx, sizeof(BoardTx)}; 
+    // uart7.transmit_dma(uart7_tx_buffer);
 }
 
 
@@ -84,7 +84,7 @@ void Communication(void const * argument)
     BoardCommunicationInit();
     for(;;)
     {
-        vofa_send(supercap.GetPower_10times(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), 1288.5f, 250.0f, energy_ring.GetPowerMax(), supercap.GetPower(), ext_power_heat_data_0x0202.chassis_power_buffer, 60.0f);
+        vofa_send(chassis_target.target_translation_x, omni_fk.GetChassisVx(), chassis_target.target_translation_y, omni_fk.GetChassisVy(), 250.0f, omni_ik.GetMotor(0), Motor3508.getVelocityRads(1), omni_ik.GetMotor(1), Motor3508.getVelocityRads(2));
         BoardCommunicationTX();
         osDelay(5);
     }

@@ -4,7 +4,6 @@
 #pragma once
 
 #include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
-#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 #include "../user/core/HAL/CAN/can_hal.hpp"
 
 namespace BSP::Motor
@@ -24,17 +23,20 @@ namespace BSP::Motor
             double torque_Nm;     // 单位牛米
             double temperature_C; // 单位摄氏度
 
-            double last_angle;  // 上一次位置
-            double add_angle;   // 增量位置
+            double last_angle;
+            double add_angle;
         };
 
         // 国际单位数据
         UnitData unit_data_[N];
         // 设备在线检测
         BSP::WATCH_STATE::StateWatch state_watch_[N];
-        // 数据
+
         virtual void Parse(const HAL::CAN::Frame &frame) = 0;
-        bool is_Enable = false;
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/MotorBase.hpp
+=======
+        bool is_Enable[N] = {false};
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/MotorBase.hpp
 
     public:
         MotorBase(uint32_t timeThreshold = 100)
@@ -47,11 +49,6 @@ namespace BSP::Motor
             }
         }
 
-        /**
-         * @brief 
-         * 
-         * @param id 电机个数id
-         */
         void updateTimestamp(uint8_t id)
         {
             if (id > 0 && id <= N)
@@ -60,25 +57,13 @@ namespace BSP::Motor
             }
         }
 
-        /**
-         * @brief 
-         * 
-         * @param id_state 状态id，对应电机个数
-         * @param id_ring 对应can接收id
-         * @return true 
-         * @return false 
-         */
-        bool isConnected(uint8_t id_state, uint8_t id_ring)
+        bool isConnected(uint8_t id)
         {
-            if (id_state > 0 && id_state <= N)
+            if (id > 0 && id <= N)
             {
-                state_watch_[id_state - 1].UpdateTime();
-                state_watch_[id_state - 1].CheckStatus();
-                if(state_watch_[id_state - 1].GetStatus() == BSP::WATCH_STATE::Status::OFFLINE)
-                {
-                    BSP::WATCH_STATE::BuzzerManagerSimple::getInstance().requestMotorRing(id_ring);
-                }
-                return state_watch_[id_state - 1].GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
+                state_watch_[id - 1].UpdateTime();
+                state_watch_[id - 1].CheckStatus();
+                return state_watch_[id - 1].GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
             }
             return false;
         }
@@ -210,6 +195,8 @@ namespace BSP::Motor
 
             return 0; // 所有电机都在线
         }
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/user/core/BSP/Motor/MotorBase.hpp
+=======
 
         /**
          * @brief 获取电机使能状态
@@ -217,20 +204,21 @@ namespace BSP::Motor
          * @return true 电机使能
          * @return false 电机失能
          */
-        bool getIsenable()
+        bool getIsenable(uint8_t id)
         {
-            return this->is_Enable;
+            return this->is_Enable[id - 1];
         }
 
         /**
          * @brief 设置电机使能状态
          * @param is_Enable true:使能  false:失能
          */
-        void setIsenable(bool is_Enable)
+        void setIsenable(uint8_t id, bool enable)
         {
-            this->is_Enable = is_Enable;
+            this->is_Enable[id - 1] = enable;
         }
 
+>>>>>>> Stashed changes:Robot/InfantryOmni-No1/2026OmniGimbal_C_board/User/core/BSP/Motor/MotorBase.hpp
     };
 } // namespace BSP::Motor
 

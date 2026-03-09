@@ -48,10 +48,11 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
+osThreadId COMMHandle;
 osThreadId CANHandle;
+osThreadId REMOHandle;
+osThreadId ChassisTaskHandle;
 osThreadId AlgHandle;
-osThreadId UARTHandle;
-osThreadId DispatchHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -59,12 +60,12 @@ osThreadId DispatchHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
-extern void Motor(void const * argument);
-extern void Control(void const * argument);
-extern void Serial(void const * argument);
 extern void Communication(void const * argument);
+extern void Motor(void const * argument);
+extern void Remote(void const * argument);
+extern void Task(void const * argument);
+extern void Control(void const * argument);
 
-extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -114,22 +115,41 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
+  /* definition and creation of COMM */
+  osThreadDef(COMM, Communication, osPriorityIdle, 0, 256);
+  COMMHandle = osThreadCreate(osThread(COMM), NULL);
+
   /* definition and creation of CAN */
   osThreadDef(CAN, Motor, osPriorityIdle, 0, 128);
   CANHandle = osThreadCreate(osThread(CAN), NULL);
+
+  /* definition and creation of REMO */
+  osThreadDef(REMO, Remote, osPriorityIdle, 0, 128);
+  REMOHandle = osThreadCreate(osThread(REMO), NULL);
+
+  /* definition and creation of ChassisTask */
+  osThreadDef(ChassisTask, Task, osPriorityIdle, 0, 512);
+  ChassisTaskHandle = osThreadCreate(osThread(ChassisTask), NULL);
 
   /* definition and creation of Alg */
   osThreadDef(Alg, Control, osPriorityIdle, 0, 1024);
   AlgHandle = osThreadCreate(osThread(Alg), NULL);
 
+<<<<<<< Updated upstream:Robot/InfantryOmni-No1/2026OmniChassis_C_board/Core/Src/freertos.c
+=======
   /* definition and creation of UART */
-  osThreadDef(UART, Serial, osPriorityIdle, 0, 256);
+  osThreadDef(UART, Serival, osPriorityIdle, 0, 128);
   UARTHandle = osThreadCreate(osThread(UART), NULL);
 
   /* definition and creation of Dispatch */
   osThreadDef(Dispatch, Communication, osPriorityIdle, 0, 256);
   DispatchHandle = osThreadCreate(osThread(Dispatch), NULL);
 
+  /* definition and creation of UITask */
+  osThreadDef(UITask, UI, osPriorityIdle, 0, 1024);
+  UITaskHandle = osThreadCreate(osThread(UITask), NULL);
+
+>>>>>>> Stashed changes:Robot/InfantryOmni-No2/2026StringWheelChassis_C_board/Core/Src/freertos.c
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -145,8 +165,6 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)

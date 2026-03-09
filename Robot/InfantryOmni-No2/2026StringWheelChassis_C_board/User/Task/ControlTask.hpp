@@ -40,7 +40,7 @@ extern float motor_direction[4];
 extern float motor_wheel[4];
 
 extern Alg::CalculationBase::String_FK string_fk;
-extern Alg::Utility::SlopePlanning string_target[3];
+extern Alg::Utility::SlopePlanning string_target[2];
 
 extern ALG::PowerControl::PowerControl<4> power6020;
 extern ALG::PowerControl::EnergyRing energy_ring;

@@ -1,0 +1,6 @@
+r
+halt
+loadfile "f:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\MDK-ARM\build\2026StringWheelChassis_C_board\2026StringWheelChassis_C_board.hex"
+r
+go
+exit
