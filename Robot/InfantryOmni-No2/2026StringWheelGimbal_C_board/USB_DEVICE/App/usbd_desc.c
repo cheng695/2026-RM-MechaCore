@@ -19,9 +19,9 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h"
+#include "usbd_core.h"
 #include "usbd_desc.h"
-#include "../USB_DEVICE/Target/usbd_conf.h"
+#include "usbd_conf.h"
 
 /* USER CODE BEGIN INCLUDE */
 

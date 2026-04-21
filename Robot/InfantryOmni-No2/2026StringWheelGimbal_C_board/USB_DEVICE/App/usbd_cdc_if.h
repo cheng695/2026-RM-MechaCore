@@ -28,18 +28,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx.h"
-
-/* 检查并包含usbd_cdc.h，如果找不到则使用系统默认路径 */
-#if __has_include("usbd_cdc.h")
-  #include "usbd_cdc.h"
-#elif __has_include("../Src/usbd_cdc.h")  
-  #include "../Src/usbd_cdc.h"
-#elif __has_include("../../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h")
-  #include "../../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
-#else
-  #include "usbd_cdc.h"  // 默认包含，依赖于项目设置
-#endif
+#include "usbd_cdc.h"
 
 /* USER CODE BEGIN INCLUDE */
 
@@ -140,3 +129,4 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 #endif
 
 #endif /* __USBD_CDC_IF_H__ */
+

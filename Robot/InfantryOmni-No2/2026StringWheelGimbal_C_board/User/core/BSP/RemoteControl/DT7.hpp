@@ -6,8 +6,8 @@
 // =======================================================================================================
 // 头文件包含
 // =======================================================================================================
-#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
-#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
+#include "core/BSP/Common/StateWatch/buzzer_manager.hpp"
 #include <stdint.h>
 #include <algorithm>
 

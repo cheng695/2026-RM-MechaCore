@@ -21,9 +21,9 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "usb_device.h"
-#include "../Middlewares/ST/STM32_USB_Device_Library//Core/Inc/usbd_core.h"
+#include "usbd_core.h"
 #include "usbd_desc.h"
-#include "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+#include "usbd_cdc.h"
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN Includes */

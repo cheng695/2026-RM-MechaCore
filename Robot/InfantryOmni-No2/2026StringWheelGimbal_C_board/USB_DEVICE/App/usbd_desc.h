@@ -26,7 +26,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+#include "usbd_def.h"
 
 /* USER CODE BEGIN INCLUDE */
 

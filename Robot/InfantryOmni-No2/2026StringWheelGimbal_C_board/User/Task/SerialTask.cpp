@@ -1,6 +1,6 @@
 #include "SerialTask.hpp"
-#include "../User/Task/ControlTask.hpp"
-#include "../User/Task/CommunicationTask.hpp"
+#include "ControlTask.hpp"
+#include "CommunicationTask.hpp"
 extern Launch_FSM launch_fsm; 
 extern Vision vision;
 

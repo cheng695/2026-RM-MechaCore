@@ -2,8 +2,8 @@
 #define Dm_Motor_hpp
 
 #pragma once
-#include "../user/core/BSP/Motor/MotorBase.hpp"
-#include "../user/core/HAL/CAN/can_hal.hpp"
+#include "core/BSP/Motor/MotorBase.hpp"
+#include "core/HAL/CAN/can_hal.hpp"
 
 namespace BSP::Motor::DM
 {

@@ -25,7 +25,8 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h"
+#include  "usbd_ioreq.h"
+
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */

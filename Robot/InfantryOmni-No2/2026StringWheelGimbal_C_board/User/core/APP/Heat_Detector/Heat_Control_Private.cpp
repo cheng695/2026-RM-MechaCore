@@ -1,4 +1,4 @@
-#include "../User/core/APP/Heat_Detector/Heat_Control_Private.hpp"
+#include "Heat_Control_Private.hpp"
 #include "math.h"
 
 void APP::Heat_Control_Private::ShootingDetection(float target_speed, float *current, float *velocity)

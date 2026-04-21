@@ -3,8 +3,8 @@
 
 #pragma once
 // 基础DJI电机实现
-#include "../user/core/BSP/Motor/MotorBase.hpp"
-#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
+#include "core/BSP/Motor/MotorBase.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
 #include "can.h"
 #include <cstdint>
 #include <cstring> // 添加头文件

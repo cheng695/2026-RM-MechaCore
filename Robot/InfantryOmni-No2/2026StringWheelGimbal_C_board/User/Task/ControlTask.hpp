@@ -3,16 +3,16 @@
 
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
-#include "../User/core/Alg/Filter/Filter.hpp"
-#include "../User/core/Alg/Feedforward/Feedforward.hpp"
-#include "../User/Task/CommunicationTask.hpp"
-#include "../User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.hpp"
-#include "../User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_launch.hpp"
-#include "../User/core/Alg/PID/pid.hpp"
-#include "../User/core/BSP/Motor/Dji/DjiMotor.hpp"
-#include "../User/core/BSP/Motor/DM/DmMotor.hpp"
-#include "../User/Task/SerialTask.hpp"
-#include "../User/core/APP/Heat_Detector/Heat_Control_Private.hpp"
+#include "core/Alg/Filter/Filter.hpp"
+#include "core/Alg/Feedforward/Feedforward.hpp"
+#include "CommunicationTask.hpp"
+#include "core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.hpp"
+#include "core/BSP/Common/FiniteStateMachine/FiniteStateMachine_launch.hpp"
+#include "core/Alg/PID/pid.hpp"
+#include "core/BSP/Motor/Dji/DjiMotor.hpp"
+#include "core/BSP/Motor/DM/DmMotor.hpp"
+#include "SerialTask.hpp"
+#include "core/APP/Heat_Detector/Heat_Control_Private.hpp"
 
 extern bool shoot;
 

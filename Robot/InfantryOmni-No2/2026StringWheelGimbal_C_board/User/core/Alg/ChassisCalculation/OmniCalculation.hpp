@@ -1,7 +1,7 @@
 #ifndef OmniCalculation_HPP
 #define OmniCalculation_HPP
 
-#include "../user/core/Alg/ChassisCalculation/CalculationBase.hpp"
+#include "CalculationBase.hpp"
 #include <math.h>
 
 namespace Alg::CalculationBase

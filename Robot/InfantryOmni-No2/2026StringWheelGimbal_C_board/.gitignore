@@ -6,6 +6,7 @@ MDK-ARM/DebugConfig/
 MDK-ARM/Listings/
 MDK-ARM/Objects/
 MDK-ARM/RTE/
+MDK-ARM/build/
 
 # Compiler output
 *.o
@@ -25,8 +26,16 @@ MDK-ARM/RTE/
 .mxproject
 # .ioc files should be version controlled
 
+# CMake / Ninja build output
+build/
+CMakeUserPresets.json
+
 # VS Code
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/TEMPLATE_NOTES.md
 
 # J-Link
 JLinkLog.txt

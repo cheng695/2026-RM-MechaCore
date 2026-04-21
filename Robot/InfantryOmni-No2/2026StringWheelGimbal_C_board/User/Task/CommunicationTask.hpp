@@ -3,9 +3,9 @@
 
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
-#include "../User/Task/SerialTask.hpp"
-#include "../User/core/BSP/Common/StateWatch/state_watch.hpp"
-#include "../User/core/BSP/Common/StateWatch/buzzer_manager.hpp"
+#include "SerialTask.hpp"
+#include "core/BSP/Common/StateWatch/state_watch.hpp"
+#include "core/BSP/Common/StateWatch/buzzer_manager.hpp"
 
 extern uint8_t BoardRx[4];;
 

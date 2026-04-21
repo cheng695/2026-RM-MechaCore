@@ -1,5 +1,5 @@
 #include "CommunicationTask.hpp"
-#include "../User/Task/MotorTask.hpp"
+#include "MotorTask.hpp"
 #include "../USB_DEVICE/App/usbd_cdc_if.h"
 
 /* 实例板间通讯设备 -----------------------------------------------------------------------------------------*/
