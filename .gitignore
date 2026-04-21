@@ -45,3 +45,12 @@ JLinkLog.txt
 !system_*.c
 !stm32*.h
 !stm32*.s
+# MDK-ARM generated directories (all projects)
+**/MDK-ARM/.cmsis/
+**/MDK-ARM/RTE/
+**/MDK-ARM/build/
+**/MDK-ARM/DebugConfig/
+**/MDK-ARM/.vscode/
+**/MDK-ARM/JLinkLog.txt
+**/MDK-ARM/EventRecorderStub.scvd
+**/MDK-ARM/*.uvguix.*
