@@ -9,7 +9,8 @@ srcDirs:
   - ../Middlewares/ST/STM32_USB_Device_Library
 virtualFolder:
   name: <virtual_root>
-  files: []
+  files:
+    - path: ../.gitignore
   folders:
     - name: Application
       files: []
@@ -343,4 +344,9 @@ targets:
         otherCmds: ""
         proType: 1
         speed: 8000
+      OpenOCD:
+        baseAddr: "0x08000000"
+        bin: ""
+        interface: cmsis-dap-v1
+        target: stm32f4x
     uploader: JLink

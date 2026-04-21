@@ -7,14 +7,14 @@ extern bool alphabet[28];
 
 /* 宏定义 --------------------------------------------------------------------------------------------------*/
 #define PI_ 3.1415926535897932384626433832795
-#define STANDARD 0.22f  // 正方向（弧度）
+#define STANDARD 3.35103f  // 正方向（弧度）
 
 /* 有限状态机 -----------------------------------------------------------------------------------------------*/
 Chassis_FSM chassis_fsm;    // 底盘有限状态机
 
 /* 底盘解算 -------------------------------------------------------------------------------------------------*/
 float wheel_azimuth[4] = {7*PI_/4, PI_/4, 3*PI_/4, 5*PI_/4};                // 安装位置
-float phase_offset[4] = {-1.2954468f, -2.8209907f, 2.9222334f, 1.3038837f}; // 舵向初始角
+float phase_offset[4] = {1.84614585f, 4.4715335f, 6.06382605f, 4.44547635f}; // 舵向初始角
 Alg::CalculationBase::String_IK string_ik(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学逆解算
 Alg::CalculationBase::String_FK string_fk(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学正解算
 Alg::CalculationBase::String_ID string_id(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 动力学逆解算
@@ -55,17 +55,19 @@ ALG::PID::PID energy_pid[2] = {
 };
 
 /* 功率控制 -------------------------------------------------------------------------------------------------*/
-ALG::PowerControl::PowerControl<4> power3508;
-ALG::PowerControl::PowerControl<4> power6020;
-ALG::PowerControl::EnergyRing energy_ring(1288.5f, 250.0f, 48.0f);
+ALG::PowerControl::PowerControl<4> power3508;   // 3508功率控制算法
+ALG::PowerControl::PowerControl<4> power6020;   // 6020功率控制算法
+ALG::PowerControl::EnergyRing energy_ring(1288.5f, 250.0f, 48.0f);  // 能量环
+ALG::PowerControl::PowerControlStrategy power_strategy(1288.5f); // 上限功率和剩余能量逻辑处理
 float coefficients3508[6] = { 2.144951, -0.002828, 0.000025, 0.016525,  0.115369, 0.000015 };   // 3508
 float coefficients6020[6] = { 1.586024,  0.013252, 0.000229, 0.530772,  7.509297, 0.000320 };   // 6020
 
+
+
 /* 期望值与输出 ----------------------------------------------------------------------------------------------*/
-Alg::Utility::SlopePlanning string_target[3] = {
+Alg::Utility::SlopePlanning string_target[2] = {
     Alg::Utility::SlopePlanning(0.006f, 0.006f),    // X轴斜坡规划
-    Alg::Utility::SlopePlanning(0.006f, 0.006f),    // Y轴斜坡规划
-    Alg::Utility::SlopePlanning(0.05f, 0.05f)         // Z轴旋转斜坡规划
+    Alg::Utility::SlopePlanning(0.006f, 0.006f)    // Y轴斜坡规划
 };
 
 ControlTask chassis_target;     // 底盘目标
@@ -85,13 +87,14 @@ Output_chassis chassis_output;  // 底盘输出
 bool check_online()
 {
     bool isconnected = true;
-    for(int i = 0; i < 4; i++)
-    {
-        if(!Motor3508.isConnected(i+1, i+1) || !Motor6020.isConnected(i+1, i+5))
-        {
-            isconnected = false;
-        }
-    }
+    //上场要注释掉，蜂鸣器使用了队列存在滞后，不注释掉的话场上复活开始的几秒轮子会疯
+    // for(int i = 0; i < 4; i++)
+    // {
+    //     if(!Motor3508.isConnected(i+1, i+1) || !Motor6020.isConnected(i+1, i+5))
+    //     {
+    //         isconnected = false;
+    //     }
+    // }
 
     if(/*!Cboard.isConnected() ||*/ !DT7.isConnected())
     {
@@ -100,7 +103,7 @@ bool check_online()
 
     if(RM_RefereeSystem::RM_RefereeSystemDir())
     {
-        isconnected = false;
+        // isconnected = false;
     }
     
     if(!isconnected)
@@ -108,8 +111,6 @@ bool check_online()
         return false;
     }
 
- 
-    
     return true;
 }
 
@@ -142,10 +143,8 @@ void CalculateTranslation_xy(float theta, float vx, float vy, float phi, float *
     float s = sinf(theta + psi);
     float c = cosf(theta + psi);
     // 控制量输入 (云台系)
-    //float raw_vx = 2.702f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
-    //float raw_vy = 2.702f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
-    float raw_vx = 5.0f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
-    float raw_vy = 5.0f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
+    float raw_vx = 3.5f * vy; // raw_vx是机器人坐标系（东北天） vy是笛卡尔坐标系（x水平）
+    float raw_vy = 3.5f * vx; // raw_vy是机器人坐标系（东北天） vx是笛卡尔坐标系（x水平）
     // 旋转到底盘系
     *out_vx = raw_vx * c + raw_vy * s; 
     *out_vy = raw_vx * -s + raw_vy * c;
@@ -163,9 +162,36 @@ void CalculateFollow()
     while (follow_error < -1.5707963267f) follow_error += 2 * 1.5707963267f;
 
     // 死区处理 (防止小误差震荡)
-    if(fabs(follow_error) < 0.05f) follow_error = 0.0f;
+    if(fabs(follow_error) < 0.1f) follow_error = 0.0f;
     
-    follow_pid.UpDate(0.0f, follow_error);
+    follow_pid.UpDate(follow_error, 0.0f);
+}
+
+/**
+ * @brief 限制底盘平动与旋转的合成目标速度，防止电机超速跑偏
+ */
+void LimitChassisVector(float &vx_norm, float &vy_norm, float &vw_norm)
+{
+    float MAX_LINEAR_VEL = 3.5f;   // 和 CalculateTranslation_xy 内部系数一致
+    float MAX_ROTATION_VEL = 15.0f; // 小陀螺角速度期望
+
+    float target_vx = vx_norm * MAX_LINEAR_VEL; 
+    float target_vy = vy_norm * MAX_LINEAR_VEL;
+    float target_vw = vw_norm * MAX_ROTATION_VEL;
+
+    // 半径 R 约为 0.178m
+    float vw_equivalent_linear = fabs(target_vw) * 0.178f;
+    float v_translation_magnitude = sqrtf(target_vx * target_vx + target_vy * target_vy);
+    float total_required_speed = v_translation_magnitude + vw_equivalent_linear;
+
+    float MOTOR_PHYSICAL_LIMIT = 3.6f; // 保守极限速度，3508满转极限约为 3.7 m/s
+    if (total_required_speed > MOTOR_PHYSICAL_LIMIT) 
+    {
+        float scale = MOTOR_PHYSICAL_LIMIT / total_required_speed;
+        vx_norm *= scale;
+        vy_norm *= scale;
+        vw_norm *= scale;
+    }
 }
 
 /**
@@ -194,63 +220,74 @@ void SetTarget()
                 float vx_Handle, vy_Handle, vw_Handle;
                 vx_Handle = alphabet[22] - alphabet[18];
                 vy_Handle = alphabet[3] - alphabet[0];
-                vw_Handle = alphabet[16] - alphabet[4];
+                vw_Handle = alphabet[23];
                 
-                // 小陀螺时进行相位补偿
-                if (vw_Handle != 0.0f) 
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+
+                float target_vw_raw = 0.0f;
+                // 1. 小陀螺与跟随的动态斜坡策略
+                if(alphabet[23])   // 小陀螺: 慢速启动和停止，极度丝滑 (0.02f)
                 {
-                    psi = -0.08f*18.00f*vw_Handle;
+                    target_vw_raw = 15.0f * vw_Handle;
+                    psi = 0.1f * target_vw_raw;
                 }
+                else    // 底盘跟随: 快速响应和高压制刹车 (0.15f)，杜绝走S形
+                {
+                    CalculateFollow();  
+                    target_vw_raw = follow_pid.getOutput(); 
+                }
+
+                chassis_target.target_rotation = target_vw_raw; 
+
+                // 3. 完美的相位补偿：跟随系统物理真实旋转速度
                 
                 CalculateTranslation_xy(Cboard.GetYawAngle(), vy_Handle, vx_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
-                chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(alphabet[16] || alphabet[4])   // 小陀螺
-                {
-                    string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, string_fk.GetChassisVw()); 
-                    chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
-                }
-                else    // 底盘跟随
-                {
-                    CalculateFollow();  // 计算底盘跟随的规划
-                    chassis_target.target_rotation = follow_pid.getOutput();    // Z轴底盘跟随旋转期望
-                }                
+                chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）                
             }   
             else    // 遥控器模式的底盘跟随
             {
                 float vx, vy;
                 float psi = 0.0f;   // 不小陀螺的时候不补偿
-                // 只在陀螺模式下进行相位补偿
-                if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f) 
+                
+                float vx_Handle = DT7.get_left_x();
+                float vy_Handle = DT7.get_left_y();
+                float vw_Handle = DT7.get_scroll_();
+
+                if (Cboard.GetScroll() == true || fabs(vw_Handle) <= 0.05f) {
+                    vw_Handle = 0.0f;
+                }
+                
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+
+                float target_vw_raw = 0.0f;
+                // 1. 小陀螺与跟随的动态斜坡策略
+                if(vw_Handle != 0.0f)   // 可以小陀螺
                 {
-                    psi = -0.08f * 18.0f * DT7.get_scroll_();
+                    target_vw_raw = 15.0f * vw_Handle;
+                    psi = 0.1f * target_vw_raw;
+                }
+                else    // 底盘跟随
+                {
+                    CalculateFollow();  
+                    target_vw_raw = follow_pid.getOutput(); 
+                    
+                    // if (target_vw_raw > 15.0f) target_vw_raw = 15.0f;
+                    // if (target_vw_raw < -15.0f) target_vw_raw = -15.0f;
                 }
 
-                CalculateTranslation_xy(Cboard.GetYawAngle(), DT7.get_left_x(), DT7.get_left_y(), -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
+                // 2. 核心保护：所有旋转期望统一过斜坡
+                chassis_target.target_rotation = target_vw_raw; 
+
+                // 3. 完美的相位补偿：跟随系统物理真实旋转速度
+                
+                CalculateTranslation_xy(Cboard.GetYawAngle(), vx_Handle, vy_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(Cboard.GetScroll() == true)  // 不能小陀螺
-                {
-                    CalculateFollow();  // 计算底盘跟随的规划
-                    chassis_target.target_rotation = follow_pid.getOutput();    // Z轴底盘跟随旋转期望
-                }
-                else    // 可以小陀螺
-                {
-                    if(fabs( DT7.get_scroll_() ) > 0.05f)   // 小陀螺
-                    {
-                        string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * DT7.get_scroll_(), string_fk.GetChassisVw()); 
-                        chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
-                    }
-                    else    // 底盘跟随
-                    {
-                        CalculateFollow();  // 计算底盘跟随的规划
-                        chassis_target.target_rotation = follow_pid.getOutput();    // Z轴底盘跟随旋转期望
-                    }
-                }
             }
             break;
         case NOTFOLLOW:
@@ -262,45 +299,51 @@ void SetTarget()
                 float vx_Handle, vy_Handle, vw_Handle;
                 vx_Handle = alphabet[22] - alphabet[18];
                 vy_Handle = alphabet[3] - alphabet[0];
-                vw_Handle = alphabet[16] - alphabet[4];
+                vw_Handle = alphabet[23];
                 
-                // 小陀螺时进行相位补偿
-                if (vw_Handle != 0.0f) 
-                {
-                    psi = -0.08f*18.00f*vw_Handle;
-                }
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+                
+                float target_vw_raw = 15.0f * vw_Handle;
+
+                chassis_target.target_rotation = target_vw_raw;
+
+                // 使用已被斜坡平滑处理过的真实旋转速度进行绝佳的相位补偿
+                psi = 0.1f * target_vw_raw;
                 
                 CalculateTranslation_xy(Cboard.GetYawAngle(), vy_Handle, vx_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * vw_Handle, string_fk.GetChassisVw());
-                chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
             }   
             else    // 遥控器模式
             {
                 float vx, vy;
                 float psi = 0.0f;   // 不小陀螺的时候不补偿
-                // 只在陀螺模式下进行相位补偿
-                if (Cboard.GetScroll() == false && fabs(DT7.get_scroll_()) > 0.05f)
-                { 
-                    psi = -0.08f * 18.0f * DT7.get_scroll_();
+                
+                float vx_Handle = DT7.get_left_x();
+                float vy_Handle = DT7.get_left_y();
+                float vw_Handle = DT7.get_scroll_();
+
+                if (Cboard.GetScroll() == true || fabs(vw_Handle) <= 0.05f) 
+                {
+                    vw_Handle = 0.0f;
                 }
-                CalculateTranslation_xy(Cboard.GetYawAngle(), DT7.get_left_x(), DT7.get_left_y(), -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
+                
+                LimitChassisVector(vx_Handle, vy_Handle, vw_Handle);
+
+                float target_vw_raw = 15.0f * vw_Handle;
+
+                chassis_target.target_rotation = target_vw_raw;
+
+                // 使用实时的真实旋转速度进行相位补偿
+                psi = 0.1f * target_vw_raw;
+                
+                CalculateTranslation_xy(Cboard.GetYawAngle(), vx_Handle, vy_Handle, -0.16f, &vx, &vy, psi);  // 计算旋转矩阵
                 string_target[0].TIM_Calculate_PeriodElapsedCallback(vx, string_fk.GetChassisVx()); // 斜坡规划 X方向（前后）
                 string_target[1].TIM_Calculate_PeriodElapsedCallback(vy, string_fk.GetChassisVy()); // 斜坡规划 Y方向（左右）
                 chassis_target.target_translation_x = string_target[0].GetOut();    // X方向期望（前后）
                 chassis_target.target_translation_y = string_target[1].GetOut();    // Y方向期望（左右）
-                if(Cboard.GetScroll() == true)  // 不能小陀螺
-                {
-                    chassis_target.target_rotation = 0.0f;  // Z轴不旋转
-                }
-                else    // 可以小陀螺
-                {
-                    string_target[2].TIM_Calculate_PeriodElapsedCallback(18.00f * DT7.get_scroll_(), string_fk.GetChassisVw());
-                    chassis_target.target_rotation = string_target[2].GetOut(); // 小陀螺的期望
-                }
             }
             break;
         default:
@@ -354,7 +397,7 @@ void chassis_notfollow()
         stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor6020.getAngleDeg(i+1));
         stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor6020.getVelocityRpm(i+1));
 
-        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRpm(i+1));
+        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRads(i+1));
 
         chassis_output.out_string[i] = stringVelocity_pid[i].getOutput();
         //chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
@@ -372,15 +415,30 @@ void chassis_notfollow()
     }
     
     // 功率控制
-    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), alphabet[26]);
-    float PowerMax = energy_ring.GetPowerMax();
-    //float PowerMax = 60.0f;
-    supercap.setInstruction(0);
+    bool isSupercapOnline = supercap.isConnected(); // 电容连接状态
+    bool isRefereeOnline = !RM_RefereeSystem::RM_RefereeSystemDir(); // 裁判系统连接状态
+    
+    supercap.setSupercapOnline(isSupercapOnline);
+    supercap.setRefereeOnline(isRefereeOnline);
 
-    supercap.setRatedPower(ext_power_heat_data_0x0201.chassis_power_limit);
-    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);
+    // 更新功率策略
+    power_strategy.Update(isSupercapOnline, isRefereeOnline, 
+                          (float)ext_power_heat_data_0x0201.chassis_power_limit, 
+                          ext_power_heat_data_0x0202.chassis_power_buffer, 
+                          supercap.GetCurrentEnergy(), alphabet);
+
+    float input_limit = power_strategy.GetInputLimit(); // 基础上限功率
+    float input_energy = power_strategy.GetInputEnergy();   // 剩余能量
+
+    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(input_energy));   // 富足环
+    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(input_energy));     // 贫困环
+    // 能量环逻辑
+    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), input_limit, input_energy, alphabet[26], alphabet[27]);
+    float PowerMax = energy_ring.GetPowerMax(); // 最终上限功率
+
+    supercap.setInstruction(0); // 开启超电
+    supercap.setRatedPower(input_limit);    // 给超电设置裁判系统上限功率
+    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);  // 给超电设置剩余缓冲能量
 
     float I6020[4], I3508[4], I_other[4], V6020[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
@@ -394,7 +452,7 @@ void chassis_notfollow()
     }
     float pmax6020 = PowerMax*0.5f; // 6020电机先吃50%
     float pmax3508 = PowerMax*0.5f; // 3508电机吃50%
-    // if(pmax6020 > 50.0f)
+    // if(pmax6020 > 50.0f) 这个可能没什么用，主要是想给6020少一点功率，放着先
     // {
     //     pmax6020 = 50.0f;
     //     pmax3508 = PowerMax - pmax6020;
@@ -412,6 +470,8 @@ void chassis_notfollow()
     {
         chassis_output.out_string[i] = power6020.getCurrentCalculate(i) * 16384.0f/3.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
+        chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
 }
 
@@ -439,7 +499,7 @@ void chassis_follow()
         stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor6020.getAngleDeg(i+1));
         stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor6020.getVelocityRpm(i+1));
 
-        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRpm(i+1));
+        wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRads(i+1));
 
         chassis_output.out_string[i] = stringVelocity_pid[i].getOutput();
         //chassis_output.out_wheel[i] = wheel_pid[i].getOutput();
@@ -457,15 +517,30 @@ void chassis_follow()
     }
     
     // 功率控制
-    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(supercap.GetCurrentEnergy()));
-    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), ext_power_heat_data_0x0201.chassis_power_limit, supercap.GetCurrentEnergy(), alphabet[26]);
-    float PowerMax = energy_ring.GetPowerMax();
-    //float PowerMax = 60.0f;
-    supercap.setInstruction(0);
+    bool isSupercapOnline = supercap.isConnected();
+    bool isRefereeOnline = !RM_RefereeSystem::RM_RefereeSystemDir();
 
-    supercap.setRatedPower(ext_power_heat_data_0x0201.chassis_power_limit);
-    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);
+    supercap.setSupercapOnline(isSupercapOnline);
+    supercap.setRefereeOnline(isRefereeOnline);
+
+    // 更新功率策略
+    power_strategy.Update(isSupercapOnline, isRefereeOnline, 
+                          (float)ext_power_heat_data_0x0201.chassis_power_limit, 
+                          ext_power_heat_data_0x0202.chassis_power_buffer, 
+                          supercap.GetCurrentEnergy(), alphabet);
+
+    float input_limit = power_strategy.GetInputLimit(); // 基础上限功率
+    float input_energy = power_strategy.GetInputEnergy();   // 剩余能量
+
+    energy_pid[0].UpDate(sqrtf(energy_ring.GetAbundanceLine()), sqrtf(input_energy));   // 富足环
+    energy_pid[1].UpDate(sqrtf(energy_ring.GetPovertyLine()), sqrtf(input_energy));     // 贫困环
+    // 能量环逻辑
+    energy_ring.energyring(energy_pid[0].getOutput(), energy_pid[1].getOutput(), input_limit, input_energy, alphabet[26], alphabet[27]);
+    float PowerMax = energy_ring.GetPowerMax(); // 最终上限功率
+    
+    supercap.setInstruction(0); // 开启超电
+    supercap.setRatedPower(input_limit);    // 给超电设置裁判系统上限功率
+    supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);  // 给超电设置剩余缓冲能量
 
     float I6020[4], I3508[4], I_other[4], V6020[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
@@ -479,7 +554,7 @@ void chassis_follow()
     }
     float pmax6020 = PowerMax*0.5f; // 6020电机先吃50%
     float pmax3508 = PowerMax*0.5f; // 3508电机吃50%
-    // if(pmax6020 > 50.0f)
+    // if(pmax6020 > 50.0f) 这个可能没什么用，主要是想给6020少一点功率，放着先
     // {
     //     pmax6020 = 50.0f;
     //     pmax3508 = PowerMax - pmax6020;
@@ -497,6 +572,8 @@ void chassis_follow()
     {
         chassis_output.out_string[i] = power6020.getCurrentCalculate(i) * 16384.0f/3.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
+        chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
 }
 

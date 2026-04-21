@@ -43,7 +43,7 @@ static void motor_control()
 
     if(gimbal_fsm.Get_Now_State() == MANUAL)
     {
-        MotorJ4310.ctrl_Mit(0x01, 
+        MotorJ4310.ctrl_Mit(1, 
                            gimbal_target.target_pitch*3.1415926f/180.0f, 
                            gimbal_target.target_pitch_vel, 
                            pitch_manual_pid.getK(0), 
@@ -52,16 +52,22 @@ static void motor_control()
     }
     else if(gimbal_fsm.Get_Now_State() == VISION)
     {
-        MotorJ4310.ctrl_Mit(0x01, 
+        // MotorJ4310.ctrl_Mit(1, 
+        //                    gimbal_target.target_pitch*3.1415926f/180.0f, 
+        //                    0.0f, 
+        //                    pitch_vision_pid.getK(0), 
+        //                    pitch_vision_pid.getK(2), 
+        //                    gimbal_output.out_pitch);
+                MotorJ4310.ctrl_Mit(1, 
                            gimbal_target.target_pitch*3.1415926f/180.0f, 
                            0.0f, 
-                           pitch_vision_pid.getK(0), 
-                           pitch_vision_pid.getK(2), 
+                           0.0f, 
+                           0.0f, 
                            gimbal_output.out_pitch);
     }
     else
     {
-        MotorJ4310.ctrl_Mit(0x01, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        MotorJ4310.ctrl_Mit(1, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     }
     
     // 发射机构
@@ -86,7 +92,7 @@ void Motor(void const * argument)
     for(;;)
     {
         motor_control();  // 执行电机控制
-        osDelay(5);       // 延时1ms，控制频率1000Hz
+        osDelay(1);       // 延时1ms，控制频率1000Hz
     } 
 }
 

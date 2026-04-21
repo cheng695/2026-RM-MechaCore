@@ -263,7 +263,6 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   /* USER CODE BEGIN 6 */
   extern void USB_Receive_Callback(uint8_t *Buf, uint32_t Len);
   USB_Receive_Callback(Buf, *Len);
-
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
   return (USBD_OK);

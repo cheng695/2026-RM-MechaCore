@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2026 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -48,10 +48,11 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
-osThreadId COMMHandle;
-osThreadId IMUHandle;
-osThreadId CONTROLHandle;
 osThreadId CANHandle;
+osThreadId AlgHandle;
+osThreadId UARTHandle;
+osThreadId DispatchHandle;
+osThreadId UITaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -59,10 +60,11 @@ osThreadId CANHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
-extern void communication(void const * argument);
-extern void imu(void const * argument);
-extern void control(void const * argument);
-extern void motor(void const * argument);
+extern void Motor(void const * argument);
+extern void Control(void const * argument);
+extern void Serival(void const * argument);
+extern void Communication(void const * argument);
+extern void UI(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -113,21 +115,25 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of COMM */
-  osThreadDef(COMM, communication, osPriorityIdle, 0, 256);
-  COMMHandle = osThreadCreate(osThread(COMM), NULL);
-
-  /* definition and creation of IMU */
-  osThreadDef(IMU, imu, osPriorityIdle, 0, 128);
-  IMUHandle = osThreadCreate(osThread(IMU), NULL);
-
-  /* definition and creation of CONTROL */
-  osThreadDef(CONTROL, control, osPriorityIdle, 0, 1024);
-  CONTROLHandle = osThreadCreate(osThread(CONTROL), NULL);
-
   /* definition and creation of CAN */
-  osThreadDef(CAN, motor, osPriorityIdle, 0, 128);
+  osThreadDef(CAN, Motor, osPriorityIdle, 0, 128);
   CANHandle = osThreadCreate(osThread(CAN), NULL);
+
+  /* definition and creation of Alg */
+  osThreadDef(Alg, Control, osPriorityIdle, 0, 1024);
+  AlgHandle = osThreadCreate(osThread(Alg), NULL);
+
+  /* definition and creation of UART */
+  osThreadDef(UART, Serival, osPriorityIdle, 0, 256);
+  UARTHandle = osThreadCreate(osThread(UART), NULL);
+
+  /* definition and creation of Dispatch */
+  osThreadDef(Dispatch, Communication, osPriorityIdle, 0, 256);
+  DispatchHandle = osThreadCreate(osThread(Dispatch), NULL);
+
+  /* definition and creation of UITask */
+  osThreadDef(UITask, UI, osPriorityIdle, 0, 128);
+  UITaskHandle = osThreadCreate(osThread(UITask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

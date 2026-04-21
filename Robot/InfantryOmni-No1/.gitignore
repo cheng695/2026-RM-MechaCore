@@ -1,0 +1,61 @@
+# Keil MDK-ARM
+*.uvoptx
+*.uvguix.*
+*.uvgui.*
+*.uvprojx.bak
+*.o
+*.d
+*.crf
+*.htm
+*.dep
+*.lnp
+*.sct
+*.map
+*.elf
+*.hex
+*.axf
+*.bin
+Objects/
+Listings/
+DebugConfig/
+*.scvd
+JLinkLog.txt
+JLinkSettings.ini
+
+# EIDE
+.eide/log
+.eide.usr.ctx.json
+build/
+bin/
+obj/
+out/
+*.ept
+*.eide-template
+
+# VS Code
+.vscode/.browse.vc.db
+.vscode/c_cpp_properties.json
+.vscode/ipch/
+*.code-workspace
+
+# STM32CubeMX
+.mxproject
+Debug/
+Release/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# C/C++ build outputs
+*.a
+*.so
+*.dll
+*.exe
+*.out
+*.app

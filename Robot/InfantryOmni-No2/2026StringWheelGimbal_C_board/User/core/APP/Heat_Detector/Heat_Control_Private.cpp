@@ -72,6 +72,7 @@ void APP::Heat_Control_Private::CalorieDistribution()
     if (shot)
     {
         Now_Heat += 10.0f;        // 累加热量
+        bullet_count++;           // 累加发弹数量
     }
     
     Now_Heat -= static_cast<float>(Heat_CD) * DeltyT;
@@ -81,17 +82,17 @@ void APP::Heat_Control_Private::CalorieDistribution()
 
         float DeltaHeat = MaxHeat - Now_Heat; // 当前剩余热量
 
-        if (DeltaHeat > 0.7f * MaxHeat) // 如果没有超过限制缓冲区域，不做限制
+        if (DeltaHeat > 0.8f * MaxHeat) // 如果没有超过限制缓冲区域，不做限制
         {
             now_fire = target_fire; // 此时不做限制
         }
         else if (DeltaHeat >= 0.3f * MaxHeat &&
-                 DeltaHeat < 0.7f * MaxHeat) // 如果在缓冲区域内，没有超过停止阈值，做线性限制
+                 DeltaHeat < 0.8f * MaxHeat) // 如果在缓冲区域内，没有超过停止阈值，做线性限制
         {
             // 热量不足，进行插值计算
-            float heat_diff = 0.7f * MaxHeat - 0.3f * MaxHeat; // 缓冲区域的热量差 (终点-起点)
+            float heat_diff = 0.8f * MaxHeat - 0.3f * MaxHeat; // 缓冲区域的热量差 (终点-起点)
             float weight_target = (DeltaHeat - 0.3f * MaxHeat) / heat_diff; // 目标权重 (当前-起点)/(终点-起点)
-            float weight_heat_cd = (0.7f * MaxHeat - DeltaHeat) / heat_diff; // 散热权重 (终点-当前)/(终点-起点)
+            float weight_heat_cd = (0.8f * MaxHeat - DeltaHeat) / heat_diff; // 散热权重 (终点-当前)/(终点-起点)
 
             // 进行权重分配；
             now_fire = target_fire * weight_target + (Heat_CD / 10.0f) * weight_heat_cd;

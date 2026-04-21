@@ -47,6 +47,11 @@ namespace Alg::CalculationBase
                 float wheel_vx = 0.0f, wheel_vy = 0.0f, sumVw = 0.0f;
                 int validWheels = 0;
 
+                // 【核心修复】必须清零上一帧的累加结果！
+                ChassisVx = 0.0f;
+                ChassisVy = 0.0f;
+                ChassisVw = 0.0f;
+
                 for (int i = 0; i < 4; i++)
                 {
                     // 计算轮子在底盘坐标系中的速度分量
@@ -370,20 +375,13 @@ namespace Alg::CalculationBase
                     
                     tmp_velocity_modulus = sqrtf(tmp_velocity_x * tmp_velocity_x + tmp_velocity_y * tmp_velocity_y) / S;
 
-                    Motor_wheel[i] = /*GetSpeedGain()**/tmp_velocity_modulus * 60.0f / (2.0f * M_PI); // rad/s转RPM
+                    Motor_wheel[i] = tmp_velocity_modulus * 60.0f / (2.0f * M_PI); // rad/s转RPM
 
-                    // 根据速度的xy分量分别决定舵向电机角度
-                    // if (tmp_velocity_modulus == 0.0f)
-                    // {
-                    //     // 排除除零问题，保持当前角度， 后面是45度抱死
-                    //     //Motor_direction[i] = atan2f((R * cosf(Wheel_Azimuth[i])), (-R * sinf(Wheel_Azimuth[i]))) + Phase[i];
-                    //     Motor_direction[i] = current_steer_angles[i];//atan2f((R * cosf(Wheel_Azimuth[i])), (-R * sinf(Wheel_Azimuth[i]))) + Phase[i];
-                    // }
-                    if (tmp_velocity_modulus < 0.05f) // Use a small threshold
+                    if (tmp_velocity_modulus < 0.05f) // 使用一个小的阈值
                     {
-                        // Velociy is near zero, keep current angle to prevent swerving on startup
-                        Motor_direction[i] = current_steer_angles[i];
-                        Motor_wheel[i] = 0.0f; // Ensure wheel speed is zero
+                        // 排除除零问题，保持当前角度， 后面是45度抱死
+                        Motor_direction[i] = current_steer_angles[i];//atan2f((R * cosf(Wheel_Azimuth[i])), (-R * sinf(Wheel_Azimuth[i]))) + Phase[i];
+                        Motor_wheel[i] = 0.0f; 
                     }
                     else
                     {

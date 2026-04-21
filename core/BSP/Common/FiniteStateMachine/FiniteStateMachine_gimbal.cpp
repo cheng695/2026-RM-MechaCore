@@ -86,7 +86,20 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online)
     }
     else if (StateLeft == 1 && StateRight == 1)
     {
-        State_gimbal = VISION;
+        if (StateRight == 1) State_chassis = FOLLOW;         // 左中右上 → 跟随
+        else if (StateRight == 3)   // 左中右中 → 键鼠
+        {
+            if(!alphabet[16])    // q为真则跟随
+            {
+                State_chassis = FOLLOW;
+            }
+            else
+            {
+                State_chassis = NOTFOLLOW;
+            }
+        }
+        else if (StateRight == 2) State_chassis = NOTFOLLOW; // 左中右下 → 不跟随
+        else State_chassis = FOLLOW; // 默认
     }
     else if(StateLeft == 3 && StateRight == 3)
     {

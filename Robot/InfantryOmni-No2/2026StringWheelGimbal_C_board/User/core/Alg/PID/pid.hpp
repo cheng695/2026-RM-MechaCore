@@ -26,6 +26,8 @@ namespace ALG::PID
             float integral_limit_;                 // 积分限幅值，限制积分项的最大绝对值
 
             float integral_separation_threshold_;  // 积分分离阈值，误差大于该值时停止积分
+            float d_filtered_;                     // D项低通滤波后的值
+            float alpha_d_;                        // D项滤波系数(0~1, 越小越平滑)
 
 
 
@@ -39,6 +41,7 @@ namespace ALG::PID
             void setMax(float max);
             void setIntegralLimit(float integral_limit);
             void setIntegralSeparation(float threshold);
+            void setDAlpha(float alpha);
             float getOutput();
             float getError();
             float getK(int index);
@@ -53,6 +56,7 @@ namespace ALG::PID
         previous_error_ = 0.0f;
         output_ = 0.0f;
         error_ = 0.0f;
+        d_filtered_ = 0.0f;
         k_out_[0] = k_out_[1] = k_out_[2] = 0.0f;
     }
 
@@ -119,6 +123,15 @@ namespace ALG::PID
     inline void PID::setIntegralSeparation(float threshold)
     {
         integral_separation_threshold_ = threshold;
+    }
+
+    /**
+     * @brief 设置D项滤波系数
+     * @param alpha 滤波系数(0~1)，越小越平滑，默认0.3
+     */
+    inline void PID::setDAlpha(float alpha)
+    {
+        alpha_d_ = alpha;
     }
 
     /**

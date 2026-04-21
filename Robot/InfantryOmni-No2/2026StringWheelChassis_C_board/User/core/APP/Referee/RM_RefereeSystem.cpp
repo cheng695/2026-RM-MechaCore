@@ -1,8 +1,10 @@
 #include "RM_RefereeSystem.h"
 #include "../User/core/BSP/Common/StateWatch/state_watch.hpp"
 #include "memory"
-#include "string.h"
-#define RM_RefereeSystemHuart huart6
+#include <cstring>
+
+extern UART_HandleTypeDef huart1;
+#define RM_RefereeSystemHuart huart1
 using namespace RM_RefereeSystem;
 using namespace RM_RefereeSystemCRC;
 // 死亡时间
@@ -33,7 +35,8 @@ namespace RM_RefereeSystem
 // 初始化
 void RM_RefereeSystemInit()
 {
-    HAL_UART_Receive_IT(&RM_RefereeSystemHuart, &RM_RefereeSystemp8Data, sizeof(RM_RefereeSystemp8Data));
+    // 绝对不能在这里调用 HAL_UART_Receive_IT，否则会开启 RXNEIE 导致 DMA IDLE 中断失效并且疯狂触发 ORE
+    // HAL_UART_Receive_IT(&RM_RefereeSystemHuart, &RM_RefereeSystemp8Data, sizeof(RM_RefereeSystemp8Data));
 }
 // 设置颜色
 void RM_RefereeSystemSetColor(int color)
@@ -258,11 +261,27 @@ ext_client_custom_character_t RM_RefereeSystemSetStr(char *name, uint32_t layer,
     memcpy((void *)ext_client_custom_character.data, str, ext_client_custom_character.grapic_data_struct.end_angle);
     return ext_client_custom_character;
 }
+// 带超时保护的等待DMA发送完成（防止HAL库ORE导致gState永久BUSY_TX死锁）
+static void WaitTxReady()
+{
+    uint32_t start = HAL_GetTick();
+    while (RM_RefereeSystemHuart.gState != HAL_UART_STATE_READY)
+    {
+        if (HAL_GetTick() - start > 10) // 超时10ms
+        {
+            // 强制终止DMA TX并恢复状态机
+            HAL_DMA_Abort(RM_RefereeSystemHuart.hdmatx);
+            RM_RefereeSystemHuart.gState = HAL_UART_STATE_READY;
+            RM_RefereeSystemHuart.Lock = HAL_UNLOCKED;
+            break;
+        }
+    }
+}
+
 // 数据发送客户端绘制删除N个图层
 void RM_RefereeSystemDelete(const char operate, const char number)
 {
-    // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    WaitTxReady();
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -288,13 +307,12 @@ void RM_RefereeSystemDelete(const char operate, const char number)
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
     Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
-    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf)); // 统一使用DMA
+    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
 }
 // 数据发送客户端绘制一个图形
 void RM_RefereeSystemSendData1(const graphic_data_struct_t graphic_data_struct)
 {
-    // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    WaitTxReady();
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -318,13 +336,12 @@ void RM_RefereeSystemSendData1(const graphic_data_struct_t graphic_data_struct)
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
     Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
-    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf)); // 统一使用DMA
+    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
 }
 // 数据发送客户端绘制1,2,5,7个图形
 void RM_RefereeSystemSendDataN(const graphic_data_struct_t graphic_data_struct[], int size)
 {
-    // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    WaitTxReady();
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -380,13 +397,12 @@ void RM_RefereeSystemSendDataN(const graphic_data_struct_t graphic_data_struct[]
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
     Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
-    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf));
+    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
 }
 // 数据发送客户端绘制字符串
 void RM_RefereeSystemSendStr(const ext_client_custom_character_t ext_client_custom_character)
 {
-    // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    WaitTxReady();
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -414,7 +430,7 @@ void RM_RefereeSystemSendStr(const ext_client_custom_character_t ext_client_cust
     memcpy(tx_buf, &RM_RefereeSystemDataTemp, sizeof(RM_RefereeSystemDataTemp));
     Append_CRC8_Check_Sum(tx_buf, CRC8LEN);
     Append_CRC16_Check_Sum(tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
-    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, sizeof(tx_buf)); // 统一使用DMA
+    HAL_UART_Transmit_DMA(&RM_RefereeSystemHuart, tx_buf, CRC16LEN(RM_RefereeSystemDataTemp.data_length));
 }
 
 /*typedef __packed struct
@@ -430,8 +446,7 @@ uint8_t rrrdata[20] = {0xA5, 0X0A, 0X00, 0X00, 0XA9, 0X05, 0X03, 0X03, 0X00, 0X1
 map_robot_data_t map_robot_data;
 void RM_daohangtx(const map_robot_data_t map_robot_data)
 {
-    // 等待上一次发送完成
-    while(HAL_UART_GetState(&RM_RefereeSystemHuart) != HAL_UART_STATE_READY);
+    WaitTxReady();
 
     static uint8_t seq = 0;
     RM_RefereeSystemData_t RM_RefereeSystemDataTemp = {0};
@@ -484,7 +499,7 @@ void RM_RefereeSystemParseData(uint8_t *RM_pDatas, int size)
     RM_RefereeSystemData.seq = RM_pDatas[3];
     RM_RefereeSystemData.CRC8 = RM_pDatas[4];
     RM_RefereeSystemData.cmd_id = RM_pDatas[5] | RM_pDatas[6] << 8;
-    if (RM_RefereeSystemData.data_length > 50)
+    if (RM_RefereeSystemData.data_length > 113)
         return;
     for (uint16_t i = 0; i < RM_RefereeSystemData.data_length; i++)
     {

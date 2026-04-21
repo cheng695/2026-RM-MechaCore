@@ -94,13 +94,13 @@ public:
      * @param equipment_online 设备是否在线
      * @param Change 左键是否有松开过
      * @param time 单发超时阈值时间
-     * @param Vision 视觉给的的模式 0：停火，1：单发，2：连发
+     * @param VisionFire 视觉给的开火标志 1：开火，0：不开火
      * @param is_vision 视觉标志位是否真 是否右键加视觉标志位为真
      * @param is_shoot 单发时是否打了一发
      * @param is_jamming 是否检测到卡弹
      * @param alphabet 处理过的键盘输入字母是1还是0；数组的26，27分别是左键右键
      */
-    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool Change, float time, uint8_t Vision, bool is_vision, bool is_shoot, bool is_jamming, bool *alphabet);
+    void StateUpdate(uint8_t left, uint8_t right, bool equipment_online, bool Change, float time, bool VisionFire, bool is_vision, bool is_shoot, bool is_jamming, bool *alphabet);
 
     /**
      * @brief 定时更新函数（用于时间统计）

@@ -38,6 +38,7 @@ namespace APP
                 acceleration_start_time = 0;    // 加速开始时间初始化为0
                 last_target_speed = 0.0f;       // 上次目标速度初始化为0
                 shot = false;                   // 射击标志初始化为false
+                bullet_count = 0;               // 发弹数量初始化为0
                 
                 // 默认热量参数设置
                 MaxHeat = 40.0f;    // 最大热量设为40.0
@@ -158,6 +159,15 @@ namespace APP
                 return Now_Heat;
             }
             
+            /**
+             * @brief 获取已发弹数量
+             * @return uint32_t 返回已发射的弹丸总数
+             */
+            uint32_t GetBulletCount()
+            {
+                return bullet_count;
+            }
+            
         private:
             // === 配置参数 ===
             uint8_t WindowSize;         // 滑动窗口大小，用于存放电流数据
@@ -173,6 +183,7 @@ namespace APP
             // === 输出结果 ===
             bool shot;      // 射击标志位，true表示当前允许射击，false表示禁止射击
             float now_fire; // 当前实际射击频率，反映系统真实的发弹速率
+            uint32_t bullet_count; // 已发射弹丸总数
             
             // === 中间计算变量 ===
             float window[200];          // 滑动窗口数组，固定最大缓冲区大小为200，用于存储历史电流数据

@@ -69,22 +69,33 @@ core/
 - **房间（Alg）**：各种功能模块（PID、滤波器），可以随意组合
 - **装修（APP）**：最终呈现给用户的功能（功率控制）
 
-```
-┌─────────────────────────────────────────┐
-│              APP 应用层                  │  ← 你写的任务代码
-│         (功率控制、热量管理)              │
-├─────────────────────────────────────────┤
-│              Alg 算法层                  │  ← 调用这些算法
-│       (PID、ADRC、滤波器、运动学)         │
-├─────────────────────────────────────────┤
-│              BSP 板级支持包              │  ← 操作设备
-│         (电机、IMU、遥控器驱动)           │
-├─────────────────────────────────────────┤
-│              HAL 硬件抽象层              │  ← 底层通信
-│           (CAN、UART、DWT)              │
-├─────────────────────────────────────────┤
-│            STM32 HAL 库                 │  ← ST官方提供
-└─────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph UserCode [你的代码]
+        APP[APP 应用层]
+    end
+
+    subgraph Framework [框架层]
+        Alg[Alg 算法层]
+        BSP[BSP 板级支持包]
+        HAL[HAL 硬件抽象层]
+    end
+
+    subgraph Hardware [硬件/官方库]
+        STM32[STM32 HAL 库]
+    end
+
+    APP -->|调用| Alg
+    APP -->|调用| BSP
+    Alg -->|计算| APP
+    BSP -->|驱动| HAL
+    HAL -->|调用| STM32
+
+    style APP fill:#f8d7da,stroke:#dc3545
+    style Alg fill:#fff3cd,stroke:#ffc107
+    style BSP fill:#d4edda,stroke:#28a745
+    style HAL fill:#cce5ff,stroke:#007bff
+    style STM32 fill:#e2e3e5,stroke:#383d41
 ```
 
 ### 各层职责
@@ -100,16 +111,43 @@ core/
 
 ## 🚀 快速上手指南
 
-### 第一步：理解数据流
+### 0️⃣ 准备工作 (必读)
 
-以**底盘控制**为例，数据是这样流动的：
+在开始写代码之前，请确保你的电脑上已经安装了以下工具：
 
+- **IDE**: Keil MDK v5.30+ (推荐使用 AC6 编译器)
+- **配置工具**: STM32CubeMX v6.0+
+- **调试神器**: [VOFA+](https://www.vofa.plus/) (强烈推荐！用于查看 PID 波形和调试数据)
+- **串口助手**: 任意串口调试助手 (如 XCOM, Vofa+ 内置也行)
+
+### 1️⃣ 理解数据流
+
+以**底盘控制**为例，数据的流动过程如下：
+
+```mermaid
+graph LR
+    A[遥控器摇杆] -->|无线信号| B(接收机)
+    B -->|DBUS协议| C[RemoteControl模块]
+    C -->|解析数据| D[你的控制代码 APP]
+    D -->|运动学解算| E[ChassisCalculation模块]
+    E -->|目标转速| F[PID控制器]
+    G[电机编码器] -->|反馈转速| F
+    F -->|计算电流| H[Motor模块]
+    H -->|CAN协议| I[电调/电机]
+
+    style C fill:#d4edda,stroke:#28a745
+    style D fill:#f8d7da,stroke:#dc3545
+    style E fill:#fff3cd,stroke:#ffc107
+    style F fill:#cce5ff,stroke:#007bff
+    style H fill:#d4edda,stroke:#28a745
 ```
-遥控器摇杆 → 解析数据 → 计算底盘速度 → 逆运动学 → 电机速度 → PID → 电流值 → CAN发送
-    ↑           ↑           ↑            ↑          ↑       ↑         ↑
- RemoteControl  DT7     你的代码    ChassisCalc   Motor    PID       CAN
-   (BSP)       (BSP)     (APP)        (Alg)       (BSP)   (Alg)     (HAL)
-```
+
+**图解说明**：
+
+- 🟢 **绿色 (BSP)**: 负责怎么读数据、怎么发指令
+- 🔴 **红色 (APP)**: 你主要写的逻辑，决定机器人怎么动
+- 🟡 **黄色 (Alg)**: 帮你算数的数学工具
+- 🔵 **蓝色 (Alg)**: 负责把误差变成控制量的 PID
 
 ### 第二步：学习使用电机（最重要！）
 
@@ -214,24 +252,7 @@ void ControlLoop()
 
 建议按以下顺序学习：
 
-### 1️⃣ 先学 BSP 层（设备驱动）
-
-| 模块                                           | 说明      | 优先级        |
-| ---------------------------------------------- | --------- | ------------- |
-| [Motor](./BSP/Motor/README.md)                 | 电机驱动  | ⭐⭐⭐ 必学   |
-| [RemoteControl](./BSP/RemoteControl/README.md) | 遥控器    | ⭐⭐⭐ 必学   |
-| [IMU](./BSP/IMU/README.md)                     | IMU传感器 | ⭐⭐ 云台必学 |
-
-### 2️⃣ 再学 Alg 层（控制算法）
-
-| 模块                                                     | 说明       | 优先级        |
-| -------------------------------------------------------- | ---------- | ------------- |
-| [PID](./Alg/PID/README.md)                               | PID控制器  | ⭐⭐⭐ 必学   |
-| [Filter](./Alg/Filter/README.md)                         | 滤波器     | ⭐⭐ 信号处理 |
-| [ChassisCalculation](./Alg/ChassisCalculation/README.md) | 底盘运动学 | ⭐⭐ 底盘必学 |
-| [ADRC](./Alg/ADRC/README.md)                             | 自抗扰控制 | ⭐ 进阶       |
-
-### 3️⃣ 最后学 HAL 层（底层通信）
+### 1️⃣ 先学 HAL 层（底层通信）
 
 | 模块                             | 说明     | 优先级        |
 | -------------------------------- | -------- | ------------- |
@@ -240,9 +261,43 @@ void ControlLoop()
 | [DWT](./HAL/DWT/README.md)       | 计时器   | ⭐ 调试时用   |
 | [LOGGER](./HAL/LOGGER/README.md) | 日志     | ⭐⭐ 调试必用 |
 
+### 2️⃣ 再学 BSP 层（设备驱动）
+
+| 模块                                           | 说明      | 优先级        |
+| ---------------------------------------------- | --------- | ------------- |
+| [Motor](./BSP/Motor/README.md)                 | 电机驱动  | ⭐⭐⭐ 必学   |
+| [RemoteControl](./BSP/RemoteControl/README.md) | 遥控器    | ⭐⭐⭐ 必学   |
+| [IMU](./BSP/IMU/README.md)                     | IMU传感器 | ⭐⭐ 云台必学 |
+
+### 3️⃣ 最后学 Alg 层（控制算法）
+
+| 模块                                                     | 说明       | 优先级        |
+| -------------------------------------------------------- | ---------- | ------------- |
+| [PID](./Alg/PID/README.md)                               | PID控制器  | ⭐⭐⭐ 必学   |
+| [Filter](./Alg/Filter/README.md)                         | 滤波器     | ⭐⭐ 信号处理 |
+| [ChassisCalculation](./Alg/ChassisCalculation/README.md) | 底盘运动学 | ⭐⭐ 底盘必学 |
+| [ADRC](./Alg/ADRC/README.md)                             | 自抗扰控制 | ⭐ 进阶       |
+
 ---
 
-## 💡 常见问题
+## �️ 推荐调试技巧
+
+### 1. 使用 VOFA+ 查看波形
+
+PID 调不好的时候，不要瞎猜参数！使用 [VOFA+](https://www.vofa.plus/) 把 `目标值` 和 `实际值` 画出来。
+
+- **协议**: JustFloat
+- **接口**: 串口 (UART)
+
+### 2. LED 和 蜂鸣器 (最简单的调试)
+
+- **LED 闪烁**: 表示程序主循环在运行 (Heartbeat)
+- **长鸣**: 通常表示初始化失败或电机断连
+- **红灯常亮**: 可能进入了错误保护状态
+
+---
+
+## �💡 常见问题
 
 ### Q1: CAN 收到数据后怎么知道是哪个电机的？
 
@@ -264,11 +319,27 @@ if (!chassis_motor.isConnected(1, 0x201))
 
 ### Q4: PID 参数怎么调？
 
-1. 先把 Ki 和 Kd 设为 0
-2. 逐渐增大 Kp，直到系统开始振荡
-3. 把 Kp 减小到振荡值的 60%
-4. 逐渐增大 Ki，消除稳态误差
-5. 如果响应太慢或有超调，微调 Kd
+### Q4: PID 参数怎么调？
+
+PID 调参是一门"玄学"，不同系统差异很大，但通常遵循以下顺序：
+
+1. **确定 Kp (比例)**：
+   - 先把 `Ki` 和 `Kd` 设为 0。
+   - 逐渐增大 `Kp`，直到系统响应够快，且**接近目标但没有超调**。
+   - 此时通常会存在"稳态误差"（永远差一点点到目标）。
+
+2. **确定 Ki (积分)**：
+   - 逐渐增大 `Ki`，用于**消除稳态误差**，让系统最终能稳定在目标值。
+   - 注意：`Ki` 太大会导致低频振荡或大幅超调。
+
+3. **确定 Kd (微分)**：
+   - 如果系统有超调或震荡，可以适当增加 `Kd`。
+   - `Kd` 相当于"阻尼"或"刹车"，能抑制变化的趋势。
+
+**💡 经验之谈**：
+
+- **速度环**：通常是大 `Kp` + 适当 `Ki`，基本不用 `Kd` (因为噪音大)。
+- **角度/位置环**：通常是 `Kp` + `Kd` 为主，`Ki` 很小或者只在积分分离时用。
 
 ---
 
@@ -288,7 +359,7 @@ if (!chassis_motor.isConnected(1, 0x201))
 
 ## 📄 许可证
 
-USTC-RoboWalker © 2022-2026
+USTC-RCIA © 2026
 
 ---
 
@@ -296,5 +367,5 @@ USTC-RoboWalker © 2022-2026
 
 1. 先看对应模块的 README
 2. 在代码中搜索相关函数
-3. 使用 LOGGER 打印调试信息
-4. 询问学长或在群里提问
+3. 询问学长或在群里提问
+4. 对README和仓库代码有问题可以在Github里提出issue

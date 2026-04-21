@@ -52,6 +52,7 @@ osThreadId CANHandle;
 osThreadId AlgHandle;
 osThreadId UARTHandle;
 osThreadId DispatchHandle;
+osThreadId UITaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -63,6 +64,7 @@ extern void Motor(void const * argument);
 extern void Control(void const * argument);
 extern void Serival(void const * argument);
 extern void Communication(void const * argument);
+extern void UI(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -128,6 +130,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of Dispatch */
   osThreadDef(Dispatch, Communication, osPriorityIdle, 0, 256);
   DispatchHandle = osThreadCreate(osThread(Dispatch), NULL);
+
+  /* definition and creation of UITask */
+  osThreadDef(UITask, UI, osPriorityIdle, 0, 1024);
+  UITaskHandle = osThreadCreate(osThread(UITask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

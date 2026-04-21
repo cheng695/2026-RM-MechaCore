@@ -16,15 +16,21 @@ Launch_FSM launch_fsm;  // 发射机构
 /* 滤波器 ---------------------------------------------------------------------------------------------------*/
 TDFilter vision_filter_pitch(30.0f, 0.005f);    // 视觉pitch滤波器
 TDFilter vision_filter_yaw(40.0f, 0.005f);      // 视觉yaw滤波器
+TDFilter target_yaw(30.0f, 0.005f);     // 键鼠模式的yaw轴目标滤波
+TDFilter ude_filter_input(40.0f, 0.005f);   // UDE滤波器,用于获取差分信号
+TDFilter ude_filter_out(20.0f, 0.001f);   // UDE滤波器，用于最终输出滤波
 
 /* 前馈 -----------------------------------------------------------------------------------------------------*/
 Alg::Feedforward::Friction friction_forward(200.0f);        // 摩擦力前馈（普通模式 Yaw）
 Alg::Feedforward::Gravity gravity_forward(-0.85f, 115.0f);  // 重力前馈（所有模式 Pitch）
 Alg::Feedforward::Acceleration acc_forward(0.5f, 0.005f);   // 加速度前馈（普通模式 Yaw）
 Alg::Feedforward::Velocity velocity_forward(0.5f, 0.005f);  // 速度前馈（视觉模式 Yaw）
+Alg::Feedforward::GimbalFullCompensation gimbal_yaw(0.005f, 0.001f, 0.005369f, 0.032416f);  // k_J初始为0，控制周期1ms
+Alg::Feedforward::UDE ude_yaw(-0.39f, 6.6f);  // UDE前馈
 
 /* 控制器 ---------------------------------------------------------------------------------------------------*/
-ALG::PID::PID yaw_pid(400.0f, 10.0f, 0.0f, 16384.0f, 30.0f, 3.0f);  // yaw轴速控pid（普通模式）
+//ALG::PID::PID yaw_pid(100.0f, 0.0f, 0.0f, 16384.0f, 30.0f, 3.0f);  // yaw轴速控pid（普通模式）
+ALG::PID::PID yaw_pid(500.0f, 0.0f, 1200.0f, 16384.0f, 30.0f, 3.0f);  // yaw轴速控pid（普通模式）
 ALG::PID::PID yaw_angle_pid(2.0f, 0.0f, 7.5f, 16384.0f, 0.0f, 0.0f);        // yaw轴角速度pid（视觉模式）
 ALG::PID::PID yaw_velocity_pid(400.0f, 0.0f, 0.0f, 16384.0f, 0.0f, 0.0f);   // yaw轴角速度pid（视觉模式）
 
@@ -64,11 +70,11 @@ Output_launch launch_output;    // 发射机构输出
 bool check_online()
 {
     bool isconnected = true;
-
-    if(!Motor6020.isConnected(1, 6) || !MotorJ4310.isConnected(1, 4) || !Motor3508.isConnected(1, 2) || !Motor3508.isConnected(1, 3) || !Motor3508.isConnected(1, 1))
-    {
-        isconnected = false;
-    }
+    // 上场要注释掉。不然发射机构掉电云台会失能，过不了检录。
+    // if(!Motor6020.isConnected(1, 6) || !MotorJ4310.isConnected(1, 4) || !Motor3508.isConnected(1, 2) || !Motor3508.isConnected(1, 3) || !Motor3508.isConnected(1, 1))
+    // {
+    //     isconnected = false;
+    // }
 
     if(!DT7.isConnected() || !HI12.isConnected())
     {
@@ -148,21 +154,39 @@ void SetTarget()
         case MANUAL:    // 普通模式
             if(DT7.get_s1() == 3 && DT7.get_s2() == 3)
             {
-                gimbal_target.target_yaw = 0.4f * -DT7.get_mouseX();  // 速度rpm
-                gimbal_target.target_pitch -= 0.003f * DT7.get_mouseY();        // 角度deg
-                gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -140.0f, -110.0f);  // 角度deg
+                gimbal_target.target_yaw = target_yaw.filter(0.3f * -DT7.get_mouseX());
+                
+                // 获取鼠标原始值
+                float mouse_y_input = DT7.get_mouseY();
+                // 异常脉冲/脏数据过滤 如果一帧的鼠标移动量超过 200 那绝对是解析错位或者是乱码脏数据，直接丢弃这一帧
+                if (fabsf(mouse_y_input) > 200.0f) 
+                {
+                    mouse_y_input = 0.0f; 
+                }
+                // 去除零漂
+                if (fabsf(mouse_y_input) < 1.0f) 
+                {
+                    mouse_y_input = 0.0f;
+                }
+                // 灵敏度
+                float pitch_sensitivity = 0.004f; 
+                float angle_delta = mouse_y_input * pitch_sensitivity;
+
+                gimbal_target.target_pitch -= angle_delta;
+                gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -20.0f, 20.0f);
             }
-            else 
+            else
             {
                 gimbal_target.target_yaw = 50.0f * -DT7.get_right_x();  // 速度rpm
+                //gimbal_target.target_yaw = SinExpected(0.001f, 20, 90, 4);
                 gimbal_target.target_pitch -= DT7.get_right_y();        // 角度deg
-                gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -140.0f, -110.0f);  // 角度deg
+                gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -20.0f, 20.0f);  // 角度deg
             }
             break;
         case VISION:    // 视觉模式
-            gimbal_target.target_yaw = vision_filter_yaw.filter(vision.getTarYaw());        // 角度deg TD滤波
-            gimbal_target.target_pitch = vision_filter_pitch.filter(vision.getTarPitch());  // 角度deg TD滤波
-            gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -140.0f, -110.0f);  // 角度deg
+            gimbal_target.target_yaw = -vision.getTarYaw();        // 角度deg TD滤波
+            gimbal_target.target_pitch = vision.getTarPitch();  // 角度deg TD滤波
+            gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -20.0f, 20.0f);  // 角度deg
             break;
         default:
             gimbal_target.target_yaw = 0.0f;
@@ -196,7 +220,7 @@ void SetTarget()
                 {
                     if(heat_control.GetNowFire() > 0) 
                     {
-                        gimbal_target.target_dial -= 43.0f*36.0f; // 只减一次
+                        gimbal_target.target_dial -= 40.0f*36.0f; // 只减一次
                     }
                 }
                 last_mouse_left = alphabet[26];
@@ -217,13 +241,12 @@ void SetTarget()
                 {
                     if(heat_control.GetNowFire() > 0) 
                     {
-                        gimbal_target.target_dial -= 43.0f*36.0f; // 只减一次
+                        gimbal_target.target_dial -= 40.0f*36.0f; // 只减一次
                     }
                     else
                     {
                         gimbal_target.target_dial += 0.0f;  
                     }
-                    gimbal_target.target_dial -= 43.0f*36.0f; // 只减一次
                 }
                 last_scroll_active = current_scroll_active;
 
@@ -241,12 +264,14 @@ void SetTarget()
                 gimbal_target.target_surgewheel[0] = 6000.0f;
                 gimbal_target.target_surgewheel[1] = -6000.0f;
                 gimbal_target.target_dial -= DT7.get_mouseLeft() * hz_to_angle(heat_control.GetNowFire());
+                //gimbal_target.target_dial -= DT7.get_mouseLeft() * hz_to_angle(13.0f);
             }
             else
             {
                 gimbal_target.target_surgewheel[0] = 6000.0f;
                 gimbal_target.target_surgewheel[1] = -6000.0f;
                 gimbal_target.target_dial -= DT7.get_scroll_() * hz_to_angle(heat_control.GetNowFire());
+                //gimbal_target.target_dial -= DT7.get_scroll_() * hz_to_angle(13.0f);
             }
             break;
         case LAUNCH_JAM:
@@ -284,7 +309,7 @@ void gimbal_stop()
     // 失能4310
     if(MotorJ4310.getIsenable())
     {
-        MotorJ4310.Off(0x01, BSP::Motor::DM::MIT);
+        MotorJ4310.Off(1, BSP::Motor::DM::MIT);
         MotorJ4310.setIsenable(false);
     }
     // 重置控制器
@@ -303,23 +328,49 @@ void gimbal_stop()
  */
 void gimbal_manual()
 {
-    // 4310使能
-    if(!MotorJ4310.getIsenable())
+    // 4310使能：如果达妙电机硬件反馈状态不是1（使能态），就一直发唤醒帧
+    if(MotorJ4310.GetErr(1) != 1)
     {
-        MotorJ4310.On(0x01, BSP::Motor::DM::MIT);
+        MotorJ4310.On(1, BSP::Motor::DM::MIT);
         MotorJ4310.setIsenable(true);
     }
 
     // Yaw 速控PID
     yaw_pid.UpDate(gimbal_target.target_yaw, HI12.GetGyroRPM(2));
-    // 摩擦力前馈补偿
-    friction_forward.FrictionFeedforward(gimbal_target.target_yaw);
-    float friction_comp = friction_forward.getFeedforward();
-    // 加速度前馈补偿
-    acc_forward.AccelerationFeedforward(gimbal_target.target_yaw);
-    float acc_comp = acc_forward.getFeedforward();
-    // Yaw 输出
-    gimbal_output.out_yaw = yaw_pid.getOutput() + friction_comp + acc_comp;
+    // 模型前馈
+    gimbal_yaw.MomentOfInertiaTuning(HI12.GetGyroRPM(2), gimbal_target.target_yaw);
+    // 在有期望值才加模型前馈，避免零飘，gimbal_yaw.getFriction() 输出单位是Nm，需要转化成控制电流
+    float model_comp = (fabsf(gimbal_target.target_yaw) > 1.0f) ? 0.3f * gimbal_yaw.getFriction() / 0.741f * (16384.0f / 3.0f) : 0.0f;
+    
+    // UDE估计器
+    static float last_total_out_yaw = 0.0f; // 由于因果律，需获取上一次的输出
+    float ude_input = last_total_out_yaw * (3.0f / 16384.0f); // 将控制电流转化为真是电流
+    ude_filter_input.filter(HI12.GetGyroRad(2));    // 获取X_dot，使用TD获取微分
+    ude_yaw.UDE_Update(ude_input, ude_filter_input.getDerivative());    // UDE计算
+    float ude_output = (ude_filter_out.filter(ude_yaw.getOutput())) * 16384.0f/3.0f;    // UDE输出转化为控制电流
+    // 使用线性衰减来限制UDE的补偿，防止云台在急速移动时UDE补偿过大
+    float speed_error = fabsf(gimbal_target.target_yaw - HI12.GetGyroRPM(2)); // 计算期望速度与实际速度的误差
+    float k_ude = 1.0f; // 系数
+    if(speed_error > 20.0f) 
+    {
+        k_ude = 1.0f - (speed_error - 20.0f) / 80.0f; // 线性衰减
+    }
+    k_ude = std::clamp(k_ude, 0.0f, 1.0f); // 保证系数在0到1之间
+    // 只采信安全平缓状态下的UDE补偿
+    float ude_output_safe = ude_output * k_ude;
+    // 小陀螺才开启UDE补偿
+    bool scroll = (gimbal_fsm.Get_Now_State() == MANUAL) && (launch_fsm.Get_Now_State() == LAUNCH_AUTO || launch_fsm.Get_Now_State() == LAUNCH_ONLY || launch_fsm.Get_Now_State() == LAUNCH_JAM);
+    if((!scroll && (DT7.get_scroll_() != 0.0f)) || alphabet[23])
+    {
+        gimbal_output.out_yaw = yaw_pid.getOutput() + model_comp - ude_output_safe;
+    }
+    else
+    {
+        gimbal_output.out_yaw = yaw_pid.getOutput() + model_comp;
+    }
+    // Yaw 输出，进行限幅
+    gimbal_output.out_yaw = std::clamp(gimbal_output.out_yaw, -16384.0f, 16384.0f);
+    last_total_out_yaw = gimbal_output.out_yaw; // 更新上一时刻的yaw输出，UDE用
     
     // Pitch 重力补偿； Pitch控制用内置pid
     gravity_forward.GravityFeedforward(MotorJ4310.getAngleDeg(1));
@@ -336,14 +387,21 @@ void gimbal_manual()
 void gimbal_vision()
 {
     // 4310使能
-    if(!MotorJ4310.getIsenable())
+    if(MotorJ4310.GetErr(1) != 1)
     {
-        MotorJ4310.On(0x01, BSP::Motor::DM::MIT);
+        MotorJ4310.On(1, BSP::Motor::DM::MIT);
         MotorJ4310.setIsenable(true);
     }
 
     // Yaw 角速度PID
-    yaw_angle_pid.UpDate(gimbal_target.target_yaw, HI12.GetAddYaw());
+    float current_yaw = HI12.GetAngle(2);
+    float err_yaw = gimbal_target.target_yaw - current_yaw;
+    
+    // 过零处理，保证走最短路径 (适用于[-180, 180]的突变)
+    while (err_yaw > 180.0f)  err_yaw -= 360.0f;
+    while (err_yaw < -180.0f) err_yaw += 360.0f;
+    
+    yaw_angle_pid.UpDate(current_yaw + err_yaw, current_yaw);
     yaw_velocity_pid.UpDate(yaw_angle_pid.getOutput(), HI12.GetGyroRPM(2));
     // 速度前馈补偿
     velocity_forward.VelocityFeedforward(gimbal_target.target_yaw);
@@ -367,7 +425,20 @@ void gimbal_vision()
  */
 void main_loop_gimbal(uint8_t left_sw, uint8_t right_sw, bool is_online) 
 {   
+    static int last_gimbal_state = -1;
     gimbal_fsm.StateUpdate(left_sw, right_sw, is_online, vision.getVisionFlag());
+    
+    // 状态机发生切换
+    if (gimbal_fsm.Get_Now_State() != last_gimbal_state)
+    {
+        // 跨越模式时清空陈旧的积分（I）和微分（D）误差，防止参数跳变导致“疯头”
+        yaw_pid.reset();
+        yaw_angle_pid.reset();
+        yaw_velocity_pid.reset();
+        
+        last_gimbal_state = gimbal_fsm.Get_Now_State();
+    }
+
     SetTarget();
 
     switch(gimbal_fsm.Get_Now_State()) 
@@ -551,12 +622,19 @@ void Control(void const * argument)
         // 更新蜂鸣器管理器，处理队列中的响铃请求
         BSP::WATCH_STATE::BuzzerManagerSimple::getInstance().update();
         
+        // 达妙电机（J4310）掉电离线时，自动清除软件使能标志位。
+        // 这样在 24V 恢复供电复活时，gimbal_manual() 就会重新发送 On() 唤醒电机。
+        // if (!MotorJ4310.isConnected(1, 4))
+        // {
+        //     MotorJ4310.setIsenable(false);
+        // }
+        
         // 1kHz 采样 (捕捉信号)
         
         // 热量控制
         float current[2] = {Motor3508.getCurrent(2), Motor3508.getCurrent(3)};
         float velocity[2] = {Motor3508.getVelocityRpm(2), Motor3508.getVelocityRpm(3)}; 
-        heat_control.HeatControl(gimbal_target.target_surgewheel[0], current, velocity, 120.0f, 40.0f, 0.001f, 10.0f);
+        heat_control.HeatControl(gimbal_target.target_surgewheel[0], current, velocity, Cboard.GetHeatLimit(), Cboard.GetHeatCool(), 0.001f, 15.0f);
 
         // 1000Hz转200Hz
         control_tick++;

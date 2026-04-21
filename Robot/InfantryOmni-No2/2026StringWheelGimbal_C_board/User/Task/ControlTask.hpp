@@ -55,5 +55,9 @@ extern Launch_FSM launch_fsm;
 extern Gimbal_FSM gimbal_fsm;
 
 extern APP::Heat_Control_Private heat_control;
+extern Alg::Feedforward::GimbalFullCompensation gimbal_yaw;
+
+extern Alg::Feedforward::UDE ude_yaw;
+extern ALG::PID::PID yaw_pid;
 
 #endif
