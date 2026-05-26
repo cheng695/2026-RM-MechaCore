@@ -1,4 +1,5 @@
 #include "ControlTask.hpp"
+#include "StringWheel.hpp"
 
 /**
  * @brief 初始化
@@ -18,20 +19,21 @@ float phase_offset[4] = {1.84614585f, 4.4715335f, 6.06382605f, 4.44547635f}; // 
 Alg::CalculationBase::String_IK string_ik(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学逆解算
 Alg::CalculationBase::String_FK string_fk(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学正解算
 Alg::CalculationBase::String_ID string_id(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 动力学逆解算
+Alg::CalculationBase::String_FK string_fk_odometer(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学正解算（里程计）
 
 /* 控制器 --------------------------------------------------------------------------------------------------*/
 // 用于运动学逆解，舵向直接输出，轮向作为补偿输出
 ALG::PID::PID stringAngle_pid[4] = {
-    ALG::PID::PID(8.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 5.0f),       // 舵向角速度pid 1号舵
-    ALG::PID::PID(9.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 10.0f),      // 舵向角速度pid 2号舵
-    ALG::PID::PID(9.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 10.0f),      // 舵向角速度pid 3号舵
-    ALG::PID::PID(8.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 20.0f)       // 舵向角速度pid 4号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 320.0f, 2500.0f, 5.0f),       // 舵向角速度pid 1号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 320.0f, 2500.0f, 10.0f),      // 舵向角速度pid 2号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 320.0f, 2500.0f, 10.0f),      // 舵向角速度pid 3号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 320.0f, 2500.0f, 20.0f)       // 舵向角速度pid 4号舵
 };  
 ALG::PID::PID stringVelocity_pid[4] = {
-    ALG::PID::PID(80.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),    // 舵向角速度pid 1号舵
-    ALG::PID::PID(80.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),    // 舵向角速度pid 2号舵
-    ALG::PID::PID(80.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),    // 舵向角速度pid 3号舵
-    ALG::PID::PID(70.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f)     // 舵向角速度pid 4号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f),    // 舵向角速度pid 1号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f),    // 舵向角速度pid 2号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f),    // 舵向角速度pid 3号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f)     // 舵向角速度pid 4号舵
 }; 
 ALG::PID::PID wheel_pid[4] = {
     ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 1号轮
@@ -40,14 +42,14 @@ ALG::PID::PID wheel_pid[4] = {
     ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 150.0f)      // 轮向速度pid 4号轮
 };  
 
-// 用于运动学正解后计算输出为力矩
+// 用于运动学正解后计算输出为力
 ALG::PID::PID translational_pid[2] = {
-    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),   // X方向牵引力
-    ALG::PID::PID(300.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f)    // Y方向牵引力
+    ALG::PID::PID(300.0f, 0.0f, 0.0f, 200.0f, 2500.0f, 100.0f),   // X方向牵引力
+    ALG::PID::PID(300.0f, 0.0f, 0.0f, 200.0f, 2500.0f, 100.0f)    // Y方向牵引力
 };
-ALG::PID::PID rotational_pid(200.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f);    // Z轴旋转力矩
+ALG::PID::PID rotational_pid(200.0f, 0.0f, 0.0f, 80.0f, 2500.0f, 100.0f);    // Z轴旋转力矩
 
-ALG::PID::PID follow_pid(8.0f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f);  // 速度环pid 用于底盘跟随
+ALG::PID::PID follow_pid(8.0f, 0.0f, 0.0f, 15.0f, 2500.0f, 100.0f);  // 速度环pid 用于底盘跟随
 
 ALG::PID::PID energy_pid[2] = {
     ALG::PID::PID(15.0f, 0.0f, 10.0f, 16384.0f, 0.0f, 0.0f),     // 富足环
@@ -56,11 +58,11 @@ ALG::PID::PID energy_pid[2] = {
 
 /* 功率控制 -------------------------------------------------------------------------------------------------*/
 ALG::PowerControl::PowerControl<4> power3508;   // 3508功率控制算法
-ALG::PowerControl::PowerControl<4> power6020;   // 6020功率控制算法
+ALG::PowerControl::PowerControl<4> power4005;   // 4005功率控制算法
 ALG::PowerControl::EnergyRing energy_ring(1288.5f, 250.0f, 48.0f);  // 能量环
 ALG::PowerControl::PowerControlStrategy power_strategy(1288.5f); // 上限功率和剩余能量逻辑处理
 float coefficients3508[6] = { 2.144951, -0.002828, 0.000025, 0.016525,  0.115369, 0.000015 };   // 3508
-float coefficients6020[6] = { 1.586024,  0.013252, 0.000229, 0.530772,  7.509297, 0.000320 };   // 6020
+float coefficients4005[6] = { 1.586024,  0.013252, 0.000229, 0.530772,  7.509297, 0.000320 };   // 4005
 
 
 
@@ -90,7 +92,7 @@ bool check_online()
     //上场要注释掉，蜂鸣器使用了队列存在滞后，不注释掉的话场上复活开始的几秒轮子会疯
     // for(int i = 0; i < 4; i++)
     // {
-    //     if(!Motor3508.isConnected(i+1, i+1) || !Motor6020.isConnected(i+1, i+5))
+    //     if(!Motor3508.isConnected(i+1, i+1) || !Motor4005.isConnected(i+1, i+5))
     //     {
     //         isconnected = false;
     //     }
@@ -383,9 +385,9 @@ void chassis_notfollow()
     // 设置当前舵向角
     for(int i = 0; i < 4; i++)
     {
-        string_ik.Set_current_steer_angles(Motor6020.getAngleRad(i+1), i);
-        string_fk.Set_current_steer_angles(Motor6020.getAngleRad(i+1), i);
-        string_id.Set_current_steer_angles(Motor6020.getAngleRad(i+1), i);
+        string_ik.Set_current_steer_angles(Motor4005.getAngleRad(i+1), i);
+        string_fk.Set_current_steer_angles(Motor4005.getAngleRad(i+1), i);
+        string_id.Set_current_steer_angles(Motor4005.getAngleRad(i+1), i);
     }
     // 正运动学解算当前底盘整体速度；逆运动学解算电机转速
     string_fk.StringForKinematics(Motor3508.getVelocityRads(1), Motor3508.getVelocityRads(2), Motor3508.getVelocityRads(3), Motor3508.getVelocityRads(4));
@@ -394,8 +396,8 @@ void chassis_notfollow()
     for(int i = 0; i < 4; i++)
     {
         // 逆运动学相关 通过PID算舵向输出和轮向补偿
-        stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor6020.getAngleDeg(i+1));
-        stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor6020.getVelocityRpm(i+1));
+        stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor4005.getAngleDeg(i+1));
+        stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor4005.getVelocityRpm(i+1));
 
         wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRads(i+1));
 
@@ -440,37 +442,37 @@ void chassis_notfollow()
     supercap.setRatedPower(input_limit);    // 给超电设置裁判系统上限功率
     supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);  // 给超电设置剩余缓冲能量
 
-    float I6020[4], I3508[4], I_other[4], V6020[4], V3508[4];   // 必要参数
+    float I4005[4], I3508[4], I_other[4], V4005[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
     {
-        I6020[i] = chassis_output.out_string[i] * 3.0f/16384.0f;    // 6020电机电流（解算欲输出电流）
-        V6020[i] = Motor6020.getVelocityRads(i+1);                  // 6020电机速度（当前速度）
+        I4005[i] = chassis_output.out_string[i] * 4.0f/2048.0f;    // 4005电机电流（解算欲输出电流）
+        V4005[i] = Motor4005.getVelocityRads(i+1);              // 4005电机速度（当前速度）
 
         I3508[i] = chassis_output.out_wheel[i] * 20.0f/16384.0f;    // 3508电机电流（解算欲输出电流）
         I_other[i] = 0.0f;                                          // 3508电机电流（非解算欲输出电流）
         V3508[i] = Motor3508.getVelocityRads(i+1)*(268.0f / 17.0f); // 3508电机速度（当前速度）
     }
-    float pmax6020 = PowerMax*0.5f; // 6020电机先吃50%
+    float pmax4005 = PowerMax*0.5f; // 4005电机先吃50%
     float pmax3508 = PowerMax*0.5f; // 3508电机吃50%
-    // if(pmax6020 > 50.0f) 这个可能没什么用，主要是想给6020少一点功率，放着先
+    // if(pmax4005 > 50.0f) 这个可能没什么用，主要是想给4005少一点功率，放着先
     // {
-    //     pmax6020 = 50.0f;
-    //     pmax3508 = PowerMax - pmax6020;
+    //     pmax4005 = 50.0f;
+    //     pmax3508 = PowerMax - pmax4005;
     // }
-    power6020.AttenuatedPower(I6020, V6020, coefficients6020, 0.0f, pmax6020);  // 6020电机功率控制（衰减功率法）
-    float PowerTotal_6020 = power6020.getPowerTotal();  // 6020电机总功率
-    if(PowerTotal_6020 < pmax6020)  // 6020电机没吃完50%
+    power4005.AttenuatedPower(I4005, V4005, coefficients4005, 0.0f, pmax4005);  // 4005电机功率控制（衰减功率法）
+    float PowerTotal_4005 = power4005.getPowerTotal();  // 4005电机总功率
+    if(PowerTotal_4005 < pmax4005)  // 4005电机没吃完50%
     {
-        pmax3508 = PowerMax - PowerTotal_6020;  // 3508电机吃剩下的全部
+        pmax3508 = PowerMax - PowerTotal_4005;  // 3508电机吃剩下的全部
     }
     power3508.DecayingCurrent(I3508, V3508, coefficients3508, I_other, 0.0f/*(-2.144951*3.0f)*/, pmax3508); // 3508电机功率控制（衰减电流法）
 
     // 底盘输出
     for(int i = 0; i < 4; i++)
     {
-        chassis_output.out_string[i] = power6020.getCurrentCalculate(i) * 16384.0f/3.0f;
+        chassis_output.out_string[i] = power4005.getCurrentCalculate(i) * 2048.0f/4.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
-        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -2048.0f, 2048.0f);
         chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
 }
@@ -485,9 +487,9 @@ void chassis_follow()
     // 设置当前舵向角
     for(int i = 0; i < 4; i++)
     {
-        string_ik.Set_current_steer_angles(Motor6020.getAngleRad(i+1), i);
-        string_fk.Set_current_steer_angles(Motor6020.getAngleRad(i+1), i);
-        string_id.Set_current_steer_angles(Motor6020.getAngleRad(i+1), i);
+        string_ik.Set_current_steer_angles(Motor4005.getAngleRad(i+1), i);
+        string_fk.Set_current_steer_angles(Motor4005.getAngleRad(i+1), i);
+        string_id.Set_current_steer_angles(Motor4005.getAngleRad(i+1), i);
     }
     // 正运动学解算当前底盘整体速度；逆运动学解算电机转速
     string_fk.StringForKinematics(Motor3508.getVelocityRads(1), Motor3508.getVelocityRads(2), Motor3508.getVelocityRads(3), Motor3508.getVelocityRads(4));
@@ -496,8 +498,8 @@ void chassis_follow()
     for(int i = 0; i < 4; i++)
     {
         // 逆运动学相关 通过PID算舵向输出和轮向补偿
-        stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor6020.getAngleDeg(i+1));
-        stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor6020.getVelocityRpm(i+1));
+        stringAngle_pid[i].UpDate(string_ik.GetMotor_direction(i)*57.3f, Motor4005.getAngleDeg(i+1));
+        stringVelocity_pid[i].UpDate(stringAngle_pid[i].getOutput(), Motor4005.getVelocityRpm(i+1));
 
         wheel_pid[i].UpDate(string_ik.GetMotor_wheel(i), Motor3508.getVelocityRads(i+1));
 
@@ -542,35 +544,35 @@ void chassis_follow()
     supercap.setRatedPower(input_limit);    // 给超电设置裁判系统上限功率
     supercap.setBufferEnergy(ext_power_heat_data_0x0202.chassis_power_buffer);  // 给超电设置剩余缓冲能量
 
-    float I6020[4], I3508[4], I_other[4], V6020[4], V3508[4];   // 必要参数
+    float I4005[4], I3508[4], I_other[4], V4005[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
     {
-        I6020[i] = chassis_output.out_string[i] * 3.0f/16384.0f;    // 6020电机电流（解算欲输出电流）
-        V6020[i] = Motor6020.getVelocityRads(i+1);                  // 6020电机速度（当前速度）
+        I4005[i] = chassis_output.out_string[i] * 4.0f/2048.0f;    // 4005电机电流（解算欲输出电流）
+        V4005[i] = Motor4005.getVelocityRads(i+1);                  // 4005电机速度（当前速度）
 
         I3508[i] = chassis_output.out_wheel[i] * 20.0f/16384.0f;    // 3508电机电流（解算欲输出电流）
         I_other[i] = 0.0f;                                          // 3508电机电流（非解算欲输出电流）
         V3508[i] = Motor3508.getVelocityRads(i+1)*(268.0f / 17.0f); // 3508电机速度（当前速度）
     }
-    float pmax6020 = PowerMax*0.5f; // 6020电机先吃50%
+    float pmax4005 = PowerMax*0.5f; // 4005电机先吃50%
     float pmax3508 = PowerMax*0.5f; // 3508电机吃50%
-    // if(pmax6020 > 50.0f) 这个可能没什么用，主要是想给6020少一点功率，放着先
+    // if(pmax4005 > 50.0f) 这个可能没什么用，主要是想给4005少一点功率，放着先
     // {
-    //     pmax6020 = 50.0f;
-    //     pmax3508 = PowerMax - pmax6020;
+    //     pmax4005 = 50.0f;
+    //     pmax3508 = PowerMax - pmax4005;
     // }
-    power6020.AttenuatedPower(I6020, V6020, coefficients6020, 0.0f, pmax6020);  // 6020电机功率控制（衰减功率法）
-    float PowerTotal_6020 = power6020.getPowerTotal();  // 6020电机总功率
-    if(PowerTotal_6020 < pmax6020)  // 6020电机没吃完50%
+    power4005.AttenuatedPower(I4005, V4005, coefficients4005, 0.0f, pmax4005);  // 4005电机功率控制（衰减功率法）
+    float PowerTotal_4005 = power4005.getPowerTotal();  // 4005电机总功率
+    if(PowerTotal_4005 < pmax4005)  // 4005电机没吃完50%
     {
-        pmax3508 = PowerMax - PowerTotal_6020;  // 3508电机吃剩下的全部
+        pmax3508 = PowerMax - PowerTotal_4005;  // 3508电机吃剩下的全部
     }
     power3508.DecayingCurrent(I3508, V3508, coefficients3508, I_other, 0.0f/*(-2.144951*3.0f)*/, pmax3508); // 3508电机功率控制（衰减电流法）
 
     // 底盘输出
     for(int i = 0; i < 4; i++)
     {
-        chassis_output.out_string[i] = power6020.getCurrentCalculate(i) * 16384.0f/3.0f;
+        chassis_output.out_string[i] = power4005.getCurrentCalculate(i) * 2048.0f/4.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
         chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
         chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);

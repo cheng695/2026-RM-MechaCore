@@ -28,7 +28,7 @@ typedef struct
 
 
 extern BSP::Motor::Dji::GM3508<4> Motor3508;
-extern BSP::Motor::Dji::GM6020<4> Motor6020;
+extern BSP::Motor::LK::LK4005<4> Motor4005;
 
 extern BSP::IMU::HI12_float HI12;
 extern BSP::REMOTE_CONTROL::RemoteController DT7;
@@ -42,7 +42,7 @@ extern float motor_wheel[4];
 extern Alg::CalculationBase::String_FK string_fk;
 extern Alg::Utility::SlopePlanning string_target[2];
 
-extern ALG::PowerControl::PowerControl<4> power6020;
+extern ALG::PowerControl::PowerControl<4> power4005;
 extern ALG::PowerControl::EnergyRing energy_ring;
 
 #endif

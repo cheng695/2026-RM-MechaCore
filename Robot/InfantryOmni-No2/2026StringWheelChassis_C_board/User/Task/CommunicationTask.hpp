@@ -11,8 +11,33 @@
 #include <cstring>
 #include "../User/core/APP/Referee/RM_RefereeSystem.h"
 
-// 板间通讯接收缓冲区声明
-extern uint8_t BoardRx[23];
+// ──── 板间 CAN 通讯协议 ──────────────────────────────────────────────────
+// 上行: C板 → MiniPC, CAN ID 0x310, 通过 CANTransport 分包
+// 下行: MiniPC → C板, CAN ID 0x300, 通过 CANTransport 分包
+
+#pragma pack(1)
+struct ChassisFeedbackCan
+{
+    float x;           // 4  里程计 x (m)
+    float y;           // 4  里程计 y (m)
+    float yaw;         // 4  偏航角 (rad), CCW 为正
+    float vx;          // 4  底盘系 x 线速度 (m/s)
+    float vy;          // 4  底盘系 y 线速度 (m/s)
+    float wz;          // 4  角速度 (rad/s)
+    uint32_t stamp_ms; // 4  MCU 时间戳 (ms), HAL_GetTick()
+    uint16_t checksum; // 2  前 28 字节累加和低 16 位
+};
+static_assert(sizeof(ChassisFeedbackCan) == 30, "ChassisFeedbackCan size mismatch");
+
+struct ChassisCtrlCan
+{
+    float vx;          // 4  目标 x 线速度 (m/s)
+    float vy;          // 4  目标 y 线速度 (m/s)
+    float wz;          // 4  目标角速度 (rad/s)
+    uint16_t checksum; // 2  前 12 字节累加和低 16 位
+};
+static_assert(sizeof(ChassisCtrlCan) == 14, "ChassisCtrlCan size mismatch");
+#pragma pack()
 
 /**
  * @brief 板间通讯类
@@ -247,6 +272,7 @@ class Supercapacitor
         bool isRefereeOnline;
 };
 
+extern uint8_t BoardRx[23];
 extern Supercapacitor supercap; // 超电类声明
 
 #endif
