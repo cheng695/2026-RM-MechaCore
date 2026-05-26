@@ -10,9 +10,9 @@
  */
 
 #pragma once
+#include <functional>
 #include "main.h"  // 包含STM32 HAL的主头文件
 #include "usart.h" // 包含UART相关定义
-#include <functional>
 
 namespace HAL::UART
 {

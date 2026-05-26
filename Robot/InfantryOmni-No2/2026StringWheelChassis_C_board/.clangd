@@ -1,0 +1,5 @@
+CompileFlags:
+  Remove:
+    - -fstack-usage
+  Add:
+    - --gcc-toolchain=D:/CodeTools/Compiler/arm-none-eabi-gcc

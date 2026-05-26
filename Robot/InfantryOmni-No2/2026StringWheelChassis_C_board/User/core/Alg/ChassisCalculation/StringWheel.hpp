@@ -44,7 +44,7 @@ namespace Alg::CalculationBase
              */
             void ForKinematics()
             {
-                float wheel_vx = 0.0f, wheel_vy = 0.0f, sumVw = 0.0f;
+                float wheel_vx = 0.0f, wheel_vy = 0.0f;
                 int validWheels = 0;
 
                 // 【核心修复】必须清零上一帧的累加结果！

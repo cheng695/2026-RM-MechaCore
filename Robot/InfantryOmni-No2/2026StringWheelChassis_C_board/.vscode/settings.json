@@ -1,3 +1,8 @@
 {
-    "kiroAgent.configureMCP": "Disabled"
+    "kiroAgent.configureMCP": "Disabled",
+    "clangd.arguments": [
+        "--compile-commands-dir=build/Debug",
+        "--query-driver=**/arm-none-eabi-*"
+    ],
+    "C_Cpp.intelliSenseEngine": "disabled"
 }

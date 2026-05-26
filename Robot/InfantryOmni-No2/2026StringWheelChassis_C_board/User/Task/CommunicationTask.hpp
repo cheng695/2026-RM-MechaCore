@@ -8,6 +8,7 @@
 #include "../User/core/BSP/Common/StateWatch/state_watch.hpp"
 #include "../User/core/BSP/Common/StateWatch/buzzer_manager.hpp"
 #include "../User/core/HAL/CAN/can_hal.hpp"
+#include <cstring>
 #include "../User/core/APP/Referee/RM_RefereeSystem.h"
 
 // 板间通讯接收缓冲区声明
