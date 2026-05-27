@@ -49,9 +49,8 @@ struct NavigationData_RX
     float vx;          // 4  目标 x 线速度 (m/s)
     float vy;          // 4  目标 y 线速度 (m/s)
     float wz;          // 4  目标角速度 (rad/s)
-    uint16_t checksum; // 2  前 12 字节累加和低 16 位
 };
-static_assert(sizeof(NavigationData_RX) == 14, "NavigationData_RX size mismatch");
+static_assert(sizeof(NavigationData_RX) == 12, "NavigationData_RX size mismatch");
 #pragma pack()
 
 /**

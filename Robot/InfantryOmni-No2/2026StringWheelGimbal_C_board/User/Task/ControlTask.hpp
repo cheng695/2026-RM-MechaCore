@@ -38,8 +38,6 @@ typedef struct
 }Output_launch;
 
 extern BSP::Motor::Dji::GM3508<3> Motor3508;
-extern BSP::Motor::Dji::GM6020<1> Motor6020;
-extern BSP::Motor::Dji::GM2006<1> Motor2006;
 extern BSP::Motor::DM::J4310<2> MotorJ4310;
 
 extern BSP::IMU::HI12_float HI12;

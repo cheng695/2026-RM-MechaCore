@@ -61,9 +61,9 @@ inline uint8_t sendPacket(HAL::CAN::ICanDevice &can, uint32_t base_id, const voi
         const size_t offset = seq * kPayloadPerFrame;
         const size_t remain = len - offset;
         const size_t copy_bytes = (remain >= kPayloadPerFrame) ? kPayloadPerFrame : remain;
-        std::memcpy(&frame.data[1], src + offset, copy_bytes);
+        memcpy(&frame.data[1], src + offset, copy_bytes);
         if (copy_bytes < kPayloadPerFrame)
-            std::memset(&frame.data[1 + copy_bytes], 0, kPayloadPerFrame - copy_bytes);
+            memset(&frame.data[1 + copy_bytes], 0, kPayloadPerFrame - copy_bytes);
 
         if (can.send(frame))
             ++sent;
@@ -134,7 +134,7 @@ class RxBuffer
 
         // 拷贝有效载荷
         const size_t offset = seq * kPayloadPerFrame;
-        std::memcpy(&buffer_[offset], &frame.data[1], kPayloadPerFrame);
+        memcpy(&buffer_[offset], &frame.data[1], kPayloadPerFrame);
         received_mask_ |= static_cast<uint16_t>(1 << seq);
 
         // 检查是否收齐

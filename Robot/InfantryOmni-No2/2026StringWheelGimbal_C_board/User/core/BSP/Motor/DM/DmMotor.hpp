@@ -169,7 +169,7 @@ namespace BSP::Motor::DM
             frame.is_extended_id = false;
             frame.is_remote_frame = false;
             
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
 
 
@@ -197,7 +197,7 @@ namespace BSP::Motor::DM
             frame.is_extended_id = false;
             frame.is_remote_frame = false;
             
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
 
         /**
@@ -220,7 +220,7 @@ namespace BSP::Motor::DM
             frame.is_extended_id = false;
             frame.is_remote_frame = false;
             
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
 
 
@@ -250,7 +250,7 @@ namespace BSP::Motor::DM
             frame.is_extended_id = false;
             frame.is_remote_frame = false;
             
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
         
         /**
@@ -279,7 +279,7 @@ namespace BSP::Motor::DM
             frame.is_extended_id = false;
             frame.is_remote_frame = false;
             
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
 
         /**
@@ -308,7 +308,7 @@ namespace BSP::Motor::DM
             frame.is_extended_id = false;
             frame.is_remote_frame = false;
             
-            HAL::CAN::get_can_bus_instance().get_can2().send(frame);
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
 
         uint8_t GetErr(uint8_t id)
