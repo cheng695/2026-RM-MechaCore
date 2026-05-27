@@ -85,6 +85,17 @@ class BoardCommunication
             shooter_barrel_cooling_value = data->shooter_barrel_cooling_value;
         }
 
+        void SetNavData(const NavigationData_RX *data)
+        {
+            chassis_nav_ = *data;
+        }
+
+        const NavigationData_RX &GetNavData() const { return chassis_nav_; }
+        float GetChassisYaw() const { return chassis_nav_.yaw; }
+        float GetChassisVx() const  { return chassis_nav_.vx; }
+        float GetChassisVy() const  { return chassis_nav_.vy; }
+        float GetChassisWz() const  { return chassis_nav_.wz; }
+
         uint16_t GetHeatLimit()
         {
             return shooter_barrel_heat_limit;
@@ -97,6 +108,7 @@ class BoardCommunication
 
     private:
         BSP::WATCH_STATE::StateWatch statewatch_;
+        NavigationData_RX chassis_nav_{};
         uint16_t shooter_barrel_heat_limit;
         uint16_t shooter_barrel_cooling_value;
 };

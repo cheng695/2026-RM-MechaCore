@@ -44,8 +44,19 @@ static void process_board_downlink()
     if (board_downlink_rx.complete())
     {
         memcpy(&gimbal_uplink, board_downlink_rx.data(), sizeof(gimbal_uplink));
-        Cboard.updateTimestamp();
-        Cboard.SetHeatData(&gimbal_uplink.referee);
+
+        // 导航数据 checksum 校验 (前 28 字节累加和低 16 位)
+        const auto *nav_p = reinterpret_cast<const uint8_t *>(&gimbal_uplink.nav);
+        uint32_t nav_sum = 0;
+        for (size_t i = 0; i < offsetof(NavigationData_RX, checksum); ++i)
+            nav_sum += nav_p[i];
+
+        if (static_cast<uint16_t>(nav_sum & 0xFFFF) == gimbal_uplink.nav.checksum)
+        {
+            Cboard.updateTimestamp();
+            Cboard.SetNavData(&gimbal_uplink.nav);
+            Cboard.SetHeatData(&gimbal_uplink.referee);
+        }
         board_downlink_rx.reset();
     }
 }
