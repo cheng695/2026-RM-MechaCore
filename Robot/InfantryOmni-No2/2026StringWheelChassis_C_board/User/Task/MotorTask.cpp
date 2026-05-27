@@ -10,7 +10,9 @@ BSP::Motor::LK::LK4005<4> Motor4005(0x140, {1, 2, 3, 4}, {1, 2, 3, 4});
 BSP::CANTransport::RxBuffer board_downlink_rx;  // 收上板下发的 23 字节数据 (CAN ID 0x300)
 
 /* CAN2 上行发送缓存 --------------------------------------------------------------------------------------*/
-static ChassisFeedbackCan uplink_fb{}; // C板→MiniPC 反馈数据
+static UplinkPacket_TX uplink_pkt{}; // C板→MiniPC 合包 (导航 + 裁判系统)
+static NavigationData_TX &uplink_nav = uplink_pkt.nav;
+static RefereeData_TX   &uplink_ref = uplink_pkt.referee;
 
 /*CAN接收 ---------------------------------------------------------------------------------------------*/
 /**
@@ -67,40 +69,54 @@ static void BoardCommunicationTX()
 {
     auto &can2 = HAL::CAN::get_can_bus_instance().get_can2();
 
-    uplink_fb.vx = static_cast<float>(string_fk.GetChassisVx());
-    uplink_fb.vy = static_cast<float>(string_fk.GetChassisVy());
-    uplink_fb.wz = static_cast<float>(string_fk.GetChassisVw());
-    uplink_fb.stamp_ms = HAL_GetTick();
+    // 导航
+    uplink_nav.vx = static_cast<float>(string_fk.GetChassisVx());
+    uplink_nav.vy = static_cast<float>(string_fk.GetChassisVy());
+    uplink_nav.wz = static_cast<float>(string_fk.GetChassisVw());
+    uplink_nav.stamp_ms = HAL_GetTick();
 
-    const auto *p = reinterpret_cast<const uint8_t *>(&uplink_fb);
-    uint32_t sum = 0;
-    for (size_t i = 0; i < offsetof(ChassisFeedbackCan, checksum); ++i)
-        sum += p[i];
-    uplink_fb.checksum = static_cast<uint16_t>(sum & 0xFFFF);
+    // 导航协议 checksum (前 28 字节)
+    const auto *nav_p = reinterpret_cast<const uint8_t *>(&uplink_nav);
+    uint32_t nav_sum = 0;
+    for (size_t i = 0; i < offsetof(NavigationData_TX, checksum); ++i)
+        nav_sum += nav_p[i];
+    uplink_nav.checksum = static_cast<uint16_t>(nav_sum & 0xFFFF);
 
-    BSP::CANTransport::sendPacket(can2, 0x310, &uplink_fb, sizeof(uplink_fb));
+    // 裁判系统
+    uplink_ref.shooter_barrel_cooling_value = ext_power_heat_data_0x0201.shooter_barrel_cooling_value;
+    uplink_ref.shooter_barrel_heat_limit    = ext_power_heat_data_0x0201.shooter_barrel_heat_limit;
+
+    BSP::CANTransport::sendPacket(can2, 0x310, &uplink_pkt, sizeof(uplink_pkt));
 }
 
 static void motor_control_logic(uint32_t tick)
 {
     process_board_downlink();
 
-    // 200Hz for Motors & Uplink (Every 5ms)
-    if (tick % 5 == 0)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            Motor3508.setCAN(static_cast<int16_t>(chassis_output.out_wheel[i]), i + 1);
-            Motor4005.ctrl_Torque(i + 1, static_cast<int16_t>(chassis_output.out_string[i]));
-        }
-        Motor3508.sendCAN();
-        BoardCommunicationTX();
-    }
-
-    // 500Hz for Supercap (Every 2ms)
+    // 500Hz 基频, 3508/4005 交替发送各 250Hz (Every 2ms)
+    // CAN1 每周期仅 1 帧: 3508 (0x200 四合一) / 4005 (0x280 多电机命令)
     if (tick % 2 == 0)
     {
-        supercap.sendCAN();
+        if (tick % 4 == 0)
+        {
+            for (int i = 0; i < 4; i++)
+                Motor3508.setCAN(static_cast<int16_t>(chassis_output.out_wheel[i]), i + 1);
+            Motor3508.sendCAN();
+        }
+        else
+        {
+            Motor4005.ctrl_Torque_All(
+                static_cast<int16_t>(chassis_output.out_string[0]),
+                static_cast<int16_t>(chassis_output.out_string[1]),
+                static_cast<int16_t>(chassis_output.out_string[2]),
+                static_cast<int16_t>(chassis_output.out_string[3]));
+        }
+
+        BoardCommunicationTX();  // CAN2: 5 帧 (sendPacket 内部有重试)
+    }
+    else
+    {
+        supercap.sendCAN();      // CAN2: 1 帧，单独占满 3 邮箱不争抢
     }
 }                               
 

@@ -135,7 +135,7 @@ file(GLOB_RECURSE User_Include_Dirs LIST_DIRECTORIES true
     ${CMAKE_CURRENT_SOURCE_DIR}/../../User/*
 )
 list(FILTER User_Include_Dirs INCLUDE REGEX ".+")
-list(FILTER User_Include_Dirs EXCLUDE REGEX ".*\\.(c|cc|cpp|cxx|h|hh|hpp|md|png|jpg|jpeg|gif)$")
+list(FILTER User_Include_Dirs EXCLUDE REGEX ".*\\.(c|cc|cpp|cxx|h|hh|hpp|md|png|jpg|jpeg|gif|py|s|S|gitignore)$")
 target_include_directories(stm32cubemx INTERFACE ${User_Include_Dirs})
 
 # Create STM32_Drivers static library

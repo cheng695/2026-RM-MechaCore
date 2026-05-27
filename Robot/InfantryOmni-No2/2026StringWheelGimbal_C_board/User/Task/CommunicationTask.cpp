@@ -20,18 +20,7 @@ uint32_t demo_time = 0;
  */
 void BoardCommunicationInit()
 {
-    auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
-    uart6.receive_dma_idle(uart6_rx_buffer);
-    uart6.register_rx_callback([](const HAL::UART::Data &data) 
-    {
-        if(data.size >= 4 && data.buffer != nullptr)
-        {
-            Cboard.updateTimestamp();
-            Cboard.SetHeatLimit(data.buffer);
-            Cboard.SetHeatCool(data.buffer+2);
-        }
-    });
+    // 板间通讯下行 (下板→云台) 已迁移至 CAN2, 由 MotorTask.cpp::process_board_downlink() 处理
 }
 
 void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6) 

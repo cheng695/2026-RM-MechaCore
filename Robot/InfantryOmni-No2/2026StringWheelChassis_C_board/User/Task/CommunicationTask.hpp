@@ -16,7 +16,7 @@
 // 下行: MiniPC → C板, CAN ID 0x300, 通过 CANTransport 分包
 
 #pragma pack(1)
-struct ChassisFeedbackCan
+struct NavigationData_TX
 {
     float x;           // 4  里程计 x (m)
     float y;           // 4  里程计 y (m)
@@ -27,16 +27,31 @@ struct ChassisFeedbackCan
     uint32_t stamp_ms; // 4  MCU 时间戳 (ms), HAL_GetTick()
     uint16_t checksum; // 2  前 28 字节累加和低 16 位
 };
-static_assert(sizeof(ChassisFeedbackCan) == 30, "ChassisFeedbackCan size mismatch");
+static_assert(sizeof(NavigationData_TX) == 30, "NavigationData_TX size mismatch");
 
-struct ChassisCtrlCan
+struct RefereeData_TX
+{
+    uint16_t shooter_barrel_cooling_value; // 2  枪口每秒冷却值
+    uint16_t shooter_barrel_heat_limit;    // 2  枪口热量上限
+};
+static_assert(sizeof(RefereeData_TX) == 4, "RefereeData_TX size mismatch");
+
+/// C板→MiniPC 上行合包 (CAN ID 0x310, CANTransport 分包)
+struct UplinkPacket_TX
+{
+    NavigationData_TX nav;
+    RefereeData_TX   referee;
+};
+static_assert(sizeof(UplinkPacket_TX) == 34, "UplinkPacket_TX size mismatch");
+
+struct NavigationData_RX
 {
     float vx;          // 4  目标 x 线速度 (m/s)
     float vy;          // 4  目标 y 线速度 (m/s)
     float wz;          // 4  目标角速度 (rad/s)
     uint16_t checksum; // 2  前 12 字节累加和低 16 位
 };
-static_assert(sizeof(ChassisCtrlCan) == 14, "ChassisCtrlCan size mismatch");
+static_assert(sizeof(NavigationData_RX) == 14, "NavigationData_RX size mismatch");
 #pragma pack()
 
 /**

@@ -1,9 +1,12 @@
 #include "MotorTask.hpp"
+#include "ControlTask.hpp"
 
 /* 实例电机 --------------------------------------------------------------------------------------------*/
 BSP::Motor::Dji::GM3508<3> Motor3508(0x200, {1, 2, 3}, 0x200); // 1号ID是2006，避免ID冲突合并到3508中
-BSP::Motor::Dji::GM6020<1> Motor6020(0x204, {1}, 0x1FE);
-BSP::Motor::DM::J4310<1> MotorJ4310(0x00, {2}, {0x01});
+BSP::Motor::DM::J4310<2> MotorJ4310(0x00, {6, 8}, {4, 7});
+
+/* 板间通讯接收缓冲区 ----------------------------------------------------------------------------------*/
+BSP::CANTransport::RxBuffer board_downlink_rx; // 收下板发来的 4 字节热量数据 (CAN ID 0x320, ChassisDownlink_RX)
 
 /* CAN接收 ---------------------------------------------------------------------------------------------*/
 /**
@@ -20,50 +23,76 @@ void MotorInit(void)
     // 注册CAN接收回调函数
     can1.register_rx_callback([](const HAL::CAN::Frame &frame) 
     {
-        Motor3508.Parse(frame);
-        Motor6020.Parse(frame);
-    });
-    can2.register_rx_callback([](const HAL::CAN::Frame &frame) 
-    {
         MotorJ4310.Parse(frame);
     });
+    can2.register_rx_callback([](const HAL::CAN::Frame &frame)
+    {
+        Motor3508.Parse(frame);
+        if (frame.id == 0x320) board_downlink_rx.feed(frame); // 板间通讯下行: 下板→云台
+    });
+}
+
+/* 板间通讯接收 ------------------------------------------------------------------------------------------*/
+/**
+ * @brief 处理下板发来的裁判系统热量数据 (CAN ID 0x320)
+ *
+ * 数据包格式: ChassisDownlink_RX (4 字节)
+ *   - shooter_barrel_cooling_value (uint16_t)
+ *   - shooter_barrel_heat_limit    (uint16_t)
+ */
+static void process_board_downlink()
+{
+    if (board_downlink_rx.complete())
+    {
+        const auto *dl = reinterpret_cast<const ChassisDownlink_RX *>(board_downlink_rx.data());
+        Cboard.updateTimestamp();
+        Cboard.SetHeatData(dl);
+        board_downlink_rx.reset();
+    }
 }
 
 /* 电机发送控制帧 ----------------------------------------------------------------------------------------*/
 /**
  * @brief 电机控制函数
- * 
+ *
  * 根据控制系统的输出结果向各电机发送控制指令
  */
 static void motor_control()
 {
     // 云台
-    Motor6020.setCAN(static_cast<int16_t>(gimbal_output.out_yaw), 1);
-    Motor6020.sendCAN();
-
     if(gimbal_fsm.Get_Now_State() == MANUAL)
     {
-        MotorJ4310.ctrl_Mit(1, 
-                           gimbal_target.target_pitch*3.1415926f/180.0f, 
-                           gimbal_target.target_pitch_vel, 
-                           pitch_manual_pid.getK(0), 
-                           pitch_manual_pid.getK(2), 
+        // Pitch
+        MotorJ4310.ctrl_Mit(4, 
+                           0.0f, 
+                           0.0f, 
+                           0.0f, 
+                           0.0f, 
                            gimbal_output.out_pitch);
+        // Yaw
+        MotorJ4310.ctrl_Mit(7, 
+                           0.0f, 
+                           0.0f, 
+                           0.0f, 
+                           0.0f, 
+                           gimbal_output.out_yaw);
     }
     else if(gimbal_fsm.Get_Now_State() == VISION)
     {
-        // MotorJ4310.ctrl_Mit(1, 
-        //                    gimbal_target.target_pitch*3.1415926f/180.0f, 
-        //                    0.0f, 
-        //                    pitch_vision_pid.getK(0), 
-        //                    pitch_vision_pid.getK(2), 
-        //                    gimbal_output.out_pitch);
-                MotorJ4310.ctrl_Mit(1, 
-                           gimbal_target.target_pitch*3.1415926f/180.0f, 
+        // Pitch
+        MotorJ4310.ctrl_Mit(4, 
+                           0.0f, 
                            0.0f, 
                            0.0f, 
                            0.0f, 
                            gimbal_output.out_pitch);
+        // Yaw
+        MotorJ4310.ctrl_Mit(7, 
+                           0.0f, 
+                           0.0f, 
+                           0.0f, 
+                           0.0f, 
+                           gimbal_output.out_yaw);
     }
     else
     {
@@ -91,9 +120,10 @@ void Motor(void const * argument)
     MotorInit();    // 初始化电机和CAN总线
     for(;;)
     {
-        motor_control();  // 执行电机控制
+        process_board_downlink();   // 处理下板CAN数据
+        motor_control();            // 执行电机控制
         osDelay(1);       // 延时1ms，控制频率1000Hz
-    } 
+    }
 }
 
 }

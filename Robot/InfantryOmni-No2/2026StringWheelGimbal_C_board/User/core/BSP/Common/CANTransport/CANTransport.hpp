@@ -1,7 +1,7 @@
 #ifndef CANTRANSPORT_HPP
 #define CANTRANSPORT_HPP
 
-#include "../../../HAL/CAN/can_hal.hpp"
+#include "core/HAL/CAN/can_hal.hpp"
 #include <cstring>
 
 /**

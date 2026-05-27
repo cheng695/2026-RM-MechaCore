@@ -135,7 +135,7 @@ namespace BSP::Motor
          */
         float getAddAngleRad(uint8_t id)
         {
-            return this->unit_data_[id - 1].add_angle;
+            return this->unit_data_[id - 1].add_angle * 3.1415926f / 180.0f;
         }
 
         /**

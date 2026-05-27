@@ -16,10 +16,11 @@ Chassis_FSM chassis_fsm;    // 底盘有限状态机
 /* 底盘解算 -------------------------------------------------------------------------------------------------*/
 float wheel_azimuth[4] = {7*PI_/4, PI_/4, 3*PI_/4, 5*PI_/4};                // 安装位置
 float phase_offset[4] = {1.84614585f, 4.4715335f, 6.06382605f, 4.44547635f}; // 舵向初始角
-Alg::CalculationBase::String_IK string_ik(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学逆解算
-Alg::CalculationBase::String_FK string_fk(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学正解算
-Alg::CalculationBase::String_ID string_id(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 动力学逆解算
-Alg::CalculationBase::String_FK string_fk_odometer(0.17f, 0.055f, wheel_azimuth, phase_offset);  // 运动学正解算（里程计）
+Alg::CalculationBase::String_IK string_ik(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 运动学逆解算
+Alg::CalculationBase::String_FK string_fk(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 运动学正解算
+Alg::CalculationBase::String_ID string_id(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 动力学逆解算
+Alg::CalculationBase::String_FK string_fk_odometer_x(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 运动学正解算（里程计）
+Alg::CalculationBase::String_FK string_fk_odometer_v(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 运动学正解算（速度）
 
 /* 控制器 --------------------------------------------------------------------------------------------------*/
 // 用于运动学逆解，舵向直接输出，轮向作为补偿输出
@@ -30,10 +31,10 @@ ALG::PID::PID stringAngle_pid[4] = {
     ALG::PID::PID(0.0f, 0.0f, 0.0f, 320.0f, 2500.0f, 20.0f)       // 舵向角速度pid 4号舵
 };  
 ALG::PID::PID stringVelocity_pid[4] = {
-    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f),    // 舵向角速度pid 1号舵
-    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f),    // 舵向角速度pid 2号舵
-    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f),    // 舵向角速度pid 3号舵
-    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2048.0f, 2500.0f, 100.0f)     // 舵向角速度pid 4号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2000.0f, 2500.0f, 100.0f),    // 舵向角速度pid 1号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2000.0f, 2500.0f, 100.0f),    // 舵向角速度pid 2号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2000.0f, 2500.0f, 100.0f),    // 舵向角速度pid 3号舵
+    ALG::PID::PID(0.0f, 0.0f, 0.0f, 2000.0f, 2500.0f, 100.0f)     // 舵向角速度pid 4号舵
 }; 
 ALG::PID::PID wheel_pid[4] = {
     ALG::PID::PID(0.9f, 0.0f, 0.0f, 16384.0f, 2500.0f, 100.0f),     // 轮向速度pid 1号轮
@@ -74,6 +75,7 @@ Alg::Utility::SlopePlanning string_target[2] = {
 
 ControlTask chassis_target;     // 底盘目标
 Output_chassis chassis_output;  // 底盘输出
+Navigation navigation;          // 导航数据
 
 /**
  * @brief 底盘控制逻辑
@@ -391,7 +393,7 @@ void chassis_notfollow()
     }
     // 正运动学解算当前底盘整体速度；逆运动学解算电机转速
     string_fk.StringForKinematics(Motor3508.getVelocityRads(1), Motor3508.getVelocityRads(2), Motor3508.getVelocityRads(3), Motor3508.getVelocityRads(4));
-    string_ik.StringInvKinematics(chassis_target.target_translation_x, chassis_target.target_translation_y, chassis_target.target_rotation, 0.0f/*+0.007f*string_fk.GetChassisVw()*/, 1.0f, 1.0f);
+    string_ik.StringInvKinematics(chassis_target.target_translation_x, chassis_target.target_translation_y, chassis_target.target_rotation, 0.0f, 1.0f, 1.0f);
     
     for(int i = 0; i < 4; i++)
     {
@@ -445,7 +447,7 @@ void chassis_notfollow()
     float I4005[4], I3508[4], I_other[4], V4005[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
     {
-        I4005[i] = chassis_output.out_string[i] * 4.0f/2048.0f;    // 4005电机电流（解算欲输出电流）
+        I4005[i] = chassis_output.out_string[i] * 32.0f/2000.0f;    // 4005电机电流（解算欲输出电流）
         V4005[i] = Motor4005.getVelocityRads(i+1);              // 4005电机速度（当前速度）
 
         I3508[i] = chassis_output.out_wheel[i] * 20.0f/16384.0f;    // 3508电机电流（解算欲输出电流）
@@ -470,9 +472,9 @@ void chassis_notfollow()
     // 底盘输出
     for(int i = 0; i < 4; i++)
     {
-        chassis_output.out_string[i] = power4005.getCurrentCalculate(i) * 2048.0f/4.0f;
+        chassis_output.out_string[i] = power4005.getCurrentCalculate(i) * 2000.0f/32.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
-        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -2048.0f, 2048.0f);
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -2000.0f, 2000.0f);
         chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
 }
@@ -547,7 +549,7 @@ void chassis_follow()
     float I4005[4], I3508[4], I_other[4], V4005[4], V3508[4];   // 必要参数
     for(int i = 0; i < 4; i++)
     {
-        I4005[i] = chassis_output.out_string[i] * 4.0f/2048.0f;    // 4005电机电流（解算欲输出电流）
+        I4005[i] = chassis_output.out_string[i] * 32.0f/2000.0f;    // 4005电机电流（解算欲输出电流）
         V4005[i] = Motor4005.getVelocityRads(i+1);                  // 4005电机速度（当前速度）
 
         I3508[i] = chassis_output.out_wheel[i] * 20.0f/16384.0f;    // 3508电机电流（解算欲输出电流）
@@ -572,11 +574,22 @@ void chassis_follow()
     // 底盘输出
     for(int i = 0; i < 4; i++)
     {
-        chassis_output.out_string[i] = power4005.getCurrentCalculate(i) * 2048.0f/4.0f;
+        chassis_output.out_string[i] = power4005.getCurrentCalculate(i) * 2000.0f/32.0f;
         chassis_output.out_wheel[i] = power3508.getCurrentCalculate(i) * 16384.0f/20.0f;
-        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -16384.0f, 16384.0f);
+        chassis_output.out_string[i] = std::clamp(chassis_output.out_string[i], -2000.0f, 2000.0f);
         chassis_output.out_wheel[i] = std::clamp(chassis_output.out_wheel[i], -16384.0f, 16384.0f);
     }
+}
+
+void NavigationParser()
+{
+    navigation.X += string_fk_odometer_x.GetChassisVx();
+    navigation.Y += string_fk_odometer_x.GetChassisVy();
+    navigation.Yaw += string_fk_odometer_x.GetChassisVw();
+
+    navigation.Vx = string_fk_odometer_v.GetChassisVx();
+    navigation.Vy = string_fk_odometer_v.GetChassisVy();
+    navigation.Wz = string_fk_odometer_v.GetChassisVw();
 }
 
 /**
@@ -606,6 +619,9 @@ void main_loop_gimbal(uint8_t left_sw, uint8_t right_sw, bool is_online, bool *a
             chassis_stop();
             break;
     }
+    string_fk_odometer_x.StringForKinematics(Motor3508.getAddAngleRad(1), Motor3508.getAddAngleRad(2), Motor3508.getAddAngleRad(3), Motor3508.getAddAngleRad(4));
+    string_fk_odometer_v.StringForKinematics(Motor3508.getVelocityRads(1), Motor3508.getVelocityRads(2), Motor3508.getVelocityRads(3), Motor3508.getVelocityRads(4));
+    NavigationParser();
 }
 
 /* 控制任务部分 ------------------------------------------------------------------------------------------------*/

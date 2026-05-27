@@ -174,7 +174,7 @@ namespace BSP::Motor::LK
         }
 
        /**
-        * @brief LK电机的扭矩控制方法（转矩闭环控制命令）
+        * @brief LK电机的扭矩控制方法（单电机转矩闭环控制命令 0xA1）
         * @param id 电机ID (1~N)
         * @param iqControl 转矩电流控制值，范围 -2048~2048
         *                  MF电机: 对应 -16.5A~16.5A
@@ -187,7 +187,7 @@ namespace BSP::Motor::LK
             // 扭矩限制
             if (iqControl > 2048) iqControl = 2048;
             if (iqControl < -2048) iqControl = -2048;
-                
+
             msd.data[0] = 0xA1;
             msd.data[1] = 0x00;
             msd.data[2] = 0x00;
@@ -198,6 +198,50 @@ namespace BSP::Motor::LK
             msd.data[7] = 0x00;
 
             sendCAN(id);
+        }
+
+       /**
+        * @brief LK电机多电机转矩闭环控制命令 (1帧控制最多4个电机, CAN ID 0x280)
+        *
+        * 需要在LK设定软件中开启多电机命令功能。
+        * 电机ID必须配置为 #1~#4 且不能重复。
+        *
+        * 内部自动做量纲缩放: 外部仍按单电机语义传入 (±2048→±16.5A),
+        * 函数内部转换为多电机协议量纲 (±2000→±32A)。
+        *
+        * @param iq1 电机1 转矩电流控制值 (单电机的语义, ±2048→±16.5A)
+        * @param iq2 电机2 转矩电流控制值
+        * @param iq3 电机3 转矩电流控制值
+        * @param iq4 电机4 转矩电流控制值
+        */
+        void ctrl_Torque_All(int16_t iq1, int16_t iq2, int16_t iq3, int16_t iq4)
+        {
+            auto clamp = [](int16_t v) -> int16_t {
+                if (v > 2000) return 2000;
+                if (v < -2000) return -2000;
+                return v;
+            };
+            iq1 = clamp(iq1);
+            iq2 = clamp(iq2);
+            iq3 = clamp(iq3);
+            iq4 = clamp(iq4);
+
+            HAL::CAN::Frame frame{};
+            frame.id = 0x280;
+            frame.dlc = 8;
+            frame.is_extended_id = false;
+            frame.is_remote_frame = false;
+
+            frame.data[0] = static_cast<uint8_t>(iq1 & 0xFF);
+            frame.data[1] = static_cast<uint8_t>((iq1 >> 8) & 0xFF);
+            frame.data[2] = static_cast<uint8_t>(iq2 & 0xFF);
+            frame.data[3] = static_cast<uint8_t>((iq2 >> 8) & 0xFF);
+            frame.data[4] = static_cast<uint8_t>(iq3 & 0xFF);
+            frame.data[5] = static_cast<uint8_t>((iq3 >> 8) & 0xFF);
+            frame.data[6] = static_cast<uint8_t>(iq4 & 0xFF);
+            frame.data[7] = static_cast<uint8_t>((iq4 >> 8) & 0xFF);
+
+            HAL::CAN::get_can_bus_instance().get_can1().send(frame);
         }
 
        /**

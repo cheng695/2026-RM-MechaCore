@@ -9,6 +9,13 @@
 
 extern uint8_t BoardRx[4];
 
+/// @brief 下板→云台 裁判系统热量数据 (CAN ID 0x320)
+struct __attribute__((packed)) ChassisDownlink_RX
+{
+    uint16_t shooter_barrel_cooling_value; // 枪口每秒冷却值
+    uint16_t shooter_barrel_heat_limit;    // 枪口热量上限
+};
+
 class BoardCommunication
 {
     public:
@@ -41,6 +48,12 @@ class BoardCommunication
         void SetHeatCool(uint8_t *data)
         {
             memcpy(&shooter_barrel_cooling_value, data, sizeof(uint16_t));
+        }
+
+        void SetHeatData(const ChassisDownlink_RX *data)
+        {
+            shooter_barrel_heat_limit = data->shooter_barrel_heat_limit;
+            shooter_barrel_cooling_value = data->shooter_barrel_cooling_value;
         }
 
         uint16_t GetHeatLimit()

@@ -26,6 +26,15 @@ typedef struct
     float out_wheel[4];
 }Output_chassis;
 
+typedef struct 
+{
+    float X;
+    float Y;
+    float Yaw;
+    float Vx;
+    float Vy;
+    float Wz;
+}Navigation;
 
 extern BSP::Motor::Dji::GM3508<4> Motor3508;
 extern BSP::Motor::LK::LK4005<4> Motor4005;
@@ -36,10 +45,12 @@ extern BoardCommunication Cboard;
 
 extern ControlTask chassis_target;
 extern Output_chassis chassis_output;
+extern Navigation navigation;
 extern float motor_direction[4];
 extern float motor_wheel[4];
 
 extern Alg::CalculationBase::String_FK string_fk;
+extern Alg::CalculationBase::String_FK string_fk_odometer;
 extern Alg::Utility::SlopePlanning string_target[2];
 
 extern ALG::PowerControl::PowerControl<4> power4005;
