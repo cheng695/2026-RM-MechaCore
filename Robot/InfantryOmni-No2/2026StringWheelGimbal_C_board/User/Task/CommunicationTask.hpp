@@ -9,12 +9,41 @@
 
 extern uint8_t BoardRx[4];
 
-/// @brief 下板→云台 裁判系统热量数据 (CAN ID 0x320)
-struct __attribute__((packed)) ChassisDownlink_RX
+// ──── 板间 CAN 通讯协议 (底盘→云台) ─────────────────────────────────────
+// 底盘通过 CAN2 发送 UplinkPacket_TX (34 字节), CAN ID 0x310, CANTransport 分包
+// 云台解析导航数据 + 裁判系统热量数据
+
+#pragma pack(1)
+struct NavigationData_RX
 {
-    uint16_t shooter_barrel_cooling_value; // 枪口每秒冷却值
-    uint16_t shooter_barrel_heat_limit;    // 枪口热量上限
+    float x;           // 4  里程计 x (m)
+    float y;           // 4  里程计 y (m)
+    float yaw;         // 4  偏航角 (rad), CCW 为正
+    float vx;          // 4  底盘系 x 线速度 (m/s)
+    float vy;          // 4  底盘系 y 线速度 (m/s)
+    float wz;          // 4  角速度 (rad/s)
+    uint32_t stamp_ms; // 4  MCU 时间戳 (ms)
+    uint16_t checksum; // 2  前 28 字节累加和低 16 位
 };
+static_assert(sizeof(NavigationData_RX) == 30, "NavigationData_RX size mismatch");
+
+struct RefereeData_RX
+{
+    uint16_t shooter_barrel_cooling_value; // 2  枪口每秒冷却值
+    uint16_t shooter_barrel_heat_limit;    // 2  枪口热量上限
+};
+static_assert(sizeof(RefereeData_RX) == 4, "RefereeData_RX size mismatch");
+
+/// 底盘→云台 上行合包 (CAN ID 0x310, CANTransport 分包)
+struct UplinkPacket_RX
+{
+    NavigationData_RX nav;
+    RefereeData_RX   referee;
+};
+static_assert(sizeof(UplinkPacket_RX) == 34, "UplinkPacket_RX size mismatch");
+#pragma pack()
+
+extern UplinkPacket_RX gimbal_uplink;
 
 class BoardCommunication
 {
@@ -50,7 +79,7 @@ class BoardCommunication
             memcpy(&shooter_barrel_cooling_value, data, sizeof(uint16_t));
         }
 
-        void SetHeatData(const ChassisDownlink_RX *data)
+        void SetHeatData(const RefereeData_RX *data)
         {
             shooter_barrel_heat_limit = data->shooter_barrel_heat_limit;
             shooter_barrel_cooling_value = data->shooter_barrel_cooling_value;

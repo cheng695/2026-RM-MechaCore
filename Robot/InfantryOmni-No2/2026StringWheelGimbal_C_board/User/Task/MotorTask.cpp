@@ -5,8 +5,9 @@
 BSP::Motor::Dji::GM3508<3> Motor3508(0x200, {1, 2, 3}, 0x200); // 1号ID是2006，避免ID冲突合并到3508中
 BSP::Motor::DM::J4310<2> MotorJ4310(0x00, {6, 8}, {4, 7});
 
-/* 板间通讯接收缓冲区 ----------------------------------------------------------------------------------*/
-BSP::CANTransport::RxBuffer board_downlink_rx; // 收下板发来的 4 字节热量数据 (CAN ID 0x320, ChassisDownlink_RX)
+/* 板间通讯接收 ----------------------------------------------------------------------------------------*/
+BSP::CANTransport::RxBuffer board_downlink_rx;          // CAN ID 0x310, 接收底盘 UplinkPacket_TX (34 字节)
+UplinkPacket_RX           gimbal_uplink{};              // 底盘上行数据副本 (导航 + 裁判系统)
 
 /* CAN接收 ---------------------------------------------------------------------------------------------*/
 /**
@@ -28,25 +29,23 @@ void MotorInit(void)
     can2.register_rx_callback([](const HAL::CAN::Frame &frame)
     {
         Motor3508.Parse(frame);
-        if (frame.id == 0x320) board_downlink_rx.feed(frame); // 板间通讯下行: 下板→云台
+        if (frame.id == 0x310) board_downlink_rx.feed(frame); // 板间通讯: 底盘上行→云台
     });
 }
 
 /* 板间通讯接收 ------------------------------------------------------------------------------------------*/
 /**
- * @brief 处理下板发来的裁判系统热量数据 (CAN ID 0x320)
+ * @brief 处理底盘上行数据 (CAN ID 0x310, UplinkPacket_RX 34 字节)
  *
- * 数据包格式: ChassisDownlink_RX (4 字节)
- *   - shooter_barrel_cooling_value (uint16_t)
- *   - shooter_barrel_heat_limit    (uint16_t)
+ * 包含: NavigationData_RX (里程计 + 速度 + 偏航) + RefereeData_RX (热量)
  */
 static void process_board_downlink()
 {
     if (board_downlink_rx.complete())
     {
-        const auto *dl = reinterpret_cast<const ChassisDownlink_RX *>(board_downlink_rx.data());
+        memcpy(&gimbal_uplink, board_downlink_rx.data(), sizeof(gimbal_uplink));
         Cboard.updateTimestamp();
-        Cboard.SetHeatData(dl);
+        Cboard.SetHeatData(&gimbal_uplink.referee);
         board_downlink_rx.reset();
     }
 }
