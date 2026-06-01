@@ -153,6 +153,14 @@ void Navigation::Data_send()
     navigation.frame.head = 0xA5;
 
     Tx_pData[0] = frame.head;
+
+    tx_odom.x = Cboard.GetChassisX();
+    tx_odom.y = Cboard.GetChassisY();
+    tx_odom.yaw = Cboard.GetChassisYaw();
+    tx_vel.vx = Cboard.GetChassisVx();
+    tx_vel.vy = Cboard.GetChassisVy();
+    tx_vel.wz = Cboard.GetChassisWz();
+    
     memcpy(&Tx_pData[1],  &tx_odom.x,   sizeof(float));
     memcpy(&Tx_pData[5],  &tx_odom.y,   sizeof(float));
     memcpy(&Tx_pData[9],  &tx_odom.yaw, sizeof(float));

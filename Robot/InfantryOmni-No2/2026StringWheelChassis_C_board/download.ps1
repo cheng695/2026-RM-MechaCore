@@ -3,7 +3,7 @@ param(
     [string]$BuildType = "Debug",
 
     [ValidateSet("openocd", "jlink", "stm32cubeprogrammer")]
-    [string]$Programmer = "openocd",
+    [string]$Programmer = "jlink",
 
     [string]$Interface = "cmsis-dap"
 )

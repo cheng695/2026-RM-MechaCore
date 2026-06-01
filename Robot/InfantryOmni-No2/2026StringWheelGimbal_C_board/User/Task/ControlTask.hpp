@@ -20,15 +20,18 @@ typedef struct
 {
     float target_yaw;   
     float target_pitch;
-    float target_pitch_vel; // Combined logic refactor
     float target_dial;
     float target_surgewheel[2];
 }ControlTask;
 
 typedef struct
 {
+    float out_yaw_angle;
+    float out_pitch_angle;
     float out_yaw;
     float out_pitch;
+    bool  motor_pitch_enable; // J4310 Pitch 使能, ControlTask 置位, MotorTask 执行
+    bool  motor_yaw_enable;   // J4310 Yaw   使能, ControlTask 置位, MotorTask 执行
 }Output_gimbal;
 
 typedef struct
@@ -56,6 +59,5 @@ extern APP::Heat_Control_Private heat_control;
 extern Alg::Feedforward::GimbalFullCompensation gimbal_yaw;
 
 extern Alg::Feedforward::UDE ude_yaw;
-extern ALG::PID::PID yaw_pid;
 
 #endif

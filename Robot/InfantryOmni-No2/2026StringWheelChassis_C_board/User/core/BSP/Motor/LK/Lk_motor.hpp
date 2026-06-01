@@ -336,7 +336,7 @@ namespace BSP::Motor::LK
    public:
        MG4005E(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
            : LkMotorBase<N>(Init_id, ids, send_idxs,
-                           Parameters(10.0,              // 减速比 (PG4210: 1:10)
+                           Parameters(1.0,              // 减速比 (PG4210: 1:10)
                                     0.06,               // 扭矩常数 (N.m/A)
                                     66.0 / 4096.0,      // 转矩电流分辨率 (MG系列)
                                     262144.0))          // 编码器分辨率 (18bit电机侧: 2^18 = 262144)
@@ -357,7 +357,7 @@ namespace BSP::Motor::LK
    public:
        LK4005(uint16_t Init_id, const uint8_t (&ids)[N], const uint32_t (&send_idxs)[N])
            : LkMotorBase<N>(Init_id, ids, send_idxs,
-                           Parameters(10.0,              // 减速比
+                           Parameters(1.0,              // 减速比
                                     0.06,               // 力矩常数 (Nm/A)
                                     33.0 / 4096.0,      // 转矩电流分辨率 (MF系列)
                                     65536.0))           // 编码器分辨率 (16bit)

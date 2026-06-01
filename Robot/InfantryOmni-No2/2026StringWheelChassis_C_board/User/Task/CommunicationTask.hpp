@@ -12,53 +12,43 @@
 #include "../User/core/APP/Referee/RM_RefereeSystem.h"
 
 // ──── 板间 CAN 通讯协议 ──────────────────────────────────────────────────
-// 上行: C板 → MiniPC, CAN ID 0x310, 通过 CANTransport 分包
-// 下行: MiniPC → C板, CAN ID 0x300, 通过 CANTransport 分包
-
-#pragma pack(1)
-struct NavigationData_TX
-{
-    float x;           // 4  里程计 x (m)
-    float y;           // 4  里程计 y (m)
-    float yaw;         // 4  偏航角 (rad), CCW 为正
-    float vx;          // 4  底盘系 x 线速度 (m/s)
-    float vy;          // 4  底盘系 y 线速度 (m/s)
-    float wz;          // 4  角速度 (rad/s)
-    uint32_t stamp_ms; // 4  MCU 时间戳 (ms), HAL_GetTick()
-    uint16_t checksum; // 2  前 28 字节累加和低 16 位
-};
-static_assert(sizeof(NavigationData_TX) == 30, "NavigationData_TX size mismatch");
-
-struct RefereeData_TX
-{
-    uint16_t shooter_barrel_cooling_value; // 2  枪口每秒冷却值
-    uint16_t shooter_barrel_heat_limit;    // 2  枪口热量上限
-};
-static_assert(sizeof(RefereeData_TX) == 4, "RefereeData_TX size mismatch");
-
-/// C板→MiniPC 上行合包 (CAN ID 0x310, CANTransport 分包)
-struct UplinkPacket_TX
-{
-    NavigationData_TX nav;
-    RefereeData_TX   referee;
-};
-static_assert(sizeof(UplinkPacket_TX) == 34, "UplinkPacket_TX size mismatch");
-
-struct NavigationData_RX
-{
-    float vx;          // 4  目标 x 线速度 (m/s)
-    float vy;          // 4  目标 y 线速度 (m/s)
-    float wz;          // 4  目标角速度 (rad/s)
-};
-static_assert(sizeof(NavigationData_RX) == 12, "NavigationData_RX size mismatch");
-#pragma pack()
-
 /**
  * @brief 板间通讯类
  * @details 负责处理与上位机板子之间的串口通讯，包括连接状态监测、数据解析等功能
  */
 class BoardCommunication
 {
+    public:
+        #pragma pack(1)
+        // 发送：底盘→云台 上行数据帧 (CAN ID 0x310, 28 字节)
+        struct BoardTX
+        {
+            float x;           // 4  里程计 x (m)
+            float y;           // 4  里程计 y (m)
+            float yaw;         // 4  偏航角 (rad), CCW 为正
+            float vx;          // 4  底盘系 x 线速度 (m/s)
+            float vy;          // 4  底盘系 y 线速度 (m/s)
+            float wz;          // 4  角速度 (rad/s)
+            
+            uint16_t shooter_barrel_cooling_value;  // 2  枪口每秒冷却值
+            uint16_t shooter_barrel_heat_limit;     // 2  枪口热量上限
+        };
+        
+        // 接收：上位机→底盘 下行数据帧 (CAN ID 0x311, 35 字节)
+        struct BoardRX
+        {
+            uint8_t  rc_data[18];   // 18  遥控器数据转发 (DT7Rx_buffer)
+            float    angle;         // 4   Motor6020 角度 (rad)
+            bool     scroll;        // 1   发射机构 scroll 状态
+            float    target_vx;     // 4   底盘目标 x 线速度 (m/s)
+            float    target_vy;     // 4   底盘目标 y 线速度 (m/s)
+            float    target_wz;     // 4   底盘目标角速度 (rad/s)
+        };
+        #pragma pack()
+
+        BoardTX board_tx_;
+        BoardRX board_rx_;
+
     public:
         /**
          * @brief 构造函数
@@ -97,40 +87,69 @@ class BoardCommunication
             }
             return statewatch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
         }
-        
+
+        float GetYawAngle() { return board_rx_.angle; } // 云台角度(弧度) 原始值
+
         /**
-         * @brief 设置云台角度数据
-         * @param data 指向角度数据的指针(4字节float)
+         * @brief 获取滤波后的云台角度
+         * @details CAN 通讯频率低于控制频率，角度呈阶梯状更新。
+         *          此函数检测新数据时估算角速度，无新数据时用角速度外推，使角度平滑变化。
+         * @return 滤波后的云台角度(弧度)
          */
-        void SetYawAngle(uint8_t *data)
-        { 
-            memcpy(&YawAngal, data, sizeof(float));
+        float GetFilteredYawAngle()
+        {
+            float raw = board_rx_.angle;
+
+            if (!yaw_filter_init_)
+            {
+                yaw_filtered_ = raw;
+                yaw_last_raw_ = raw;
+                yaw_cycles_ = 0;
+                yaw_filter_init_ = true;
+                return raw;
+            }
+
+            if (raw != yaw_last_raw_)
+            {
+                // 新数据到达：计算瞬时角速度并低通滤波
+                float delta = raw - yaw_last_raw_;
+                if (delta > 3.14159265f)       delta -= 6.28318531f;
+                else if (delta < -3.14159265f) delta += 6.28318531f;
+
+                if (yaw_cycles_ > 0)
+                {
+                    float instant_rate = delta / (float)yaw_cycles_;  // rad/周期
+                    yaw_rate_ = yaw_rate_ * 0.8f + instant_rate * 0.2f;
+                }
+
+                yaw_last_raw_ = raw;
+                yaw_cycles_ = 0;
+                yaw_filtered_ = raw;
+            }
+            else
+            {
+                // 无新数据：用估算角速度外推
+                yaw_cycles_++;
+                yaw_filtered_ = yaw_last_raw_ + yaw_rate_ * (float)yaw_cycles_;
+            }
+
+            return yaw_filtered_;
         }
 
-        /**
-         * @brief 设置能否小陀螺状态数据
-         * @param data 指向能否小陀螺状态的指针(1字节bool)
-         */
-        void SetScroll(uint8_t *data)
-        { 
-            memcpy(&scroll, data, sizeof(bool));
-        }
+        bool GetScroll() { return board_rx_.scroll; } // 能否小陀螺 true: 不能小陀螺 false: 能小陀螺（遥控器模式下）
+        float GetTargetVx() { return board_rx_.target_vx; } // 目标 x 线速度 (m/s)
+        float GetTargetVy() { return board_rx_.target_vy; } // 目标 y 线速度 (m/s)
+        float GetTargetWz() { return board_rx_.target_wz; } // 目标角速度 (rad/s)
 
-        /**
-         * @brief 获取云台角度
-         * @return 云台角度值(弧度单位)
-         */
-        float GetYawAngle() { return YawAngal; } //弧度
-
-        /**
-         * @brief 获取滚轮状态
-         * @return 滚轮开关状态
-         */
-        bool GetScroll() { return scroll; }
     private:
         BSP::WATCH_STATE::StateWatch statewatch_;  // 连接状态监视器
-        float YawAngal;                            // 云台角度(弧度)
-        bool scroll;                               // 能否小陀螺 true: 不能小陀螺 false: 能小陀螺（遥控器模式下）
+
+        // 角度滤波器状态
+        bool   yaw_filter_init_ = false;
+        float  yaw_filtered_ = 0.0f;
+        float  yaw_last_raw_ = 0.0f;
+        float  yaw_rate_ = 0.0f;       // 角速度 (rad/周期)
+        uint16_t yaw_cycles_ = 0;      // 自上次更新以来的周期数
 };
 
 /**

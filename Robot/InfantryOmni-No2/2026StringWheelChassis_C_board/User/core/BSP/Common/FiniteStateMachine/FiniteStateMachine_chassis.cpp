@@ -18,6 +18,8 @@ static const char* State_Names[STATUS_COUNT] = {
     "STOP",
     "FOLLOW", 
     "NOTFOLLOW",
+    "NAVIGATION"
+
 };
 
 /**
@@ -89,7 +91,8 @@ void Chassis_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online
     // 左中 (3)
     else if (StateLeft == 3)
     {
-        if (StateRight == 1) State_chassis = FOLLOW;         // 左中右上 → 跟随
+        //if (StateRight == 1) State_chassis = FOLLOW;         // 左中右上 → 跟随
+        if (StateRight == 1) State_chassis = NAVIGATION;        // 左中右上 → 导航
         else if (StateRight == 3)   // 左中右中 → 键鼠
         {
             if(alphabet[16])    // q为真则跟随

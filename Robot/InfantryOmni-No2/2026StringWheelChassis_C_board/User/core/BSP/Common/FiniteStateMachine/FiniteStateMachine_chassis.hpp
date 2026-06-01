@@ -29,6 +29,7 @@ enum Enum_Chassis_States
     STOP = 0,      // 停止状态
     FOLLOW,        // 跟随状态
     NOTFOLLOW,     // 非跟随状态
+    NAVIGATION,    // 导航状态
     STATUS_COUNT   // 状态数量
 };
 

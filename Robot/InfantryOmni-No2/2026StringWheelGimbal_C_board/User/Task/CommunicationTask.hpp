@@ -75,6 +75,8 @@ class BoardCommunication
 
         // ──── 上行数据访问 (底盘→云台) ────
 
+        float GetChassisX()   const { return board_rx_.x; }
+        float GetChassisY()   const { return board_rx_.y; }
         float GetChassisYaw() const { return board_rx_.yaw; }
         float GetChassisVx()  const { return board_rx_.vx; }
         float GetChassisVy()  const { return board_rx_.vy; }

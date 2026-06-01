@@ -18,7 +18,7 @@ static const char* State_Names[STATUS_COUNT] = {
     "STOP",
     "VISION", 
     "MANUAL",
-    "KEYBOARD"
+    "NAVIGATION"
 };
 
 /**
@@ -113,6 +113,10 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
             {
                 State_gimbal = MANUAL;
             }
+            break;
+
+        case NAVIGATION:
+
             break;
         
         default:

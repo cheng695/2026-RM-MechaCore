@@ -29,7 +29,7 @@ enum Enum_Gimbal_States
     STOP = 0,      // 停止状态
     VISION,        // 视觉状态
     MANUAL,        // 普通状态
-    KEYBOARD,      // 键盘控制状态
+    NAVIGATION,      // 导航状态
     STATUS_COUNT   // 状态数量
 };
 

@@ -1,0 +1,7 @@
+device STM32F407IG
+si 1
+speed 8000
+loadfile F:\RCIA\2026-RM-MechaCore\Robot\InfantryOmni-No2\2026StringWheelChassis_C_board\build\Debug\2026StringWheelChassis_C_board.hex
+r
+g
+exit

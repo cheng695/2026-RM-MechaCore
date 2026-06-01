@@ -205,6 +205,7 @@ template <uint8_t N> class DjiMotorBase : public MotorBase<N>
 
 
   public:
+    const volatile DjiMotorfeedback *debug_fb() const { return feedback_; } // Ozone watch
     Parameters params_; // 转国际单位参数列表
 
 };
