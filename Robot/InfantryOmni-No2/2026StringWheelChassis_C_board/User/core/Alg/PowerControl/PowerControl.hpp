@@ -387,8 +387,8 @@ namespace ALG::PowerControl
              */
             PowerControlStrategy(float abundanceline)
             {
-                last_valid_limit = 60.0f; // 默认功率限制 (W)
-                input_limit = 60.0f;      // 初始功率限制 (W)
+                last_valid_limit = 120.0f; // 默认功率限制 (W)
+                input_limit = 120.0f;      // 初始功率限制 (W)
                 input_energy = 0.0f;      // 初始能量反馈 (J)
                 AbundanceLine = abundanceline;
             }
@@ -410,9 +410,9 @@ namespace ALG::PowerControl
                 if (isSupercapOnline && (!isRefereeOnline || alphabet[5]))
                 {
                     input_limit = last_valid_limit;
-                    if(input_limit < 60.0f)
+                    if(input_limit < 120.0f)
                     {
-                        input_limit = 60.0f;
+                        input_limit = 120.0f;
                     }
                     input_energy = supercap_energy;
                 }
@@ -435,9 +435,9 @@ namespace ALG::PowerControl
                 else if (!isSupercapOnline && (!isRefereeOnline || alphabet[5]))
                 {
                     input_limit = last_valid_limit;
-                    if(input_limit < 60.0f)
+                    if(input_limit < 120.0f)
                     {
-                        input_limit = 60.0f;
+                        input_limit = 120.0f;
                     }
                     input_energy = 0.0f;
                 }

@@ -18,7 +18,7 @@ Chassis_FSM chassis_fsm;    // 底盘有限状态机
 
 /* 底盘解算 -------------------------------------------------------------------------------------------------*/
 float wheel_azimuth[4] = {3*PI_/4, 5*PI_/4, 7*PI_/4, PI_/4};                // 安装位置
-float phase_offset[4] = {0.2825f, -2.4902f,4.2140f, 3.7968f};         // 舵向初始角
+float phase_offset[4] = {0.2825f, -2.4902f,-1.5221f, 3.7968f};         // 舵向初始角
 Alg::CalculationBase::String_IK string_ik(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 运动学逆解算
 Alg::CalculationBase::String_FK string_fk(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 运动学正解算
 Alg::CalculationBase::String_ID string_id(0.22f, 0.09f, wheel_azimuth, phase_offset);  // 动力学逆解算
@@ -354,21 +354,36 @@ void SetTarget()
             break;
             case NAVIGATION:
                 {
-                    // 导航模式：目标值已是底盘系真实速度(m/s, rad/s)，无需旋转矩阵和斜坡规划
-                    float vx_target = Cboard.GetTargetVx();
-                    float vy_target = Cboard.GetTargetVy();
+                    // 导航目标值（底盘系真实速度 m/s, rad/s）
+                    float vx_target = -Cboard.GetTargetVx();
+                    float vy_target = -Cboard.GetTargetVy();
                     float vw_target = Cboard.GetTargetWz();
+
+                    // 遥控器并联输入（底盘系直接叠加，无需旋转矩阵）
+                    float rc_vx = DT7.get_left_x();
+                    float rc_vy = -DT7.get_left_y();
+                    float rc_vw = DT7.get_scroll_();
+
+                    if (Cboard.GetScroll() == true || fabs(rc_vw) <= 0.05f)
+                    {
+                        rc_vw = 0.0f;
+                    }
+
+                    // 并联叠加（遥控器直译为底盘系速度）
+                    vx_target += rc_vy * 5.3f;
+                    vy_target += rc_vx * 5.3f;
+                    vw_target += rc_vw * 15.0f;
 
                     board[0] = vx_target;
                     board[1] = vy_target;
                     board[2] = vw_target;
 
-                    // 速度限幅（同 LimitChassisVector 逻辑，但输入已是真实单位）
+                    // 速度限幅
                     float vw_eq = fabsf(vw_target) * 0.22f;
                     float v_xy  = sqrtf(vx_target * vx_target + vy_target * vy_target);
                     if (v_xy + vw_eq > 5.2f)
                     {
-                        float scale = 5.2f / (v_xy + vw_eq);
+                        float scale = 1.0f / (v_xy + vw_eq);
                         vx_target *= scale;
                         vy_target *= scale;
                         vw_target *= scale;
@@ -718,8 +733,8 @@ void NavigationParser()
     navigation.Vy = string_fk_odometer_v.GetChassisVy();
     navigation.Wz = string_fk_odometer_v.GetChassisVw();
 
-    navigation.X += navigation.Vx * dt;
-    navigation.Y += navigation.Vy * dt;
+    navigation.X -= navigation.Vx * dt;
+    navigation.Y -= navigation.Vy * dt;
     navigation.Yaw += navigation.Wz * dt;
 }
 

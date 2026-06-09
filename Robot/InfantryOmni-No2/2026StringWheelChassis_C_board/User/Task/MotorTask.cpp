@@ -67,7 +67,7 @@ static void BoardCommunicationTX()
     // 里程计
     uplink_tx.x   = navigation.X;
     uplink_tx.y   = navigation.Y;
-    uplink_tx.yaw = navigation.Yaw;
+    uplink_tx.yaw = 0.0f;//navigation.Yaw;
 
     // 速度
     uplink_tx.vx = static_cast<float>(string_fk.GetChassisVx());

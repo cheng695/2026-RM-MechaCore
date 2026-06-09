@@ -140,8 +140,24 @@ float hz_to_angle(float fire_hz)
 // }
 
 /**
+ * @brief 导航模式 Pitch 正弦波扫描目标
+ *
+ * 2Hz 正弦, 幅值限制在 [-0.3491, 0.5236] rad 范围内
+ *
+ * @param t 时间 (秒), 由调用方按控制周期累加
+ * @return float 目标 Pitch 角度 (rad)
+ */
+float nav_sine_pitch(float t)
+{
+    const float center    = (-0.3f + 0.5f) / 2.0f; // 0.1 rad
+    const float amplitude = 0.4f;                   // 不超出 [-0.3, 0.5]
+    const float freq      = 1.0f;                  // 0.25 Hz, 周期 4s
+    return center + amplitude * sinf(2.0f * 3.14159f * freq * t);
+}
+
+/**
  * @brief 设置云台和发射机构的目标值
- * 
+ *
  * 根据当前工作模式设置相应的目标值
  */
 void SetTarget()
@@ -183,10 +199,20 @@ void SetTarget()
             }
             break;
         case VISION:    // 视觉模式
-            gimbal_target.target_yaw = -vision.getTarYaw() * 3.14159f / 180.0f;     // 弧度rad 
-            gimbal_target.target_pitch = vision.getTarPitch() * 3.14159f / 180.0f;  // 弧度rad 
+            gimbal_target.target_yaw = -vision.getTarYaw() * 3.14159f / 180.0f;     // 弧度rad
+            gimbal_target.target_pitch = vision.getTarPitch() * 3.14159f / 180.0f;  // 弧度rad
             gimbal_target.target_pitch = std::clamp(gimbal_target.target_pitch, -0.3491f, 0.5236f);  // 弧度rad
             break;
+        case NAVIGATION: // 导航模式
+        {
+            static float nav_time = 0.0f;
+            nav_time += 0.005f; // 200Hz 控制周期
+
+            // Yaw: 角度闭环匀速旋转, 每周期累加角度增量
+            gimbal_target.target_yaw += 0.01f; // 30°/s
+            gimbal_target.target_pitch = nav_sine_pitch(nav_time);
+            break;
+        }
         default:
             gimbal_target.target_yaw = HI12.GetAddYaw() * 3.14159f / 180.0f;   // 弧度rad
             gimbal_target.target_pitch = HI12.GetAngle(1) * 3.14159f / 180.0f; // 弧度rad
@@ -374,6 +400,41 @@ void gimbal_vision()
 }
 
 /**
+ * @brief 云台导航模式控制函数
+ *
+ * Yaw 角度闭环匀速旋转, Pitch 正弦波角度闭环扫描
+ */
+void gimbal_navigation()
+{
+    gimbal_output.motor_pitch_enable = false;
+    gimbal_output.motor_yaw_enable   = false;
+
+    yaw_angle_pid.reset();
+    yaw_velocity_pid.reset();
+    pitch_angle_pid.reset();
+    pitch_velocity_pid.reset();
+
+    gimbal_output.out_yaw = 0.0f;
+    gimbal_output.out_pitch = 0.0f;
+    // gimbal_output.motor_pitch_enable = true; // 通知 MotorTask 使能 4310 Pitch
+    // gimbal_output.motor_yaw_enable   = true; // 通知 MotorTask 使能 4310 Yaw
+
+    // // Yaw 角度PID 跟踪持续递增的目标
+    // yaw_angle_pid.UpDate(gimbal_target.target_yaw, HI12.GetAddYaw() * 3.14159f / 180.0f);
+    // gimbal_output.out_yaw_angle = yaw_angle_pid.getOutput();
+    // gimbal_output.out_yaw = 0.0f;
+    // gimbal_output.out_yaw = std::clamp(gimbal_output.out_yaw, -3.0f, 3.0f);
+
+    // // Pitch 角度PID 跟踪正弦波目标
+    // pitch_angle_pid.UpDate(gimbal_target.target_pitch, HI12.GetAngle(1) * 3.14159f / 180.0f);
+    // gimbal_output.out_pitch_angle = pitch_angle_pid.getOutput();
+    // gravity_forward.GravityFeedforward(HI12.GetPitch_180());
+    // float gravity_comp = gravity_forward.getFeedforward();
+    // gimbal_output.out_pitch = gravity_comp;
+    // gimbal_output.out_pitch = std::clamp(gimbal_output.out_pitch, -3.0f, 3.0f);
+}
+
+/**
  * @brief 云台主控制循环
  * 
  * @param left_sw 遥控器左开关状态
@@ -413,6 +474,9 @@ void main_loop_gimbal(uint8_t left_sw, uint8_t right_sw, bool is_online)
             break;
         case VISION:    // 视觉模式
             gimbal_vision();
+            break;
+        case NAVIGATION: // 导航模式
+            gimbal_navigation();
             break;
         default:        // 默认模式（停止）
             gimbal_stop();
@@ -485,8 +549,6 @@ void launch_jam()
  */
 void main_loop_launch()
 {
-    SetTarget();
-
     // 基于 Action 和 Mode 执行控制函数
     switch(launch_fsm.Get_Now_State())
     {

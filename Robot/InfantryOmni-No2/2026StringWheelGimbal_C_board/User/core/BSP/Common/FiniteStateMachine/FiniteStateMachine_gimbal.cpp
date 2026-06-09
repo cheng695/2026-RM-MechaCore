@@ -95,6 +95,10 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
                     State_gimbal = VISION;
                 }
             }
+            else if(left == 3 && right == 1)
+            {
+                State_gimbal = NAVIGATION;
+            }
             else if(left == 3 && right == 3)
             {
                 if(vision_flag /*&& 按下右键（后面再加）*/)
@@ -105,7 +109,11 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
             break;
 
         case VISION:
-            if(left != 1)
+            if(left == 3 && right == 1)
+            {
+                State_gimbal = NAVIGATION;
+            }
+            else if(left != 1)
             {
                 State_gimbal = MANUAL;
             }
@@ -116,7 +124,10 @@ void Gimbal_FSM::StateUpdate(uint8_t left, uint8_t right, bool equipment_online,
             break;
 
         case NAVIGATION:
-
+            if(left != 3 || right != 1)
+            {
+                State_gimbal = MANUAL;
+            }
             break;
         
         default:
