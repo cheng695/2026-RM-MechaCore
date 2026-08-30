@@ -7,6 +7,8 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = $PSScriptRoot
 $BuildDir = Join-Path $ProjectRoot "build\$BuildType"
 
+Push-Location $ProjectRoot
+try {
 Write-Host "=== 2026StringWheelChassis_C_board Build ===" -ForegroundColor Cyan
 Write-Host "Build type: $BuildType" -ForegroundColor Cyan
 Write-Host ""
@@ -36,3 +38,7 @@ Write-Host "Output:" -ForegroundColor Cyan
 Write-Host "  ELF: $elf"
 Write-Host "  HEX: $hex"
 Write-Host "  BIN: $bin"
+}
+finally {
+    Pop-Location
+}

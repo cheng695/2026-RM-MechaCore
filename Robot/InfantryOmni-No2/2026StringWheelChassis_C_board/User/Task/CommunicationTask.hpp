@@ -3,15 +3,15 @@
 
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
-#include "../User/core/HAL/UART/uart_hal.hpp"
-#include "../User/core/BSP/RemoteControl/DT7.hpp"
-#include "../User/core/BSP/Common/StateWatch/state_watch.hpp"
-#include "../User/core/BSP/Common/StateWatch/buzzer_manager.hpp"
-#include "../User/core/HAL/CAN/can_hal.hpp"
+#include "buzzer_manager.hpp"
+#include "can_hal.hpp"
+#include "DT7.hpp"
+#include "state_watch.hpp"
+#include "uart_hal.hpp"
 #include <cstring>
-#include "../User/core/APP/Referee/RM_RefereeSystem.h"
+#include "RM_RefereeSystem.h"
 
-// ──── 板间 CAN 通讯协议 ──────────────────────────────────────────────────
+// ──── 板间通讯协议 ──────────────────────────────────────────────────
 /**
  * @brief 板间通讯类
  * @details 负责处理与上位机板子之间的串口通讯，包括连接状态监测、数据解析等功能
@@ -20,29 +20,19 @@ class BoardCommunication
 {
     public:
         #pragma pack(1)
-        // 发送：底盘→云台 上行数据帧 (CAN ID 0x310, 28 字节)
+        // 发送：底盘→云台 上行数据帧 
         struct BoardTX
         {
-            float x;           // 4  里程计 x (m)
-            float y;           // 4  里程计 y (m)
-            float yaw;         // 4  偏航角 (rad), CCW 为正
-            float vx;          // 4  底盘系 x 线速度 (m/s)
-            float vy;          // 4  底盘系 y 线速度 (m/s)
-            float wz;          // 4  角速度 (rad/s)
-            
             uint16_t shooter_barrel_cooling_value;  // 2  枪口每秒冷却值
             uint16_t shooter_barrel_heat_limit;     // 2  枪口热量上限
         };
         
-        // 接收：上位机→底盘 下行数据帧 (CAN ID 0x311, 35 字节)
+        // 接收：云台→底盘 下行数据帧
         struct BoardRX
         {
             uint8_t  rc_data[18];   // 18  遥控器数据转发 (DT7Rx_buffer)
             float    angle;         // 4   Motor6020 角度 (rad)
             bool     scroll;        // 1   发射机构 scroll 状态
-            float    target_vx;     // 4   底盘目标 x 线速度 (m/s)
-            float    target_vy;     // 4   底盘目标 y 线速度 (m/s)
-            float    target_wz;     // 4   底盘目标角速度 (rad/s)
         };
         #pragma pack()
 
@@ -87,69 +77,22 @@ class BoardCommunication
             }
             return statewatch_.GetStatus() == BSP::WATCH_STATE::Status::ONLINE;
         }
-
-        float GetYawAngle() { return board_rx_.angle; } // 云台角度(弧度) 原始值
-
-        /**
-         * @brief 获取滤波后的云台角度
-         * @details CAN 通讯频率低于控制频率，角度呈阶梯状更新。
-         *          此函数检测新数据时估算角速度，无新数据时用角速度外推，使角度平滑变化。
-         * @return 滤波后的云台角度(弧度)
-         */
-        float GetFilteredYawAngle()
+        
+        void SetYawAngle(const uint8_t* data)
         {
-            float raw = board_rx_.angle;
-
-            if (!yaw_filter_init_)
-            {
-                yaw_filtered_ = raw;
-                yaw_last_raw_ = raw;
-                yaw_cycles_ = 0;
-                yaw_filter_init_ = true;
-                return raw;
-            }
-
-            if (raw != yaw_last_raw_)
-            {
-                // 新数据到达：计算瞬时角速度并低通滤波
-                float delta = raw - yaw_last_raw_;
-                if (delta > 3.14159265f)       delta -= 6.28318531f;
-                else if (delta < -3.14159265f) delta += 6.28318531f;
-
-                if (yaw_cycles_ > 0)
-                {
-                    float instant_rate = delta / (float)yaw_cycles_;  // rad/周期
-                    yaw_rate_ = yaw_rate_ * 0.8f + instant_rate * 0.2f;
-                }
-
-                yaw_last_raw_ = raw;
-                yaw_cycles_ = 0;
-                yaw_filtered_ = raw;
-            }
-            else
-            {
-                // 无新数据：用估算角速度外推
-                yaw_cycles_++;
-                yaw_filtered_ = yaw_last_raw_ + yaw_rate_ * (float)yaw_cycles_;
-            }
-
-            return yaw_filtered_;
+            std::memcpy(&board_rx_.angle, data, sizeof(float));
         }
 
+        void SetScroll(const uint8_t* data)
+        {
+            std::memcpy(&board_rx_.scroll, data, sizeof(bool));
+        }
+
+        float GetYawAngle() { return board_rx_.angle; } // 云台角度(弧度) 原始值
         bool GetScroll() { return board_rx_.scroll; } // 能否小陀螺 true: 不能小陀螺 false: 能小陀螺（遥控器模式下）
-        float GetTargetVx() { return board_rx_.target_vx; } // 目标 x 线速度 (m/s)
-        float GetTargetVy() { return board_rx_.target_vy; } // 目标 y 线速度 (m/s)
-        float GetTargetWz() { return board_rx_.target_wz; } // 目标角速度 (rad/s)
 
     private:
         BSP::WATCH_STATE::StateWatch statewatch_;  // 连接状态监视器
-
-        // 角度滤波器状态
-        bool   yaw_filter_init_ = false;
-        float  yaw_filtered_ = 0.0f;
-        float  yaw_last_raw_ = 0.0f;
-        float  yaw_rate_ = 0.0f;       // 角速度 (rad/周期)
-        uint16_t yaw_cycles_ = 0;      // 自上次更新以来的周期数
 };
 
 /**
@@ -306,6 +249,5 @@ class Supercapacitor
 };
 
 extern uint8_t BoardRx[23];
-extern Supercapacitor supercap; // 超电类声明
 
 #endif

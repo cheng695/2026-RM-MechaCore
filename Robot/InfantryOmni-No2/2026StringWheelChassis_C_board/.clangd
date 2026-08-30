@@ -1,5 +1,6 @@
 CompileFlags:
+  CompilationDatabase: build/Debug
   Remove:
     - -fstack-usage
   Add:
-    - --gcc-toolchain=D:/CodeTools/Compiler/arm-none-eabi-gcc
+    - --gcc-toolchain=C:/Users/WHC/.eide/tools/gcc_arm

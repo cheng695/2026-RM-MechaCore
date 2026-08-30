@@ -1,7 +1,7 @@
 #include "MotorTask.hpp"
 #include "CommunicationTask.hpp"
 #include "SerialTask.hpp"
-#include "../core/APP/Referee/RM_RefereeSystem.h"
+#include "RM_RefereeSystem.h"
 
 /* CAN回调 ---------------------------------------------------------------------------------------------*/
 // fifo0
@@ -65,25 +65,8 @@ extern "C"
                 uart1.trigger_rx_callbacks(uart1_rx_buffer);
             }
         }
-
-        // // 遥控器
-        // else if(huart->Instance == USART3)
-        // {
-        //     HAL::UART::Data uart3_rx_buffer{DT7Rx_buffer, sizeof(DT7Rx_buffer)};
-        //     auto &uart3 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart3);
-            
-        //     if(huart == uart3.get_handle())
-        //     {
-        //         uart3.receive_dma_idle(uart3_rx_buffer);
-        //         uart3.trigger_rx_callbacks(uart3_rx_buffer);
-        //     }
-        // }
     }
 
-    // 定长数据接收
-    void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-    {
-    }
 
 /* 错误处理 ---------------------------------------------------------------------------------------------*/
     void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
@@ -125,12 +108,5 @@ extern "C"
             auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
             uart6.receive_dma_idle(uart6_rx_buffer);
         }
-        // else if (huart->Instance == USART3)  // 遥控器
-        // {
-        //     __HAL_UART_CLEAR_OREFLAG(huart);
-        //     HAL::UART::Data uart3_rx_buffer{DT7Rx_buffer, sizeof(DT7Rx_buffer)};
-        //     auto &uart3 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart3);
-        //     uart3.receive_dma_idle(uart3_rx_buffer);
-        // }
     }
 }

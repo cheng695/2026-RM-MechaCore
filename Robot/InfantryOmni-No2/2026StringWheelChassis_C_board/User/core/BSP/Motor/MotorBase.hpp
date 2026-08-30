@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "../user/core/BSP/Common/StateWatch/state_watch.hpp"
-#include "../user/core/BSP/Common/StateWatch/buzzer_manager.hpp"
-#include "../user/core/HAL/CAN/can_hal.hpp"
+#include "state_watch.hpp"
+#include "buzzer_manager.hpp"
+#include "can_hal.hpp"
 
 namespace BSP::Motor
 {

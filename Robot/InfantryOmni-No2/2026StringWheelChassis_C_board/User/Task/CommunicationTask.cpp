@@ -1,10 +1,6 @@
 #include "CommunicationTask.hpp"
-#include "../User/Task/MotorTask.hpp"
-#include "../User/Task/SerialTask.hpp"
-
-/* 实例通讯设备 ---------------------------------------------------------------------------------------------*/
-BoardCommunication Cboard;      // 板间通讯
-Supercapacitor supercap(0x666); // 超级电容
+#include "RobotContext.hpp"
+#include "SerialTask.hpp"
 
 /* 通讯数据缓存 ---------------------------------------------------------------------------------------------*/
 uint8_t BoardRx[23];    // 接收上板 (UART6 DT7 数据)
@@ -23,6 +19,10 @@ void BoardCommunicationInit()
     uart6.receive_dma_idle(uart6_rx_buffer);
     uart6.register_rx_callback([](const HAL::UART::Data &data)
     {
+            Cboard.updateTimestamp();
+            DT7.parseData(data.buffer);
+            Cboard.SetYawAngle(data.buffer+18);
+            Cboard.SetScroll(data.buffer+22);
     });
 }
 
@@ -30,7 +30,6 @@ void BoardCommunicationInit()
  * @brief vofa发送
  *
  */
-
 void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6, float x7, float x8, float x9)
 {
     const uint8_t sendSize = sizeof(float); // 单浮点数占4字节
@@ -56,7 +55,7 @@ void UART_TX()
     auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
     HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)};
     uart6.transmit_dma(uart6_tx_buffer);
-    vofa_send(chassis_target.target_translation_x, string_fk.GetChassisVx(), chassis_target.target_translation_y, string_fk.GetChassisVy(), chassis_target.target_rotation, string_fk.GetChassisVw(), supercap.GetPower(), ext_power_heat_data_0x0202.chassis_power_buffer, 60.0f);
+    vofa_send(chassis_target.target_translation_x, omni_fk.GetChassisVx(), chassis_target.target_translation_y, omni_fk.GetChassisVy(), chassis_target.target_rotation, omni_fk.GetChassisVw(), supercap.GetPower(), ext_power_heat_data_0x0202.chassis_power_buffer, 60.0f);
 }
 
 

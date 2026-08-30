@@ -1,7 +1,7 @@
 #ifndef STRINGWHEEL_HPP
 #define STRINGWHEEL_HPP
 
-#include "../user/core/Alg/ChassisCalculation/CalculationBase.hpp"
+#include "CalculationBase.hpp"
 #include <math.h>
 
 #define M_PI 3.14159265358979323846

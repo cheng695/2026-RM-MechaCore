@@ -1,6 +1,6 @@
 #pragma once
-#include "../User/core/HAL/UART/uart_hal.hpp"
-#include "../User/core/APP/Referee/RM_RefereeSystemCRC.h"
+#include "uart_hal.hpp"
+#include "RM_RefereeSystemCRC.h"
 #define Win_W (1920)
 #define Win_H (1080)
 namespace RM_RefereeSystem

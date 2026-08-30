@@ -3,57 +3,15 @@
 
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
-#include "../User/Task/CommunicationTask.hpp"
-#include "../User/core/BSP/IMU/HI12_imu.hpp"
-#include "../User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_chassis.hpp"
-#include "../user/core/Alg/ChassisCalculation/StringWheel.hpp"
-#include "../User/core/Alg/PID/pid.hpp"
-#include "../User/core/BSP/Motor/Dji/DjiMotor.hpp"
-#include "../User/core/BSP/Motor/LK/Lk_motor.hpp"
-#include "../User/core/Alg/UtilityFunction/SlopePlanning.hpp"
-#include "../User/core/Alg/PowerControl/PowerControl.hpp"
 
-typedef struct 
-{
-    float target_translation_x;
-    float target_translation_y;
-    float target_rotation;
-}ControlTask;
+/*
+ * 底盘控制任务对外只暴露任务入口和初始化兼容接口。
+ * 底盘目标、输出、状态机等共享对象统一放在 RobotContext.hpp。
+ */
+void fsm_init();
 
-typedef struct
-{
-    float out_string[4];
-    float out_wheel[4];
-}Output_chassis;
-
-typedef struct 
-{
-    float X;
-    float Y;
-    float Yaw;
-    float Vx;
-    float Vy;
-    float Wz;
-}Navigation;
-
-extern BSP::Motor::Dji::GM3508<4> Motor3508;
-extern BSP::Motor::LK::LK4005<4> Motor4005;
-
-extern BSP::IMU::HI12_float HI12;
-extern BSP::REMOTE_CONTROL::RemoteController DT7;
-extern BoardCommunication Cboard;
-
-extern ControlTask chassis_target;
-extern Output_chassis chassis_output;
-extern Navigation navigation;
-extern float motor_direction[4];
-extern float motor_wheel[4];
-
-extern Alg::CalculationBase::String_FK string_fk;
-extern Alg::CalculationBase::String_FK string_fk_odometer_v;
-extern Alg::Utility::SlopePlanning string_target[2];
-
-extern ALG::PowerControl::PowerControl<4> power4005;
-extern ALG::PowerControl::EnergyRing energy_ring;
+extern "C" {
+void Control(void const *argument);
+}
 
 #endif

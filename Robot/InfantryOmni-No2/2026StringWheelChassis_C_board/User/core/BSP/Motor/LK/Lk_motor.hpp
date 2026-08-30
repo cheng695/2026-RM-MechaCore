@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "../user/core/BSP/Motor/MotorBase.hpp"
-#include "../user/core/HAL/CAN/can_hal.hpp"
+#include "MotorBase.hpp"
+#include "can_hal.hpp"
 
 namespace BSP::Motor::LK
 {

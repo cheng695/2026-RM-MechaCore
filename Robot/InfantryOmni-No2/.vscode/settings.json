@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "D:/UserWHC/RCIA/2026-RM-MechaCore/Robot/InfantryOmni-No2/2026StringWheelGimbal_C_board"
+    "cmake.sourceDirectory": "${workspaceFolder}/2026StringWheelChassis_C_board",
+    "clangd.arguments": [
+        "--query-driver=C:/Users/WHC/.eide/tools/gcc_arm/bin/arm-none-eabi-*"
+    ]
 }

@@ -1,7 +1,7 @@
 #ifndef POWERCONTROL
 #define POWERCONTROL
 
-#include "../User/core/Alg/PowerControl/PowerControlBase.hpp"
+#include "PowerControlBase.hpp"
 
 namespace ALG::PowerControl
 {
@@ -400,14 +400,15 @@ namespace ALG::PowerControl
              * @param referee_limit 裁判系统功率限制
              * @param referee_buffer 裁判系统缓冲能量
              * @param supercap_energy 超电剩余能量
+             * @param force_referee_untrusted 裁判系统是否被强制信任
              */
-            void Update(bool isSupercapOnline, bool isRefereeOnline, float referee_limit, float referee_buffer, float supercap_energy, bool *alphabet)
+            void Update(bool isSupercapOnline, bool isRefereeOnline, float referee_limit, float referee_buffer, float supercap_energy, bool force_referee_untrusted)
             {
                 // 若裁判系统在线，更新裁判系统功率上限
                 if (isRefereeOnline) last_valid_limit = referee_limit;
 
                 // 1. 电容连接，裁判断连
-                if (isSupercapOnline && (!isRefereeOnline || alphabet[5]))
+                if (isSupercapOnline && (!isRefereeOnline || force_referee_untrusted))
                 {
                     input_limit = last_valid_limit;
                     if(input_limit < 120.0f)
@@ -432,7 +433,7 @@ namespace ALG::PowerControl
                     }
                 }
                 // 3. 双断连
-                else if (!isSupercapOnline && (!isRefereeOnline || alphabet[5]))
+                else if (!isSupercapOnline && (!isRefereeOnline || force_referee_untrusted))
                 {
                     input_limit = last_valid_limit;
                     if(input_limit < 120.0f)

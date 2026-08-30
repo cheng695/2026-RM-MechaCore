@@ -51,6 +51,8 @@ set(GLOBAL_INC
 # ============================================================
 set(USER_INC
     User
+    User/Module
+    User/Module/Chassis
     User/Task
     User/core
     User/core/APP/Referee
@@ -63,7 +65,6 @@ set(USER_INC
     User/core/Alg/PowerControl
     User/core/Alg/PowerControl-TestVersion
     User/core/Alg/UtilityFunction
-    User/core/BSP/Common/FiniteStateMachine
     User/core/BSP/Common/StateWatch
     User/core/BSP/IMU
     User/core/BSP/Motor
@@ -158,6 +159,11 @@ set(FREERTOS_SRC
 # User application sources
 # ============================================================
 set(USER_SRC
+    User/Module/RobotContext.cpp
+    User/Module/Chassis/ChassisController.cpp
+    User/Module/Chassis/ChassisEventDetector.cpp
+    User/Module/Chassis/ChassisPlanner.cpp
+    User/Module/Chassis/ChassisStateMachine.cpp
     User/Task/Callback.cpp
     User/Task/CommunicationTask.cpp
     User/Task/ControlTask.cpp
@@ -172,9 +178,6 @@ set(USER_SRC
     User/core/Alg/FSM/alg_fsm.cpp
     User/core/Alg/PID/pid.cpp
     User/core/Alg/UtilityFunction/SlopPlanning.cpp
-    User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_chassis.cpp
-    User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_gimbal.cpp
-    User/core/BSP/Common/FiniteStateMachine/FiniteStateMachine_launch.cpp
     User/core/BSP/Common/StateWatch/buzzer_manager.cpp
     User/core/BSP/Common/StateWatch/state_watch.cpp
     User/core/BSP/RemoteControl/DT7.cpp

@@ -3,8 +3,8 @@
 
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
-#include "../User/core/APP/Referee/RM_RefereeSystem.h"
-#include "../User/core/APP/Referee/RM_RefereeSystemCRC.h"
+#include "RM_RefereeSystem.h"
+#include "RM_RefereeSystemCRC.h"
 #include <string.h>
 
 // 超电位置
