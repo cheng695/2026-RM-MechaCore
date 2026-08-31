@@ -1,5 +1,7 @@
 #include "can_device_impl.hpp"
 
+#include <algorithm>
+
 namespace HAL::CAN
 {
 
@@ -31,6 +33,68 @@ void CanDevice::start()
 
 bool CanDevice::send(const Frame &frame)
 {
+    /* 先发送已经排队的高优先级帧，避免普通帧插队。 */
+    process_tx_queue();
+
+    if (send_now(frame))
+    {
+        return true;
+    }
+
+    const uint8_t frame_priority = get_frame_priority(frame);
+
+    /* 控制帧过期后没有意义，因此同 ID 帧直接覆盖为最新值。 */
+    for (auto &pending : tx_queue_)
+    {
+        if (pending.id == frame.id &&
+            pending.is_extended_id == frame.is_extended_id)
+        {
+            /* 安全帧不能被普通控制帧覆盖。 */
+            if (get_frame_priority(pending) <= frame_priority)
+            {
+                pending = frame;
+            }
+            return true;
+        }
+    }
+
+    if (tx_queue_.size() >= TX_QUEUE_MAX)
+    {
+        /* 队列只保存最新控制状态，满时丢弃最旧的普通帧。 */
+        tx_queue_.pop_front();
+    }
+    auto insert_position = std::find_if(
+        tx_queue_.begin(), tx_queue_.end(),
+        [&frame](const Frame &pending)
+        {
+            return get_frame_priority(pending) > get_frame_priority(frame);
+        });
+    tx_queue_.insert(insert_position, frame);
+    return true;
+}
+
+uint8_t CanDevice::get_frame_priority(const Frame &frame) const
+{
+    /* 达妙命令帧：FC=使能，FD=失能，FB=清错误，均需要优先发送。 */
+    if (frame.dlc == 8)
+    {
+        bool prefix_is_ff = true;
+        for (uint8_t i = 0; i < 7; ++i)
+        {
+            prefix_is_ff = prefix_is_ff && (frame.data[i] == 0xFF);
+        }
+        if (prefix_is_ff &&
+            (frame.data[7] == 0xFB || frame.data[7] == 0xFC || frame.data[7] == 0xFD))
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+bool CanDevice::send_now(const Frame &frame)
+{
     if (HAL_CAN_GetTxMailboxesFreeLevel(handle_) == 0)
     {
         return false;
@@ -61,6 +125,19 @@ bool CanDevice::send(const Frame &frame)
     }
 
     return true;
+}
+
+void CanDevice::process_tx_queue()
+{
+    while (!tx_queue_.empty() &&
+           HAL_CAN_GetTxMailboxesFreeLevel(handle_) > 0)
+    {
+        if (!send_now(tx_queue_.front()))
+        {
+            break;
+        }
+        tx_queue_.pop_front();
+    }
 }
 
 bool CanDevice::receive(Frame &frame)

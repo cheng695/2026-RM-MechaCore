@@ -11,6 +11,8 @@
 
 #pragma once
 #include "../interface/can_device.hpp"
+#include <cstddef>
+#include <deque>
 #include <vector>
 
 namespace HAL::CAN
@@ -34,6 +36,7 @@ class CanDevice : public ICanDevice
     void init() override;
     void start() override;
     bool send(const Frame &frame) override;
+    void process_tx_queue() override;
     bool receive(Frame &frame) override;
     CAN_HandleTypeDef *get_handle() const override;
 
@@ -49,6 +52,14 @@ class CanDevice : public ICanDevice
 
     // 存储注册的回调函数
     std::vector<RxCallback> rx_callbacks_;
+
+    /* 邮箱满时暂存的待发送帧；同一个 CAN ID 只保留最新一帧。 */
+    std::deque<Frame> tx_queue_;
+
+    static constexpr size_t TX_QUEUE_MAX = 16;
+
+    bool send_now(const Frame &frame);
+    uint8_t get_frame_priority(const Frame &frame) const;
 
     // 配置过滤器
     void configure_filter();

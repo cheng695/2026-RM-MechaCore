@@ -1,9 +1,12 @@
 #include "CommunicationTask.hpp"
 #include "RobotContext.hpp"
 #include "SerialTask.hpp"
+#include "uart_device.hpp"
+#include <cstdint>
 
 /* 通讯数据缓存 ---------------------------------------------------------------------------------------------*/
-uint8_t BoardRx[23];    // 接收上板 (UART6 DT7 数据)
+uint8_t BoardRx[23];    // 接收上板 (UART1 DT7 数据)
+uint8_t BoardTx[4];     // 发送上板 (UART1 底盘数据)
 uint8_t send_str2[sizeof(float) * 11];  // 发送vofa
 
 /* 板间通讯 ------------------------------------------------------------------------------------------------*/
@@ -13,11 +16,11 @@ uint8_t send_str2[sizeof(float) * 11];  // 发送vofa
  */
 void BoardCommunicationInit()
 {
-    auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
+    auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
+    HAL::UART::Data uart1_rx_buffer{BoardRx, sizeof(BoardRx)};
 
-    uart6.receive_dma_idle(uart6_rx_buffer);
-    uart6.register_rx_callback([](const HAL::UART::Data &data)
+    uart1.receive_dma_idle(uart1_rx_buffer);
+    uart1.register_rx_callback([](const HAL::UART::Data &data)
     {
             Cboard.updateTimestamp();
             DT7.parseData(data.buffer);
@@ -51,6 +54,11 @@ void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6, float
 
 void UART_TX()
 {
+    // 板间通讯
+    auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
+    HAL::UART::Data uart1_tx_buffer{BoardTx, sizeof(BoardTx)};
+    uart1.transmit_dma(uart1_tx_buffer);
+
     // vofa
     auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
     HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)};

@@ -50,7 +50,7 @@ CDC 是连续字节流。miniPC 端按首字节分流：
 | 25 | uint32 | time | `HAL_GetTick()` (ms) |
 | 29 | uint16 | checksum | 前 29 字节累加和低 16 位 |
 
-> 数据来源：底盘 CAN 上行 (0x310)。调用侧通过 `navigation.setOdom()` / `navigation.setVel()` 填入。
+> 数据来源：底盘串口上行。调用侧通过 `navigation.setOdom()` / `navigation.setVel()` 填入。
 
 ---
 

@@ -978,24 +978,24 @@
               <FilePath>..\User\core\BSP\Common\StateWatch\state_watch.hpp</FilePath>
             </File>
             <File>
-              <FileName>FiniteStateMachine_gimbal.cpp</FileName>
+              <FileName>GimbalStateMachine.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.cpp</FilePath>
+              <FilePath>..\User\Module\Gimbal\GimbalStateMachine.cpp</FilePath>
             </File>
             <File>
-              <FileName>FiniteStateMachine_gimbal.hpp</FileName>
+              <FileName>GimbalStateMachine.hpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_gimbal.hpp</FilePath>
+              <FilePath>..\User\Module\Gimbal\GimbalStateMachine.hpp</FilePath>
             </File>
             <File>
-              <FileName>FiniteStateMachine_launch.cpp</FileName>
+              <FileName>LaunchStateMachine.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.cpp</FilePath>
+              <FilePath>..\User\Module\Launch\LaunchStateMachine.cpp</FilePath>
             </File>
             <File>
-              <FileName>FiniteStateMachine_launch.hpp</FileName>
+              <FileName>LaunchStateMachine.hpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\User\core\BSP\Common\FiniteStateMachine\FiniteStateMachine_launch.hpp</FilePath>
+              <FilePath>..\User\Module\Launch\LaunchStateMachine.hpp</FilePath>
             </File>
             <File>
               <FileName>HI12_imu.hpp</FileName>

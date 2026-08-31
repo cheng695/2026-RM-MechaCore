@@ -187,6 +187,7 @@ namespace BSP::Motor::LK
             data[6] = (encoder_value >> 16) & 0xFF;
             data[7] = (encoder_value >> 24) & 0xFF;
 
+            memcpy(msd.data, data, 8);
             sendCAN(id);
         }
 
@@ -211,6 +212,7 @@ namespace BSP::Motor::LK
             data[6] = 0x00;
             data[7] = 0x00;
 
+            memcpy(msd.data, data, 8);
             sendCAN(id);
         }
 
@@ -222,7 +224,7 @@ namespace BSP::Motor::LK
             if (motor_index < 1 || motor_index > N) return;
 
             uint8_t data[8] = {0x88};
-                
+            memcpy(msd.data, data, 8);
             sendCAN(id);
         }
 
@@ -234,7 +236,7 @@ namespace BSP::Motor::LK
             if (motor_index < 1 || motor_index > N) return;
 
             uint8_t data[8] = {0x81};
-            
+            memcpy(msd.data, data, 8);
             sendCAN(id);
         }
 
@@ -246,7 +248,7 @@ namespace BSP::Motor::LK
             if (motor_index < 1 || motor_index > N) return;
 
             uint8_t data[8] = {0x9B};
-            
+            memcpy(msd.data, data, 8);
             sendCAN(id);
         }
 

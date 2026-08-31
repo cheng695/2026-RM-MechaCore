@@ -55,9 +55,17 @@ extern "C"
                 uart3.trigger_rx_callbacks(uart3_rx_buffer);
             }
         }
-        // 串口6
+        // 串口6 板间通讯
         else if(huart->Instance == USART6)
         {
+            HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
+            auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+            
+            if(huart == uart6.get_handle())
+            {
+                uart6.receive_dma_idle(uart6_rx_buffer);
+                uart6.trigger_rx_callbacks(uart6_rx_buffer);
+            }
         }
     }
 
@@ -85,6 +93,9 @@ extern "C"
             }
             else if(huart->Instance == USART6)
             {
+                HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
+                auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+                uart6.receive_dma_idle(uart6_rx_buffer);
             }
         }
     }

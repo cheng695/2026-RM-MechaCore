@@ -37,32 +37,32 @@ extern "C"
     void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     {
         // 板间通讯
-        if(huart->Instance == USART6)
+        if(huart->Instance == USART1)
         {
-            HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
-            auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+            HAL::UART::Data uart1_rx_buffer{BoardRx, sizeof(BoardRx)};
+            auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
             
-            if(huart == uart6.get_handle())
+            if(huart == uart1.get_handle())
             {
-                uart6.receive_dma_idle(uart6_rx_buffer);
-                uart6.trigger_rx_callbacks(uart6_rx_buffer);
+                uart1.receive_dma_idle(uart1_rx_buffer);
+                uart1.trigger_rx_callbacks(uart1_rx_buffer);
             }
         }
         // 裁判系统通讯
         else if (huart->Instance == USART1) 
         {
             // 使用系统传进来的 Size 表示这一包真正的长度，而不是写死 512
-            HAL::UART::Data uart1_rx_buffer{referee_buffer, Size};
-            auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
+            HAL::UART::Data uart6_rx_buffer{referee_buffer, Size};
+            auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
             
-            if(huart == uart1.get_handle())
+            if(huart == uart6.get_handle())
             {
                 HAL::UART::Data next_rx_buffer{referee_buffer, 512};
-                if (!uart1.receive_dma_idle(next_rx_buffer))
+                if (!uart6.receive_dma_idle(next_rx_buffer))
                 {
-                    uart1.receive_dma_idle(next_rx_buffer);
+                    uart6.receive_dma_idle(next_rx_buffer);
                 }
-                uart1.trigger_rx_callbacks(uart1_rx_buffer);
+                uart6.trigger_rx_callbacks(uart6_rx_buffer);
             }
         }
     }
@@ -71,7 +71,7 @@ extern "C"
 /* 错误处理 ---------------------------------------------------------------------------------------------*/
     void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
     {
-        if (huart->Instance == USART1) // 裁判系统
+        if (huart->Instance == USART6) // 裁判系统
         {
              // 清除错误标志并重新开启接收
             // Read SR/DR once to fully flush stale byte state in hardware.
@@ -91,11 +91,11 @@ extern "C"
             huart->Lock = HAL_UNLOCKED;
 
             // 错误后也需要重启接收
-            HAL::UART::Data uart1_rx_buffer{referee_buffer, sizeof(referee_buffer)};
-            auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
-            uart1.receive_dma_idle(uart1_rx_buffer);
+            HAL::UART::Data uart6_rx_buffer{referee_buffer, sizeof(referee_buffer)};
+            auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+            uart6.receive_dma_idle(uart6_rx_buffer);
         }
-        else if (huart->Instance == USART6) // 板间通讯
+        else if (huart->Instance == USART1) // 板间通讯
         {
             volatile uint32_t sr = huart->Instance->SR;
             volatile uint32_t dr = huart->Instance->DR;
@@ -104,9 +104,9 @@ extern "C"
 
             __HAL_UART_DISABLE_IT(huart, UART_IT_RXNE);
             __HAL_UART_CLEAR_OREFLAG(huart);
-            HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
-            auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-            uart6.receive_dma_idle(uart6_rx_buffer);
+            HAL::UART::Data uart1_rx_buffer{BoardRx, sizeof(BoardRx)};
+            auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
+            uart1.receive_dma_idle(uart1_rx_buffer);
         }
     }
 }

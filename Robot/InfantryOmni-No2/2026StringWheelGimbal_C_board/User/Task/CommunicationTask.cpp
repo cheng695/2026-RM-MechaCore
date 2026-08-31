@@ -1,13 +1,15 @@
 #include "CommunicationTask.hpp"
 #include "MotorTask.hpp"
 #include "usbd_cdc_if.h"
+#include <cstdint>
 
 /* 实例板间通讯设备 -----------------------------------------------------------------------------------------*/
 BoardCommunication Cboard;
 Vision vision;
-Navigation navigation;
 
 /* 设备缓存 ------------------------------------------------------------------------------------------------*/
+uint8_t BoardRx[4];    // 接收下板
+uint8_t BoardTx[23];   // 发送下板
 uint8_t send_str2[sizeof(float) * 8];
 uint32_t send_time = 0;
 uint32_t demo_time = 0;
@@ -18,6 +20,16 @@ uint32_t demo_time = 0;
  */
 void BoardCommunicationInit()
 {
+    auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+    HAL::UART::Data uart6_rx_buffer{BoardRx, sizeof(BoardRx)};
+
+    uart6.receive_dma_idle(uart6_rx_buffer);
+    uart6.register_rx_callback([](const HAL::UART::Data &data)
+    {
+            Cboard.updateTimestamp();
+            Cboard.SetHeatCool(data.buffer);
+            Cboard.SetHeatLimit(data.buffer+2);
+    });
 }
 
 void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6) 
@@ -91,13 +103,6 @@ extern "C" void USB_Receive_Callback(uint8_t *Buf, uint32_t Len)
         memcpy(vision.Rx_pData, Buf, Len);
         vision.dataReceive();
     }
-    else if(Buf[0] == 0xA5)
-    {
-        // 导航数据 (15 字节)
-        if (Len > sizeof(navigation.Rx_pData)) Len = sizeof(navigation.Rx_pData);
-        memcpy(navigation.Rx_pData, Buf, Len);
-        navigation.dataReceive();
-    }
 }
 
 void Vision::dataReceive()
@@ -142,70 +147,18 @@ void Vision::dataReceive()
     }
 }
 
-
-/* 板间通讯发送 ------------------------------------------------------------------------------------------------
- * 已迁移至 CAN2, 由 MotorTask.cpp::send_board_downlink() 处理
- */
-
-/* 导航通讯 ------------------------------------------------------------------------------------------------*/
-void Navigation::Data_send()
-{
-    navigation.frame.head = 0xA5;
-
-    Tx_pData[0] = frame.head;
-
-    tx_odom.x = Cboard.GetChassisX();
-    tx_odom.y = Cboard.GetChassisY();
-    tx_odom.yaw = Cboard.GetChassisYaw();
-    tx_vel.vx = Cboard.GetChassisVx();
-    tx_vel.vy = Cboard.GetChassisVy();
-    tx_vel.wz = Cboard.GetChassisWz();
-    
-    memcpy(&Tx_pData[1],  &tx_odom.x,   sizeof(float));
-    memcpy(&Tx_pData[5],  &tx_odom.y,   sizeof(float));
-    memcpy(&Tx_pData[9],  &tx_odom.yaw, sizeof(float));
-    memcpy(&Tx_pData[13], &tx_vel.vx,   sizeof(float));
-    memcpy(&Tx_pData[17], &tx_vel.vy,   sizeof(float));
-    memcpy(&Tx_pData[21], &tx_vel.wz,   sizeof(float));
-
-    tx_other.time = HAL_GetTick();
-    memcpy(&Tx_pData[25], &tx_other.time, sizeof(uint32_t));
-
-    // checksum: 前 29 字节累加和低 16 位
-    uint32_t sum = 0;
-    for (uint8_t i = 0; i < 29; i++)
-        sum += Tx_pData[i];
-    tx_other.checksum = static_cast<uint16_t>(sum & 0xFFFF);
-    memcpy(&Tx_pData[29], &tx_other.checksum, sizeof(uint16_t));
-
-    CDC_Transmit_FS(Tx_pData, 31);
-}
-
-void Navigation::dataReceive()
-{
-    if (Rx_pData[0] == 0xA5)
-    {
-        memcpy(&rx_target.vx, &Rx_pData[1],  sizeof(float));
-        memcpy(&rx_target.vy, &Rx_pData[5],  sizeof(float));
-        memcpy(&rx_target.wz, &Rx_pData[9],  sizeof(float));
-        memcpy(&rx_other.checksum, &Rx_pData[13], sizeof(uint16_t));
-
-        // checksum 校验: 前 13 字节累加和低 16 位
-        uint32_t sum = 0;
-        for (uint8_t i = 0; i < 13; i++)
-            sum += Rx_pData[i];
-        if (static_cast<uint16_t>(sum & 0xFFFF) != rx_other.checksum)
-        {
-            // checksum mismatch, discard
-        }
-    }
-}
-
 void UART_TX()
 {
+    // 板间通讯
     auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
-    HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)}; 
+    HAL::UART::Data uart6_tx_buffer{BoardTx, sizeof(BoardTx)}; 
     uart6.transmit_dma(uart6_tx_buffer);
+    
+    // Vofa
+    // auto &uart6 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart6);
+    // HAL::UART::Data uart6_tx_buffer{send_str2, sizeof(send_str2)}; 
+    // uart6.transmit_dma(uart6_tx_buffer);
+    // vofa_send(gimbal_target.target_yaw, gimbal_target.target_pitch, HI12.GetAddYaw(), MotorJ4310.getAngleDeg(1), heat_control.GetBulletCount(), Motor3508.getCurrent(2));
 }
  
 
@@ -215,10 +168,9 @@ void Communication(void const * argument)
     BoardCommunicationInit();
     for(;;)
     {
-        // vofa_send(gimbal_target.target_yaw, gimbal_target.target_pitch, HI12.GetAddYaw(), MotorJ4310.getAngleDeg(1), heat_control.GetBulletCount(), Motor3508.getCurrent(2));
+        UART_TX();
         vision.Data_send();
-        navigation.Data_send();
-        
+
         osDelay(1);
     }
 }

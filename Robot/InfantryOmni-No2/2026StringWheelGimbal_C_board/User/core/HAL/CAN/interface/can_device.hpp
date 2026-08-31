@@ -39,6 +39,9 @@ class ICanDevice
     // 发送CAN帧
     virtual bool send(const Frame &frame) = 0;
 
+    /* 尝试发送因邮箱繁忙而暂存的最新控制帧。 */
+    virtual void process_tx_queue() = 0;
+
     // 接收CAN帧（非阻塞）
     virtual bool receive(Frame &frame) = 0;
 

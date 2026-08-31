@@ -32,7 +32,7 @@ void ALG::VMC::VMC::Jacobian()
 void ALG::VMC::VMC::FictitiousForce(float target_pitch2, float target_pitch1)
 {
     float target_pitch_rad = target_pitch2 * 3.14159265f / 180.0f;
-    float theta_fixed = (103.0f + target_pitch1) * 3.14159265f / 180.0f;
+    float theta_fixed = target_pitch1 * 3.14159265f / 180.0f;
 
     x_dot = J00 * theta1_dot + J01 * theta2_dot;
     z_dot = J10 * theta1_dot + J11 * theta2_dot;

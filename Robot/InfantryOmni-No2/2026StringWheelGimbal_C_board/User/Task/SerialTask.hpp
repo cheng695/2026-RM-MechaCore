@@ -7,14 +7,18 @@
 #include "core/BSP/IMU/HI12_imu.hpp"
 #include "core/BSP/RemoteControl/DT7.hpp"
 #include "core/BSP/SimpleKey/SimpleKey.hpp"
+#include "Module/OperatorInput.hpp"
 
 extern BSP::IMU::HI12_float HI12;
 extern uint8_t HI12RX_buffer[82];
 extern BSP::REMOTE_CONTROL::RemoteController DT7;
 extern uint8_t DT7Rx_buffer[18];
 
-extern bool is_change;
-extern bool is_vision;
-extern bool alphabet[28];
+extern OperatorInput operator_input;
+
+void KeyUpdate();
+void UpdateMomentaryInput(OperatorInput &input);
+void UpdateLatchedInput(OperatorInput &input);
+OperatorInput BuildOperatorInput();
 
 #endif

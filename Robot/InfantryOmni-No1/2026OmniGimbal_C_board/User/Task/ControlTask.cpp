@@ -30,7 +30,7 @@ TDFilter vision_filter_yaw(40.0f, 0.005f);      // 视觉yaw滤波
 TDFilter target_yaw_vel(60.0f, 0.005f);         // 键鼠模式的yaw轴目标滤
 TDFilter target_pitch_vel(60.0f, 0.005f);
 TDFilter ude_filter_input(40.0f, 0.005f);       // UDE滤波用于获取差分信号
-TDFilter ude_filter_out(20.0f, 0.001f);         // UDE滤波器，用于最终输出滤
+TDFilter ude_filter_out(20.0f, .001f);         // UDE滤波器，用于最终输出滤
 
 TDFilter vmc_pitch1_filter(15.0f, 0.005f);       // J1速度规划
 TDFilter vmc_pitch2_filter(25.0f, 0.005f);      // J2速度规划
