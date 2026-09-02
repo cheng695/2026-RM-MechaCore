@@ -6,12 +6,12 @@
 
 /* 通讯数据缓存 ---------------------------------------------------------------------------------------------*/
 uint8_t BoardRx[23];    // 接收上板 (UART1 DT7 数据)
-uint8_t BoardTx[4];     // 发送上板 (UART1 底盘数据)
+uint8_t BoardTx[sizeof(BoardCommunication::BoardTX)];     // �����ϰ壺�������� + ����С����״̬
 uint8_t send_str2[sizeof(float) * 11];  // 发送vofa
 
 /* 板间通讯 ------------------------------------------------------------------------------------------------*/
 /**
- * @brief 板件通讯串口接收回调与数据解析
+ * @brief 板件通讯串口接收回调与数据解�?
  *
  */
 void BoardCommunicationInit()
@@ -30,14 +30,14 @@ void BoardCommunicationInit()
 }
 
 /**
- * @brief vofa发送
+ * @brief vofa发�?
  *
  */
 void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6, float x7, float x8, float x9)
 {
-    const uint8_t sendSize = sizeof(float); // 单浮点数占4字节
+    const uint8_t sendSize = sizeof(float); // 单浮点数�?字节
 
-    // 将6个浮点数据写入缓冲区（小端模式）
+    // �?个浮点数据写入缓冲区（小端模式）
     *((float*)&send_str2[sendSize * 0]) = x1;
     *((float*)&send_str2[sendSize * 1]) = x2;
     *((float*)&send_str2[sendSize * 2]) = x3;
@@ -48,13 +48,18 @@ void vofa_send(float x1, float x2, float x3, float x4, float x5, float x6, float
     *((float*)&send_str2[sendSize * 7]) = x8;
     *((float*)&send_str2[sendSize * 8]) = x9;
 
-    // 写入帧尾（协议要求 0x00 0x00 0x80 0x7F）
-    *((uint32_t*)&send_str2[sizeof(float) * 9]) = 0x7F800000; // 小端存储为 00 00 80 7F
+    // 写入帧尾（协议要�?0x00 0x00 0x80 0x7F�?
+    *((uint32_t*)&send_str2[sizeof(float) * 9]) = 0x7F800000; // 小端存储�?00 00 80 7F
 }
 
 void UART_TX()
 {
     // 板间通讯
+    Cboard.board_tx_.shooter_barrel_cooling_value = ext_power_heat_data_0x0201.shooter_barrel_cooling_value;
+    Cboard.board_tx_.shooter_barrel_heat_limit = ext_power_heat_data_0x0201.shooter_barrel_heat_limit;
+    Cboard.board_tx_.chassis_spin = operator_input.spin;
+    memcpy(BoardTx, &Cboard.board_tx_, sizeof(Cboard.board_tx_));
+
     auto &uart1 = HAL::UART::get_uart_bus_instance().get_device(HAL::UART::UartDeviceId::HAL_Uart1);
     HAL::UART::Data uart1_tx_buffer{BoardTx, sizeof(BoardTx)};
     uart1.transmit_dma(uart1_tx_buffer);

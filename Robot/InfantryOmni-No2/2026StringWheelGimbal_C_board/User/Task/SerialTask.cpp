@@ -1,6 +1,5 @@
 #include "SerialTask.hpp"
 #include "CommunicationTask.hpp"
-#include "RM_RefereeSystem.h"
 
 extern Vision vision;
 

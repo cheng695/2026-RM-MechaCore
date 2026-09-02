@@ -1,4 +1,4 @@
-#ifndef CONTROLTASK_HPP
+﻿#ifndef CONTROLTASK_HPP
 #define CONTROLTASK_HPP
 
 #include "FreeRTOS.h"
@@ -8,7 +8,6 @@
 #include "CommunicationTask.hpp"
 #include "Module/Gimbal/GimbalStateMachine.hpp"
 #include "Module/Gimbal/GimbalTypes.hpp"
-#include "Module/Control/LegacyControlTypes.hpp"
 #include "Module/Launch/LaunchStateMachine.hpp"
 #include "Module/Launch/LaunchTypes.hpp"
 #include "core/Alg/PID/pid.hpp"
@@ -32,8 +31,6 @@ extern Vision vision;
 
 extern Output_gimbal gimbal_output;
 extern Output_launch launch_output;
-extern ControlTask gimbal_target;
-
 extern Launch_FSM launch_fsm;
 extern Gimbal_FSM gimbal_fsm;
 

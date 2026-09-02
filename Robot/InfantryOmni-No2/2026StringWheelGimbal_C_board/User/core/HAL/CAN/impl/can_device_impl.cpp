@@ -65,7 +65,7 @@ bool CanDevice::send(const Frame &frame)
     }
     auto insert_position = std::find_if(
         tx_queue_.begin(), tx_queue_.end(),
-        [&frame](const Frame &pending)
+        [this, &frame](const Frame &pending)
         {
             return get_frame_priority(pending) > get_frame_priority(frame);
         });

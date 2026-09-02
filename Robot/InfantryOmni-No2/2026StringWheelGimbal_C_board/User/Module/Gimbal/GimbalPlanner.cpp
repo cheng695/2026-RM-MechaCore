@@ -1,52 +1,66 @@
 #include "GimbalPlanner.hpp"
 
 #include <algorithm>
+#include <cmath>
 
 namespace
 {
 constexpr float PI = 3.14159265358979323846f;
+constexpr float DEG_TO_RAD = PI / 180.0f;
 
 /*
- * 云台关节角度约定：
- * J1 为主 Pitch 关节，控制坐标 103 度正常起立位置；
- * J2 为辅助 Pitch 关节，控制坐标 0 弧度 对应世界坐标系水平姿态。
+ * 云台关节角度约定。
+ *
+ * 达妙 MIT 位置控制接口使用弧度，因此这里所有角度目标都用 rad。
+ * J1 是主 Pitch 关节，正常起立位置约为 103 度。
+ * J2 是末端 Pitch 关节，0 rad 表示让末端保持世界坐标系水平。
  */
-constexpr float NORMAL_J1_ANGLE = 103.0f;
+constexpr float NORMAL_J1_ANGLE = 103.0f * DEG_TO_RAD;
 constexpr float NORMAL_J2_ANGLE = 0.0f;
 
-/* 折叠状态的标定目标，单位为弧度（yaw）度（J1），需根据实际机械位置修改。 */
+/*
+ * 折叠状态目标角度。
+ *
+ * DOWN_YAW_ANGLE 是折叠前需要先对齐的 yaw 固定角。
+ * DOWN_J1_ANGLE 是 J1 折叠后的目标角，当前按 153 度作为初值。
+ */
 constexpr float DOWN_YAW_ANGLE = 0.0f;
-constexpr float DOWN_J1_ANGLE = 153.0f;
+constexpr float DOWN_J1_ANGLE = 153.0f * DEG_TO_RAD;
 
-/* 只有 J1 已经处于起立姿态时，才允许 J2（弧度） 使用这组活动范围。 */
+/* Yaw 接近折叠固定角后，才允许 J1 开始折叠。 */
+constexpr float DOWN_YAW_READY_TOLERANCE = 3.0f * DEG_TO_RAD;
+
+/*
+ * 折叠/起立过程的关节最大规划速度，单位 rad/s。
+ * 这里限制的是“目标值变化速度”，不是电机反馈速度；它能避免 J1/J2 目标一步跳变。
+ */
+constexpr float J1_TRANSITION_MAX_SPEED = 0.8f;
+constexpr float J2_TRANSITION_MAX_SPEED = 0.8f;
+
+/* 只有 J1 已经处于正常起立姿态时，J2 才使用这组活动范围。 */
 constexpr float J2_UPRIGHT_MIN = -0.3491f;
 constexpr float J2_UPRIGHT_MAX = 0.5236f;
 
-/* Planner 当前由 200 Hz 控制循环调用，即每次规划间隔 5 ms。 */
+/* Planner 当前由 200 Hz 控制循环调用，规划间隔为 5 ms。 */
 constexpr float CONTROL_PERIOD = 0.005f;
 
 /*
- * 鼠标输入增益：将鼠标每帧的位移量换算为 yaw 目标角度增量。
- * 计算形式为：mouse_x * MOUSE_YAW_SENSITIVITY * CONTROL_PERIOD。
- * 该值越大，鼠标横向移动相同距离时 yaw 转动越快。
+ * 鼠标 yaw 输入增益。
  */
 constexpr float MOUSE_YAW_SENSITIVITY = 0.3f;
 
 /*
- * 鼠标输入增益：将鼠标每帧的纵向位移量换算为 J2 目标角度增量。
- * 该值越大，鼠标纵向移动相同距离时 J2 变化越快。
+ * 鼠标 J2 输入增益。
  */
 constexpr float MOUSE_PITCH_SENSITIVITY = 0.004f;
 
 /*
- * 右摇杆输入增益：将摇杆横向输入换算为 yaw 目标角度增量。
- * 该值越大，右摇杆横向偏转相同幅度时 yaw 转动越快。
+ * 遥控器右摇杆 yaw 输入增益。
  */
 constexpr float STICK_YAW_SENSITIVITY = 0.01f;
 
 /*
- * 右摇杆输入增益：将摇杆纵向输入换算为 J2 目标角度增量。
- * 该值越大，右摇杆纵向偏转相同幅度时 J2 变化越快。
+ * 遥控器右摇杆 J2 输入增益。
  */
 constexpr float STICK_PITCH_SENSITIVITY = 0.007f;
 
@@ -64,6 +78,38 @@ bool IsUprightTransition(GimbalTransition transition)
     return transition == GimbalTransition::StopToManual ||
            transition == GimbalTransition::DownToManual;
 }
+
+float NormalizeAngle(float angle)
+{
+    while (angle > PI)
+    {
+        angle -= 2.0f * PI;
+    }
+
+    while (angle < -PI)
+    {
+        angle += 2.0f * PI;
+    }
+
+    return angle;
+}
+
+float StepToTarget(float current, float target, float max_step)
+{
+    const float error = target - current;
+
+    if (error > max_step)
+    {
+        return current + max_step;
+    }
+
+    if (error < -max_step)
+    {
+        return current - max_step;
+    }
+
+    return target;
+}
 } // namespace
 
 void InitGimbalPlanner()
@@ -79,57 +125,77 @@ GimbalTarget PlanGimbalTarget(Enum_Gimbal_States state,
     GimbalTarget target = current_target;
 
     /*
-     * 折叠过程优先级最高。
-     * Yaw 必须转到固定的折叠对齐角，J1 转到折叠角，J2 始终保持水平。
-     * 这里不对 J2 做折叠限幅，因为折叠状态的活动范围与起立状态不同。
+     * 折叠流程优先级最高。
+     *
+     * 顺序是：Yaw 先转到固定折叠对齐角，Yaw 到位后 J1 再进入折叠角。
+     * J2 在折叠全过程中固定为 0 rad，让末端保持世界坐标系水平。
+     * 折叠状态不使用 J2 起立姿态下的限幅，因为机械可动范围不同。
      */
     if (IsDownTransition(transition))
     {
         target.target_yaw = DOWN_YAW_ANGLE;
-        target.target_J1 = DOWN_J1_ANGLE;
-        target.target_J2 = NORMAL_J2_ANGLE;
+        target.target_J2 = StepToTarget(current_target.target_J2,
+                                        NORMAL_J2_ANGLE,
+                                        J2_TRANSITION_MAX_SPEED * CONTROL_PERIOD);
+
+        if (std::fabs(NormalizeAngle(input.current_yaw - DOWN_YAW_ANGLE)) <= DOWN_YAW_READY_TOLERANCE)
+        {
+            target.target_J1 = StepToTarget(current_target.target_J1,
+                                            DOWN_J1_ANGLE,
+                                            J1_TRANSITION_MAX_SPEED * CONTROL_PERIOD);
+        }
+        else
+        {
+            target.target_J1 = current_target.target_J1;
+        }
+
         return target;
     }
 
     /*
-     * 起立过程同样优先于普通 MANUAL/VISION 控制。
-     * Yaw 保持进入起立流程时的当前角度，避免起立时云台突然转向；
-     * J1 回到正常位置，J2 固定为 0 弧度以保持世界坐标系水平。
-     * 此时 J1 尚未完全到位，因此不能使用起立状态下的 J2 限幅。
+     * 起立流程同样优先于普通 MANUAL/VISION 控制。
+     *
+     * 从 DOWN 或 STOP 起立时，Yaw 保持当前角度，不主动转向；
+     * J1 回到正常起立位置；J2 固定为 0 rad，保持世界坐标系水平。
+     * 由于 J1 尚未到位，这里不能使用起立姿态下的 J2 限幅。
      */
     if (IsUprightTransition(transition))
     {
         target.target_yaw = input.current_yaw;
-        target.target_J1 = NORMAL_J1_ANGLE;
-        target.target_J2 = NORMAL_J2_ANGLE;
+        target.target_J1 = StepToTarget(current_target.target_J1,
+                                        NORMAL_J1_ANGLE,
+                                        J1_TRANSITION_MAX_SPEED * CONTROL_PERIOD);
+        target.target_J2 = StepToTarget(current_target.target_J2,
+                                        NORMAL_J2_ANGLE,
+                                        J2_TRANSITION_MAX_SPEED * CONTROL_PERIOD);
         return target;
     }
 
     switch (state)
     {
     case STOP:
-        /* 急停状态锁定三个关节的当前位置，避免重新使能时产生跳变。 */
+        /* 停止状态锁住三个关节的当前位置，避免重新使能时产生目标跳变。 */
         target.target_yaw = input.current_yaw;
         target.target_J1 = input.current_J1;
         target.target_J2 = input.current_J2;
         break;
 
     case VISION:
-        /* 视觉只控制 Yaw 和 J2，J1 保持在正常起立位置。 */
-        target.target_yaw = -input.vision_yaw * PI / 180.0f;
+        /* 视觉模式只控制 Yaw 和 J2，J1 始终保持正常起立位置。 */
+        target.target_yaw = -input.vision_yaw * DEG_TO_RAD;
         target.target_J1 = NORMAL_J1_ANGLE;
-        target.target_J2 = input.vision_pitch * PI / 180.0f;
+        target.target_J2 = input.vision_pitch * DEG_TO_RAD;
         target.target_J2 = std::clamp(target.target_J2,
                                       J2_UPRIGHT_MIN, J2_UPRIGHT_MAX);
         break;
 
     case MANUAL:
-        /* 普通手动模式不允许 J1 被操作员输入改变。 */
+        /* 手动模式不允许操作员直接改变 J1，J1 始终保持正常起立位置。 */
         target.target_J1 = NORMAL_J1_ANGLE;
 
         if (input.left_switch == 3 && input.right_switch == 3)
         {
-            /* 键鼠模式：输入被视为角速度，积分为角度目标增量。 */
+            /* 键鼠模式：鼠标输入视为角速度，再积分成角度目标。 */
             target.target_yaw += MOUSE_YAW_SENSITIVITY *
                                  -input.mouse_x * CONTROL_PERIOD;
 
@@ -140,19 +206,20 @@ GimbalTarget PlanGimbalTarget(Enum_Gimbal_States state,
             {
                 mouse_y = 0.0f;
             }
+
             target.target_J2 += MOUSE_PITCH_SENSITIVITY *
                                 mouse_y * CONTROL_PERIOD;
         }
         else
         {
-            /* 遥控器模式：右摇杆输入同样转换为角度目标增量。 */
+            /* 遥控器模式：右摇杆输入同样转成角度目标增量。 */
             target.target_yaw += STICK_YAW_SENSITIVITY *
                                  -input.right_x * CONTROL_PERIOD;
             target.target_J2 += STICK_PITCH_SENSITIVITY *
                                 input.right_y * CONTROL_PERIOD;
         }
 
-        /* 起立完成后的正常操作才使用 J2 的活动范围。 */
+        /* 只有起立完成后的普通操作，才使用 J2 起立姿态活动范围。 */
         target.target_J2 = std::clamp(target.target_J2,
                                       J2_UPRIGHT_MIN, J2_UPRIGHT_MAX);
         break;

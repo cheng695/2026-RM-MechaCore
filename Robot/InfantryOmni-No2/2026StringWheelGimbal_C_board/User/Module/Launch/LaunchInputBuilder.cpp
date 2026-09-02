@@ -1,5 +1,7 @@
 #include "LaunchInputBuilder.hpp"
 
+#include "Task/ControlTask.hpp"
+
 LaunchInput BuildLaunchInput(const OperatorInput& operator_input,
                              bool equipment_online,
                              bool jam_detected)
@@ -17,5 +19,8 @@ LaunchInput BuildLaunchInput(const OperatorInput& operator_input,
     input.fire_single = operator_input.fire_single;
     input.fire_continuous = operator_input.fire_continuous;
     input.jam_detected = jam_detected;
+    input.current_dial_angle = Motor3508.getAddAngleDeg(1);
+    input.fire_rate = heat_control.GetNowFire();
+    input.scroll = DT7.get_scroll_();
     return input;
 }

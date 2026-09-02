@@ -11,26 +11,27 @@
 
 
 /**
- * @brief 板间通讯类
+ * @brief 板间通讯�?
  * @details 管理云台与底盘之间的数据收发:
  */
 class BoardCommunication
 {
     public:
         #pragma pack(1)
-        // 发送：云台→底盘 下行数据帧 (23 字节)
+        // 发送：云台→底�?下行数据�?(23 字节)
         struct BoardTx
         {
-            uint8_t  rc_data[18];   // 18  遥控器数据转发 (DT7Rx_buffer)
+            uint8_t  rc_data[18];   // 18  遥控器数据转�?(DT7Rx_buffer)
             float    angle;         // 4   Motor6020 角度 (rad)
-            bool     scroll;        // 1   发射机构 scroll 状态
+            bool     scroll;        // 1   发射机构 scroll 状�?
         };
 
-        // 接收：底盘→云台 上行数据帧 (4 字节)
+        // 接收：底盘→云台 上行数据�?(4 字节)
         struct BoardRx
         {
-            uint16_t shooter_barrel_cooling_value;  // 2  枪口每秒冷却值
+            uint16_t shooter_barrel_cooling_value;  // 2  枪口每秒冷却�?
             uint16_t shooter_barrel_heat_limit;     // 2  枪口热量上限
+            bool     chassis_spin;                   // 1  �����Ƿ�����С����
         };
         #pragma pack()
 
@@ -69,49 +70,56 @@ class BoardCommunication
             std::memcpy(&board_rx_.shooter_barrel_cooling_value, data, sizeof(uint16_t));
         }
 
+        void SetChassisSpin(const uint8_t* data)
+        {
+            std::memcpy(&board_rx_.chassis_spin, data, sizeof(bool));
+        }
+
         uint16_t GetHeatLimit() const { return board_rx_.shooter_barrel_heat_limit; }
         uint16_t GetHeatCool()  const { return board_rx_.shooter_barrel_cooling_value; }
+
+        bool GetChassisSpin() const { return board_rx_.chassis_spin; }
 
     private:
         BSP::WATCH_STATE::StateWatch statewatch_;
 };
 
-/* UART 接收缓冲区由 CommunicationTask.cpp 定义，串口回调只使用其地址。 */
-extern uint8_t BoardRx[4];
+/* UART 接收缓冲区由 CommunicationTask.cpp 定义，串口回调只使用其地址�?*/
+extern uint8_t BoardRx[sizeof(BoardCommunication::BoardRx)];
 
 
 // ──── 视觉 USB 虚拟串口通讯协议 ─────────────────────────────────────────
-// 云台通过 USB CDC 与 miniPC 通讯, 发送 IMU 四元数 + Pitch 角度等, 接收目标角度
+// 云台通过 USB CDC �?miniPC 通讯, 发�?IMU 四元�?+ Pitch 角度�? 接收目标角度
 
 /**
- * @brief 视觉通讯类
- * @details 管理云台与 miniPC 之间的数据收发, 包括四元数姿态发送、目标角度接收、
- *          发射指令解析等
+ * @brief 视觉通讯�?
+ * @details 管理云台�?miniPC 之间的数据收�? 包括四元数姿态发送、目标角度接收�?
+ *          发射指令解析�?
  */
 class Vision
 {
     public:
-        // 发送帧头
+        // 发送帧�?
         struct Frame
         {
             uint8_t head_one = 0;
             uint8_t head_two = 0;
         };
 
-        // 发送: 云台姿态数据
+        // 发�? 云台姿态数�?
         struct Tx_Gimbal
         {
             float quat_w = 0.0f;
             float quat_x = 0.0f;
             float quat_y = 0.0f;
             float quat_z = 0.0f;
-            uint32_t time = 0;          // 时间戳 (ms)
+            uint32_t time = 0;          // 时间�?(ms)
         };
 
-        // 发送: 其他信息
+        // 发�? 其他信息
         struct Tx_Other
         {
-            uint8_t bullet_rate = 0;    // 射速
+            uint8_t bullet_rate = 0;    // 射�?
             uint8_t enemy_color = 0;    // 敌方颜色
             uint8_t vision_mode = 0;    // 视觉模式
             uint8_t tail = 0;           // 帧尾
@@ -124,12 +132,12 @@ class Vision
             uint8_t head_two = 0;
         };
 
-        // 接收: 视觉解算的目标角度
+        // 接收: 视觉解算的目标角�?
         struct Rx_Target
         {
             float pitch_angle = 0.0f;   // 目标 Pitch 角度 (deg)
             float yaw_angle = 0.0f;     // 目标 Yaw 角度 (deg)
-            uint32_t time = 0;          // 时间戳 (ms)
+            uint32_t time = 0;          // 时间�?(ms)
         };
 
         // 接收: 视觉状态与控制信息
@@ -138,15 +146,15 @@ class Vision
             uint8_t vision_ready = 0;   // 视觉就绪标志
             uint8_t fire = 0;           // 发射指令
             uint8_t tail = 0;           // 帧尾
-            uint8_t aim_x = 0;          // 瞄准点 x
-            uint8_t aim_y = 0;          // 瞄准点 y
+            uint8_t aim_x = 0;          // 瞄准�?x
+            uint8_t aim_y = 0;          // 瞄准�?y
         };
 
-        // 缓存的本地目标角度
+        // 缓存的本地目标角�?
         float pitch_angle_ = 0.0f;
         float yaw_angle_ = 0.0f;
 
-        // 发送相关
+        // 发送相�?
         Frame frame;
         Tx_Gimbal tx_gimbal;
         Tx_Other tx_other;
@@ -157,18 +165,18 @@ class Vision
         Rx_Other rx_other;
 
         uint8_t Tx_pData[26] = {0};     // 发送缓冲区 (26 字节)
-        uint8_t Rx_pData[19] = {0};     // 接收缓冲区 (19 字节)
+        uint8_t Rx_pData[19] = {0};     // 接收缓冲�?(19 字节)
 
         bool fire_flag = false;
         uint32_t fire_num = 0;
         bool vision_flag = false;       // 视觉在线标志
         uint8_t vision_mode = 0;        // 当前视觉模式
 
-        // 发射指令变化检测
+        // 发射指令变化检�?
         bool fire_value_initialized = false;
         uint32_t fire_update_count = 0;
 
-        // 调试用: 缓存最近一次的接收数据
+        // 调试�? 缓存最近一次的接收数据
         Rx_Target debug_rx_target;
         Rx_Other debug_rx_other;
 
@@ -176,7 +184,7 @@ class Vision
         // 组装并发送一帧数据到 miniPC (USB CDC)
         void Data_send();
 
-        // 解析接收到的视觉数据帧
+        // 解析接收到的视觉数据�?
         void dataReceive();
 
         // 设置本地 Pitch 目标角度
@@ -201,13 +209,13 @@ class Vision
             return pitch_angle_;
         }
 
-        // 获取视觉解算的 Yaw 角度
+        // 获取视觉解算�?Yaw 角度
         float getVisionYaw()
         {
             return rx_target.yaw_angle;
         }
 
-        // 获取视觉解算的 Pitch 角度
+        // 获取视觉解算�?Pitch 角度
         float getVisionPitch()
         {
             return rx_target.pitch_angle;
@@ -225,7 +233,7 @@ class Vision
             return rx_other.fire;
         }
 
-        // 设置发送给视觉的模式
+        // 设置发送给视觉的模�?
         void setVisionMode(uint8_t mode)
         {
             tx_other.vision_mode = mode;

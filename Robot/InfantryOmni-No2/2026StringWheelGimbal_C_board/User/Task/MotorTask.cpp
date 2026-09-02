@@ -9,6 +9,9 @@ BSP::Motor::DM::J4310<2> MotorJ4310(0x00, {2, 6}, {0x01, 0x05}); // 1是pitch，
 BSP::Motor::DM::J4340<1> MotorJ4340(0x00, {4}, {0x03});
 BSP::Motor::LK::LK4005<1> MotorLK4005(0x140, {1}, {0x01});
 
+float Motor4310_angle[2] = {0.0f, 0.0f};
+float Motor4310_velocity[2] = {0.0f, 0.0f};
+
 namespace
 {
 enum class DmEnablePhase
